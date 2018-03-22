@@ -16,7 +16,7 @@ export class AuthenticationService {
     this.token = currentUser && currentUser.token;
 
     // TODO fill in your heroku-backend URL
-    this.apiUrl = '';
+    this.apiUrl = 'https://git.heroku.com/sopra-fs18-group13-server.git';
   }
 
   login(user: User): Observable<User> {
