@@ -6,7 +6,7 @@ import {AuthGuardService} from './shared/services/auth-guard.service';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: '', component: GameComponent, canActivate: [AuthGuardService] }, // this works when we omit "canActivate: [AuthGuardService]"
+    { path: '', component: GameComponent, canActivate: [AuthGuardService]}, // this works when we omit "canActivate: [AuthGuardService]"
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
