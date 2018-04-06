@@ -8,7 +8,8 @@ import {HostScreenComponent} from './host-screen/host-screen.component';
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
     { path: 'game', component: GameComponent}, // this works when we omit "canActivate: [AuthGuardService]"
-    { path: "host-screen", component: HostScreenComponent},
+    { path: 'host-screen', component: HostScreenComponent},
+    { path: 'waiting-screen', component: HostScreenComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: '' }
