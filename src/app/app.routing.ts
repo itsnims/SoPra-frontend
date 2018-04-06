@@ -9,7 +9,7 @@ import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
 
 const appRoutes: Routes = [
     { path: 'login', component: LoginComponent },
-    { path: 'game', component: GameComponent}, // this works when we omit "canActivate: [AuthGuardService]"
+    { path: 'game', component: GameComponent}, // this works when we omit "canActivate: [AuthGuardService], in the template it was { path: 'game', component: GameComponent,canActivate: [AuthGuardService]}"
     { path: 'host-screen', component: HostScreenComponent},
     { path: 'waiting-screen', component: WaitingScreenComponent},
     { path: 'in-game-screen', component: InGameScreenComponent},
