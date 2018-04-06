@@ -10,6 +10,7 @@ import {routing} from './app.routing';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { GameLobbyScreenComponent } from './game-lobby-screen/game-lobby-screen.component';
+import { HostScreenComponent } from './host-screen/host-screen.component';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { GameLobbyScreenComponent } from './game-lobby-screen/game-lobby-screen.
     LoginComponent,
     GameComponent,
     GameLobbyScreenComponent,
+    HostScreenComponent,
   ],
   imports: [
     BrowserModule,
