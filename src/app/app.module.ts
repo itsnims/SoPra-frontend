@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { GameLobbyScreenComponent } from './game-lobby-screen/game-lobby-screen.component';
 import { HostScreenComponent } from './host-screen/host-screen.component';
 import { WaitingScreenComponent } from './waiting-screen/waiting-screen.component';
+import { InGameScreenComponent } from './in-game-screen/in-game-screen.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { WaitingScreenComponent } from './waiting-screen/waiting-screen.componen
     GameLobbyScreenComponent,
     HostScreenComponent,
     WaitingScreenComponent,
+    InGameScreenComponent,
   ],
   imports: [
     BrowserModule,
