@@ -19,5 +19,4 @@ export class GameComponent  implements OnInit {
         this.users = users;
       });
   }
-
 }
