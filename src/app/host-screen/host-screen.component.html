@@ -1,41 +1,36 @@
-<h1> Host a new game</h1>
-<br>
-<h3> Game name</h3>
-<label for="user_name" class="sr-only">User</label>
-<input id="user_name" type="text" class="form-control" placeholder="" [(ngModel)]="user.name" autofocus>
+<h1>Host a new game</h1><br>
 
+<h3>Game name:</h3>
+<input type="text" [(ngModel)]="room.name">
 
-<h3> Choose Path</h3>
+<h3>Choose Path:</h3>
 <select>
-  <option value="classic path">Classic Path</option>
-  <option value="hills of gold">Hills of Gold</option>
-  <option value="home stretch">Home Stretch</option>
-  <option value="winding paths">Winding Paths</option>
-  <option value="serpentine">Serpentine</option>
-  <option value="swamplands">Swamplands</option>
-  <option value="witch's cauldron">Witch's Cauldron</option>
-</select>
-<br>
-<h3> Choose number of players</h3>
+  <option *ngFor="let path of paths" [value]="path.pathID">{{path.pathName}}</option>
+</select><br>
+
+
+<h3>Choose number of players:</h3>
 <select>
-  <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-</select>
+  <option *ngFor="let numbOfPlayer of numbOfPlayers" [value]="numbOfPlayer.numbValue">{{numbOfPlayer.numbSelect}}</option>
+</select><br>
 
-<br>
-<h3> Password protection</h3>
-<label class="switch">
-  <input type="checkbox">
-  <span class="slider"></span>
+<h3>Password protection:</h3>
 
-</label>
+<div class="onoffswitch">
+  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" onclick="pwdInput()"> <!--pwdInput() not implemented yet-->
+  <label class="onoffswitch-label" for="myonoffswitch">
+    <span class="onoffswitch-inner"></span>
+    <span class="onoffswitch-switch"></span>
+  </label>
+</div>
 
-<br>
-<h3>Password</h3>
-<label for="password" class="sr-only">Username</label>
-<input id="password" type="text" class="form-control" placeholder=""  [(ngModel)]="user.username">
-<br>
+
+<div>
+  <div id="pwdSlot" style="display:none">
+    <h3>Password:</h3>
+    <input type="text"><br><br>
+  </div>
+</div>
 
 <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/waiting-screen']">Create Game</button>
 <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/game']">Back to lobby</button>
