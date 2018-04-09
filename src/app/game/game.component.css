@@ -12,3 +12,37 @@
   margin-right: 0.8em;
   border-radius: 8px 0 0 8px;
 }
+.game-rooms{
+  background-color: black;
+  border: black;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  border-radius: 12px ;
+}
+.game-rooms .hover{
+  border: white;
+}
+.game-image {
+  /* The image used */
+  background-image: url("general-lobby.jpg");
+
+  /* Set a specific height */
+  height: 100%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1366px 768px;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  padding:0;
+  margin: 0;
+
+}

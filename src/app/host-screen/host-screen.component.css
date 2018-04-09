@@ -43,4 +43,22 @@
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
   right: 0px;
 }
+.host-image {
+  /* The image used */
+  background-image: url("host-image.jpg");
 
+  /* Set a specific height */
+  height: 100%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 1366px 768px;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  padding:0;
+  margin: 0;
+
+}

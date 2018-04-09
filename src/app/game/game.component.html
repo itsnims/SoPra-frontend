@@ -1,11 +1,15 @@
-<div class="col-md-6 col-md-offset-3">
+<div class="game-image">
+  <div class="col-md-6 col-md-offset-3">
   <h1>General Lobby Screen </h1>
   <div>
     Users from secure api end point:
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let user of users">{{user.name}} {{user.username}}</li>
       <div *ngFor= "let room of rooms">
-        <span class="back">{{room.id}}</span> {{room.name}} {{room.pwdBool}}
+        <button class="game-rooms" type="submit" >{{room.id}}
+          {{room.name}}
+          {{room.pwdBool}}
+          {{room.status}}</button>
       </div>
     </ul>
   </div>
@@ -16,5 +20,6 @@
 
 
 
+</div>
 </div>
 
