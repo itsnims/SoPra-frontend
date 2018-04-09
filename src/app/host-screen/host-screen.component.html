@@ -17,16 +17,18 @@
 <h3>Password protection:</h3>
 
 <div class="onoffswitch">
-  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" (click)="pwdInput()">
+  <form #myForm="ngForm">
+  <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" #checkBox="ngModel"
+         [(ngModel)]="shown" (click)="pwdInput()">
   <label class="onoffswitch-label" for="myonoffswitch">
     <span class="onoffswitch-inner"></span>
     <span class="onoffswitch-switch"></span>
   </label>
+  </form>
 </div>
 
-
 <div>
-  <div id="pwdSlot" style="display:none">
+  <div *ngIf="shown">
     <h3>Password:</h3>
     <input type="text" [(ngModel)]="room.pwd"><br><br>
   </div>

@@ -24,15 +24,12 @@ export class HostScreenComponent implements OnInit {
     {numbValue: '4', numbSelect: '4'}
   ];
 
-  pwdInput() {
-    const checkbox = document.getElementById('myonoffswitch');
-    const pwdSpace = document.getElementById('pwdSlot');
+  public shown = false;
 
-    if (checkbox.checked === true) {
-      pwdSpace.style.display = 'block';
+  pwdInput() {
+    if (this.shown === true) {
       this.room.pwdBool = true;
     } else {
-      pwdSpace.style.display = 'none';
       this.room.pwdBool = false;
     }
   }
