@@ -20,7 +20,7 @@ export class AuthenticationService {
   }
 
   login(user: User): Observable<User> {
-    const bodyString = JSON.stringify({name: user.name, username: user.username});
+    const bodyString = JSON.stringify({ username: user.username});
 
     const httpOptions = {
       headers: new HttpHeaders({
