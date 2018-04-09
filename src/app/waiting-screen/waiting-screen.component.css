@@ -1,0 +1,8 @@
+#content >div:first-of-type {
+  width: 100%;
+  height: 400px;
+  background-image: url('waiting1.jpg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 1px solid red;
+}
