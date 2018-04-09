@@ -4,13 +4,12 @@
 <input type="text" [(ngModel)]="room.name">
 
 <h3>Choose Path:</h3>
-<select>
-  <option *ngFor="let path of paths" [value]="path.pathID">{{path.pathName}}</option>
+<select id="selectPath">
+  <option *ngFor="let path of paths" [value]="path.pathID" >{{path.pathName}}</option>
 </select><br>
 
-
 <h3>Choose number of players:</h3>
-<select>
+<select id="maxPlayer">
   <option *ngFor="let numbOfPlayer of numbOfPlayers" [value]="numbOfPlayer.numbValue">{{numbOfPlayer.numbSelect}}</option>
 </select><br>
 
@@ -34,5 +33,5 @@
   </div>
 </div>
 
-<button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/waiting-screen']">Create Game</button>
+<button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/waiting-screen']" (click)="pathSelect()">Create Game</button>
 <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/game']">Back to lobby</button>

@@ -3,8 +3,8 @@ export class Room {
   public name: string;
   public pwdBool: boolean;
   public pwd: string;
-  public path: number;
-  public maxPlayers: number;
+  public path: string;
+  public maxPlayers: string;
 //  public status: string;
 
 }

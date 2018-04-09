@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-
 @Component({
   selector: 'app-waiting-screen',
   templateUrl: './waiting-screen.component.html',

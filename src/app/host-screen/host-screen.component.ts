@@ -33,7 +33,10 @@ export class HostScreenComponent implements OnInit {
       this.room.pwdBool = false;
     }
   }
-
+  pathSelect() {
+    this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
+    this.room.maxPlayers = (<HTMLInputElement>document.getElementById('maxPlayer')).value;
+  }
   constructor() {}
 
 
