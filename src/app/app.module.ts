@@ -9,10 +9,9 @@ import {AuthenticationService} from './shared/services/authentication.service';
 import {routing} from './app.routing';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
-import { GameLobbyScreenComponent } from './game-lobby-screen/game-lobby-screen.component';
 import { HostScreenComponent } from './host-screen/host-screen.component';
-import { WaitingScreenComponent } from './waiting-screen/waiting-screen.component';
-import { InGameScreenComponent } from './in-game-screen/in-game-screen.component';
+import {WaitingScreenComponent} from './waiting-screen/waiting-screen.component';
+import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
 
 
 @NgModule({
@@ -20,7 +19,6 @@ import { InGameScreenComponent } from './in-game-screen/in-game-screen.component
     AppComponent,
     LoginComponent,
     GameComponent,
-    GameLobbyScreenComponent,
     HostScreenComponent,
     WaitingScreenComponent,
     InGameScreenComponent,
