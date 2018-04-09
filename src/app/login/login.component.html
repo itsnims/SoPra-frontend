@@ -1,21 +1,15 @@
-<div class="form-signin">
-  <h2 class="form-signin-heading">This is El Dorado</h2>
-  <label for="user_name" class="sr-only">User</label>
-  <input id="user_name" type="text" class="form-control" placeholder="name" [(ngModel)]="user.name" autofocus>
+
+  <div class="form-signin">
+    <h2 class="form-signin-heading">This is El Dorado</h2>
   <label for="password" class="sr-only">Username</label>
   <input id="password" type="text" class="form-control" placeholder="username"  [(ngModel)]="user.username">
 <br>
   <div class="row">
     <div class="col-md-6">
       <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Login</button>
-      <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/game']">Demo Button</button>
-
     </div>
     <div class="col-md-6">
-      <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="clearfields()">Clear</button>
     </div>
   </div>
-  <br>
-
-</div>
-
+    <br>
+  </div>
