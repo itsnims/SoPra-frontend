@@ -5,6 +5,6 @@ export class Room {
   public pwd: string;
   public path: string;
   public maxPlayers: string;
-//  public status: string;
+  public status: string;
 
 }

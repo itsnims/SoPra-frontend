@@ -1,4 +1,13 @@
 <h1> This is the In-Game Screen</h1>
 
+<button id="marketPlace" type="button">Marketplace</button>
 
-<button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/game']">Quit Game</button>
+<!-- bottom left buttons-->
+<button id="zoomIn" class="bottomLeft" type="button">Zoom In</button>
+<button id="zoomOut" class="bottomLeft" type="button">Zoom Out</button>
+<button id="endTurn" class="bottomLeft" type="submit">End turn</button>
+<button id="move" class="bottomLeft" type="submit">Move</button>
+<button id="buy" class="bottomLeft" type="submit">Buy</button>
+<button id="discard" class="bottomLeft" type="submit">Discard</button>
+
+<button id="leave" type="submit" [routerLink]="['/game']">Quit Game</button>

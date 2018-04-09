@@ -1,0 +1,6 @@
+{
+  "name": "sample_room",
+  "path": "Hills of Gold",
+  "numbOfPlayers": 4,
+  "pwdProtected": false
+}
