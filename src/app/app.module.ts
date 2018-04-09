@@ -12,6 +12,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { HostScreenComponent } from './host-screen/host-screen.component';
 import {WaitingScreenComponent} from './waiting-screen/waiting-screen.component';
 import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
+import { DataService } from './data.service';
 
 
 @NgModule({
@@ -29,7 +30,7 @@ import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
     HttpClientModule,
     routing
   ],
-  providers: [AuthenticationService, AuthGuardService, UserService],
+  providers: [AuthenticationService, AuthGuardService, UserService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

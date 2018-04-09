@@ -4,6 +4,9 @@
     Users from secure api end point:
     <ul class="list-group">
       <li class="list-group-item" *ngFor="let user of users">{{user.name}} {{user.username}}</li>
+      <div *ngFor= "let room of rooms">
+        <span class="back">{{room.id}}</span> {{room.name}} {{room.pwdBool}}
+      </div>
     </ul>
   </div>
 
