@@ -37,10 +37,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  clearfields() {
-    this.user.name = '';
-    this.user.username = '';
-  }
 
 
 }
