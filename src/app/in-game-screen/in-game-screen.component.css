@@ -1,0 +1,47 @@
+.bottomLeft {
+  width: 85px;}
+
+#marketPlace {
+  position: fixed;
+  left: -188px;
+  top: 375px;
+  width: 400px;
+  -moz-transform: rotate(-90.0deg);
+  -o-transform: rotate(-90.0deg);
+  -webkit-transform: rotate(-90.0deg);
+}
+
+#zoomIn {
+  position: fixed;
+  top: 640px;
+  left: 75px;}
+
+#zoomOut {
+  position: fixed;
+  top: 680px;
+  left: 75px;}
+
+#endTurn {
+  position: fixed;
+  top: 720px;
+  left: 75px;}
+#move {
+  position: fixed;
+  top: 640px;
+  left: 180px;}
+
+#buy {
+  position: fixed;
+  top: 680px;
+  left: 180px;}
+
+#discard {
+  position: fixed;
+  top: 720px;
+  left: 180px;}
+
+#leave {
+  position: fixed;
+  top: 720px;
+  left: 1200px;}
+
