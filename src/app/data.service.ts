@@ -9,7 +9,7 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   fetchData() {
-    return this.http.get('/assets/mock_players.json');
+    return this.http.get('https://sopra-fd2af.firebaseio.com/.json');
   }
 
   /*fbGetData()
