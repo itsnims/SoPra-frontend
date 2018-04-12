@@ -11,7 +11,7 @@ export class UserService {
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationService) {
 
-    //TODO fill in your heroku-backend URL
+    /*TODO fill in your heroku-backend URL*/
     this.apiUrl = 'https://git.heroku.com/sopra-fs18-group13-server.git';
   }
 

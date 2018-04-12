@@ -4,11 +4,11 @@
   <div class="form-signin">
     <h2 class="form-signin-heading">This is El Dorado</h2>
   <label for="password" class="sr-only">Username</label>
-  <input id="password" type="text" class="form-control" placeholder="username"  [(ngModel)]="user.username">
+  <input id="password" type="text" class="form-control" placeholder="username"  [(ngModel)]="user.username"/>
 <br>
   <div class="row">
     <div class="col-md-6">
-      <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Login</button>
+      <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login(user.username)">Login</button>
     </div>
     <div class="col-md-6">
     </div>
