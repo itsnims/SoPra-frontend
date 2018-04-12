@@ -31,21 +31,27 @@
 <!-- Player Cards and stuff -->
 <div>
   <h4 id="drawPile">Draw<br>pile</h4>
-  <button class="handCard" id="handCard1" type="submit">{{handCard1}}</button>
-  <button class="handCard" id="handCard2" type="submit">{{handCard1}}</button>
-  <button class="handCard" id="handCard3" type="submit">{{handCard1}}</button>
-  <button class="handCard" id="handCard4" type="submit">{{handCard1}}</button>
+  <div class="scrollCards">
+    <button class="handCard" id="handCard1" type="submit">{{handCard1}}</button>
+    <button class="handCard" id="handCard2" type="submit">{{handCard2}}</button>
+    <button class="handCard" id="handCard3" type="submit">{{handCard3}}</button>
+    <button class="handCard" id="handCard4" type="submit">{{handCard4}}</button>
+    <button class="handCard" id="handCard5" type="submit">{{handCard4}}</button>
+    <button class="handCard" id="handCard6" type="submit">{{handCard4}}</button>
+  </div>
+
   <h4 id="playerName">{{playerName}}</h4>
 </div>
 
 <!-- bottom left buttons-->
-<button id="zoomIn" class="bottomLeft" type="button">Zoom In</button>
-<button id="zoomOut" class="bottomLeft" type="button">Zoom Out</button>
-<button id="endTurn" class="bottomLeft" type="submit">End turn</button>
-<button id="move" class="bottomLeft" type="submit">Move</button>
-<button id="buy" class="bottomLeft" type="submit">Buy</button>
-<button id="discard" class="bottomLeft" type="submit">Discard</button>
-
+<div>
+  <button id="zoomIn" class="bottomLeft" type="button">Zoom In</button>
+  <button id="zoomOut" class="bottomLeft" type="button">Zoom Out</button>
+  <button id="endTurn" class="bottomLeft" type="submit">End turn</button>
+  <button id="move" class="bottomLeft" type="submit">Move</button>
+  <button id="buy" class="bottomLeft" type="submit">Buy</button>
+  <button id="discard" class="bottomLeft" type="submit">Discard</button>
+</div>
 
 
 <button id="leave" type="submit" [routerLink]="['/game']">Quit Game</button>

@@ -109,27 +109,19 @@
   top: 660px;
 }
 
-.handCard {
+.scrollCards {
   position: fixed;
+  top: 630px;
+  left: 525px;
+  width: 323px;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+.handCard {
+  display: inline-block;
   height: 101px;
   width: 61px;
 }
-
-#handCard1 {
-  left: 525px;
-  top: 630px;}
-
-#handCard2 {
-  left: 600px;
-  top: 630px;}
-
-#handCard3 {
-  left: 675px;
-  top: 630px;}
-
-#handCard4 {
-  left: 750px;
-  top: 630px;}
 
 #playerName {
   position: fixed;
