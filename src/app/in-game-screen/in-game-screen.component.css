@@ -1,6 +1,20 @@
-.bottomLeft {
-  width: 85px;}
+.opponents {
+  position: fixed;
+}
 
+#opponent1 {
+  top: 15px;
+  left: 175px;}
+
+#opponent2 {
+  top: 15px;
+  left: 525px;}
+
+#opponent3 {
+  top: 15px;
+  left: 875px;}
+
+/* Market & market cards */
 #marketPlace {
   position: fixed;
   left: -188px;
@@ -11,32 +25,144 @@
   -webkit-transform: rotate(-90.0deg);
 }
 
-#zoomIn {
+.marketCard {
   position: fixed;
+  height: 149px; /*ratio: 6.1 breit, 10.1 hoch*/
+  width: 90px;}
+
+#upperCard1 {
+  left: 120px;
+  top: 120px;}
+
+#upperCard2 {
+  left: 255px;
+  top: 120px;}
+
+#upperCard3 {
+  left: 390px;
+  top: 120px;}
+
+#upperCard4 {
+  left: 525px;
+  top: 120px;}
+
+#upperCard5 {
+  left: 660px;
+  top: 120px;}
+
+#upperCard6 {
+  left: 795px;
+  top: 120px;}
+
+#upperCard7 {
+  left: 120px;
+  top: 280px;}
+
+#upperCard8 {
+  left: 255px;
+  top: 280px;}
+
+#upperCard9 {
+  left: 390px;
+  top: 280px;}
+
+#upperCard10 {
+  left: 525px;
+  top: 280px;}
+
+#upperCard11 {
+  left: 660px;
+  top: 280px;}
+
+#upperCard12 {
+  left: 795px;
+  top: 280px;}
+
+#bottomCard1 {
+  left: 120px;
+  top: 460px;}
+
+#bottomCard2 {
+  left: 255px;
+  top: 460px;}
+
+#bottomCard3 {
+  left: 390px;
+  top: 460px;}
+
+#bottomCard4 {
+  left: 525px;
+  top: 460px;}
+
+#bottomCard5 {
+  left: 660px;
+  top: 460px;}
+
+#bottomCard6 {
+  left: 795px;
+  top: 460px;}
+
+/* Expedition Board */
+#drawPile {
+  position: fixed;
+  left: 350px;
+  top: 660px;
+}
+
+.handCard {
+  position: fixed;
+  height: 101px;
+  width: 61px;
+}
+
+#handCard1 {
+  left: 525px;
+  top: 630px;}
+
+#handCard2 {
+  left: 600px;
+  top: 630px;}
+
+#handCard3 {
+  left: 675px;
+  top: 630px;}
+
+#handCard4 {
+  left: 750px;
+  top: 630px;}
+
+#playerName {
+  position: fixed;
+  left: 860px;
+  top: 670px;
+}
+
+/* Buttons bottom left */
+.bottomLeft {
+  position: fixed;
+  width: 85px;}
+
+#zoomIn {
   top: 640px;
   left: 75px;}
 
 #zoomOut {
-  position: fixed;
   top: 680px;
   left: 75px;}
 
 #endTurn {
-  position: fixed;
   top: 720px;
   left: 75px;}
+
 #move {
-  position: fixed;
   top: 640px;
   left: 180px;}
 
 #buy {
-  position: fixed;
   top: 680px;
   left: 180px;}
 
 #discard {
-  position: fixed;
   top: 720px;
   left: 180px;}
 

@@ -1,6 +1,42 @@
-<h1> This is the In-Game Screen</h1>
+<h3 class="opponents" id="opponent1">{{opponent1}}</h3>
+<h3 class="opponents" id="opponent2">{{opponent2}}</h3>
+<h3 class="opponents" id="opponent3">{{opponent3}}</h3>
 
-<button id="marketPlace" type="button">Marketplace</button>
+
+<button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
+<div *ngIf="showMarket">
+  <!-- top row-->
+  <button class="marketCard" id="upperCard7" type="submit">{{marketCard13}}</button>
+  <button class="marketCard" id="upperCard8" type="submit">{{marketCard14}}</button>
+  <button class="marketCard" id="upperCard9" type="submit">{{marketCard15}}</button>
+  <button class="marketCard" id="upperCard10" type="submit">{{marketCard16}}</button>
+  <button class="marketCard" id="upperCard11" type="submit">{{marketCard17}}</button>
+  <button class="marketCard" id="upperCard12" type="submit">{{marketCard18}}</button><br><br>
+  <!-- middle row-->
+  <button class="marketCard" id="upperCard1" type="submit">{{marketCard7}}</button>
+  <button class="marketCard" id="upperCard2" type="submit">{{marketCard8}}</button>
+  <button class="marketCard" id="upperCard3" type="submit">{{marketCard9}}</button>
+  <button class="marketCard" id="upperCard4" type="submit">{{marketCard10}}</button>
+  <button class="marketCard" id="upperCard5" type="submit">{{marketCard11}}</button>
+  <button class="marketCard" id="upperCard6" type="submit">{{marketCard12}}</button><br><br>
+  <!-- last row-->
+  <button class="marketCard" id="bottomCard1" type="submit">{{marketCard1}}</button>
+  <button class="marketCard" id="bottomCard2" type="submit">{{marketCard2}}</button>
+  <button class="marketCard" id="bottomCard3" type="submit">{{marketCard3}}</button>
+  <button class="marketCard" id="bottomCard4" type="submit">{{marketCard4}}</button>
+  <button class="marketCard" id="bottomCard5" type="submit">{{marketCard5}}</button>
+  <button class="marketCard" id="bottomCard6" type="submit">{{marketCard6}}</button>
+</div>
+
+<!-- Player Cards and stuff -->
+<div>
+  <h4 id="drawPile">Draw<br>pile</h4>
+  <button class="handCard" id="handCard1" type="submit">{{handCard1}}</button>
+  <button class="handCard" id="handCard2" type="submit">{{handCard1}}</button>
+  <button class="handCard" id="handCard3" type="submit">{{handCard1}}</button>
+  <button class="handCard" id="handCard4" type="submit">{{handCard1}}</button>
+  <h4 id="playerName">{{playerName}}</h4>
+</div>
 
 <!-- bottom left buttons-->
 <button id="zoomIn" class="bottomLeft" type="button">Zoom In</button>
@@ -9,5 +45,7 @@
 <button id="move" class="bottomLeft" type="submit">Move</button>
 <button id="buy" class="bottomLeft" type="submit">Buy</button>
 <button id="discard" class="bottomLeft" type="submit">Discard</button>
+
+
 
 <button id="leave" type="submit" [routerLink]="['/game']">Quit Game</button>
