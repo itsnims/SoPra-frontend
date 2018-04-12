@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this._service.logout();
     this.user = new User();
     this.dataservice.fetchData().subscribe(
-      (data) => console.log(data));
+      (data: User[]) => this.sample_users = data);
 
   }
 
