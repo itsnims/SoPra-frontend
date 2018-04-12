@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {AuthenticationService} from '../shared/services/authentication.service';
 import {Router} from '@angular/router';
 import {User} from '../shared/models/user';
+import {DataService} from '../data.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  // providers: [DataService]
 })
 export class LoginComponent implements OnInit {
   model: any = {};
@@ -14,7 +16,7 @@ export class LoginComponent implements OnInit {
   error = '';
   user: User;
 
-  constructor(private router: Router, private _service: AuthenticationService, private _router: Router) {
+  constructor(private router: Router, private _service: AuthenticationService, private _router: Router, private dataservice: DataService) {
 
   }
 
@@ -22,6 +24,7 @@ export class LoginComponent implements OnInit {
     // reset login status
     this._service.logout();
     this.user = new User();
+    this.dataservice.fetchData();
 
   }
 

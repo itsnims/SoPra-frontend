@@ -13,7 +13,7 @@ import { HostScreenComponent } from './host-screen/host-screen.component';
 import {WaitingScreenComponent} from './waiting-screen/waiting-screen.component';
 import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
 import { DataService } from './data.service';
-
+import { HttpModule, RequestOptions} from '@angular/http';
 
 
 @NgModule({
@@ -24,12 +24,13 @@ import { DataService } from './data.service';
     HostScreenComponent,
     WaitingScreenComponent,
     InGameScreenComponent,
+
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
-    routing
+    routing,
   ],
   providers: [AuthenticationService, AuthGuardService, UserService, DataService],
   bootstrap: [AppComponent]

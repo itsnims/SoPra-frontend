@@ -1,10 +1,17 @@
 import {Injectable, OnInit} from '@angular/core';
-import {Http} from '@angular/http';
+import {HttpClient} from '@angular/common/http';
+
 declare var firebase: any;
 
 @Injectable()
 export class DataService {
 
+  constructor(private http: HttpClient) {}
+
+  fetchData() {
+    return this.http.get('/assets/mock_players.json').subscribe(
+      (data) => console.log(data));
+  }
 
   /*fbGetData()
   {
@@ -16,3 +23,4 @@ export class DataService {
   }
 }*/
 }
+
