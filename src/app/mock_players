@@ -1,0 +1,23 @@
+[
+  {
+    "id" : "1",
+    "token": "token1",
+    "status": "online",
+    "games": "no_games_yet",
+    "moves": "all",
+    "username":"player1"
+  },
+
+  {
+    "id" : "2",
+    "token": "token2",
+    "status": "online",
+    "games": "no_games_yet",
+    "moves": "all",
+    "username":"player2"
+  }
+]
+
+
+
+
