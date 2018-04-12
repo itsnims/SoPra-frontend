@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   loading = false;
   error = '';
   user: User;
+  sample_users: User[] = [];
 
   constructor(private router: Router, private _service: AuthenticationService, private _router: Router, private dataservice: DataService) {
 
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
     // reset login status
     this._service.logout();
     this.user = new User();
-    this.dataservice.fetchData();
+    this.dataservice.fetchData().subscribe(
+      (data) => console.log(data));
 
   }
 

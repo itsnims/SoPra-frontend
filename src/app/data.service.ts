@@ -9,8 +9,7 @@ export class DataService {
   constructor(private http: HttpClient) {}
 
   fetchData() {
-    return this.http.get('/assets/mock_players.json').subscribe(
-      (data) => console.log(data));
+    return this.http.get('/assets/mock_players.json');
   }
 
   /*fbGetData()

@@ -15,6 +15,15 @@
     "games": "no_games_yet",
     "moves": "all",
     "username":"player2"
+  },
+
+  {
+    "id" : "3",
+    "token": "token3",
+    "status": "online",
+    "games": "no_games_yet",
+    "moves": "all",
+    "username":"player3"
   }
 ]
 
