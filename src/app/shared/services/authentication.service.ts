@@ -10,7 +10,9 @@ import 'rxjs/add/operator/catch';
 export class AuthenticationService {
   public token: string;
   private apiUrl: string;
-  public userID = 0;
+  // public ID = 0;
+  public var = 0;
+
 
   constructor(private http: HttpClient) {
     // set token if saved in local storage
@@ -21,10 +23,15 @@ export class AuthenticationService {
     // this.apiUrl = 'https://git.heroku.com/sopra-fs18-group13-server.git';
     this.apiUrl = 'https://sopra-fd2af.firebaseio.com/0/users.json';
   }
-  
+
+  assignUniqueID(){
+    this.var++;
+    return this.var;
+  }
+
   login(user: User): Observable<User> {
-    this.userID ++;
-    const bodyString = JSON.stringify({username: user.username, id: this.userID.toString()});
+    // this.testID += 1;
+    const bodyString = JSON.stringify({username: user.username, id: this.assignUniqueID().toString()});
     // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {
