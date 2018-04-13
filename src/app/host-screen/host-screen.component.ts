@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Room} from '../shared/models/room';
+import {AuthenticationService} from '../shared/services/authentication.service';
+import {User} from '../shared/models/user';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {Router} from '@angular/router';
+import {DataService} from '../data.service';
 
 @Component({
   selector: 'app-host-screen',
@@ -9,6 +15,12 @@ import {Room} from '../shared/models/room';
 
 export class HostScreenComponent implements OnInit {
   room: Room;
+  apiURL = 'https://sopra-fd2af.firebaseio.com/0.json';
+
+  constructor(private _service: AuthenticationService, private router: Router) {
+
+  }
+
   paths = [
     {pathID: '1', pathName: 'Classic Path'},
     {pathID: '2', pathName: 'Hills of Gold'},
@@ -37,15 +49,21 @@ export class HostScreenComponent implements OnInit {
     this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
     this.room.maxPlayers = (<HTMLInputElement>document.getElementById('maxPlayer')).value;
   }
-  createRoom(){
-
-  }
-  constructor() {}
-
 
   ngOnInit() {
     this.room = new Room();
   }
+
+  createRoom() {
+    this._service.roomLogin(this.room)
+      .subscribe(result => {
+        if (result) {
+          this.router.navigate(['/waiting-screen']);
+        }});
+  }
+
+
+
 
 
 }

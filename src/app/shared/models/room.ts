@@ -9,5 +9,4 @@ export class Room {
   public maxPlayers: string;
   public status: string;
   public PlayersInRoom: User[]= [];
-
 }
