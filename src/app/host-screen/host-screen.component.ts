@@ -37,11 +37,15 @@ export class HostScreenComponent implements OnInit {
     this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
     this.room.maxPlayers = (<HTMLInputElement>document.getElementById('maxPlayer')).value;
   }
+  createRoom(){
+
+  }
   constructor() {}
 
 
   ngOnInit() {
     this.room = new Room();
   }
+
 
 }
