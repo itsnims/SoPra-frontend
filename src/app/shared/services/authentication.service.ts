@@ -16,7 +16,8 @@ export class AuthenticationService {
     this.token = currentUser && currentUser.token;
 
     // TODO fill in your heroku-backend URL
-    this.apiUrl = 'https://git.heroku.com/sopra-fs18-group13-server.git';
+    // this.apiUrl = 'https://git.heroku.com/sopra-fs18-group13-server.git';
+    this.apiUrl = 'https://sopra-fd2af.firebaseio.com/.json';
   }
 
   login(user: User): Observable<User> {
@@ -28,7 +29,7 @@ export class AuthenticationService {
       })
     };
 
-    return this.http.post<User>(this.apiUrl + '/users', bodyString, httpOptions).map((fetchedUser: User) => {
+    return this.http.post<User>(this.apiUrl, bodyString, httpOptions).map((fetchedUser: User) => {
       if (user) {
         // set token property
         this.token = fetchedUser.token;
@@ -46,7 +47,6 @@ export class AuthenticationService {
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
-
   logout(): void {
     // clear token remove user from local storage to log user out
     this.token = null;
@@ -54,3 +54,18 @@ export class AuthenticationService {
   }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

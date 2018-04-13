@@ -32,9 +32,8 @@ export class LoginComponent implements OnInit {
 
   }
 
-  login(xp) {
-    firebase.database().ref('/').push({user: xp});
-   /* this._service.login(this.user)
+  login() {
+    this._service.login(this.user)
       .subscribe(result => {
         if (result) {
           this.router.navigate(['/game-lobby-screen']);
@@ -42,9 +41,9 @@ export class LoginComponent implements OnInit {
           this.error = 'Username exists';
           this.loading = false;
         }
-      });*/
-
+      });
     }
+
 
   fbGetData() {
     /*firebase.database database connects to database*/
