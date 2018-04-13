@@ -5,10 +5,12 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+
 @Injectable()
 export class AuthenticationService {
   public token: string;
   private apiUrl: string;
+  public userID = 0;
 
   constructor(private http: HttpClient) {
     // set token if saved in local storage
@@ -17,11 +19,13 @@ export class AuthenticationService {
 
     // TODO fill in your heroku-backend URL
     // this.apiUrl = 'https://git.heroku.com/sopra-fs18-group13-server.git';
-    this.apiUrl = 'https://sopra-fd2af.firebaseio.com/.json';
+    this.apiUrl = 'https://sopra-fd2af.firebaseio.com/0/users.json';
   }
-
+  
   login(user: User): Observable<User> {
-    const bodyString = JSON.stringify({ username: user.username});
+    this.userID ++;
+    const bodyString = JSON.stringify({username: user.username, id: this.userID.toString()});
+    // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {
       headers: new HttpHeaders({
@@ -52,6 +56,8 @@ export class AuthenticationService {
     this.token = null;
     localStorage.removeItem('currentUser');
   }
+
+
 
 }
 
