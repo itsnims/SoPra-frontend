@@ -28,7 +28,7 @@ export class AuthenticationService {
 
   }
 
-  assignUniqueID(){
+  assignUniqueID() {
     this.var++;
     return this.var;
   }
@@ -74,7 +74,7 @@ export class AuthenticationService {
 
   roomLogin(room: Room): Observable<Room> {
     // this.testID += 1;
-    const bodyString = JSON.stringify({roomname: room.name, id : this.assignUniqueID());
+    const bodyString = JSON.stringify({roomname: room.name, id : this.assignUniqueID()});
     // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {
