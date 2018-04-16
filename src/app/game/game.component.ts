@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../shared/services/user.service';
 import {User} from '../shared/models/user';
-import { ROOMS} from '../mock-rooms';
+
 
 @Component({
   selector: 'app-game',
@@ -10,7 +10,6 @@ import { ROOMS} from '../mock-rooms';
 })
 export class GameComponent  implements OnInit {
   users: User[] = [];
-  rooms = ROOMS;
 
   constructor(private userService: UserService) { }
 

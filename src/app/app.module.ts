@@ -14,6 +14,8 @@ import {WaitingScreenComponent} from './waiting-screen/waiting-screen.component'
 import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
 import { DataService } from './data.service';
 import { HttpModule, RequestOptions} from '@angular/http';
+import { HexagonBoardComponent } from './hexagon-board/hexagon-board.component';
+import { StandardComponent } from './standard/standard.component';
 
 
 @NgModule({
@@ -24,6 +26,8 @@ import { HttpModule, RequestOptions} from '@angular/http';
     HostScreenComponent,
     WaitingScreenComponent,
     InGameScreenComponent,
+    HexagonBoardComponent,
+    StandardComponent,
 
   ],
   imports: [

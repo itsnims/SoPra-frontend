@@ -2,7 +2,8 @@
 <h3 class="opponents" id="opponent2">{{opponent2}}</h3>
 <h3 class="opponents" id="opponent3">{{opponent3}}</h3>
 
-
+<div class="gameboard">
+</div>
 <button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
 <div *ngIf="showMarket">
   <!-- top row-->
@@ -52,6 +53,10 @@
   <button id="buy" class="bottomLeft" type="submit">Buy</button>
   <button id="discard" class="bottomLeft" type="submit">Discard</button>
 </div>
+
+<!--something here like:
+class NgIf-->
+
 
 
 <button id="leave" type="submit" [routerLink]="['/game']">Quit Game</button>

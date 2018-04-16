@@ -1,3 +1,4 @@
+import * as $ from 'jquery';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class InGameScreenComponent implements OnInit {
-  playerName = 'Your name'; //later replace with this.username or whatever works
+  playerName = 'Your name'; // later replace with this.username or whatever works
 
   showMarket = false;
 
@@ -38,6 +39,8 @@ export class InGameScreenComponent implements OnInit {
   handCard2 = 'Hand Card 2';
   handCard3 = 'Hand Card 3';
   handCard4 = 'Hand Card 4';
+
+
 
   showMarketFunc() {
     if (this.showMarket === true) {
