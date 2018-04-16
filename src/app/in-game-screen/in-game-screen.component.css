@@ -25,6 +25,13 @@
   -webkit-transform: rotate(-90.0deg);
 }
 
+.marketCard {
+  height: 149px; /*ratio: 6.1 breit, 10.1 hoch*/
+  width: 96px;
+  margin-right: 45px;
+  margin-top: 11px;
+}
+
 .upperMarket {
   position: fixed;
   top: 109px;
@@ -32,111 +39,106 @@
   width: 850px;
 
 }
-
+/* remove when market works
 .middleMarket {
   position: fixed;
   top: 280px;
   left: 120px;
 }
-
+*/
 .lowerMarket {
   position: fixed;
   top: 449px;
   left: 120px;
 }
 
-.marketCard {
-  height: 149px; /*ratio: 6.1 breit, 10.1 hoch*/
-  width: 96px;
-  margin-right: 35px;
-  margin-top: 11px;
-}
+
 
 /* maybe have to change names*/
 
 .cartographer {
   background: url('../images/cards/A.cartographer.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .compass {
   background: url('../images/cards/A.compass.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .native {
   background: url('../images/cards/A.native.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .scientist {
   background: url('../images/cards/A.scientist.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .transmitter {
   background: url('../images/cards/A.transmitter.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .travel-log {
   background: url('../images/cards/A.travel-log.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .sailor {
   background: url('../images/cards/B1-sailor.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .captain {
   background: url('../images/cards/B3v2-captain.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .explorer {
   background: url('../images/cards/G1-explorer.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .scout {
   background: url('../images/cards/G2v1-scout.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .trailblazer {
   background: url('../images/cards/G3v3-trailblazer.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .pioneer {
   background: url('../images/cards/G5v5-pioneer.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .giant-machete {
   background: url('../images/cards/G6v3-giant-machete.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .jack-of-all-trades {
   background: url('../images/cards/GBY1v2-jack-of-all-trades.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .adventurer {
   background: url('../images/cards/GBY2v4-adventurer.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .prop-plane {
   background: url('../images/cards/GBY4v4-prop-plane.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .traveler {
   background: url('../images/cards/Y1-traveler.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .photographer {
   background: url('../images/cards/Y2v2-photographer.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .journalist {
   background: url('../images/cards/Y3v3-journalist.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .treasure-chest {
   background: url('../images/cards/Y4v3-treasure-chest.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 .millionaire {
   background: url('../images/cards/Y4v5-millionaire.png') no-repeat top left;
-  background-size: contain;}
+  background-size: cover;}
 
 /* Expedition Board */
 #drawPile {

@@ -7,29 +7,31 @@
 <div *ngIf="showMarket">
   <!-- top row-->
   <div class="upperMarket">
-  <button [disabled]=lowerMarketFree class="{{classTest}} cartographer" type="submit">{{marketCard13}}</button>
+    <button *ngFor="let upperCard of upperCards" [disabled]="lowerMarketFree" class="{{upperCard.cardID}} marketCard" type="submit"></button>
+  <!--button [disabled]=lowerMarketFree class="{{classTest}} cartographer" type="submit">{{marketCard13}}</button>
   <button [disabled]=true class={{classTest}} type="radio">{{marketCard14}}</button>
-  <button class="marketCard" type="radio">{{marketCard15}}</button>
-  <button class="marketCard" type="radio">{{marketCard16}}</button>
-  <button class="marketCard" type="radio">{{marketCard17}}</button>
-  <button class="marketCard" type="radio">{{marketCard18}}</button>
+  <button class="marketCard" type="submit">{{marketCard15}}</button>
+  <button class="marketCard" type="submit">{{marketCard16}}</button>
+  <button class="marketCard" type="submit">{{marketCard17}}</button>
+  <button class="marketCard" type="submit">{{marketCard18}}</button-->
   <!-- middle row-->
-  <button class="marketCard" type="radio">{{marketCard7}}</button>
-  <button class="marketCard" type="radio">{{marketCard8}}</button>
-  <button class="marketCard" type="radio">{{marketCard9}}</button>
-  <button class="marketCard" type="radio">{{marketCard10}}</button>
-  <button class="marketCard" type="radio">{{marketCard11}}</button>
-  <button class="marketCard" type="radio">{{marketCard12}}</button>
+  <!--button class="marketCard" type="submit">{{marketCard7}}</button>
+  <button class="marketCard" type="submit">{{marketCard8}}</button>
+  <button class="marketCard" type="submit">{{marketCard9}}</button>
+  <button class="marketCard" type="submit">{{marketCard10}}</button>
+  <button class="marketCard" type="submit">{{marketCard11}}</button>
+  <button class="marketCard" type="submit">{{marketCard12}}</button-->
   </div>
 
   <!-- last row-->
   <div class="lowerMarket">
-  <button class="marketCard" type="radio">{{marketCard1}}</button>
+    <button *ngFor="let lowerCard of lowerCards" class="{{lowerCard.cardID}} marketCard" type="submit"></button>
+  <!--button class="marketCard" type="submit">{{marketCard1}}</button>
   <button class="marketCard" type="submit">{{marketCard2}}</button>
   <button class="marketCard" type="submit">{{marketCard3}}</button>
   <button class="marketCard" type="submit">{{marketCard4}}</button>
   <button class="marketCard" type="submit">{{marketCard5}}</button>
-  <button class="marketCard" type="submit">{{marketCard6}}</button>
+  <button class="marketCard" type="submit">{{marketCard6}}</button-->
   </div>
 </div>
 
