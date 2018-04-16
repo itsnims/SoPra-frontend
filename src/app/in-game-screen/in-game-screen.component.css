@@ -25,82 +25,118 @@
   -webkit-transform: rotate(-90.0deg);
 }
 
-.marketCard {
+.upperMarket {
   position: fixed;
+  top: 109px;
+  left: 120px;
+  width: 850px;
+
+}
+
+.middleMarket {
+  position: fixed;
+  top: 280px;
+  left: 120px;
+}
+
+.lowerMarket {
+  position: fixed;
+  top: 449px;
+  left: 120px;
+}
+
+.marketCard {
   height: 149px; /*ratio: 6.1 breit, 10.1 hoch*/
-  width: 90px;}
+  width: 96px;
+  margin-right: 35px;
+  margin-top: 11px;
+}
 
-#upperCard1 {
-  left: 120px;
-  top: 120px;}
+/* maybe have to change names*/
 
-#upperCard2 {
-  left: 255px;
-  top: 120px;}
+.cartographer {
+  background: url('../images/cards/A.cartographer.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard3 {
-  left: 390px;
-  top: 120px;}
+.compass {
+  background: url('../images/cards/A.compass.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard4 {
-  left: 525px;
-  top: 120px;}
+.native {
+  background: url('../images/cards/A.native.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard5 {
-  left: 660px;
-  top: 120px;}
+.scientist {
+  background: url('../images/cards/A.scientist.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard6 {
-  left: 795px;
-  top: 120px;}
+.transmitter {
+  background: url('../images/cards/A.transmitter.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard7 {
-  left: 120px;
-  top: 280px;}
+.travel-log {
+  background: url('../images/cards/A.travel-log.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard8 {
-  left: 255px;
-  top: 280px;}
+.sailor {
+  background: url('../images/cards/B1-sailor.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard9 {
-  left: 390px;
-  top: 280px;}
+.captain {
+  background: url('../images/cards/B3v2-captain.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard10 {
-  left: 525px;
-  top: 280px;}
+.explorer {
+  background: url('../images/cards/G1-explorer.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard11 {
-  left: 660px;
-  top: 280px;}
+.scout {
+  background: url('../images/cards/G2v1-scout.png') no-repeat top left;
+  background-size: contain;}
 
-#upperCard12 {
-  left: 795px;
-  top: 280px;}
+.trailblazer {
+  background: url('../images/cards/G3v3-trailblazer.png') no-repeat top left;
+  background-size: contain;}
 
-#bottomCard1 {
-  left: 120px;
-  top: 460px;}
+.pioneer {
+  background: url('../images/cards/G5v5-pioneer.png') no-repeat top left;
+  background-size: contain;}
 
-#bottomCard2 {
-  left: 255px;
-  top: 460px;}
+.giant-machete {
+  background: url('../images/cards/G6v3-giant-machete.png') no-repeat top left;
+  background-size: contain;}
 
-#bottomCard3 {
-  left: 390px;
-  top: 460px;}
+.jack-of-all-trades {
+  background: url('../images/cards/GBY1v2-jack-of-all-trades.png') no-repeat top left;
+  background-size: contain;}
 
-#bottomCard4 {
-  left: 525px;
-  top: 460px;}
+.adventurer {
+  background: url('../images/cards/GBY2v4-adventurer.png') no-repeat top left;
+  background-size: contain;}
 
-#bottomCard5 {
-  left: 660px;
-  top: 460px;}
+.prop-plane {
+  background: url('../images/cards/GBY4v4-prop-plane.png') no-repeat top left;
+  background-size: contain;}
 
-#bottomCard6 {
-  left: 795px;
-  top: 460px;}
+.traveler {
+  background: url('../images/cards/Y1-traveler.png') no-repeat top left;
+  background-size: contain;}
+
+.photographer {
+  background: url('../images/cards/Y2v2-photographer.png') no-repeat top left;
+  background-size: contain;}
+
+.journalist {
+  background: url('../images/cards/Y3v3-journalist.png') no-repeat top left;
+  background-size: contain;}
+
+.treasure-chest {
+  background: url('../images/cards/Y4v3-treasure-chest.png') no-repeat top left;
+  background-size: contain;}
+
+.millionaire {
+  background: url('../images/cards/Y4v5-millionaire.png') no-repeat top left;
+  background-size: contain;}
 
 /* Expedition Board */
 #drawPile {

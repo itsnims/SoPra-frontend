@@ -6,26 +6,31 @@
 <button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
 <div *ngIf="showMarket">
   <!-- top row-->
-  <button class="marketCard" id="upperCard7" type="submit">{{marketCard13}}</button>
-  <button class="marketCard" id="upperCard8" type="submit">{{marketCard14}}</button>
-  <button class="marketCard" id="upperCard9" type="submit">{{marketCard15}}</button>
-  <button class="marketCard" id="upperCard10" type="submit">{{marketCard16}}</button>
-  <button class="marketCard" id="upperCard11" type="submit">{{marketCard17}}</button>
-  <button class="marketCard" id="upperCard12" type="submit">{{marketCard18}}</button><br><br>
+  <div class="upperMarket">
+  <button [disabled]=lowerMarketFree class="{{classTest}} cartographer" type="submit">{{marketCard13}}</button>
+  <button [disabled]=true class={{classTest}} type="radio">{{marketCard14}}</button>
+  <button class="marketCard" type="radio">{{marketCard15}}</button>
+  <button class="marketCard" type="radio">{{marketCard16}}</button>
+  <button class="marketCard" type="radio">{{marketCard17}}</button>
+  <button class="marketCard" type="radio">{{marketCard18}}</button>
   <!-- middle row-->
-  <button class="marketCard" id="upperCard1" type="submit">{{marketCard7}}</button>
-  <button class="marketCard" id="upperCard2" type="submit">{{marketCard8}}</button>
-  <button class="marketCard" id="upperCard3" type="submit">{{marketCard9}}</button>
-  <button class="marketCard" id="upperCard4" type="submit">{{marketCard10}}</button>
-  <button class="marketCard" id="upperCard5" type="submit">{{marketCard11}}</button>
-  <button class="marketCard" id="upperCard6" type="submit">{{marketCard12}}</button><br><br>
+  <button class="marketCard" type="radio">{{marketCard7}}</button>
+  <button class="marketCard" type="radio">{{marketCard8}}</button>
+  <button class="marketCard" type="radio">{{marketCard9}}</button>
+  <button class="marketCard" type="radio">{{marketCard10}}</button>
+  <button class="marketCard" type="radio">{{marketCard11}}</button>
+  <button class="marketCard" type="radio">{{marketCard12}}</button>
+  </div>
+
   <!-- last row-->
-  <button class="marketCard" id="bottomCard1" type="submit">{{marketCard1}}</button>
-  <button class="marketCard" id="bottomCard2" type="submit">{{marketCard2}}</button>
-  <button class="marketCard" id="bottomCard3" type="submit">{{marketCard3}}</button>
-  <button class="marketCard" id="bottomCard4" type="submit">{{marketCard4}}</button>
-  <button class="marketCard" id="bottomCard5" type="submit">{{marketCard5}}</button>
-  <button class="marketCard" id="bottomCard6" type="submit">{{marketCard6}}</button>
+  <div class="lowerMarket">
+  <button class="marketCard" type="radio">{{marketCard1}}</button>
+  <button class="marketCard" type="submit">{{marketCard2}}</button>
+  <button class="marketCard" type="submit">{{marketCard3}}</button>
+  <button class="marketCard" type="submit">{{marketCard4}}</button>
+  <button class="marketCard" type="submit">{{marketCard5}}</button>
+  <button class="marketCard" type="submit">{{marketCard6}}</button>
+  </div>
 </div>
 
 <!-- Player Cards and stuff -->

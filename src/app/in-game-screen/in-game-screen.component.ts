@@ -9,8 +9,10 @@ import { Component, OnInit } from '@angular/core';
 export class InGameScreenComponent implements OnInit {
   playerName = 'Your name'; //later replace with this.username or whatever works
 
+  lowerMarketFree = true; // erhält true / false von isFree() im backend
   showMarket = false;
 
+  classTest = "marketCard";
   opponent1 = 'Opponent 1 name';
   opponent2 = 'Opponent 2 name';
   opponent3 = 'Opponent 3 name';
