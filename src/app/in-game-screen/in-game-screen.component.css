@@ -28,31 +28,26 @@
 .marketCard {
   height: 149px; /*ratio: 6.1 breit, 10.1 hoch*/
   width: 96px;
-  margin-right: 45px;
-  margin-top: 11px;
+  margin-top: 5px;
 }
 
 .upperMarket {
   position: fixed;
   top: 109px;
   left: 120px;
-  width: 850px;
+  width: 900px;
+}
 
-}
-/* remove when market works
-.middleMarket {
-  position: fixed;
-  top: 280px;
-  left: 120px;
-}
-*/
 .lowerMarket {
   position: fixed;
   top: 449px;
   left: 120px;
 }
 
-
+.cardsLeft {
+  margin-right: 20px;
+  font-size: 250%
+}
 
 /* maybe have to change names*/
 

@@ -7,31 +7,18 @@
 <div *ngIf="showMarket">
   <!-- top row-->
   <div class="upperMarket">
-    <button *ngFor="let upperCard of upperCards" [disabled]="lowerMarketFree" class="{{upperCard.cardID}} marketCard" type="submit"></button>
-  <!--button [disabled]=lowerMarketFree class="{{classTest}} cartographer" type="submit">{{marketCard13}}</button>
-  <button [disabled]=true class={{classTest}} type="radio">{{marketCard14}}</button>
-  <button class="marketCard" type="submit">{{marketCard15}}</button>
-  <button class="marketCard" type="submit">{{marketCard16}}</button>
-  <button class="marketCard" type="submit">{{marketCard17}}</button>
-  <button class="marketCard" type="submit">{{marketCard18}}</button-->
-  <!-- middle row-->
-  <!--button class="marketCard" type="submit">{{marketCard7}}</button>
-  <button class="marketCard" type="submit">{{marketCard8}}</button>
-  <button class="marketCard" type="submit">{{marketCard9}}</button>
-  <button class="marketCard" type="submit">{{marketCard10}}</button>
-  <button class="marketCard" type="submit">{{marketCard11}}</button>
-  <button class="marketCard" type="submit">{{marketCard12}}</button-->
+    <span *ngFor="let upperCard of upperCards" >
+      <button [disabled]="lowerMarketFree" class="{{upperCard.cardID}} marketCard" type="submit"></button>
+      <span class="cardsLeft">{{upperCard.left}}</span>
+    </span>
   </div>
 
   <!-- last row-->
   <div class="lowerMarket">
-    <button *ngFor="let lowerCard of lowerCards" class="{{lowerCard.cardID}} marketCard" type="submit"></button>
-  <!--button class="marketCard" type="submit">{{marketCard1}}</button>
-  <button class="marketCard" type="submit">{{marketCard2}}</button>
-  <button class="marketCard" type="submit">{{marketCard3}}</button>
-  <button class="marketCard" type="submit">{{marketCard4}}</button>
-  <button class="marketCard" type="submit">{{marketCard5}}</button>
-  <button class="marketCard" type="submit">{{marketCard6}}</button-->
+    <span *ngFor="let lowerCard of lowerCards">
+      <button class="{{lowerCard.cardID}} marketCard" type="submit"></button>
+      <span class="cardsLeft">{{lowerCard.left}}</span>
+    </span>
   </div>
 </div>
 
