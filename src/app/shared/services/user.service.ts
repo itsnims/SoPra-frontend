@@ -12,15 +12,15 @@ export class UserService {
               private authenticationService: AuthenticationService) {
 
     /*TODO fill in your heroku-backend URL*/
-    this.apiUrl = 'https://git.heroku.com/sopra-fs18-group13-server.git';
+    this.apiUrl = 'https://sopra-fd2af.firebaseio.com/0/users.json';
   }
 
   getUsers(): Observable<User[]> {
-    const httpOptions = {
+    /*const httpOptions = {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + this.authenticationService.token})
-    };
+    }; */
     // get users from api
-    return this.http.get<User[]>(this.apiUrl + '/users', httpOptions);
+    return this.http.get<User[]>(this.apiUrl);
   }
 }
 
