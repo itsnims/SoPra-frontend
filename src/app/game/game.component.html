@@ -4,13 +4,13 @@
   <div>
     Users from secure api end point:
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let user of users">
-        {{user.username}}</li>
+     <!-- <li class="list-group-item" *ngFor="let user of users">
+        {{user.username}}</li> -->
 
       <div *ngFor= "let room of rooms">
         <button class="game-rooms" type="submit" (click)="joinRoom()">
           {{room.name}}
-          {{room.status}}
+          <!-- {{room.status}} -->
           <div *ngIf="joinable">
             <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="addPlayerToRoom()">Join Room</button>
           </div>

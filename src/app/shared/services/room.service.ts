@@ -10,13 +10,19 @@ export class RoomService {
   private apiUrl: string;
   public token: string; // we probably need the actual token of a certain player
   public roomUrl: string;
+  public playersUrl: string;
+  public users: User[] = [];
+  User = new User();
+
+
 
   constructor(private http: HttpClient,
               private authenticationService: AuthenticationService) {
 
     /*TODO fill in your heroku-backend URL*/
     this.apiUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms.json';
-    this.roomUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms/0/PlayersInRoom.json';
+    this.playersUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms/0/PlayersInRoom.json';
+    this.roomUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms/.json';
   }
 
   getRooms(): Observable<Room[]> {
@@ -39,7 +45,7 @@ export class RoomService {
       })
     };
 
-    return this.http.post<User>(this.roomUrl, bodyString, httpOptions).map((fetchedUser: User) => {
+    return this.http.post<User>(this.playersUrl, bodyString, httpOptions).map((fetchedUser: User) => {
       if (user) {
         // set token property
         this.token = fetchedUser.token;
@@ -57,9 +63,14 @@ export class RoomService {
       .catch((error: any) => Observable.throw(error || 'Server error'));
   }
 
+
   roomLogin(room: Room): Observable<Room> {
-    // this.testID += 1;
-    const bodyString = JSON.stringify({roomname: room.name, id : this.assignUniqueID()});
+
+    this.User.token = '';
+    this.User.username = '';   // here we hardcode a user, so that we can display the room in an appropriate JSON format
+    this.User.id = 1;
+
+    const bodyString = JSON.stringify({name: room.name, pathID: room.path, maxPlayers : room.maxPlayers, PlayersInRoom: [this.User]});
     // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {
@@ -68,13 +79,9 @@ export class RoomService {
       })
     };
 
-    return this.http.post<User>(this.roomUrl, bodyString, httpOptions).map((fetchedUser: User) => {
+    return this.http.post<Room>(this.roomUrl, bodyString, httpOptions).map((fetchedUser: Room) => {
       if (room) {
         // set token property
-        this.token = fetchedUser.token;
-
-        // store username and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify({username: fetchedUser.username, token: this.token}));
 
         // return true to indicate successful login
         return room;

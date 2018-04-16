@@ -10,3 +10,10 @@ export class User {
   public moves: number;
   public username: string;
 }
+
+export class SuperUser {
+  public id: number;
+  public token: string;
+  public username: string
+  ;
+}
