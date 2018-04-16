@@ -5,6 +5,8 @@ import {AuthGuardService} from './shared/services/auth-guard.service';
 import {HostScreenComponent} from './host-screen/host-screen.component';
 import {WaitingScreenComponent} from './waiting-screen/waiting-screen.component';
 import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
+import {HexagonBoardComponent} from './hexagon-board/hexagon-board.component';
+import {StandardComponent} from './standard/standard.component';
 
 
 const appRoutes: Routes = [
@@ -14,6 +16,8 @@ const appRoutes: Routes = [
     { path: 'host-screen', component: HostScreenComponent},
     { path: 'waiting-screen', component: WaitingScreenComponent},
     { path: 'in-game-screen', component: InGameScreenComponent},
+  {path: 'hexagon-board', component: HexagonBoardComponent},
+  {path: 'standard', component: StandardComponent},
 
     // otherwise redirect to home
     { path: '**', redirectTo: 'login' }
