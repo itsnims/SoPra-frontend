@@ -13,6 +13,8 @@ import {User} from '../shared/models/user';
 export class GameComponent  implements OnInit {
   users: User[] = [];
   rooms: Room[] = [];
+  joinable = true;
+  playersInRoom = 4;
 
   constructor(private userService: UserService, private roomService: RoomService) { }
 
@@ -26,5 +28,15 @@ export class GameComponent  implements OnInit {
       .subscribe(rooms => {
         this.rooms = rooms;
       });
+  }
+
+  joinRoom() {
+    if (this.joinable === true) {
+      this.joinable = true;
+    }
+  }
+
+  addPlayerToRoom() {
+
   }
 }

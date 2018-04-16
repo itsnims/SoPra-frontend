@@ -8,9 +8,12 @@
         {{user.username}}</li>
 
       <div *ngFor= "let room of rooms">
-        <button class="game-rooms" type="submit" >
+        <button class="game-rooms" type="submit" (click)="joinRoom()">
           {{room.name}}
           {{room.status}}
+          <div *ngIf="joinable">
+            <button class="btn btn-sm btn-primary btn-block" type="submit" [routerLink]="['/login']">Join Room</button>
+          </div>
         </button>
       </div>
     </ul>
