@@ -68,39 +68,6 @@ export class AuthenticationService {
     localStorage.removeItem('currentUser');
   }
 
-
-
-
-
-  roomLogin(room: Room): Observable<Room> {
-    // this.testID += 1;
-    const bodyString = JSON.stringify({roomname: room.name, id : this.assignUniqueID()});
-    // const userID = JSON.stringify({id: user.id})
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-
-    return this.http.post<User>(this.roomUrl, bodyString, httpOptions).map((fetchedUser: User) => {
-      if (room) {
-        // set token property
-        this.token = fetchedUser.token;
-
-        // store username and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify({username: fetchedUser.username, token: this.token}));
-
-        // return true to indicate successful login
-        return room;
-      } else {
-        // return false to indicate failed login
-        return null;
-      }
-    }) // ...and calling .json() on the response to return data
-      .catch((error: any) => Observable.throw(error || 'Server error'));
-  }
-
 }
 
 

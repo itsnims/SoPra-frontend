@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Room} from '../shared/models/room';
-import {AuthenticationService} from '../shared/services/authentication.service';
+import {RoomService} from '../shared/services/room.service';
 import {User} from '../shared/models/user';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
@@ -17,7 +17,7 @@ export class HostScreenComponent implements OnInit {
   room: Room;
   apiURL = 'https://sopra-fd2af.firebaseio.com/0.json';
 
-  constructor(private _service: AuthenticationService, private router: Router) {
+  constructor(private _service: RoomService, private router: Router) {
 
   }
 
