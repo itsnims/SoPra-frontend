@@ -3,18 +3,31 @@
   <h1>General Lobby Screen </h1>
   <div>
     Users from secure api end point:
-    <!-- <ul class="list-group">
+    <ul class="list-group">
       <li class="list-group-item" *ngFor="let user of users">
         {{user.username}}</li>
 
       <div *ngFor= "let room of rooms">
-        <button class="game-rooms" type="submit" >{{room.id}}
+        <button class="game-rooms" type="submit" >
           {{room.name}}
-          {{room.pwdBool}}
-          {{room.status}}</button>
+          {{room.status}}
+        </button>
       </div>
-    </ul>-->
-    {{users}}
+    </ul>
+
+    <!-- <li class="list-group-item" *ngFor="let user of users">
+      {{user.username}} {{user.id}} </li>
+
+    <li class="list-group-item" *ngFor="let room of rooms">
+      {{room.name}}, {{room.PlayersInRoom}} </li>
+
+    <div *ngFor= "let room of rooms">
+      <button class="game-rooms" type="submit" >{{room.id}}
+        {{room.name}}
+        {{room.pwdBool}}
+        {{room.status}}</button>
+    </div> -->
+
   </div>
 
     <form>
@@ -27,6 +40,6 @@
 
 
 
-</div>
+  </div>
 </div>
 

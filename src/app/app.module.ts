@@ -16,6 +16,7 @@ import { DataService } from './data.service';
 import { HttpModule, RequestOptions} from '@angular/http';
 import { HexagonBoardComponent } from './hexagon-board/hexagon-board.component';
 import { StandardComponent } from './standard/standard.component';
+import { RoomService} from './shared/services/room.service';
 
 
 @NgModule({
@@ -36,7 +37,7 @@ import { StandardComponent } from './standard/standard.component';
     HttpClientModule,
     routing,
   ],
-  providers: [AuthenticationService, AuthGuardService, UserService, DataService],
+  providers: [AuthenticationService, AuthGuardService, UserService, DataService, RoomService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
