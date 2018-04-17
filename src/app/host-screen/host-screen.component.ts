@@ -38,7 +38,7 @@ export class HostScreenComponent implements OnInit {
 
   public shown = false;
 
-  pwdInput() {
+  public pwdInput() {
     if (this.shown === true) {
       this.room.pwdBool = true;
     } else {
