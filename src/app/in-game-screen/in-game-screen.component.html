@@ -1,35 +1,28 @@
 <h3 class="opponents" id="opponent1">{{opponent1}}</h3>
 <h3 class="opponents" id="opponent2">{{opponent2}}</h3>
 <h3 class="opponents" id="opponent3">{{opponent3}}</h3>
-
-<div class="gameboard">
-</div>
+<!-- Market-->
 <button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
 <div *ngIf="showMarket">
-  <!-- top row-->
-  <button class="marketCard" id="upperCard7" type="submit">{{marketCard13}}</button>
-  <button class="marketCard" id="upperCard8" type="submit">{{marketCard14}}</button>
-  <button class="marketCard" id="upperCard9" type="submit">{{marketCard15}}</button>
-  <button class="marketCard" id="upperCard10" type="submit">{{marketCard16}}</button>
-  <button class="marketCard" id="upperCard11" type="submit">{{marketCard17}}</button>
-  <button class="marketCard" id="upperCard12" type="submit">{{marketCard18}}</button><br><br>
-  <!-- middle row-->
-  <button class="marketCard" id="upperCard1" type="submit">{{marketCard7}}</button>
-  <button class="marketCard" id="upperCard2" type="submit">{{marketCard8}}</button>
-  <button class="marketCard" id="upperCard3" type="submit">{{marketCard9}}</button>
-  <button class="marketCard" id="upperCard4" type="submit">{{marketCard10}}</button>
-  <button class="marketCard" id="upperCard5" type="submit">{{marketCard11}}</button>
-  <button class="marketCard" id="upperCard6" type="submit">{{marketCard12}}</button><br><br>
-  <!-- last row-->
-  <button class="marketCard" id="bottomCard1" type="submit">{{marketCard1}}</button>
-  <button class="marketCard" id="bottomCard2" type="submit">{{marketCard2}}</button>
-  <button class="marketCard" id="bottomCard3" type="submit">{{marketCard3}}</button>
-  <button class="marketCard" id="bottomCard4" type="submit">{{marketCard4}}</button>
-  <button class="marketCard" id="bottomCard5" type="submit">{{marketCard5}}</button>
-  <button class="marketCard" id="bottomCard6" type="submit">{{marketCard6}}</button>
+
+  <!-- upper Cards -->
+  <div class="upperMarket">
+    <span *ngFor="let upperCard of upperCards" >
+      <button [disabled]="isFree" id="{{upperCard.cardID}}" class="{{upperCard.cardID}} marketCard" type="submit" (click)="chooseMarketCard($event)"></button>
+      <span class="cardsLeft">{{upperCard.left}}</span>
+    </span>
+  </div>
+
+  <!-- lower Cards -->
+  <div class="lowerMarket">
+    <span *ngFor="let lowerCard of lowerCards">
+      <button [disabled]="firstPurchase" id="{{lowerCard.cardID}}" class="{{lowerCard.cardID}} marketCard" type="submit" (click)="chooseMarketCard($event)"></button>
+      <span class="cardsLeft">{{lowerCard.left}}</span>
+    </span>
+  </div>
 </div>
 
-<!-- Player Cards and stuff -->
+<!-- Expedition Board -->
 <div>
   <h4 id="drawPile">Draw<br>pile</h4>
   <div class="scrollCards">
@@ -50,13 +43,9 @@
   <button id="zoomOut" class="bottomLeft" type="button">Zoom Out</button>
   <button id="endTurn" class="bottomLeft" type="submit">End turn</button>
   <button id="move" class="bottomLeft" type="submit">Move</button>
-  <button id="buy" class="bottomLeft" type="submit">Buy</button>
+  <button [disabled]="firstPurchase" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
   <button id="discard" class="bottomLeft" type="submit">Discard</button>
 </div>
-
-<!--something here like:
-class NgIf-->
-
 
 
 <button id="leave" type="submit" [routerLink]="['/game']">Quit Game</button>
