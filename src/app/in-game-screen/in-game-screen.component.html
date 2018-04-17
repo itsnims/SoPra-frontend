@@ -1,28 +1,28 @@
 <h3 class="opponents" id="opponent1">{{opponent1}}</h3>
 <h3 class="opponents" id="opponent2">{{opponent2}}</h3>
 <h3 class="opponents" id="opponent3">{{opponent3}}</h3>
-
-
+<!-- Market-->
 <button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
 <div *ngIf="showMarket">
-  <!-- top row-->
+
+  <!-- upper Cards -->
   <div class="upperMarket">
     <span *ngFor="let upperCard of upperCards" >
-      <button [disabled]="lowerMarketFree" class="{{upperCard.cardID}} marketCard" type="submit"></button>
+      <button [disabled]="isFree" id="{{upperCard.cardID}}" class="{{upperCard.cardID}} marketCard" type="submit" (click)="chooseMarketCard($event)"></button>
       <span class="cardsLeft">{{upperCard.left}}</span>
     </span>
   </div>
 
-  <!-- last row-->
+  <!-- lower Cards -->
   <div class="lowerMarket">
     <span *ngFor="let lowerCard of lowerCards">
-      <button class="{{lowerCard.cardID}} marketCard" type="submit"></button>
+      <button [disabled]="firstPurchase" id="{{lowerCard.cardID}}" class="{{lowerCard.cardID}} marketCard" type="submit" (click)="chooseMarketCard($event)"></button>
       <span class="cardsLeft">{{lowerCard.left}}</span>
     </span>
   </div>
 </div>
 
-<!-- Player Cards and stuff -->
+<!-- Expedition Board -->
 <div>
   <h4 id="drawPile">Draw<br>pile</h4>
   <div class="scrollCards">
@@ -43,7 +43,7 @@
   <button id="zoomOut" class="bottomLeft" type="button">Zoom Out</button>
   <button id="endTurn" class="bottomLeft" type="submit">End turn</button>
   <button id="move" class="bottomLeft" type="submit">Move</button>
-  <button id="buy" class="bottomLeft" type="submit">Buy</button>
+  <button [disabled]="firstPurchase" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
   <button id="discard" class="bottomLeft" type="submit">Discard</button>
 </div>
 

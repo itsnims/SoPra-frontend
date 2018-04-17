@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -9,8 +9,11 @@ import { Component, OnInit } from '@angular/core';
 export class InGameScreenComponent implements OnInit {
   playerName = 'Your name'; //later replace with this.username or whatever works
 
-  lowerMarketFree = true; // erhält true / false von isFree() im backend
-  showMarket = false;
+  isFree = true; // erhält true / false von isFree() im backend
+  firstPurchase = false; // true / false muss invertiert sein im vergleich zu backend
+
+  showMarket = false; // für show market button
+  chosenMarketCard = ''; // wird bei buy card mitgegeben
 
   upperCards = [    // temporär um den markt zu testen
     {cardID: 'cartographer', left: '3'},
@@ -45,12 +48,25 @@ export class InGameScreenComponent implements OnInit {
   handCard3 = 'Hand Card 3';
   handCard4 = 'Hand Card 4';
 
+  uMavailable() {
+    if (this.firstPurchase === false)
+      {this.isFree = false;}
+  }
+
   showMarketFunc() {
     if (this.showMarket === true) {
       this.showMarket = false;
     } else {
-      this.showMarket = true;
-    }
+      this.showMarket = true;}
+  }
+
+  buy() {
+    // this.chosenMarketCard wird ans backend gegeben
+  }
+  chooseMarketCard(event) {
+    var target = event.target || event.srcElement || event.currentTarget;
+    var idAttr = target.attributes.id;
+    this.chosenMarketCard = idAttr.nodeValue;
   }
 
   constructor() { }
