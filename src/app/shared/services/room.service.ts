@@ -38,7 +38,7 @@ export class RoomService {
 
   joinRoomLogin(user: User): Observable<User> {
     // this.testID += 1;
-    const bodyString = JSON.stringify({username: 'sv1008'}); // this has to be changed to the actual user's username
+    const bodyString = JSON.stringify({username: user.username}); // this has to be changed to the actual user's username
     // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {
@@ -47,23 +47,17 @@ export class RoomService {
       })
     };
 
-    return this.http.post<User>(this.playersUrl, bodyString, httpOptions).map((fetchedUser: User) => {
-      if (user) {
-        // set token property
-        this.token = fetchedUser.token;
-
-        // store username and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify({username: fetchedUser.username, token: this.token}));
-
-        // return true to indicate successful login
-        return user;
-      } else {
-        // return false to indicate failed login
-        return null;
-      }
-    }) // ...and calling .json() on the response to return data
-      .catch((error: any) => Observable.throw(error || 'Server error'));
+    return this.http.put<User>('https://sopra-fs18-group13-server.herokuapp.com/Games/Nimra/test_room/secret_password/join', null, httpOptions);
   }
+
+
+
+
+
+
+
+
+
 
 
   roomLogin(room: Room): Observable<Room> {

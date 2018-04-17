@@ -8,11 +8,14 @@
         {{user.username}}</li> -->
 
       <div *ngFor= "let room of rooms">
-        <button class="game-rooms" type="submit" (click)="joinRoom()">
+        <button class="game-rooms" type="submit">
           {{room.name}}
+          <div> {{room.current}} players in the room
+          </div>
+
           <!-- {{room.status}} -->
           <div *ngIf="joinable">
-            <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="addPlayerToRoom()">Join Room</button>
+            <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="addPlayerToRoom(room.name)">Join Room</button>
           </div>
         </button>
       </div>
