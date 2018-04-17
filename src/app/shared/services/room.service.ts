@@ -11,6 +11,7 @@ export class RoomService {
   public token: string; // we probably need the actual token of a certain player
   public roomUrl: string;
   public playersUrl: string;
+  public testUrl: string;
   public users: User[] = [];
   User = new User();
 
@@ -22,7 +23,8 @@ export class RoomService {
     /*TODO fill in your heroku-backend URL*/
     this.apiUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms.json';
     this.playersUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms/0/PlayersInRoom.json';
-    this.roomUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms/.json';
+    this.testUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms';
+    this.roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games';
   }
 
   getRooms(): Observable<Room[]> {
@@ -70,7 +72,7 @@ export class RoomService {
     this.User.username = '';   // here we hardcode a user, so that we can display the room in an appropriate JSON format
     this.User.id = 1;
 
-    const bodyString = JSON.stringify({name: room.name, pathID: room.path, maxPlayers : room.maxPlayers, PlayersInRoom: [this.User]});
+    const bodyString = JSON.stringify({name: room.name, owner: 'sample_owner', maxplayer : room.maxPlayers, protection: true, password : 'secret_password'}); // TODO add path ID
     // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {
