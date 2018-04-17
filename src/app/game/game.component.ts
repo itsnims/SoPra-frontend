@@ -40,13 +40,13 @@ export class GameComponent  implements OnInit {
   }
 
   addPlayerToRoom() {
-    this.roomService.joinRoomLogin(this.user)
+    /*this.roomService.joinRoomLogin(this.users)
       .subscribe(result => {
         if (result) {
           this.router.navigate(['/waiting-game']);
         } else {
           this.router.navigate(['/game']);
         }
-      });
+      }); */
   }
 }
