@@ -32,7 +32,7 @@ export class RoomService {
       headers: new HttpHeaders({'Authorization': 'Bearer ' + this.authenticationService.token})
     }; */
     // get users from api
-    return this.http.get<Room[]>(this.apiUrl);
+    return this.http.get<Room[]>(this.roomUrl);
   }
 
 
