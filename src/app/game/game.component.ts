@@ -3,7 +3,7 @@ import {UserService} from '../shared/services/user.service';
 import {RoomService} from '../shared/services/room.service';
 import {Room} from '../shared/models/room';
 import {Router} from '@angular/router';
-import {User} from '../shared/models/user';
+import {SuperUser, User} from '../shared/models/user';
 
 
 @Component({
@@ -17,9 +17,11 @@ export class GameComponent  implements OnInit {
   joinable = true;
   playersInRoom = 4;
 
+
   constructor(private router: Router, private userService: UserService, private roomService: RoomService) { }
 
   ngOnInit() {
+
     // get users from secure api end point
     /* this.userService.getUsers()
       .subscribe(users => {
@@ -38,13 +40,13 @@ export class GameComponent  implements OnInit {
   }
 
   addPlayerToRoom() {
-    this.roomService.joinRoomLogin(this.user)
+    /*this.roomService.joinRoomLogin(this.users)
       .subscribe(result => {
         if (result) {
           this.router.navigate(['/waiting-game']);
         } else {
           this.router.navigate(['/game']);
         }
-      });
+      }); */
   }
 }
