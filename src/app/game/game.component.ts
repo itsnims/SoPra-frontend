@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from '../shared/services/user.service';
-import {User} from '../shared/models/user';
+import {RoomService} from '../shared/services/room.service';
+import {Room} from '../shared/models/room';
+import {Router} from '@angular/router';
+import { HttpClient} from "@angular/common/http";
+import {HttpHeaders} from "@angular/common/http";
+import {SuperUser, User} from '../shared/models/user';
 
 
 @Component({
@@ -10,14 +15,57 @@ import {User} from '../shared/models/user';
 })
 export class GameComponent  implements OnInit {
   users: User[] = [];
+  rooms: Room[] = [];
+  joinable = true;
+  playersInRoom = 4;
+  sample_user: User;
+  private apiUrl: string;
 
-  constructor(private userService: UserService) { }
+
+  constructor(private router: Router, private userService: UserService, private roomService: RoomService, private http: HttpClient) { }
 
   ngOnInit() {
+
+    this.sample_user = new User;
+    this.sample_user.username = 'sv108';
+
     // get users from secure api end point
-    this.userService.getUsers()
+    /* this.userService.getUsers()
       .subscribe(users => {
         this.users = users;
+      }); */
+    this.roomService.getRooms()
+      .subscribe(rooms => {
+        this.rooms = rooms;
       });
+  }
+
+  joinRoom() {
+    if (this.joinable === true) {
+      this.joinable = true;
+    }
+  }
+
+
+
+  addPlayerToRoom(room_name: string) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+    this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
+    this.apiUrl +=  this.sample_user.username + '/' + room_name + 'null/join' ; // TODO change this to the actual player, make sure the actual password is implemented
+    console.log(this.apiUrl);
+    this.http.put(this.apiUrl, null, httpOptions);
+
+    /*this.roomService.joinRoomLogin(this.users)
+      .subscribe(result => {
+        if (result) {
+          this.router.navigate(['/waiting-game']);
+        } else {
+          this.router.navigate(['/game']);
+        }
+      }); */
   }
 }
