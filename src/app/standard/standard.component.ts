@@ -4,23 +4,31 @@ import {HexagonBoardComponent} from '../hexagon-board/hexagon-board.component';
 @Component({
   selector: 'app-standard',
   templateUrl: './standard.component.html',
-  styleUrls: ['./standard.component.css']
+  styleUrls: ['./standard.component.css'],
 })
 export class StandardComponent implements OnInit {
   constructor() { }
-/*classe für click events...*/
+/*classe für click events...
+* */
   ngOnInit() {
-    document.getElementById ('B4').addEventListener ('click', b4, false);
-    document.getElementById ('B3').addEventListener ('click', b3, false);
+/*Selectiert nur die felder der liste und macht für jedes ein click event mit funktion call pos
+* */
+    const positions = ['B4', 'B9', 'B11'];
+    for (const position of positions){
+      document.getElementById (position).addEventListener ('click', pos, false);}
 
 
 
-    function b4() {
+
+    /*this.positionService.fetchPosition().subscribe((data) => this.positions = data);*/
+
+
+/*Has to be remodeled to just return the field to the backend.*/
+    function pos() {
       alert('Hello! I am an alert box!!');
     }
-    function b3() {
-      alert('Hello! alert box!!');
-    }
+
+
   }
 
 }
