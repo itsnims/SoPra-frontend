@@ -12,6 +12,7 @@ declare var firebase: any;
   // providers: [DataService]
 })
 export class LoginComponent implements OnInit {
+  public current_user;
   model: any = {};
   loading = false;
   error = '';
@@ -36,6 +37,7 @@ export class LoginComponent implements OnInit {
     this._service.login(this.user)
       .subscribe(result => {
         if (result) {
+          console.log(this.user.username);
           this.router.navigate(['/game']);
         } else {
           this.error = 'Username exists';

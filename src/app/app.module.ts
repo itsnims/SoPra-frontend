@@ -37,7 +37,7 @@ import { RoomService} from './shared/services/room.service';
     HttpClientModule,
     routing,
   ],
-  providers: [AuthenticationService, AuthGuardService, UserService, DataService, RoomService],
+  providers: [AuthenticationService, AuthGuardService, UserService, DataService, RoomService, LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

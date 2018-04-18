@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import { HttpClient} from "@angular/common/http";
 import {HttpHeaders} from "@angular/common/http";
 import {SuperUser, User} from '../shared/models/user';
+import {LoginComponent} from "../login/login.component";
 
 
 @Component({
@@ -22,12 +23,13 @@ export class GameComponent  implements OnInit {
   private apiUrl: string;
 
 
-  constructor(private router: Router, private userService: UserService, private roomService: RoomService, private http: HttpClient) { }
+  constructor(private router: Router, private userService: UserService, private roomService: RoomService, private http: HttpClient, private loginComponent: LoginComponent) { }
 
   ngOnInit() {
 
     this.sample_user = new User;
     this.sample_user.username = 'sv108';
+    console.log(this.loginComponent.user.username); // TODO this doesn't display anything
 
     // get users from secure api end point
     /* this.userService.getUsers()
