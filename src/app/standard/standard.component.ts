@@ -8,7 +8,7 @@ import {HexagonBoardComponent} from '../hexagon-board/hexagon-board.component';
 })
 export class StandardComponent implements OnInit {
   constructor() { }
-
+/*classe für click events...*/
   ngOnInit() {
     document.getElementById ('B4').addEventListener ('click', b4, false);
     document.getElementById ('B3').addEventListener ('click', b3, false);

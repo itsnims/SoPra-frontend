@@ -164,5 +164,12 @@
   left: 1200px;}
 
 .gameboard{
-  position: relative;
+  position: fixed;
+
+
+}
+.board_input{
+  position: fixed;
+  top: -1180px;
+  left: 10px;
 }

@@ -2,7 +2,9 @@
 <h3 class="opponents" id="opponent2">{{opponent2}}</h3>
 <h3 class="opponents" id="opponent3">{{opponent3}}</h3>
 
-<div class="gameboard">
+<div class="gameboard" >
+  <app-standard class="board_input" [style.a]></app-standard>
+
 </div>
 <button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
 <div *ngIf="showMarket">
