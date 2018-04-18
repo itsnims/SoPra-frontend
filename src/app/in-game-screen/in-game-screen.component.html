@@ -1,11 +1,17 @@
 <h3 class="opponents" id="opponent1">{{opponent1}}</h3>
 <h3 class="opponents" id="opponent2">{{opponent2}}</h3>
 <h3 class="opponents" id="opponent3">{{opponent3}}</h3>
-<ul>
+
+<ul> <!-- sollte ausgewählte handCards printen -->
   <li *ngFor="let select of selected">
     {{ select.id }}
   </li>
 </ul>
+
+<div class="gameboard" >
+  <app-standard class="board_input" [style.a]></app-standard>
+
+</div>
 <!-- Market-->
 <button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
 <div *ngIf="showMarket">

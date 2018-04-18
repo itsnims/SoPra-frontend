@@ -1,3 +1,4 @@
+
 .opponents {
   position: fixed;
 }
@@ -196,3 +197,13 @@
   position: fixed;
   top: 720px;
   left: 1200px;}
+
+.gameboard{
+  position: fixed;
+}
+
+.board_input{
+  position: fixed;
+  top: -1180px;
+  left: 10px;
+}
