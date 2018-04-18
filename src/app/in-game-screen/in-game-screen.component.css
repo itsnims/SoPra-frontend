@@ -145,15 +145,16 @@
 .scrollCards {
   position: fixed;
   top: 630px;
-  left: 525px;
-  width: 323px;
+  left: 440px;
+  width: 400px;
   overflow-y: auto;
   white-space: nowrap;
 }
-.handCard {
+.handCardFormat {
   display: inline-block;
-  height: 101px;
-  width: 61px;
+  margin-right: 10px;
+  height: 135px;
+  width: 87px;
 }
 
 #playerName {
