@@ -47,6 +47,7 @@ export class GameComponent  implements OnInit {
   }
 
 
+
   addPlayerToRoom(room_name: string) {
     const httpOptions = {
       headers: new HttpHeaders({
