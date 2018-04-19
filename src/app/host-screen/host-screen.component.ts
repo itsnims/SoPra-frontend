@@ -55,9 +55,9 @@ export class HostScreenComponent implements OnInit {
     this.room = new Room();
     // this.current_host = JSON.parse(localStorage.getItem('currentUser')).name;
     // console.log('the current host is  : ' + this.current_host);
-    this.current_host = JSON.parse(localStorage.getItem('currentUser')).name;
-    console.log(this.current_host + ' wants to host a game');
+    // this.current_host = JSON.parse(localStorage.getItem('currentUser')).name;
   }
+
 
   createRoom() {
     this._service.roomLogin(this.room)
