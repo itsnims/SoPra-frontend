@@ -7,6 +7,7 @@ import { HttpClient} from "@angular/common/http";
 import {HttpHeaders} from "@angular/common/http";
 import {SuperUser, User} from '../shared/models/user';
 import {LoginComponent} from "../login/login.component";
+import {Observable} from "rxjs/Observable";
 
 
 @Component({
@@ -50,18 +51,18 @@ export class GameComponent  implements OnInit {
   }
 
 
-
-
   addPlayerToRoom(room_name: string) {
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json;charset=UTF-8', 'Access-Control-Allow-Origin' : '*'
       })
     };
     this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
-    this.apiUrl +=  this.sample_user.username + '/' + room_name + 'null/join' ; // TODO change this to the actual player, make sure the actual password is implemented
+    this.apiUrl +=  this.current_player + '/' + room_name + '/null/join' ; // TODO make sure the actual password is implemented
+    this.http.put(this.apiUrl, httpOptions);
     console.log(this.apiUrl);
-    this.http.put(this.apiUrl, null, httpOptions);
+    return this.http.put(this.apiUrl, httpOptions).map((res: Response) => res.json()); // TODO make sure this is actually executed
+}
 
     /*this.roomService.joinRoomLogin(this.users)
       .subscribe(result => {
@@ -71,5 +72,5 @@ export class GameComponent  implements OnInit {
           this.router.navigate(['/game']);
         }
       }); */
-  }
 }
+
