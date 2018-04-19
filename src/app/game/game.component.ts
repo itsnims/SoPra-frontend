@@ -29,7 +29,7 @@ export class GameComponent  implements OnInit {
 
     this.sample_user = new User;
     this.sample_user.username = 'sv108';
-    console.log(this.loginComponent.user.username); // TODO this doesn't display anything
+    // console.log(this.loginComponent.user.username); // TODO this doesn't display anything
 
     // get users from secure api end point
     /* this.userService.getUsers()
