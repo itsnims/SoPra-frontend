@@ -15,6 +15,7 @@ import {DataService} from '../data.service';
 
 export class HostScreenComponent implements OnInit {
   room: Room;
+  current_host: string;
   apiURL = 'https://sopra-fd2af.firebaseio.com/0.json';
 
   constructor(private _service: RoomService, private router: Router) {
@@ -52,6 +53,10 @@ export class HostScreenComponent implements OnInit {
 
   ngOnInit() {
     this.room = new Room();
+    // this.current_host = JSON.parse(localStorage.getItem('currentUser')).name;
+    // console.log('the current host is  : ' + this.current_host);
+    this.current_host = JSON.parse(localStorage.getItem('currentUser')).name;
+    console.log(this.current_host + ' wants to host a game');
   }
 
   createRoom() {
