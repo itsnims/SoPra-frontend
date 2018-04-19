@@ -5,6 +5,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 
 
 @Injectable()
@@ -23,7 +24,7 @@ export class AuthenticationService {
 
     // TODO fill in your heroku-backend URL
     // this.apiUrl = 'https://git.heroku.com/sopra-fs18-group13-server.git';
-    this.apiUrl = 'https://sopra-fd2af.firebaseio.com/0/users.json';
+    this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/User';
     this.roomUrl = 'https://sopra-fd2af.firebaseio.com/0/rooms.json';
 
   }
@@ -35,7 +36,7 @@ export class AuthenticationService {
 
   login(user: User): Observable<User> {
     // this.testID += 1;
-    const bodyString = JSON.stringify({username: user.username});
+    const bodyString = JSON.stringify({name: user.username});
     // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {
@@ -47,10 +48,11 @@ export class AuthenticationService {
     return this.http.post<User>(this.apiUrl, bodyString, httpOptions).map((fetchedUser: User) => {
       if (user) {
         // set token property
-        this.token = fetchedUser.token;
+        // this.token = fetchedUser.token;
 
         // store username and jwt token in local storage to keep user logged in between page refreshes
-        localStorage.setItem('currentUser', JSON.stringify({username: fetchedUser.username, token: this.token}));
+        // localStorage.setItem('currentUser', JSON.stringify({username: fetchedUser.username, token: this.token}));
+        localStorage.setItem('currentUser', JSON.stringify({name: user.username}));
 
         // return true to indicate successful login
         return user;
