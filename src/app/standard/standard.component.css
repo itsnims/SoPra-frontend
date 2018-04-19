@@ -14,7 +14,7 @@ body {
   height: 900px;
   width: 4000px;
   -webkit-transform: rotateX(45deg) rotateY(0deg);
-  transform: rotateX(30deg) rotateY(0deg);
+  transform: rotateX(60deg) rotateY(0deg);
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transform-origin: center 65%;
@@ -89,7 +89,17 @@ meaning if the child is odd it gets put 1/2size of hexagon down*/
 }
 /* colours of the 3 different parts the hexagon consists off*/
 .container .TILEB .hex .wrapper .color-1 {
-  background: darkolivegreen;
+  background-color: darkolivegreen;
+  background-image: url(curvy-knife.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+
+
+}
+.container .TILEB .hex .wrapper .color-1 .sword1{
+  background-image: url(http://game-icons.net/lorc/originals/bowie-knife.html);
+  background-size: contain;
 }
 
 .container .TILEB .hex .wrapper .color-1:before {
@@ -159,3 +169,4 @@ meaning if the child is odd it gets put 1/2size of hexagon down*/
 .hidden {
   display: none;
 }
+
