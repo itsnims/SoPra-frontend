@@ -18,6 +18,7 @@ export class GameComponent  implements OnInit {
   users: User[] = [];
   rooms: Room[] = [];
   joinable = true;
+  current_player: string;
   playersInRoom = 4;
   sample_user: User;
   private apiUrl: string;
@@ -27,9 +28,9 @@ export class GameComponent  implements OnInit {
 
   ngOnInit() {
 
-    this.sample_user = new User;
-    this.sample_user.username = 'sv108';
-    // console.log(this.loginComponent.user.username); // TODO this doesn't display anything
+    this.current_player = JSON.parse(localStorage.getItem('currentUser')).name;
+    console.log('the current player is : ' + this.current_player);
+
 
     // get users from secure api end point
     /* this.userService.getUsers()
@@ -47,6 +48,7 @@ export class GameComponent  implements OnInit {
       this.joinable = true;
     }
   }
+
 
 
 
