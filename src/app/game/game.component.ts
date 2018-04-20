@@ -73,13 +73,6 @@ export class GameComponent  implements OnInit {
 
 
 
-    /* return this.http.put(this.apiUrl, httpOptions).map((result) => { // TODO maybe this should use subscribe instead?
-      if (result) {
-        console.log('player added to game');
-      }
-    }); // TODO make sure this is actually executed
-}
-
     /*this.roomService.joinRoomLogin(this.users)
       .subscribe(result => {
         if (result) {
