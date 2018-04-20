@@ -7,7 +7,7 @@ import { Component, OnInit} from '@angular/core';
 })
 
 export class InGameScreenComponent implements OnInit {
-  playerName = 'Your name'; //later replace with this.username or whatever works
+  playerName = 'Your name'; // later replace with this.username or whatever works
 
   isFree = false; // überprüft ob lowerMarket 6 karten hat
   firstPurchase = false; // true / false muss invertiert sein im vergleich zu backend
@@ -51,9 +51,7 @@ export class InGameScreenComponent implements OnInit {
     {cardClass: 'sailor', cardID: '1'},
     {cardClass: 'explorer', cardID: '2'},
     {cardClass: 'traveler', cardID: '3'},
-    {cardClass: 'traveler', cardID: '4'},
-    {cardClass: 'traveler', cardID: '5'}
-
+    {cardClass: 'traveler', cardID: '4'}
   ];
 
   selected:Object[]; // angekreuzte karten
@@ -65,8 +63,10 @@ export class InGameScreenComponent implements OnInit {
 
   checkIsFree() {
     if (this.lowerCards.length !== 6)
+    {this.isFree = false;}
+    else {this.isFree = true;}
+    if (this.firstPurchase === true)
     {this.isFree = true;}
-    else {this.isFree = false;}
   }
 
   toggleHandSelection(card) { // = toggleSelection(user) ist noch fehlerhaft
@@ -86,19 +86,20 @@ export class InGameScreenComponent implements OnInit {
 
   uMavailable() { // damit der upper market korrekt ausgewählt wird
     if (this.firstPurchase === false)
-      {this.isFree = false;}
+      {this.isFree = true;}
   }
 
   showMarketFunc() {
     if (this.showMarket === true) {
       this.showMarket = false;
     } else {
-      this.checkIsFree()
+      this.checkIsFree();
       this.showMarket = true;}
   }
 
   buy() {
     this.firstPurchase = true;
+    this.checkIsFree();
   }
   chooseMarketCard(event) { // chosenMarketCard erhält ID vom zuletzt ausgewählten Button
     var target = event.target || event.srcElement || event.currentTarget;
