@@ -40,53 +40,48 @@ export class InGameScreenComponent implements OnInit {
     {cardID: 'photographer', left: '3'}
   ];
 
-  drawPile = [
-    {cardID: 'explorer'},
-    {cardID: 'explorer'},
-    {cardID: 'traveler'},
-    {cardID: 'traveler'}
-  ];
-
   handCards = [
-    {cardClass: 'sailor', cardID: '1'},
-    {cardClass: 'explorer', cardID: '2'},
-    {cardClass: 'traveler', cardID: '3'},
-    {cardClass: 'traveler', cardID: '4'}
+    {cardClass: 'sailor', checked: false },
+    {cardClass: 'explorer', checked: false},
+    {cardClass: 'traveler', checked: false},
+    {cardClass: 'traveler', checked: false}
   ];
 
-  selected:Object[]; // angekreuzte karten
+  selected = []; // angekreuzte karten
 
   selectedCards = 0;
+
   opponent1 = 'Opponent 1 name';
   opponent2 = 'Opponent 2 name';
   opponent3 = 'Opponent 3 name';
 
   checkIsFree() {
-    if (this.lowerCards.length !== 6)
-    {this.isFree = false;}
-    else {this.isFree = true;}
-    if (this.firstPurchase === true)
-    {this.isFree = true;}
+    if (this.lowerCards.length !== 6) {
+      this.isFree = false; }
+    else {this.isFree = true; }
+    if (this.firstPurchase === true) {
+      this.isFree = true; }
   }
 
-  toggleHandSelection(card) { // = toggleSelection(user) ist noch fehlerhaft
-    if(card.notChecked){
-      card.notChecked=false;
+  toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
+    const newCard = card;
+    if (this.handCards[i].checked === true) {
+      this.handCards[i].checked = false;
+      const position = this.selected.indexOf(newCard);
       this.selectedCards--;
+      this.selected.splice(position, 1);
     }
-    else{
+    else {
+      this.handCards[i].checked = true;
       this.selectedCards++;
-      var target = card.target || card.srcElement || card.currentTarget;
-      var idAttr = target.attributes.id;
-      card = idAttr.nodeValue;
-      let handCard = {'id':card, 'notChecked': true};
-      this.selected.push(handCard);
+      this.selected.push(newCard);
+      }
     }
-  }
+
 
   uMavailable() { // damit der upper market korrekt ausgewählt wird
-    if (this.firstPurchase === false)
-      {this.isFree = true;}
+    if (this.firstPurchase === false) {
+      this.isFree = true; }
   }
 
   showMarketFunc() {
@@ -94,7 +89,7 @@ export class InGameScreenComponent implements OnInit {
       this.showMarket = false;
     } else {
       this.checkIsFree();
-      this.showMarket = true;}
+      this.showMarket = true; }
   }
 
   buy() {
@@ -102,8 +97,8 @@ export class InGameScreenComponent implements OnInit {
     this.checkIsFree();
   }
   chooseMarketCard(event) { // chosenMarketCard erhält ID vom zuletzt ausgewählten Button
-    var target = event.target || event.srcElement || event.currentTarget;
-    var idAttr = target.attributes.id;
+    const target = event.target || event.srcElement || event.currentTarget;
+    const idAttr = target.attributes.id;
     this.chosenMarketCard = idAttr.nodeValue;
   }
 
