@@ -6,8 +6,11 @@ import {Router} from '@angular/router';
 import { HttpClient} from "@angular/common/http";
 import {HttpHeaders} from "@angular/common/http";
 import {SuperUser, User} from '../shared/models/user';
-import {LoginComponent} from "../login/login.component";
+import {JoinRoomService} from "../join-room.service";
+import 'rxjs/add/operator/toPromise';
+import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
+import {tap} from "rxjs/operators";
 
 
 @Component({
@@ -25,7 +28,10 @@ export class GameComponent  implements OnInit {
   private apiUrl: string;
 
 
-  constructor(private router: Router, private userService: UserService, private roomService: RoomService, private http: HttpClient, private loginComponent: LoginComponent) { }
+  constructor(private router: Router, private userService: UserService, private roomService: RoomService, private http: HttpClient, private joinRoomService: JoinRoomService) {
+
+
+  }
 
   ngOnInit() {
 
@@ -55,14 +61,17 @@ export class GameComponent  implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json;charset=UTF-8', 'Access-Control-Allow-Origin' : '*'
-      })
-    };
+      })};
     this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
     this.apiUrl +=  this.current_player + '/' + room_name + '/null/join' ; // TODO make sure the actual password is implemented
-    this.http.put(this.apiUrl, httpOptions);
-    console.log(this.apiUrl);
-    return this.http.put(this.apiUrl, httpOptions).map((res: Response) => res.json()); // TODO make sure this is actually executed
-}
+    console.log(this.http.put(this.apiUrl, httpOptions));
+    localStorage.setItem('currentRoom', JSON.stringify({room_name}));
+    this.router.navigate(['/waiting-screen']);
+
+    // this.http.put(this.apiUrl, null, httpOptions).subscribe(result => console.log(result));
+    }
+
+
 
     /*this.roomService.joinRoomLogin(this.users)
       .subscribe(result => {
