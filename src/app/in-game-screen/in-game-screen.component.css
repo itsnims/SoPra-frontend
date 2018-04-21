@@ -1,4 +1,39 @@
+.background-image {
+  background-image: url("../images/cards/backside.jpg"), url("rectangle.jpg");
 
+
+  /* Set a specific height */
+  height: 100%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: left 325px top 630px, top left;
+  background-repeat: no-repeat;
+  background-size: 87px 135px, 1366px 768px;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  padding:0;
+  margin: 0;
+}
+
+.drawPile {
+  background-image: url("../images/cards/backside.jpg");
+
+  /* Set a specific height */
+  height: 100%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: left 325px top 630px;
+  background-repeat: no-repeat;
+  background-size: 87px 135px;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  padding:0;
+  margin: 0;
+}
 .opponents {
   position: fixed;
 }
@@ -137,6 +172,8 @@
   background-size: cover;}
 
 /* Expedition Board */
+
+
 #drawPile {
   position: fixed;
   left: 350px;
@@ -167,13 +204,13 @@
 /* Buttons bottom left */
 .bottomLeft {
   position: fixed;
-  width: 85px;}
+  width: 88px;}
 
-#zoomIn {
-  top: 640px;
+#actionCard {
+  top: 619px;
   left: 75px;}
 
-#zoomOut {
+#trash {
   top: 680px;
   left: 75px;}
 
@@ -181,8 +218,8 @@
   top: 720px;
   left: 75px;}
 
-#move {
-  top: 640px;
+#expedCard {
+  top: 619px;
   left: 180px;}
 
 #buy {
