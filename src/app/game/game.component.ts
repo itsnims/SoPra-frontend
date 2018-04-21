@@ -8,7 +8,6 @@ import {HttpHeaders} from "@angular/common/http";
 import {SuperUser, User} from '../shared/models/user';
 import {JoinRoomService} from "../join-room.service";
 import 'rxjs/add/operator/toPromise';
-import {Router} from "@angular/router";
 import {Observable} from "rxjs/Observable";
 import {tap} from "rxjs/operators";
 
