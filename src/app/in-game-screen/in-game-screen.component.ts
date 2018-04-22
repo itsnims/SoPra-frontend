@@ -40,36 +40,36 @@ export class InGameScreenComponent implements OnInit {
 
   // hier werden die upper market cards eingelesen
   upperCards = [
-    {cardID: 'cartographer', left: '3'},
-    {cardID: 'compass', left: '3'},
-    {cardID: 'native', left: '3'},
-    {cardID: 'scientist', left: '3'},
-    {cardID: 'transmitter', left: '3'},
-    {cardID: 'travel-log', left: '3'},
-    {cardID: 'sailor', left: '3'},
-    {cardID: 'captain', left: '3'},
-    {cardID: 'explorer', left: '3'},
-    {cardID: 'scout', left: '3'},
-    {cardID: 'trailblazer', left: '3'},
-    {cardID: 'pioneer', left: '3'}
+    {cardID: 'Cartographer', left: '3'},
+    {cardID: 'Compass', left: '3'},
+    {cardID: 'Natives', left: '3'},
+    {cardID: 'Scientist', left: '3'},
+    {cardID: 'Transmitter', left: '3'},
+    {cardID: 'TravelDiary', left: '3'},
+    {cardID: 'Sailor', left: '3'},
+    {cardID: 'Captain', left: '3'},
+    {cardID: 'Explorer', left: '3'},
+    {cardID: 'Scout', left: '3'},
+    {cardID: 'Trailblazer', left: '3'},
+    {cardID: 'Pioneer', left: '3'}
   ];
 
   // hier werden die lower market cards eingelesen
   lowerCards = [
-    {cardID: 'giant-machete', left: '3'},
-    {cardID: 'jack-of-all-trades', left: '3'},
-    {cardID: 'adventurer', left: '3'},
-    {cardID: 'prop-plane', left: '3'},
-    {cardID: 'traveler', left: '3'},
-    {cardID: 'photographer', left: '3'}
+    {cardID: 'GiantMachete', left: '3'},
+    {cardID: 'Allrounder', left: '3'},
+    {cardID: 'Adventurer', left: '3'},
+    {cardID: 'Plane', left: '3'},
+    {cardID: 'Traveler', left: '3'},
+    {cardID: 'Photographer', left: '3'}
   ];
 
   // hier werden die handcards des spielers eingelesen
   handCards = [
-    {cardClass: 'sailor', checked: false },
-    {cardClass: 'explorer', checked: false},
-    {cardClass: 'traveler', checked: false},
-    {cardClass: 'traveler', checked: false}
+    {cardClass: 'Sailor', checked: false },
+    {cardClass: 'Explorer', checked: false},
+    {cardClass: 'Traveler', checked: false},
+    {cardClass: 'Traveler', checked: false}
   ];
 
   // liste der angekreuzten handcards
