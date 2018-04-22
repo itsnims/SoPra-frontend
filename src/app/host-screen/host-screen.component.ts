@@ -60,11 +60,13 @@ export class HostScreenComponent implements OnInit {
 
 
   createRoom() {
+    localStorage.setItem('currentRoom', JSON.stringify(this.room.name));
     console.log(this.room);
     this._service.roomLogin(this.room)
       .subscribe(result => {
         if (result) {
-          this.router.navigate(['/waiting-screen']);
+          console.log(localStorage);
+          // this.router.navigate(['/waiting-screen']);
         }});
   }
 

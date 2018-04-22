@@ -18,7 +18,7 @@ export class WaitingScreenComponent implements OnInit {
 
   ngOnInit() {
     this.current_player = JSON.parse(localStorage.getItem('currentUser')).name;
-    this.current_room = JSON.parse(localStorage.getItem('currentRoom')).room_name;
+    this.current_room = JSON.parse(localStorage.getItem('currentRoom'));
     console.log('the current player is : ' + this.current_player);
     console.log('the current room is : ' + this.current_room);
 
