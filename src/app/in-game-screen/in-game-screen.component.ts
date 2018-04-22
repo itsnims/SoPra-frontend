@@ -15,7 +15,23 @@ export class InGameScreenComponent implements OnInit {
   showMarket = false; // für show market button
   chosenMarketCard = ''; // wird bei buy card mitgegeben
 
+  i = 0;
+  useActionCard = true;
+  useExpeditionCard = true;
+  // trash = true;
+  buyAvailable = true;
+  discard = true;
+
   // temporär um die karten anzuzeigen
+  actionCards = [
+    'cartographer',
+    'compass',
+    'native',
+    'scientist',
+    'transmitter',
+    'travel-log'
+  ];
+
   upperCards = [
     {cardID: 'cartographer', left: '3'},
     {cardID: 'compass', left: '3'},
@@ -48,8 +64,8 @@ export class InGameScreenComponent implements OnInit {
   ];
 
   selected = []; // angekreuzte karten
-
-  selectedCards = 0;
+  selectedCards = 0; // anzahl ausgewählte Karten
+  selectedCardIsActionCard = false;
 
   opponent1 = 'Opponent 1 name';
   opponent2 = 'Opponent 2 name';
@@ -63,6 +79,50 @@ export class InGameScreenComponent implements OnInit {
       this.isFree = true; }
   }
 
+  updateSelectedCardIsActionCard() {
+    for (this.i = 0; this.i < 6; this.i++){
+      if (this.selectedCards[0] === this.actionCards[this.i]){
+        this.selectedCardIsActionCard = true;
+        return;
+      }
+    }
+    this.selectedCardIsActionCard = false;
+  }
+
+  updateUseActionCard(){
+    if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
+      this.useActionCard = false;
+    }
+    else
+      this.useActionCard = true;
+  }
+
+  updateUseExpeditionCard(){
+    if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
+      this.useExpeditionCard = false;
+    }
+    else {
+      this.useExpeditionCard = true;
+    }
+  }
+
+  updateBuyAvailable(){
+    if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false){
+      this.buyAvailable = false;
+    }
+    else{
+      this.buyAvailable = true;
+    }
+  }
+
+  updateDiscard(){
+    if (this.selectedCards >= 1) {
+      this.discard = false;
+    }
+    else {
+      this.discard = true;
+    }
+  }
   toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
     const newCard = card;
     if (this.handCards[i].checked === true) {
@@ -76,6 +136,11 @@ export class InGameScreenComponent implements OnInit {
       this.selectedCards++;
       this.selected.push(newCard);
       }
+    this.updateSelectedCardIsActionCard();
+    this.updateUseActionCard();
+    this.updateUseExpeditionCard();
+    this.updateBuyAvailable();
+    this.updateDiscard();
     }
 
 
@@ -100,6 +165,7 @@ export class InGameScreenComponent implements OnInit {
     const target = event.target || event.srcElement || event.currentTarget;
     const idAttr = target.attributes.id;
     this.chosenMarketCard = idAttr.nodeValue;
+    this.updateBuyAvailable();
   }
 
   constructor() { }
