@@ -67,7 +67,7 @@ export class GameComponent  implements OnInit {
     localStorage.setItem('currentRoom', JSON.stringify({room_name}));
     this.router.navigate(['/waiting-screen']);
 
-    // this.http.put(this.apiUrl, null, httpOptions).subscribe(result => console.log(result));
+    this.http.put(this.apiUrl, null, httpOptions).subscribe(result => console.log(result));
     }
 
 
