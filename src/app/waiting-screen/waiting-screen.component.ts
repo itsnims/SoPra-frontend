@@ -15,7 +15,6 @@ export class WaitingScreenComponent implements OnInit {
   current_player: string;
   current_room: string;
   users: User[] = [];
-  myObservable: Object;
   private interval: number;
   private display: boolean;
   private alive: boolean;
@@ -31,17 +30,13 @@ export class WaitingScreenComponent implements OnInit {
 
   ngOnInit() {
     this.current_player = JSON.parse(localStorage.getItem('currentUser')).name;
-    this.current_room = JSON.parse(localStorage.getItem('currentRoom')).room_name;
+    this.current_room = JSON.parse(localStorage.getItem('currentRoom'));
     console.log('the current player is : ' + this.current_player);
     console.log('the current room is : ' + this.current_room);
+    console.log(localStorage);
 
 
-    this.getUsersFromRoomService.getPlayersFromRoom('https://sopra-fs18-group13-server.herokuapp.com/Games/test/users')
-      .subscribe(users => {
-        this.myObservable = users;
-      });
 
-    console.log(this.myObservable);
 
 
   }

@@ -15,7 +15,9 @@ import {DataService} from '../data.service';
 
 export class HostScreenComponent implements OnInit {
   room: Room;
+  public room_name: string;
   current_host: string;
+  placeholder : any;
   apiURL = 'https://sopra-fd2af.firebaseio.com/0.json';
 
   constructor(private _service: RoomService, private router: Router) {
@@ -60,13 +62,14 @@ export class HostScreenComponent implements OnInit {
 
 
   createRoom() {
-    localStorage.setItem('currentRoom', JSON.stringify(this.room));
-    console.log(this.room);
+    localStorage.setItem('currentRoom', JSON.stringify(this.room.name));
+    console.log('host_screen local storage: ' + localStorage);
+
     this._service.roomLogin(this.room)
       .subscribe(result => {
         if (result) {
-          console.log(localStorage);
-          // this.router.navigate(['/waiting-screen']);
+          console.log('Result retrieved');
+          this.router.navigate(['/waiting-screen']);
         }});
   }
 

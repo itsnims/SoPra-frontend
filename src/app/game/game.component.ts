@@ -87,7 +87,7 @@ export class GameComponent  implements OnInit, OnDestroy {
     this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
     this.apiUrl +=  this.current_player + '/' + room_name + '/null/join' ; // TODO make sure the actual password is implemented
     console.log(this.http.put(this.apiUrl, httpOptions));
-    localStorage.setItem('currentRoom', JSON.stringify({room_name}));
+    localStorage.setItem('currentRoom', JSON.stringify(room_name));
     this.router.navigate(['/waiting-screen']);
 
     this.http.put(this.apiUrl, null, httpOptions).subscribe(result => console.log(result));
