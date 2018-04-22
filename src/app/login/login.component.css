@@ -1,29 +1,37 @@
-
 body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  height: 100%;
-
 
 }
+
 .login-image {
+  height: 768px;
+  width: 1366px;
   /* The image used */
   background-image: url("login2.jpg");
 
-  /* Set a specific height */
-  height: 100%;
-
   /* Position and center the image to scale nicely on all screens */
-  background-position: center;
   background-repeat: no-repeat;
-  background-size: 1366px 768px;
+  background-size: 100%;
   position: fixed;
-  width: 100%;
+  /* width: 100%; */
   top:0;
   left:0;
   padding:0;
   margin: 0;
+}
 
+.userinput {
+  position: center;
+  max-width: 500px;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  height: auto;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding: 20px;
+  font-size: 16px;
 }
 .form-signin {
   max-width: 330px;
