@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {Room} from "../shared/models/room";
 import {HttpClient} from "@angular/common/http";
+import {User} from "../shared/models/user";
+import {Observable} from "rxjs/Rx";
+import {RoomService} from "../shared/services/room.service";
+import { TimerObservable } from "rxjs/observable/TimerObservable";
 
 @Component({
   selector: 'app-waiting-screen',
@@ -10,10 +14,19 @@ import {HttpClient} from "@angular/common/http";
 export class WaitingScreenComponent implements OnInit {
   current_player: string;
   current_room: string;
+  users: User[] = [];
+  myObservable: Object;
+  private interval: number;
+  private display: boolean;
+  private alive: boolean;
+
   message: string;
   roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private getUsersFromRoomService: RoomService) {
+  this.interval = 1000;
+  this.display = false;
+  this.alive = true;
   }
 
   ngOnInit() {
@@ -22,10 +35,14 @@ export class WaitingScreenComponent implements OnInit {
     console.log('the current player is : ' + this.current_player);
     console.log('the current room is : ' + this.current_room);
 
-   /* this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/').map(
-      (res) => JSON.stringify(res)
-    ).subscribe((data) => console.log(data)); */ // This returns a string with info about all games
+
+    this.getUsersFromRoomService.getPlayersFromRoom('https://sopra-fs18-group13-server.herokuapp.com/Games/test/users')
+      .subscribe(users => {
+        this.myObservable = users;
+      });
+
+    console.log(this.myObservable);
+
 
   }
-
 }

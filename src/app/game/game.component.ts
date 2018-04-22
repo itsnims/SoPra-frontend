@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {UserService} from '../shared/services/user.service';
 import {RoomService} from '../shared/services/room.service';
 import {Room} from '../shared/models/room';
@@ -9,7 +9,8 @@ import {SuperUser, User} from '../shared/models/user';
 import {JoinRoomService} from "../join-room.service";
 import 'rxjs/add/operator/toPromise';
 import {Observable} from "rxjs/Observable";
-import {tap} from "rxjs/operators";
+import 'rxjs/add/operator/takeWhile';
+import {TimerObservable} from "rxjs/observable/TimerObservable";
 
 
 @Component({
@@ -17,7 +18,7 @@ import {tap} from "rxjs/operators";
   templateUrl: './game.component.html',
   styleUrls: ['./game.component.css']
 })
-export class GameComponent  implements OnInit {
+export class GameComponent  implements OnInit, OnDestroy {
   users: User[] = [];
   rooms: Room[] = [];
   joinable = true;
@@ -26,10 +27,18 @@ export class GameComponent  implements OnInit {
   sample_user: User;
   private apiUrl: string;
 
+  private display: boolean; // whether to display info in the component
+                            // use *ngIf="display" in your html to take
+                            // advantage of this
+
+  private alive: boolean; // used to unsubscribe from the TimerObservable
+                          // when OnDestroy is called.
+  private interval: number;
 
   constructor(private router: Router, private userService: UserService, private roomService: RoomService, private http: HttpClient, private joinRoomService: JoinRoomService) {
-
-
+    this.display = false;
+    this.alive = true;
+    this.interval = 1000;
   }
 
   ngOnInit() {
@@ -43,10 +52,24 @@ export class GameComponent  implements OnInit {
       .subscribe(users => {
         this.users = users;
       }); */
-    this.roomService.getRooms()
+
+
+    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.roomService.getRooms()
+          .subscribe((rooms) => {
+            this.rooms = rooms;
+            if (!this.display) {
+              this.display = true;
+            }
+          });
+      });
+
+   /* this.roomService.getRooms()
       .subscribe(rooms => {
         this.rooms = rooms;
-      });
+      }); */
   }
 
   joinRoom() {
@@ -80,5 +103,9 @@ export class GameComponent  implements OnInit {
           this.router.navigate(['/game']);
         }
       }); */
+
+  ngOnDestroy() {
+    this.alive = false; // switches your TimerObservable off
+  }
 }
 

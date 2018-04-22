@@ -35,6 +35,10 @@ export class RoomService {
     return this.http.get<Room[]>(this.roomUrl);
   }
 
+  getPlayersFromRoom(roomUsersUrl)  {
+    return this.http.get(roomUsersUrl);
+  }
+
 
   joinRoomLogin(user: User): Observable<User> {
     // this.testID += 1;

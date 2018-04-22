@@ -1,15 +1,33 @@
 <div class="waiting-image">
+  <!-- <meta http-equiv="refresh" content="2" > -->
 
-<h1> This is the waiting screen </h1>
+
+  <h1> This is the waiting screen </h1>
 
 <p>&nbsp;</p>
 <p>&nbsp;</p>
+
 
   <h2> {{current_room}} is about to start </h2>
   <p>&nbsp;</p>
   <p>&nbsp;</p>
+
   <p>&nbsp;</p>
   <p>&nbsp;</p>
+  <div *ngFor= "let user of users">
+    <h3>      {{user.username}}
+    </h3>
+  </div>
+
+
+
+
+
+
+
+
+
+
 <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/host-screen']">Cancel</button>
 <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/in-game-screen']">Start Game</button>
 </div>

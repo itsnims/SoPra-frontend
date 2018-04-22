@@ -9,6 +9,7 @@ export class User {
   public games: number;
   public moves: number;
   public username: string;
+  public name: string;
 }
 
 export class SuperUser {
