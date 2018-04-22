@@ -47,7 +47,7 @@ export class HostScreenComponent implements OnInit {
     }
   }
   pathSelect() {
-    this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
+    // this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
     this.room.maxPlayers = (<HTMLInputElement>document.getElementById('maxPlayer')).value;
   }
 
@@ -60,6 +60,7 @@ export class HostScreenComponent implements OnInit {
 
 
   createRoom() {
+    console.log(this.room);
     this._service.roomLogin(this.room)
       .subscribe(result => {
         if (result) {
