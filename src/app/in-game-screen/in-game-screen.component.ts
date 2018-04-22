@@ -9,12 +9,17 @@ import { Component, OnInit} from '@angular/core';
 export class InGameScreenComponent implements OnInit {
   playerName = 'Your name'; // later replace with this.username or whatever works
 
-  isFree = false; // überprüft ob lowerMarket 6 karten hat
-  firstPurchase = false; // true / false muss invertiert sein im vergleich zu backend
+  // wenn lower market 6 karten hat ist isfree = false
+  isFree = false;
+  // wenn der user noch keinen kauf gemacht hat ist firstpurchase = false
+  firstPurchase = false;
 
-  showMarket = false; // für show market button
-  chosenMarketCard = ''; // wird bei buy card mitgegeben
+  // für show market button
+  showMarket = false;
+  // wird bei buy card mitgegeben
+  chosenMarketCard = '';
 
+  // für button unten links, kontrolliert clickable status
   i = 0;
   useActionCard = true;
   useExpeditionCard = true;
@@ -22,7 +27,7 @@ export class InGameScreenComponent implements OnInit {
   buyAvailable = true;
   discard = true;
 
-  // temporär um die karten anzuzeigen
+  // für useActionCard und useExpeditionCard verwendet
   actionCards = [
     'cartographer',
     'compass',
@@ -31,7 +36,9 @@ export class InGameScreenComponent implements OnInit {
     'transmitter',
     'travel-log'
   ];
+  selectedCardIsActionCard = false;
 
+  // hier werden die upper market cards eingelesen
   upperCards = [
     {cardID: 'cartographer', left: '3'},
     {cardID: 'compass', left: '3'},
@@ -47,6 +54,7 @@ export class InGameScreenComponent implements OnInit {
     {cardID: 'pioneer', left: '3'}
   ];
 
+  // hier werden die lower market cards eingelesen
   lowerCards = [
     {cardID: 'giant-machete', left: '3'},
     {cardID: 'jack-of-all-trades', left: '3'},
@@ -56,6 +64,7 @@ export class InGameScreenComponent implements OnInit {
     {cardID: 'photographer', left: '3'}
   ];
 
+  // hier werden die handcards des spielers eingelesen
   handCards = [
     {cardClass: 'sailor', checked: false },
     {cardClass: 'explorer', checked: false},
@@ -63,14 +72,15 @@ export class InGameScreenComponent implements OnInit {
     {cardClass: 'traveler', checked: false}
   ];
 
-  selected = []; // angekreuzte karten
-  selectedCards = 0; // anzahl ausgewählte Karten
-  selectedCardIsActionCard = false;
+  // liste der angekreuzten handcards
+  selected = [];
+  selectedCards = 0; // anzahl ausgewählte handcards
 
   opponent1 = 'Opponent 1 name';
   opponent2 = 'Opponent 2 name';
   opponent3 = 'Opponent 3 name';
 
+  // überprüft wie viele karten im lower market sind
   checkIsFree() {
     if (this.lowerCards.length !== 6) {
       this.isFree = false; }
@@ -79,6 +89,7 @@ export class InGameScreenComponent implements OnInit {
       this.isFree = true; }
   }
 
+  // updated clickable status der buttons unten links
   updateSelectedCardIsActionCard() {
     for (this.i = 0; this.i < 6; this.i++){
       if (this.selectedCards[0] === this.actionCards[this.i]){
@@ -88,7 +99,6 @@ export class InGameScreenComponent implements OnInit {
     }
     this.selectedCardIsActionCard = false;
   }
-
   updateUseActionCard(){
     if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
       this.useActionCard = false;
@@ -96,7 +106,6 @@ export class InGameScreenComponent implements OnInit {
     else
       this.useActionCard = true;
   }
-
   updateUseExpeditionCard(){
     if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
       this.useExpeditionCard = false;
@@ -105,7 +114,6 @@ export class InGameScreenComponent implements OnInit {
       this.useExpeditionCard = true;
     }
   }
-
   updateBuyAvailable(){
     if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false){
       this.buyAvailable = false;
@@ -114,7 +122,6 @@ export class InGameScreenComponent implements OnInit {
       this.buyAvailable = true;
     }
   }
-
   updateDiscard(){
     if (this.selectedCards >= 1) {
       this.discard = false;
@@ -123,6 +130,8 @@ export class InGameScreenComponent implements OnInit {
       this.discard = true;
     }
   }
+
+  // aktionen die ausgeführt werden wenn eine handcard aus- / abgewählt wird
   toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
     const newCard = card;
     if (this.handCards[i].checked === true) {
@@ -143,12 +152,13 @@ export class InGameScreenComponent implements OnInit {
     this.updateDiscard();
     }
 
-
-  uMavailable() { // damit der upper market korrekt ausgewählt wird
+  // überprüft ob die oberen marktkarten auswählbar sind
+  uMavailable() {
     if (this.firstPurchase === false) {
       this.isFree = true; }
   }
 
+  // toggelt die marktbuttons
   showMarketFunc() {
     if (this.showMarket === true) {
       this.showMarket = false;
@@ -157,10 +167,13 @@ export class InGameScreenComponent implements OnInit {
       this.showMarket = true; }
   }
 
+  // kaufinteraktionen, mit buy button verbunden
   buy() {
     this.firstPurchase = true;
     this.checkIsFree();
   }
+
+  // updatet chosenMarketCard
   chooseMarketCard(event) { // chosenMarketCard erhält ID vom zuletzt ausgewählten Button
     const target = event.target || event.srcElement || event.currentTarget;
     const idAttr = target.attributes.id;
