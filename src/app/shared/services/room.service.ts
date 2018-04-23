@@ -28,12 +28,15 @@ export class RoomService {
   }
 
   getRooms(): Observable<Room[]> {
-    /*const httpOptions = {
-      headers: new HttpHeaders({'Authorization': 'Bearer ' + this.authenticationService.token})
-    }; */
-    // get users from api
     return this.http.get<Room[]>(this.roomUrl);
   }
+
+
+  getCurrentRoomInfo(uri: string) {
+    return this.http.get(uri)
+  }
+
+
 
   getPlayersFromRoom(roomUsersUrl)  {
     return this.http.get(roomUsersUrl);
