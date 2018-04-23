@@ -1,4 +1,6 @@
 import { Component, OnInit} from '@angular/core';
+import {RoomService} from "../shared/services/room.service";
+
 
 @Component({
   selector: 'app-in-game-screen',
@@ -7,6 +9,10 @@ import { Component, OnInit} from '@angular/core';
 })
 
 export class InGameScreenComponent implements OnInit {
+  apiUrl: string;
+  room_name: string;
+  playerObject: object;
+  random: number;
   playerName = 'Your name'; // later replace with this.username or whatever works
 
   // wenn lower market 6 karten hat ist isfree = false
@@ -79,6 +85,11 @@ export class InGameScreenComponent implements OnInit {
   opponent1 = 'Opponent 1 name';
   opponent2 = 'Opponent 2 name';
   opponent3 = 'Opponent 3 name';
+
+  opponents_list = [this.opponent1, this.opponent2, this.opponent3];
+
+
+
 
   // überprüft wie viele karten im lower market sind
   checkIsFree() {
@@ -181,10 +192,36 @@ export class InGameScreenComponent implements OnInit {
     this.updateBuyAvailable();
   }
 
-  constructor() { }
-
+  constructor(private roomService: RoomService) { }
 
   ngOnInit() {
+
+    this.playerName = JSON.parse(localStorage.getItem('currentUser')).name;
+    console.log('welcome ' + this.playerName);
+    this.room_name = JSON.parse(localStorage.getItem('currentRoom'));
+    this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
+    this.apiUrl += this.room_name;
+    console.log(this.apiUrl);
+
+    // this.roomService.getRooms().subscribe(data => console.log((data[0]).players));
+    this.roomService.getRooms().subscribe(data => { // TODO pass this.apiUrl into getRooms()
+      this.playerObject = (data[0]).players; // TODO change this upon getting only information from specific room
+
+      this.random = this.playerObject.length;
+
+      for (var i=0; i<this.playerObject.length; i++) {
+        // console.log((this.playerObject[i]).name);
+        this.opponents_list[i] = (this.playerObject[i]).name;
+      }
+      console.log(this.opponents_list);
+      console.log(localStorage);
+
+
+
+
+    });
+
+
   }
 
 }
