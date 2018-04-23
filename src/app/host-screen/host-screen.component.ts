@@ -26,12 +26,12 @@ export class HostScreenComponent implements OnInit {
 
   paths = [
     {pathID: '1', pathName: 'Classic Path'},
-    {pathID: '2', pathName: 'Hills of Gold'},
+    /*{pathID: '2', pathName: 'Hills of Gold'},
     {pathID: '3', pathName: 'Home Stretch'},
     {pathID: '4', pathName: 'Winding Paths'},
     {pathID: '5', pathName: 'Serpentine'},
     {pathID: '6', pathName: 'Swamplands'},
-    {pathID: '7', pathName: 'Witch\'s Cauldron'}
+    {pathID: '7', pathName: 'Witch\'s Cauldron'}*/
   ];
   numbOfPlayers = [
     {numbValue: '4', numbSelect: '4'},

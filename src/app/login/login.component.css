@@ -29,6 +29,8 @@
   font-variant: small-caps;
   border: none;
   font-style: italic;
+  outline-color: black;
+
 }
 
 .loginbutton {
