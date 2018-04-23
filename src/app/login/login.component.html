@@ -1,18 +1,14 @@
 <html>
 
 <div class="login-image">
-  <div class="form-signin">
-  <label for="password" class="sr-only">Enter Username</label>
-  <input id="password" type="text" class="form-control userinput" placeholder="Enter Username"  [(ngModel)]="user.username"/> <!-- class form-control-->
-<br>
-  <div class="row">
-    <div class="col-md-6">
-      <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="login()">Login</button>
+  <div>
+  <!--label for="password" class="sr-only">Enter Username</label-->
+  <input type="text" class="userinput" placeholder="Enter Username"  [(ngModel)]="user.username"/> <!-- class form-control-->
+
+
+    <div>
+      <button class="loginbutton" type="submit" (click)="login()">Login</button>
     </div>
-    <div class="col-md-6">
-    </div>
-  </div>
-    <br>
   </div>
 
 </div>
