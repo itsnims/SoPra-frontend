@@ -167,6 +167,24 @@ export class InGameScreenComponent implements OnInit {
       this.showMarket = true; }
   }
 
+  // füllt das upperCards Array
+  getUpperCards(upperCardsJson) {
+    this.upperCards = [];
+    for (const key in upperCardsJson) {
+      const upCard = {cardID: key, left: upperCardsJson[key]};
+      this.upperCards.push(upCard);
+      }
+  }
+
+  // füllt das lowerCards Array
+  getLowerCards(lowerCardsJson) {
+    this.lowerCards = [];
+    for (const key in lowerCardsJson) {
+      const upCard = {cardID: key, left: lowerCardsJson[key]};
+      this.lowerCards.push(upCard);
+    }
+  }
+
   // kaufinteraktionen, mit buy button verbunden
   buy() {
     this.firstPurchase = true;

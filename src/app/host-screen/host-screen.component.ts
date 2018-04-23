@@ -34,10 +34,10 @@ export class HostScreenComponent implements OnInit {
     {pathID: '7', pathName: 'Witch\'s Cauldron'}
   ];
   numbOfPlayers = [
-    {numbValue: '2', numbSelect: '2'},
+    {numbValue: '4', numbSelect: '4'},
     {numbValue: '3', numbSelect: '3'},
-    {numbValue: '4', numbSelect: '4'}
-  ];
+    {numbValue: '2', numbSelect: '2'}
+    ];
 
   public shown = false;
 
