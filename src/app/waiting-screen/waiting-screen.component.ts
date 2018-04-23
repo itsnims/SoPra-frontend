@@ -18,6 +18,7 @@ export class WaitingScreenComponent implements OnInit {
   private interval: number;
   private display: boolean;
   private alive: boolean;
+  private playersArray: object;
 
   message: string;
   roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
@@ -34,7 +35,9 @@ export class WaitingScreenComponent implements OnInit {
     console.log('the current player is : ' + this.current_player);
     console.log('the current room is : ' + this.current_room);
     console.log(localStorage);
-
+    this.http.get(this.roomUrl  + this.current_room).subscribe((data) => {
+      console.log(Object.keys(data).map(key => ({type: key, value: data[key]})));
+    });
 
 
 
