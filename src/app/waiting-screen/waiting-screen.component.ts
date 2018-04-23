@@ -6,6 +6,7 @@ import {Observable} from "rxjs/Rx";
 import {RoomService} from "../shared/services/room.service";
 import { TimerObservable } from "rxjs/observable/TimerObservable";
 import 'rxjs/add/operator/takeWhile';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-waiting-screen',
@@ -26,7 +27,7 @@ export class WaitingScreenComponent implements OnInit {
   message: string;
   roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
 
-  constructor(private http: HttpClient, private roomService: RoomService) {
+  constructor(private http: HttpClient, private roomService: RoomService, private router: Router) {
   this.interval = 1000;
   this.display = false;
   this.alive = true;
@@ -51,6 +52,9 @@ export class WaitingScreenComponent implements OnInit {
           .subscribe((data) => {
             this.currentPlayers = data[0];
             this.maxplayers = data[1];
+            if (this.maxplayers === this.currentPlayers) {
+              this.router.navigate(['/in-game-screen']);
+            }
             if (!this.display) {
               this.display = true;
             }
