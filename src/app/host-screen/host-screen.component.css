@@ -45,13 +45,13 @@
 }
 .host-image {
   /* The image used */
-  background-image: url("host-image.jpg");
+  background-image: url("../images/backgrounds/host.jpeg");
 
   /* Set a specific height */
   height: 100%;
 
   /* Position and center the image to scale nicely on all screens */
-  background-position: center;
+  background-position: top left;
   background-repeat: no-repeat;
   background-size: 1366px 768px;
   position: fixed;

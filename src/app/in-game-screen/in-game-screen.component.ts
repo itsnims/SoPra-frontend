@@ -221,6 +221,7 @@ export class InGameScreenComponent implements OnInit {
     this.apiUrl += this.room_name;
     console.log(this.apiUrl);
 
+    /*
     // this.roomService.getRooms().subscribe(data => console.log((data[0]).players));
     this.roomService.getRooms().subscribe(data => { // TODO pass this.apiUrl into getRooms()
       this.playerObject = (data[0]).players; // TODO change this upon getting only information from specific room
@@ -237,7 +238,7 @@ export class InGameScreenComponent implements OnInit {
 
 
 
-    });
+    });*/
 
 
   }
