@@ -23,6 +23,7 @@ export class InGameScreenComponent implements OnInit {
   room_name: string;
   playerObject: object;
   handCardObject: object;
+  marketCardsObject: object;
   random: number;
   playerName = 'Your name'; // later replace with this.username or whatever works
 
@@ -269,28 +270,35 @@ export class InGameScreenComponent implements OnInit {
 
     });
 
+    // TODO implement dynamic link
 
-    this.http.put('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/Momentoftruth/turn', null, httpOptions).subscribe(result => {
+    this.http.put('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/player3/turn', null, httpOptions).subscribe(result => {
       console.log(result);
       this.handCardObject = result;
-      this.random = this.handCardObject.length;
+      console.log('HandCardsObject: ' + this.handCardObject[0]);
 
+      console.log('handCardsObject' + this.handCardObject);
       for (let i = 0; i < 4; i++) {
         // console.log((this.playerObject[i]).name);
         this.handCards[i].cardClass = (this.handCardObject[i]).name;
       }
-      console.log(this.handCards);
+    });
+  }
 
+  // TODO implement dynamic link
+  getCurrentMarket() {
+    this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/market').subscribe(result => console.log(result));
+
+    this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/market').subscribe(result => {
+      console.log(result);
+      this.marketCardsObject = result;
+      console.log('upperCardsObject: ' + this.marketCardsObject);
     });
 
 
+    console.log('upperCards: ' + this.upperCards[0].cardID); // This logs 'Cartographer for instance'
   }
-  randomFunction() {
 
-    };
-
-
-
-  }
 
 }
+
