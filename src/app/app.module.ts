@@ -17,7 +17,9 @@ import { HttpModule, RequestOptions} from '@angular/http';
 import { HexagonBoardComponent } from './hexagon-board/hexagon-board.component';
 import { StandardComponent } from './standard/standard.component';
 import { RoomService} from './shared/services/room.service';
-import {JoinRoomService} from "./join-room.service";
+import { ColumnComponent } from './column/column.component';
+import { PlayerComponent } from './player/player.component';
+import { HexComponent } from './hex/hex.component';
 
 
 @NgModule({
@@ -30,15 +32,19 @@ import {JoinRoomService} from "./join-room.service";
     InGameScreenComponent,
     HexagonBoardComponent,
     StandardComponent,
-
+    ColumnComponent,
+    PlayerComponent,
+    HexComponent,
   ],
+  entryComponents: [PlayerComponent],
   imports: [
     BrowserModule,
     FormsModule,
+    HttpModule,
     HttpClientModule,
-    routing,
+    routing
   ],
-  providers: [AuthenticationService, AuthGuardService, UserService, DataService, RoomService, LoginComponent, JoinRoomService],
+  providers: [AuthenticationService, AuthGuardService, UserService, DataService, RoomService, LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

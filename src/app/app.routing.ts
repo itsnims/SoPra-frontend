@@ -7,6 +7,7 @@ import {WaitingScreenComponent} from './waiting-screen/waiting-screen.component'
 import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
 import {HexagonBoardComponent} from './hexagon-board/hexagon-board.component';
 import {StandardComponent} from './standard/standard.component';
+import {HexComponent} from './hex/hex.component';
 
 
 const appRoutes: Routes = [
@@ -19,7 +20,8 @@ const appRoutes: Routes = [
   {path: 'hexagon-board', component: HexagonBoardComponent},
   {path: 'standard', component: StandardComponent},
 
-    // otherwise redirect to home
+
+  // otherwise redirect to home
     { path: '**', redirectTo: 'login' }
 ];
 

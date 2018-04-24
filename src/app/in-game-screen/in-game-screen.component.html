@@ -52,7 +52,7 @@
   <button id="zoomIn" class="bottomLeft" type="button">Zoom In</button>
   <button id="zoomOut" class="bottomLeft" type="button">Zoom Out</button>
   <button id="endTurn" class="bottomLeft" type="submit">End turn</button>
-  <button id="move" class="bottomLeft" type="submit">Move</button>
+  <button id="move" class="bottomLeft" type="submit" (click)="movePlayer()">Move</button>
   <button [disabled]="firstPurchase" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
   <button id="discard" class="bottomLeft" type="submit">Discard</button>
 </div>

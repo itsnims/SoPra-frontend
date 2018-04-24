@@ -1,0 +1,15 @@
+<a class="hex">
+     <div [id]="hexId"
+          (click)="clicked()">
+       <div class="wrapper">
+         <div [ngClass]="colourclass + ' hexagon'"
+              [id] = "strengthId"
+              [style.opacity]="opacity"
+              (mouseenter) ="mouseEnter('test input value')"  (mouseleave) ="mouseLeave('test input value')"
+         >
+         </div>
+           <app-player *ngIf="hasPlayer()"
+                       [playerId]="getPlayerId()"></app-player>
+       </div>
+     </div>
+</a>

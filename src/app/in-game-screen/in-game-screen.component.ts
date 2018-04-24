@@ -1,4 +1,7 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {StandardComponent} from '../standard/standard.component';
+import {PlayerComponent} from '../player/player.component';
+import {HexComponent} from '../hex/hex.component';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -7,6 +10,11 @@ import { Component, OnInit} from '@angular/core';
 })
 
 export class InGameScreenComponent implements OnInit {
+  @ViewChild(StandardComponent) standard: StandardComponent;
+  boards = [StandardComponent];
+  player: PlayerComponent;
+  currentselection: string;
+  current = 'Player1'
   playerName = 'Your name'; // later replace with this.username or whatever works
 
   isFree = false; // überprüft ob lowerMarket 6 karten hat
@@ -84,7 +92,7 @@ export class InGameScreenComponent implements OnInit {
     }
   }
 
-  uMavailable() { // damit der upper market korrekt ausgewählt wird
+  unavailable() { // damit der upper market korrekt ausgewählt wird
     if (this.firstPurchase === false)
       {this.isFree = true;}
   }
@@ -96,7 +104,9 @@ export class InGameScreenComponent implements OnInit {
       this.checkIsFree();
       this.showMarket = true;}
   }
-
+  selection(selectedTile: string) {
+    this.currentselection = selectedTile;
+  }
   buy() {
     this.firstPurchase = true;
     this.checkIsFree();
@@ -106,6 +116,14 @@ export class InGameScreenComponent implements OnInit {
     var idAttr = target.attributes.id;
     this.chosenMarketCard = idAttr.nodeValue;
   }
+
+  movePlayer() {
+    console.log('entered mov');
+    console.log(this);
+    console.log(this.standard.updatePlayers('B22'));
+    this.standard.updatePlayers('B22');
+    /*console.log(this.boards[0](this.hex.currenthexselection));*/
+    }
 
   constructor() { }
 

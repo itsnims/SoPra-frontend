@@ -5,7 +5,7 @@ body {
 
 }
 /*positioning*/
-.container .TILEB {
+.container .path {
   display: block;
   position: relative;
   top: 270px;
@@ -21,7 +21,7 @@ body {
   transform-origin: center 65%;
   z-index: 5;
 }
-.container .TILEB .column {
+.container .path .column {
   display: block;
   float: left;
   width: 62px;
@@ -30,11 +30,11 @@ body {
 }
 /*Determines the position of every odd child;
 meaning if the child is odd it gets put 1/2size of hexagon down*/
-.container .TILEB .column:nth-child(odd) {
+.container .path .column:nth-child(odd) {
   margin-top: 36px;
 }
 
-.container .TILEB .emptyhex{
+.container .path .emptyhex{
   display: block;
   position: relative;
   float: left;
@@ -51,7 +51,7 @@ meaning if the child is odd it gets put 1/2size of hexagon down*/
   opacity: 0.5;
 
 }
-.container .TILEB .hex {
+.container .path .hex {
   display: block;
   position: relative;
   float: left;
@@ -67,49 +67,52 @@ meaning if the child is odd it gets put 1/2size of hexagon down*/
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
   opacity: 0.5;
 }
-.container .TILEB .hex:hover {
+.container .path .hex:hover {
   opacity: 1;
   -webkit-transform: translateZ(20px);
   transform: translateZ(20px);
   transition-duration: 200ms;
 }
-.container .TILEB .hex:hover .content {
+.container .path .hex:hover .content {
   filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
   opacity: 1;
   -webkit-transform: rotateX(-90deg) translateZ(-40px) translateY(-50px);
   transform: rotateX(-90deg) translateZ(-40px) translateY(-50px);
 }
-.container .TILEB .hex .wrapper {
+.container .path .hex .wrapper {
   display: block;
   position: absolute;
-  top: 0;
+  top: 0px;
   left: 0;
   height: 100%;
   width: 100%;
+
 }
 /* colours of the 3 different parts the hexagon consists off*/
-.container .TILEB .hex .wrapper .color-1 {
+.container .path .hex .wrapper .color-1 {
   background-color: darkolivegreen;
-  background-image: url(curvy-knife.png);
+  /*background-image: url(../hex/curvy-knife.png);*/
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
 
 
+
 }
-.container .TILEB .hex .wrapper .color-1 .sword1{
+
+.container .path .hex .wrapper .color-1 .sword1{
   background-image: url(http://game-icons.net/lorc/originals/bowie-knife.html);
   background-size: contain;
 }
 
-.container .TILEB .hex .wrapper .color-1:before {
+.container .path .hex .wrapper .color-1:before {
   border-right-color: darkolivegreen;
 }
-.container .TILEB .hex .wrapper .color-1:after {
+.container .path .hex .wrapper .color-1:after {
   border-left-color: darkolivegreen;
 }
 
-.container .TILEB .hex .content {
+.container .path .hex .content {
   display: block;
   position: absolute;
   top: 0;
@@ -129,7 +132,7 @@ meaning if the child is odd it gets put 1/2size of hexagon down*/
   -webkit-font-smoothing: antialiased;
 }
 /*writing above hexagon*/
-.container .TILEB .hex .content strong {
+.container .path .hex .content strong {
   display: block;
   font: 600 26px/1.1 verdana, sans-serif;
   overflow: hidden;
@@ -137,7 +140,7 @@ meaning if the child is odd it gets put 1/2size of hexagon down*/
   white-space: nowrap;
   text-shadow: -1px -1px 2px rgba(0, 0, 0, 0.8);
 }
-.container .TILEB .hex .content small {
+.container .path .hex .content small {
   display: block;
   font: 15px/1.1 verdana, sans-serif;
 }
@@ -169,4 +172,3 @@ meaning if the child is odd it gets put 1/2size of hexagon down*/
 .hidden {
   display: none;
 }
-

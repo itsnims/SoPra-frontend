@@ -1,0 +1,177 @@
+.emptyhex{
+  display: block;
+  position: relative;
+  float: left;
+  margin: 0;
+  height: 72px;
+  width: 62px;
+  color: red;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease-out;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.5;
+
+}
+.hex {
+  display: block;
+  position: relative;
+  float: left;
+  margin: 0;
+  height: 72px;
+  width: 62px;
+  color: red;
+  cursor: pointer;
+  text-decoration: none;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  transition: all 0.3s ease-out;
+  filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=50);
+  opacity: 0.7;
+}
+.hex:hover {
+  opacity: 1;
+  -webkit-transform: translateZ(10px);
+  transform: translateZ(10px);
+  transition-duration: 100ms;
+}
+
+.hex .wrapper {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.green{
+  background-size: contain;
+  background-color: darkolivegreen;
+}
+.hex .wrapper .green:before {
+  border-right-color: darkolivegreen;
+}  .hex .wrapper .green:after {
+  border-left-color: darkolivegreen;
+}
+
+.blue{
+  background-size: contain;
+  background-color: blue;
+}
+.hex .wrapper .blue:before {
+  border-right-color: blue;
+}  .hex .wrapper .blue:after {
+     border-left-color: blue;
+   }
+
+.yellow{
+  background-size: contain;
+  background-color: gold;
+}
+.hex .wrapper .yellow:before {
+  border-right-color: gold;
+}  .hex .wrapper .yellow:after {
+     border-left-color: gold;
+   }
+
+.stone{
+  background-size: contain;
+  background-color: darkslategrey;
+}
+.hex .wrapper .stone:before {
+  border-right-color: darkslategrey;
+}  .hex .wrapper .stone:after {
+     border-left-color: darkslategrey;
+   }
+
+.grey{
+  background-size: contain;
+  background-color: grey;
+}
+.hex .wrapper .grey:before {
+  border-right-color: grey;
+}  .hex .wrapper .grey:after {
+     border-left-color: grey;
+   }
+
+.card{
+  background-size: contain;
+  background-color: orangered;
+}
+.hex .wrapper .card:before {
+  border-right-color: orangered;
+}  .hex .wrapper .card:after {
+     border-left-color: orangered;
+   }
+
+#strength1{
+  background-size: contain;
+  background-image: url(curvy-knife.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#strength2{
+  background-size: contain;
+  background-image: url(dervish-swords.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#strength3{
+  background-size: contain;
+  background-image: url(daggers.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#coin1{
+  background-size: 80%;
+  background-image: url(coin.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#coin2{
+  background-size: 26px 25px;
+  background-image: url(coin.png);
+  background-position: top;
+}
+
+#paddle2{
+  background-size: contain;
+  background-image: url(paddles.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+/*Creation of hexagon shape and colouring*/
+.hexagon {
+  display: block;
+  position: absolute;
+  width: 36px;
+  height: 62px;
+  /*background-color: #ffffff;*/
+}
+.hexagon:before, .hexagon:after {
+  content: "";
+  position: relative;
+  float: left;
+  border-top: 31px solid transparent;
+  border-bottom: 31px solid transparent;
+}
+.hexagon:before {
+  border-right: 18px solid #ffffff;
+  left: -18px;
+}
+.hexagon:after {
+  border-left: 18px solid #ffffff;
+  right: -18px;
+}
+
+.hidden {
+  display: none;
+}

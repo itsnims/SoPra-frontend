@@ -1,0 +1,45 @@
+
+.player {
+  display: block;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: 0;
+  background-image: radial-gradient(circle at 5px 5px, rgba(0,0,0,0), rgba(0,0,0,0), rgba(0,0,0,.8)), radial-gradient(circle 18px at 9px 8px, rgba(25.5,255,255,.7), rgba(0,0,0,0));
+  background-repeat: no-repeat, no-repeat;
+
+  position:absolute;
+  left: 0px;
+  display: block;
+  bottom: 65px;
+  z-index: 15;
+
+}
+.player:after {
+  content: "";
+  z-index: 0;
+  top: 23px; left: 15px;
+  position: absolute;
+  background-color: black;
+  border-radius: 28px 6px;
+  width: 15px;
+  height: 7px;
+  box-shadow: 1px 0 1px black;
+  opacity: .8;
+}
+
+#player4 {
+  background-color: blue;
+}
+
+#player3 {
+  background-color: red;
+}
+
+#player2 {
+  background-color: green;
+}
+
+#player1 {
+  background-color: yellow;
+}
