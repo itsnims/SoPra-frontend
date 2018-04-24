@@ -10,7 +10,7 @@
 </div-->
 
 <!-- Market-->
-<button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
+<button id="marketPlace" type="button" (click)="showMarketFunc(); getCurrentMarket()">Marketplace</button>
 <div *ngIf="showMarket">
 
   <!-- upper Cards -->

@@ -2,6 +2,7 @@ import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/co
 import {StandardComponent} from '../standard/standard.component';
 import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {RoomService} from '../shared/services/room.service';
 
@@ -17,11 +18,17 @@ export class InGameScreenComponent implements OnInit {
   boards = [StandardComponent];
   player: PlayerComponent;
   currentselection: string;
-  current = 'Player1'
+  currentRoom: string;
+  current = 'Player1';
   apiUrl: string;
   room_name: string;
   playerObject: object;
+  handCardObject: object;
+  marketCardsObject: object;
   random: number;
+  public idx: number;
+  apiUrl: string;
+
   playerName = 'Your name'; // later replace with this.username or whatever works
 
   // wenn lower market 6 karten hat ist isfree = false
@@ -122,15 +129,13 @@ export class InGameScreenComponent implements OnInit {
   updateUseActionCard() {
     if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
       this.useActionCard = false;
-    }
-    else
+    } else
       this.useActionCard = true;
   }
   updateUseExpeditionCard() {
     if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
       this.useExpeditionCard = false;
-    }
-    else {
+    } else {
       this.useExpeditionCard = true;
     }
   }
@@ -232,37 +237,95 @@ export class InGameScreenComponent implements OnInit {
     }
 
 
-  constructor(private roomService: RoomService) { }
+  constructor(private roomService: RoomService, private http: HttpClient) {
+    this.idx = -1;
+    this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
+  }
 
   ngOnInit() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
 
     this.playerName = JSON.parse(localStorage.getItem('currentUser')).name;
     console.log('welcome ' + this.playerName);
-    this.room_name = JSON.parse(localStorage.getItem('currentRoom'));
-    this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
-    this.apiUrl += this.room_name;
+    this.currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
     console.log(this.apiUrl);
+    console.log('this.playerName: ' + this.playerName);
+    console.log('this.currentRoom: ' + this.currentRoom);
+    console.log(this.apiUrl + this.currentRoom + '/' + this.playerName);
+    console.log('this is the market url: ' + this.apiUrl + this.currentRoom + '/market');
 
-    /*
+
+
+
+
+
+
     // this.roomService.getRooms().subscribe(data => console.log((data[0]).players));
     this.roomService.getRooms().subscribe(data => { // TODO pass this.apiUrl into getRooms()
       this.playerObject = (data[0]).players; // TODO change this upon getting only information from specific room
 
       this.random = this.playerObject.length;
 
-      for (var i=0; i<this.playerObject.length; i++) {
+      for (let i=0; i<this.playerObject.length; i++) {
         // console.log((this.playerObject[i]).name);
         this.opponents_list[i] = (this.playerObject[i]).name;
       }
       console.log(this.opponents_list);
       console.log(localStorage);
 
+    });
 
+    // TODO implement dynamic link
 
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/turn', null, httpOptions).subscribe(result => {
+      console.log(result);
+      this.handCardObject = result;
+      console.log('HandCardsObject: ' + this.handCardObject[0]);
 
-    });*/
-
-
+      console.log('handCardsObject' + this.handCardObject);
+      for (let i = 0; i < 4; i++) {
+        // console.log((this.playerObject[i]).name);
+        this.handCards[i].cardClass = (this.handCardObject[i]).name;
+      }
+    });
   }
 
+  // TODO implement dynamic link
+  getCurrentMarket() {
+
+    this.http.get(this.apiUrl + this.currentRoom + '/market').subscribe(result => {
+      // console.log(result);
+
+      for (let key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
+        for (let key2 in result[key]) {
+          if (this.idx === 12) {
+            this.idx = 0;
+          }else {
+            this.idx += 1;
+          }
+          if (key === 'upperdict') {
+            this.upperCards[this.idx].cardID = key2;
+          } else {
+            this.lowerCards[this.idx].cardID = key2;
+          }
+        }
+      }
+
+
+
+      this.marketCardsObject = result;
+      // console.log('upperCardsObject: ' + this.marketCardsObject);
+    });
+
+
+    console.log(this.upperCards[0].cardID);
+    console.log(this.upperCards[1].cardID);
+    console.log(this.upperCards[2].cardID); // This logs 'Cartographer for instance'
+  }
+
+
 }
+

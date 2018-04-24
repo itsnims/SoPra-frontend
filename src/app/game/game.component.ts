@@ -6,7 +6,6 @@ import {Router} from '@angular/router';
 import { HttpClient} from "@angular/common/http";
 import {HttpHeaders} from "@angular/common/http";
 import {SuperUser, User} from '../shared/models/user';
-import {JoinRoomService} from "../join-room.service";
 import 'rxjs/add/operator/toPromise';
 import {Observable} from "rxjs/Observable";
 import 'rxjs/add/operator/takeWhile';
@@ -35,7 +34,7 @@ export class GameComponent  implements OnInit, OnDestroy {
                           // when OnDestroy is called.
   private interval: number;
 
-  constructor(private router: Router, private userService: UserService, private roomService: RoomService, private http: HttpClient, private joinRoomService: JoinRoomService) {
+  constructor(private router: Router, private userService: UserService, private roomService: RoomService, private http: HttpClient) {
     this.display = false;
     this.alive = true;
     this.interval = 1000;
