@@ -22,6 +22,7 @@ export class InGameScreenComponent implements OnInit {
   apiUrl: string;
   room_name: string;
   playerObject: object;
+  handCardObject: object;
   random: number;
   playerName = 'Your name'; // later replace with this.username or whatever works
 
@@ -236,6 +237,10 @@ export class InGameScreenComponent implements OnInit {
   constructor(private roomService: RoomService, private http: HttpClient) { }
 
   ngOnInit() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
 
     this.playerName = JSON.parse(localStorage.getItem('currentUser')).name;
     console.log('welcome ' + this.playerName);
@@ -248,35 +253,43 @@ export class InGameScreenComponent implements OnInit {
 
 
 
-    /*
+
     // this.roomService.getRooms().subscribe(data => console.log((data[0]).players));
     this.roomService.getRooms().subscribe(data => { // TODO pass this.apiUrl into getRooms()
       this.playerObject = (data[0]).players; // TODO change this upon getting only information from specific room
 
       this.random = this.playerObject.length;
 
-      for (var i=0; i<this.playerObject.length; i++) {
+      for (let i=0; i<this.playerObject.length; i++) {
         // console.log((this.playerObject[i]).name);
         this.opponents_list[i] = (this.playerObject[i]).name;
       }
       console.log(this.opponents_list);
       console.log(localStorage);
 
+    });
 
 
+    this.http.put('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/Momentoftruth/turn', null, httpOptions).subscribe(result => {
+      console.log(result);
+      this.handCardObject = result;
+      this.random = this.handCardObject.length;
 
-    });*/
+      for (let i = 0; i < 4; i++) {
+        // console.log((this.playerObject[i]).name);
+        this.handCards[i].cardClass = (this.handCardObject[i]).name;
+      }
+      console.log(this.handCards);
+
+    });
 
 
   }
   randomFunction() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
+
     };
 
-    this.http.put('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/amadeo/turn', null, httpOptions).subscribe(result => console.log('list from heroku: ' + result));
+
 
   }
 
