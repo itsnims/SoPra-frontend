@@ -18,13 +18,15 @@ export class InGameScreenComponent implements OnInit {
   boards = [StandardComponent];
   player: PlayerComponent;
   currentselection: string;
-  current = 'Player1'
+  current = 'Player1';
   apiUrl: string;
   room_name: string;
   playerObject: object;
   handCardObject: object;
   marketCardsObject: object;
   random: number;
+  public idx: number;
+
   playerName = 'Your name'; // later replace with this.username or whatever works
 
   // wenn lower market 6 karten hat ist isfree = false
@@ -235,7 +237,9 @@ export class InGameScreenComponent implements OnInit {
     }
 
 
-  constructor(private roomService: RoomService, private http: HttpClient) { }
+  constructor(private roomService: RoomService, private http: HttpClient) {
+    this.idx = -1;
+  }
 
   ngOnInit() {
     const httpOptions = {
@@ -291,12 +295,32 @@ export class InGameScreenComponent implements OnInit {
 
     this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/market').subscribe(result => {
       console.log(result);
+
+      for (let key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
+        for (let key2 in result[key]) {
+          if (this.idx === 12) {
+            this.idx = 0;
+          }else {
+            this.idx += 1;
+          }
+          if (key === 'upperdict') {
+            this.upperCards[this.idx].cardID = key2;
+          } else {
+            this.lowerCards[this.idx].cardID = key2;
+          }
+        }
+      }
+
+
+
       this.marketCardsObject = result;
-      console.log('upperCardsObject: ' + this.marketCardsObject);
+      // console.log('upperCardsObject: ' + this.marketCardsObject);
     });
 
 
-    console.log('upperCards: ' + this.upperCards[0].cardID); // This logs 'Cartographer for instance'
+    console.log(this.upperCards[0].cardID);
+    console.log(this.upperCards[1].cardID);
+    console.log(this.upperCards[2].cardID); // This logs 'Cartographer for instance'
   }
 
 
