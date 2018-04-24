@@ -226,8 +226,8 @@ export class InGameScreenComponent implements OnInit {
   movePlayer() {
     console.log('entered mov');
     console.log(this);
-    console.log(this.standard.updatePlayers('B22'));
-    this.standard.updatePlayers('B22');
+    console.log(this.standard.addPlayers());
+    this.standard.addPlayers();
     /*console.log(this.boards[0](this.hex.currenthexselection));*/
     }
 
