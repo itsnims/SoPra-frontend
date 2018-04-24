@@ -26,18 +26,22 @@ export class StandardComponent implements OnInit, AfterViewInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
   ngOnInit() {
-/*Selectiert nur die felder der liste und macht für jedes ein click event mit funktion call pos
-* */
+/*Adds players to Playercomponent list
+* -> now players holds all current players*/
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
     this.players.push(new PlayerComponent())
     this.players[0].playerId = sample_players[0];
+    this.players[0].position = 'B1';
     this.players.push(new PlayerComponent())
     this.players[1].playerId = sample_players[1];
+    this.players[1].position = 'B2';
     this.players.push(new PlayerComponent())
     this.players[2].playerId = sample_players[2];
+    this.players[2].position = 'B3';
     this.players.push(new PlayerComponent())
     this.players[3].playerId = sample_players[3];
-    const positions = ['B4', 'B9', 'B11'];
+    this.players[3].position = 'B4';
+    console.log(this.players);
     // for (var position of positions){
       // document.getElementById (position).addEventListener ('click', function(){pos(position, sample_players); } , false); }
 
@@ -74,24 +78,36 @@ export class StandardComponent implements OnInit, AfterViewInit {
       }
       return false;
     });
+    /**/
     /*BACKEND need to make current player instead of dummy */
+    /*highlights all potentialMoveIds*/
     console.log(this.hexMapById);
+    this.setInitialPosition();
     this.players[0].getPotentialMoveIds()
       .forEach(moveId => {
       this.hexMapById.get(moveId).onhightlight();
       /*this.hex.selectedTile(this.players[0].getPotentialMoveIds());*/
     });
-    this.addPlayers();
   }
-
+  setInitialPosition() {
+    this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
+    this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
+    this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
+    this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);
+    console.log(this.players);
+  }
   addPlayers() {
-    this.hexMapById.get('B1').addplayer(this.players[0]);
-    this.hexMapById.get('B2').addplayer(this.players[1]);
-    this.hexMapById.get('B3').addplayer(this.players[2]);
-    this.hexMapById.get('B4').addplayer(this.players[3]);
+    this.hexMapById.get(this.players[0].position).removePlayer();
+    this.players[0].position =  JSON.parse(localStorage.getItem('selectedHex'));
+    this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[0]);
+    console.log(this.players);
+  }
+  getPlayerPosition(playerId: string, position: string){
+
   }
   /*BACKEND Probabely need notion of current player*/
-  updatePlayers(position: string){
+  updatePlayers(position: string) {
+
     this.hexMapById.get(position).addplayer(this.players[0])
   }
 

@@ -34,6 +34,7 @@ export class HexComponent implements OnInit {
     if (this.clickTile(this.hexId)) {
       console.log(this.hexId, 'was clicked');
       this.selectedTile(this.hexId);
+      localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
     }
   }
   public onhightlight() {
@@ -73,6 +74,9 @@ export class HexComponent implements OnInit {
 
   addplayer(p: PlayerComponent) {
     this.player = p;
+  }
+  removePlayer() {
+    this.player = null;
   }
   selectedTile(position: string) {
 

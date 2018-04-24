@@ -9,6 +9,7 @@ export class PlayerComponent implements OnInit {
   @Input() playerId: string;
   @Input() position: string;
 
+
   ngOnInit() { }
 
   constructor() {}
@@ -16,8 +17,11 @@ export class PlayerComponent implements OnInit {
   getPotentialMoveIds() {
     return ['B22', 'C33', 'C9', 'C13'];
   }
-  public setPosition(position: string) {
+  public setPosition(position: string, playerId: string) {
     this.position = position;
+    this.playerId = playerId;
   }
+
+  public getPosition()
 
 }

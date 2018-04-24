@@ -2,7 +2,9 @@
 <h3 class="opponents" id="opponent1">{{opponents_list[0]}}</h3>
 <h3 class="opponents" id="opponent2">{{opponents_list[1]}}</h3>
 <h3 class="opponents" id="opponent3">{{opponents_list[2]}}</h3>
-<!--p *ngFor="let select of selected">{{select}}</p-->
+  <!--<app-standard></app-standard>-->
+
+  <!--p *ngFor="let select of selected">{{select}}</p-->
 <!--div class="gameboard" >
   <app-standard class="board_input" [style.a]></app-standard>
 </div-->
@@ -46,7 +48,8 @@
   <button [disabled]="useActionCard" id="actionCard" class="bottomLeft" type="button">Use action card</button>
   <button id="trash" class="bottomLeft" type="button">Trash</button>
   <button id="endTurn" class="bottomLeft" type="submit">End turn</button>
-  <button [disabled]="useExpeditionCard" id="expedCard" class="bottomLeft" type="submit" (click)="movePlayer()">Use exped. card</button>
+  <button id="expedCard" class="bottomLeft" type="submit" (click)="movePlayer()">Use exped. card</button>
+  <!--[disabled]="useExpeditionCard"-->
   <button [disabled]="buyAvailable" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
   <button [disabled]="discard" id="discard" class="bottomLeft" type="submit">Discard</button>
 </div>
