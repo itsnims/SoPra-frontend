@@ -1,19 +1,20 @@
-<div class="host-image"><h1>Host a new game</h1><br>
+<div class="host-image">
+  <h1>Host a new game</h1><br>
 
-<h3>Game name:</h3>
-<input type="text" [(ngModel)]="room.name">
+<h3>Game Name:</h3>
+<input class="hostInput" type="text" placeholder="My room" [(ngModel)]="room.name">
 
-<h3>Choose Path:</h3>
-<select id="selectPath">
-  <option *ngFor="let path of paths" [value]="path.pathID" >{{path.pathName}}</option>
-</select><br>
+  <h3>Choose Path:</h3>
+<select class="hostInput">
+  <option *ngFor="let path of paths" [value]="path.pathID">{{path.pathName}}</option>
+</select>
 
-<h3>Choose number of players:</h3>
-<select id="maxPlayer">
+<h3>Choose # of Players:</h3>
+<select class="hostInput">
   <option *ngFor="let numbOfPlayer of numbOfPlayers" [value]="numbOfPlayer.numbValue">{{numbOfPlayer.numbSelect}}</option>
-</select><br>
+</select>
 
-<h3>Password protection:</h3>
+<h3>Password Protection:</h3>
 
 <div class="onoffswitch">
   <form #myForm="ngForm">
@@ -29,11 +30,11 @@
 <div>
   <div *ngIf="shown">
     <h3>Password:</h3>
-    <input type="text" [(ngModel)]="room.pwd"><br><br>
+    <input class="hostInput" type="text" placeholder="My password" [(ngModel)]="room.pwd"><br><br>
   </div>
 </div>
 
-<button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/waiting-screen']" (click)="pathSelect(); createRoom()">Create Game</button>
-<button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/game']">Back to lobby</button>
+<button class="hostBtn" id="createGame" type="submit" (click)= "playerNumSelect();createRoom()">Create Game</button>
+<button class="hostBtn" id="back2lobby" type="submit" [routerLink]="['/game']">Back to Lobby</button>
 
 </div>

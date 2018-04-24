@@ -1,4 +1,40 @@
+.background-image {
+  background-image: url("../images/cards/backside.jpg"), url("../images/backgrounds/in-game_bg.jpeg");
 
+
+  /* Set a specific height */
+  height: 100%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: left 325px top 630px, top left;
+  background-repeat: no-repeat;
+  background-size: 87px 135px, 1366px 768px;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  padding:0;
+  margin: 0;
+
+}
+
+.drawPile {
+  background-image: url("../images/cards/backside.jpg");
+
+  /* Set a specific height */
+  height: 100%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: left 325px top 630px;
+  background-repeat: no-repeat;
+  background-size: 87px 135px;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  padding:0;
+  margin: 0;
+}
 .opponents {
   position: fixed;
 }
@@ -52,87 +88,87 @@
 
 /* maybe have to change names*/
 
-.cartographer {
+.Cartographer {
   background: url('../images/cards/A.cartographer.png') no-repeat top left;
   background-size: cover;}
 
-.compass {
+.Compass {
   background: url('../images/cards/A.compass.png') no-repeat top left;
   background-size: cover;}
 
-.native {
+.Natives {
   background: url('../images/cards/A.native.png') no-repeat top left;
   background-size: cover;}
 
-.scientist {
+.Scientist {
   background: url('../images/cards/A.scientist.png') no-repeat top left;
   background-size: cover;}
 
-.transmitter {
+.Transmitter {
   background: url('../images/cards/A.transmitter.png') no-repeat top left;
   background-size: cover;}
 
-.travel-log {
+.TravelDiary {
   background: url('../images/cards/A.travel-log.png') no-repeat top left;
   background-size: cover;}
 
-.sailor {
+.Sailor {
   background: url('../images/cards/B1-sailor.png') no-repeat top left;
   background-size: cover;}
 
-.captain {
+.Captain {
   background: url('../images/cards/B3v2-captain.png') no-repeat top left;
   background-size: cover;}
 
-.explorer {
+.Explorer {
   background: url('../images/cards/G1-explorer.png') no-repeat top left;
   background-size: cover;}
 
-.scout {
+.Scout {
   background: url('../images/cards/G2v1-scout.png') no-repeat top left;
   background-size: cover;}
 
-.trailblazer {
+.Trailblazer {
   background: url('../images/cards/G3v3-trailblazer.png') no-repeat top left;
   background-size: cover;}
 
-.pioneer {
+.Pioneer {
   background: url('../images/cards/G5v5-pioneer.png') no-repeat top left;
   background-size: cover;}
 
-.giant-machete {
+.GiantMachete {
   background: url('../images/cards/G6v3-giant-machete.png') no-repeat top left;
   background-size: cover;}
 
-.jack-of-all-trades {
+.Allrounder {
   background: url('../images/cards/GBY1v2-jack-of-all-trades.png') no-repeat top left;
   background-size: cover;}
 
-.adventurer {
+.Adventurer {
   background: url('../images/cards/GBY2v4-adventurer.png') no-repeat top left;
   background-size: cover;}
 
-.prop-plane {
+.Plane {
   background: url('../images/cards/GBY4v4-prop-plane.png') no-repeat top left;
   background-size: cover;}
 
-.traveler {
+.Traveler {
   background: url('../images/cards/Y1-traveler.png') no-repeat top left;
   background-size: cover;}
 
-.photographer {
+.Photographer {
   background: url('../images/cards/Y2v2-photographer.png') no-repeat top left;
   background-size: cover;}
 
-.journalist {
+.Journalist {
   background: url('../images/cards/Y3v3-journalist.png') no-repeat top left;
   background-size: cover;}
 
-.treasure-chest {
+.TreasureChest {
   background: url('../images/cards/Y4v3-treasure-chest.png') no-repeat top left;
   background-size: cover;}
 
-.millionaire {
+.Millionaire {
   background: url('../images/cards/Y4v5-millionaire.png') no-repeat top left;
   background-size: cover;}
 
@@ -167,13 +203,13 @@
 /* Buttons bottom left */
 .bottomLeft {
   position: fixed;
-  width: 85px;}
+  width: 88px;}
 
-#zoomIn {
-  top: 640px;
+#actionCard {
+  top: 619px;
   left: 75px;}
 
-#zoomOut {
+#trash {
   top: 680px;
   left: 75px;}
 
@@ -181,8 +217,8 @@
   top: 720px;
   left: 75px;}
 
-#move {
-  top: 640px;
+#expedCard {
+  top: 619px;
   left: 180px;}
 
 #buy {

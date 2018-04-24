@@ -28,11 +28,18 @@ export class RoomService {
   }
 
   getRooms(): Observable<Room[]> {
-    /*const httpOptions = {
-      headers: new HttpHeaders({'Authorization': 'Bearer ' + this.authenticationService.token})
-    }; */
-    // get users from api
     return this.http.get<Room[]>(this.roomUrl);
+  }
+
+
+  getCurrentRoomInfo(uri: string) {
+    return this.http.get(uri)
+  }
+
+
+
+  getPlayersFromRoom(roomUsersUrl)  {
+    return this.http.get(roomUsersUrl);
   }
 
 
@@ -61,7 +68,7 @@ export class RoomService {
     this.User.username = '';   // here we hardcode a user, so that we can display the room in an appropriate JSON format
     this.User.id = 1;
 
-    const bodyString = JSON.stringify({name: room.name, owner: this.showCurrentHost(), maxplayer : room.maxPlayers, password : room.pwd}); // TODO add path ID
+    const bodyString = JSON.stringify({name: room.name, owner: this.showCurrentHost(), maxplayer: room.maxPlayers, password : room.pwd}); // TODO add path ID
     // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {

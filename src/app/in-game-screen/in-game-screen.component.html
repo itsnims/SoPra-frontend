@@ -1,17 +1,12 @@
-<h3 class="opponents" id="opponent1">{{opponent1}}</h3>
-<h3 class="opponents" id="opponent2">{{opponent2}}</h3>
-<h3 class="opponents" id="opponent3">{{opponent3}}</h3>
-
-<ul> <!-- sollte ausgewählte handCards printen -->
-  <li *ngFor="let select of selected">
-    {{ select.id }}
-  </li>
-</ul>
-
-<div class="gameboard" >
+<div class="background-image">
+<h3 class="opponents" id="opponent1">{{opponents_list[0]}}</h3>
+<h3 class="opponents" id="opponent2">{{opponents_list[1]}}</h3>
+<h3 class="opponents" id="opponent3">{{opponents_list[2]}}</h3>
+<!--p *ngFor="let select of selected">{{select}}</p-->
+<!--div class="gameboard" >
   <app-standard class="board_input" [style.a]></app-standard>
+</div-->
 
-</div>
 <!-- Market-->
 <button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
 <div *ngIf="showMarket">
@@ -35,11 +30,10 @@
 
 <!-- Expedition Board -->
 <div>
-  <h4 id="drawPile">Draw<br>pile</h4>
   <div class="scrollCards" id="cb-button">
-    <span *ngFor="let handCard of handCards">
+    <span *ngFor="let handCard of handCards; let i = index;">
       <label class="handCardFormat {{handCard.cardClass}}">
-        <input id="{{handCard.cardID}}" type="checkbox" [checked]="handCard.notChecked" (change)="toggleHandSelection(handCard)">
+        <input class="handCard" type="checkbox" (change)="toggleHandSelection(handCard.cardClass, i)" [checked]="handCard.checked">
       </label>
     </span>
   </div>
@@ -49,13 +43,15 @@
 
 <!-- bottom left buttons-->
 <div>
-  <button id="zoomIn" class="bottomLeft" type="button">Zoom In</button>
-  <button id="zoomOut" class="bottomLeft" type="button">Zoom Out</button>
+  <button [disabled]="useActionCard" id="actionCard" class="bottomLeft" type="button">Use action card</button>
+  <button id="trash" class="bottomLeft" type="button">Trash</button>
   <button id="endTurn" class="bottomLeft" type="submit">End turn</button>
-  <button id="move" class="bottomLeft" type="submit" (click)="movePlayer()">Move</button>
-  <button [disabled]="firstPurchase" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
-  <button id="discard" class="bottomLeft" type="submit">Discard</button>
+  <button [disabled]="useExpeditionCard" id="expedCard" class="bottomLeft" type="submit" (click)="movePlayer()">Use exped. card</button>
+  <button [disabled]="buyAvailable" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
+  <button [disabled]="discard" id="discard" class="bottomLeft" type="submit">Discard</button>
 </div>
 
 
 <button id="leave" type="submit" [routerLink]="['/game']">Quit Game</button>
+
+</div>

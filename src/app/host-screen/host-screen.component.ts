@@ -15,7 +15,9 @@ import {DataService} from '../data.service';
 
 export class HostScreenComponent implements OnInit {
   room: Room;
+  public room_name: string;
   current_host: string;
+  placeholder : any;
   apiURL = 'https://sopra-fd2af.firebaseio.com/0.json';
 
   constructor(private _service: RoomService, private router: Router) {
@@ -24,18 +26,18 @@ export class HostScreenComponent implements OnInit {
 
   paths = [
     {pathID: '1', pathName: 'Classic Path'},
-    {pathID: '2', pathName: 'Hills of Gold'},
+    /*{pathID: '2', pathName: 'Hills of Gold'},
     {pathID: '3', pathName: 'Home Stretch'},
     {pathID: '4', pathName: 'Winding Paths'},
     {pathID: '5', pathName: 'Serpentine'},
     {pathID: '6', pathName: 'Swamplands'},
-    {pathID: '7', pathName: 'Witch\'s Cauldron'}
+    {pathID: '7', pathName: 'Witch\'s Cauldron'}*/
   ];
   numbOfPlayers = [
-    {numbValue: '2', numbSelect: '2'},
+    {numbValue: '4', numbSelect: '4'},
     {numbValue: '3', numbSelect: '3'},
-    {numbValue: '4', numbSelect: '4'}
-  ];
+    {numbValue: '2', numbSelect: '2'}
+    ];
 
   public shown = false;
 
@@ -46,8 +48,8 @@ export class HostScreenComponent implements OnInit {
       this.room.pwdBool = false;
     }
   }
-  pathSelect() {
-    this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
+  playerNumSelect() {
+    // this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
     this.room.maxPlayers = (<HTMLInputElement>document.getElementById('maxPlayer')).value;
   }
 
@@ -60,9 +62,13 @@ export class HostScreenComponent implements OnInit {
 
 
   createRoom() {
+    localStorage.setItem('currentRoom', JSON.stringify(this.room.name));
+    console.log('host_screen local storage: ' + localStorage);
+
     this._service.roomLogin(this.room)
       .subscribe(result => {
         if (result) {
+          console.log('Result retrieved');
           this.router.navigate(['/waiting-screen']);
         }});
   }
