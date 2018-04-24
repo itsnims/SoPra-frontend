@@ -24,11 +24,11 @@ export class RoomService {
     this.apiUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms.json';
     this.playersUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms/0/PlayersInRoom.json';
     this.testUrl = 'https://sopra-fd2af.firebaseio.com/1/rooms';
-    this.roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games';
+    this.roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   }
 
-  getRooms(): Observable<Room[]> {
-    return this.http.get<Room[]>(this.roomUrl);
+  getRooms(room_name): Observable<Room> {
+    return this.http.get<Room>(this.roomUrl + room_name);
   }
 
 

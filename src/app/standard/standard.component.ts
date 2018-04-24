@@ -41,7 +41,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
     this.players.push(new PlayerComponent())
     this.players[3].playerId = sample_players[3];
     this.players[3].position = 'B4';
-    console.log(this.players);
+
+
     // for (var position of positions){
       // document.getElementById (position).addEventListener ('click', function(){pos(position, sample_players); } , false); }
 
@@ -97,7 +98,15 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log(this.players);
   }
   addPlayers() {
-    this.hexMapById.get(this.players[0].position).removePlayer();
+    temp = 0;
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.players[i].playerId === this.current_player) {
+        this.temp = i;
+      }
+    }
+
+
+    this.hexMapById.get(this.players[temp].position).removePlayer();
     this.players[0].position =  JSON.parse(localStorage.getItem('selectedHex'));
     this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[0]);
     console.log(this.players);

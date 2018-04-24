@@ -47,7 +47,7 @@ export class WaitingScreenComponent implements OnInit {
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
-        this.roomService.getCurrentRoomInfo(this.roomUrl  + this.current_room)
+        this.roomService.getCurrentRoomInfo(this.roomUrl  + this.current_room + '/wait')
           .subscribe((data) => {
             this.currentPlayers = data[0];
             this.maxplayers = data[1];

@@ -8,7 +8,7 @@
 <!--div class="gameboard" >
   <app-standard class="board_input" [style.a]></app-standard>
 </div-->
-
+  <button id="m" type="button" (click)="showSelected()">ShowSelected</button>
 <!-- Market-->
 <button id="marketPlace" type="button" (click)="showMarketFunc(); getCurrentMarket()">Marketplace</button>
 <div *ngIf="showMarket">
