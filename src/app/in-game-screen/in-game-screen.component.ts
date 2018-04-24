@@ -238,7 +238,6 @@ export class InGameScreenComponent implements OnInit {
 
 
   constructor(private roomService: RoomService, private http: HttpClient) {
-    this.idx = -1;
     this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   }
 
@@ -295,13 +294,13 @@ export class InGameScreenComponent implements OnInit {
 
   // TODO implement dynamic link
   getCurrentMarket() {
-
+    this.idx = -1;
     this.http.get(this.apiUrl + this.currentRoom + '/market').subscribe(result => {
       // console.log(result);
 
       for (let key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
         for (let key2 in result[key]) {
-          if (this.idx === 12) {
+          if (this.idx === 11) {
             this.idx = 0;
           }else {
             this.idx += 1;
@@ -321,9 +320,10 @@ export class InGameScreenComponent implements OnInit {
     });
 
 
-    console.log(this.upperCards[0].cardID);
-    console.log(this.upperCards[1].cardID);
-    console.log(this.upperCards[2].cardID); // This logs 'Cartographer for instance'
+
+    // console.log(this.upperCards);
+    // console.log(this.lowerCards);
+
   }
 
 
