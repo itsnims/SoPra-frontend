@@ -2,6 +2,7 @@ import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/co
 import {StandardComponent} from '../standard/standard.component';
 import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {RoomService} from '../shared/services/room.service';
 
@@ -232,7 +233,7 @@ export class InGameScreenComponent implements OnInit {
     }
 
 
-  constructor(private roomService: RoomService) { }
+  constructor(private roomService: RoomService, private http: HttpClient) { }
 
   ngOnInit() {
 
@@ -242,6 +243,10 @@ export class InGameScreenComponent implements OnInit {
     this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
     this.apiUrl += this.room_name;
     console.log(this.apiUrl);
+
+
+
+
 
     /*
     // this.roomService.getRooms().subscribe(data => console.log((data[0]).players));
@@ -262,6 +267,16 @@ export class InGameScreenComponent implements OnInit {
 
     });*/
 
+
+  }
+  randomFunction() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    this.http.put('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/amadeo/turn', null, httpOptions).subscribe(result => console.log('list from heroku: ' + result));
 
   }
 
