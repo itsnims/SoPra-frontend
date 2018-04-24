@@ -18,6 +18,7 @@ export class InGameScreenComponent implements OnInit {
   boards = [StandardComponent];
   player: PlayerComponent;
   currentselection: string;
+  currentRoom: string;
   current = 'Player1';
   apiUrl: string;
   room_name: string;
@@ -26,6 +27,7 @@ export class InGameScreenComponent implements OnInit {
   marketCardsObject: object;
   random: number;
   public idx: number;
+  apiUrl: string;
 
   playerName = 'Your name'; // later replace with this.username or whatever works
 
@@ -127,15 +129,13 @@ export class InGameScreenComponent implements OnInit {
   updateUseActionCard() {
     if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
       this.useActionCard = false;
-    }
-    else
+    } else
       this.useActionCard = true;
   }
   updateUseExpeditionCard() {
     if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
       this.useExpeditionCard = false;
-    }
-    else {
+    } else {
       this.useExpeditionCard = true;
     }
   }
@@ -239,6 +239,7 @@ export class InGameScreenComponent implements OnInit {
 
   constructor(private roomService: RoomService, private http: HttpClient) {
     this.idx = -1;
+    this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   }
 
   ngOnInit() {
@@ -249,10 +250,13 @@ export class InGameScreenComponent implements OnInit {
 
     this.playerName = JSON.parse(localStorage.getItem('currentUser')).name;
     console.log('welcome ' + this.playerName);
-    this.room_name = JSON.parse(localStorage.getItem('currentRoom'));
-    this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
-    this.apiUrl += this.room_name;
+    this.currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
     console.log(this.apiUrl);
+    console.log('this.playerName: ' + this.playerName);
+    console.log('this.currentRoom: ' + this.currentRoom);
+    console.log(this.apiUrl + this.currentRoom + '/' + this.playerName);
+    console.log('this is the market url: ' + this.apiUrl + this.currentRoom + '/market');
+
 
 
 
@@ -276,7 +280,7 @@ export class InGameScreenComponent implements OnInit {
 
     // TODO implement dynamic link
 
-    this.http.put('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/player3/turn', null, httpOptions).subscribe(result => {
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/turn', null, httpOptions).subscribe(result => {
       console.log(result);
       this.handCardObject = result;
       console.log('HandCardsObject: ' + this.handCardObject[0]);
@@ -291,10 +295,9 @@ export class InGameScreenComponent implements OnInit {
 
   // TODO implement dynamic link
   getCurrentMarket() {
-    this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/market').subscribe(result => console.log(result));
 
-    this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/market').subscribe(result => {
-      console.log(result);
+    this.http.get(this.apiUrl + this.currentRoom + '/market').subscribe(result => {
+      // console.log(result);
 
       for (let key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
         for (let key2 in result[key]) {
