@@ -21,11 +21,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
 /*classe für click events...
 * */
   hex: HexComponent;
-  dummylist: string[];
   players: PlayerComponent[] = [];
   hexMapById = new Map<string, HexComponent>();
   currentPlayer: any;
   numberPlayers: number;
+  playerNames: string[];
   i: number;
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
@@ -33,10 +33,15 @@ export class StandardComponent implements OnInit, AfterViewInit {
 /*Adds players to Playercomponent list
 * -> now players holds all current players*/
     this.currentPlayer = JSON.parse(localStorage.getItem('currentUser')).name;
-    this.dummylist = ['nimra', 'clara', 'Arina'];
-    this.currentPlayer = this.dummylist.indexOf(this.currentPlayer)
-    this.numberPlayers = this.dummylist.length;
+    this.playerNames = JSON.parse(localStorage.getItem('playersInRoom'));
+    this.currentPlayer = this.playerNames.indexOf(this.currentPlayer)
+    console.log(this.playerNames);
+    console.log(this.currentPlayer);
+
+    this.numberPlayers = this.playerNames.length;
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
+    /*
+    How many playing pieces should be displayed on the board as well as their initial positions*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
         this.players.push(new PlayerComponent());
@@ -97,21 +102,22 @@ export class StandardComponent implements OnInit, AfterViewInit {
       return false;
     });
     /**/
-    /*BACKEND need to make current player instead of dummy */
     /*highlights all potentialMoveIds*/
     console.log(this.hexMapById);
     this.setInitialPosition();
     this.players[this.currentPlayer].getPotentialMoveIds()
       .forEach(moveId => {
-      this.hexMapById.get(moveId).onhightlight();
-      /*this.hex.selectedTile(this.players[0].getPotentialMoveIds());*/
-    });
+        this.hexMapById.get(moveId).onhightlight();
+        /*this.hex.selectedTile(this.players[0].getPotentialMoveIds());*/
+      });
   }
   setInitialPosition() {
-    this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
-    this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
-    this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
-    this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);
+    /*for (let i = 0; i < this.numberPlayers; i++) {*/
+      this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
+      this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
+      this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
+      this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);
+
   }
   addPlayers() {
     this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();

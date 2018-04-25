@@ -267,7 +267,7 @@ export class InGameScreenComponent implements OnInit {
     console.log(this);
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    // this.standard.addPlayers();^
+    this.standard.addPlayers();
     /*console.log(this.boards[0](this.hex.currenthexselection));*/
     return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
       .subscribe(result => {
