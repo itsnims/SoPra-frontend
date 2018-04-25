@@ -247,6 +247,18 @@ export class InGameScreenComponent implements OnInit {
       });*/
   }
 
+  discardCards() {
+    const bodyString = JSON.stringify({cards: this.selected});
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
+    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard', bodyString, httpOptions)
+      .subscribe(result => console.log(result));
+  }
+
+
+
   // kaufinteraktionen, mit buy button verbunden
   buy() {
     this.firstPurchase = true;
@@ -303,6 +315,7 @@ export class InGameScreenComponent implements OnInit {
 
   ngOnInit() {
 
+    /*
     this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
       .subscribe(result => {
         for (let key in result) {
@@ -311,7 +324,22 @@ export class InGameScreenComponent implements OnInit {
             console.log('dieser spieler ist an der reihe: ' + this.current_player);
           }
         }
+      }); */
+
+    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
+          .subscribe(result => {
+            for (let key in result) {
+              if (key === 'name') {
+                this.current_player = result[key];
+                // console.log(this.current_player);
+              }
+            }
+          });
       });
+
 
     const httpOptions = {
       headers: new HttpHeaders({

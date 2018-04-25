@@ -50,7 +50,7 @@
   <button id="expedCard" class="bottomLeft" type="submit" (click)="movePlayer()">Use exped. card</button>
   <!--[disabled]="useExpeditionCard"-->
   <button [disabled]="buyAvailable" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
-  <button [disabled]="discard" id="discard" class="bottomLeft" type="submit">Discard</button>
+  <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
 </div>
 
 
