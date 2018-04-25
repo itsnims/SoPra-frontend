@@ -31,6 +31,10 @@ export class RoomService {
     return this.http.get<Room>(this.roomUrl + room_name);
   }
 
+  getAllRooms(): Observable<Room[]> {
+    return this.http.get<Room[]>(this.roomUrl);
+  }
+
 
   getCurrentRoomInfo(uri: string) {
     return this.http.get(uri)

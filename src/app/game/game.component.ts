@@ -56,7 +56,7 @@ export class GameComponent  implements OnInit, OnDestroy {
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
-        this.roomService.getRooms()
+        this.roomService.getAllRooms()
           .subscribe((rooms) => {
             this.rooms = rooms;
             if (!this.display) {

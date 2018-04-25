@@ -26,6 +26,7 @@ export class InGameScreenComponent implements OnInit {
   marketCardsObject: object;
   random: number;
   public idx: number;
+  possibleTiles: string[];
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
 
@@ -104,6 +105,10 @@ export class InGameScreenComponent implements OnInit {
   opponent3 = 'Opponent 3 name';
 
   opponents_list = [this.opponent1, this.opponent2, this.opponent3];
+
+  constructor(private roomService: RoomService, private http: HttpClient) {
+    this.possibleTiles = new Array<string>();
+  }
 
 
 
@@ -216,9 +221,15 @@ export class InGameScreenComponent implements OnInit {
   }
 
   showSelected() {
-    console.log(this.selected);
+    console.log(this.selected[0]);
     console.log(this.chosenMarketCard);
-
+    this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+      .subscribe(result => {
+        for (const el in result) {
+          this.possibleTiles.push(result[el].name);
+        }
+      });
+    console.log(this.possibleTiles);
   }
 
   // kaufinteraktionen, mit buy button verbunden
@@ -236,10 +247,8 @@ export class InGameScreenComponent implements OnInit {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-
-
-
-    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, options, httpOptions).subscribe(result => console.log(result));
+    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, options, httpOptions)
+      .subscribe(result => console.log(result));
   }
 
   // updatet chosenMarketCard
@@ -259,10 +268,11 @@ export class InGameScreenComponent implements OnInit {
     }
 
 
-  constructor(private roomService: RoomService, private http: HttpClient) {
-  }
+
 
   ngOnInit() {
+
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
