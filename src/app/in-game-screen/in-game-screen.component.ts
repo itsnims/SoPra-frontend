@@ -26,6 +26,7 @@ export class InGameScreenComponent implements OnInit {
   marketCardsObject: object;
   random: number;
   public idx: number;
+  playersInRoom: string[];
   possibleTiles: string[];
   opponents: string[];
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
@@ -109,6 +110,7 @@ export class InGameScreenComponent implements OnInit {
   constructor(private roomService: RoomService, private http: HttpClient) {
     this.possibleTiles = new Array<string>();
     this.opponents = new Array<string>();
+    this.playersInRoom = new Array<string>();
   }
 
 
@@ -297,13 +299,19 @@ export class InGameScreenComponent implements OnInit {
       console.log('this is what we retrieve from getRooms' + data.players);
       this.playerObject = data.players;
 
-      // here we push the usernames of all opponents in the room into the list of opponents
+
       for (const idx in this.playerObject) {
+        this.playersInRoom.push((this.playerObject[idx]).name);
+        // here we push the usernames of all opponents in the room into the list of opponents
         if (this.playerName !== (this.playerObject[idx]).name) {
           this.opponents.push((this.playerObject[idx]).name);
         }
       }
+      console.log('these are the players in the room: ' + this.playersInRoom);
+      localStorage.setItem('playersInRoom', JSON.stringify(this.playersInRoom));
+      console.log('this is the local storage' + localStorage.getItem('playersInRoom'));
     });
+
 
 
     // here we get the handcards from heroku
