@@ -17,7 +17,7 @@ export class HostScreenComponent implements OnInit {
   room: Room;
   public room_name: string;
   current_host: string;
-  placeholder : any;
+  placeholder: any;
   apiURL = 'https://sopra-fd2af.firebaseio.com/0.json';
 
   constructor(private _service: RoomService, private router: Router) {

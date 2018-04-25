@@ -1,8 +1,32 @@
 <div class="game-image">
   <div class="col-md-6 col-md-offset-3">
   <h1>General Lobby Screen </h1>
-  <div>
-    Users from secure api end point:
+
+  <div id="bgBox"></div>
+    <table id="titleRow" class="blackRow">
+      <tr>
+        <td>Game Name</td>
+        <td>Pwd Protected</td>
+        <td>Players</td>
+        <td>Path & Difficulty</td>
+        <td>Time</td>
+      </tr>
+    </table>
+
+    <div id="rooms" *ngFor="let room of rooms">
+      <button class="roomButton">
+        <table class="blackRow">
+          <tr>
+            <td>{{room.name}}</td>
+            <td>{{room.pwdBool}}</td>
+            <td>{{room.current}} / {{room.maxPlayers}}</td>
+            <td>{{room.path}}</td>
+            <td>-</td>
+          </tr>
+        </table>
+      </button>
+    </div>
+
     <ul class="list-group">
      <!-- <li class="list-group-item" *ngFor="let user of users">
         {{user.username}}</li> -->
@@ -35,17 +59,14 @@
         {{room.status}}</button>
     </div> -->
 
-  </div>
 
     <form>
-      <a href="https://www.ravensburger.com/spielanleitungen/ecm/Spielanleitungen/26754%202%20anl%201741342.pdf?ossl=pds_text_Spielanleitung" target="_blank" class="btn btn-sm btn-primary btn-block">Paths</a>
-      <a href="https://www.ravensburger.com/spielanleitungen/ecm/Spielanleitungen/26754%20anl%201741342.pdf?ossl=pds_text_Spielanleitung" target="_blank" class="btn btn-sm btn-primary btn-block">Manual</a>
+      <a id="manualLink" target="_blank" class="manual" href="https://www.ravensburger.com/spielanleitungen/ecm/Spielanleitungen/26754%20anl%201741342.pdf?ossl=pds_text_Spielanleitung">Manual</a>
+      <a id="pathLink" target="_blank" class="manual" href="https://www.ravensburger.com/spielanleitungen/ecm/Spielanleitungen/26754%202%20anl%201741342.pdf?ossl=pds_text_Spielanleitung">Paths</a>
     </form>
 
-  <button class="btn btn-sm btn-primary btn-block" type="submit" [routerLink]="['/login']">Logout</button>
-  <button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/host-screen']">Host a Game</button>
-
-
+  <button id="logout" class="bottomButtons" type="submit" [routerLink]="['/login']">Logout</button>
+  <button id="hostGame" class="bottomButtons" type="submit" [routerLink]="['/host-screen']">Host a Game</button>
 
 
   </div>

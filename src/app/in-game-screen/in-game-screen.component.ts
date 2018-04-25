@@ -6,7 +6,8 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpParams} from '@angular/common/http';
 
 import {RoomService} from '../shared/services/room.service';
-
+import 'rxjs/add/operator/takeWhile';
+import {TimerObservable} from "rxjs/observable/TimerObservable";
 
 @Component({
   selector: 'app-in-game-screen',
@@ -21,14 +22,22 @@ export class InGameScreenComponent implements OnInit {
   currentselection: string;
   current = 'Player1';
   room_name: string;
+
   playerObject: object;
   handCardObject: object;
+  current_player: string;
+
   marketCardsObject: object;
   random: number;
   public idx: number;
   playersInRoom: string[];
   possibleTiles: string[];
   opponents: string[];
+
+  display: boolean;
+  alive: boolean;
+  interval: number;
+
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
 
@@ -111,6 +120,9 @@ export class InGameScreenComponent implements OnInit {
     this.possibleTiles = new Array<string>();
     this.opponents = new Array<string>();
     this.playersInRoom = new Array<string>();
+    this.display = false;
+    this.alive = true;
+    this.interval = 1000;
   }
 
 
@@ -236,7 +248,7 @@ export class InGameScreenComponent implements OnInit {
   }
 
   showSelected() {
-    console.log(this.selected[0]);
+    console.log(this.selected);
     console.log(this.chosenMarketCard);
    /* return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
       .subscribe(result => {
@@ -252,19 +264,26 @@ export class InGameScreenComponent implements OnInit {
     this.firstPurchase = true;
     this.checkIsFree();
 
-    const options = {
-      params: new HttpParams().set('cards', JSON.stringify(this.selected))
-    };
-
-
     const bodyString = JSON.stringify({cards: this.selected});
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, options, httpOptions)
+    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
       .subscribe(result => console.log(result));
   }
+
+
+  buyThis() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+      })};
+    const bodyString = JSON.stringify({cards : this.selected});
+    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
+      .subscribe(res => console.log(res));
+  }
+
 
   // updatet chosenMarketCard
   chooseMarketCard(event) { // chosenMarketCard erhält ID vom zuletzt ausgewählten Button
@@ -287,6 +306,17 @@ export class InGameScreenComponent implements OnInit {
 
 
   ngOnInit() {
+
+    this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
+      .subscribe(result => {
+        for (let key in result) {
+          if (key === 'name') {
+            this.current_player = result[key];
+            console.log('dieser spieler ist an der reihe: ' + this.current_player);
+          }
+        }
+      });
+
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -301,7 +331,6 @@ export class InGameScreenComponent implements OnInit {
 
     // here we get all players of the current room from heroku
     this.roomService.getRooms(this.currentRoom).subscribe(data => {
-      console.log('this is what we retrieve from getRooms' + data.players);
       this.playerObject = data.players;
 
 
@@ -314,7 +343,6 @@ export class InGameScreenComponent implements OnInit {
       }
       console.log('these are the players in the room: ' + this.playersInRoom);
       localStorage.setItem('playersInRoom', JSON.stringify(this.playersInRoom));
-      console.log('this is the local storage' + localStorage.getItem('playersInRoom'));
     });
 
 
