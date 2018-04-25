@@ -252,17 +252,12 @@ export class InGameScreenComponent implements OnInit {
     this.firstPurchase = true;
     this.checkIsFree();
 
-    const options = {
-      params: new HttpParams().set('cards', JSON.stringify(this.selected))
-    };
-
-
     const bodyString = JSON.stringify({cards: this.selected});
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, options, httpOptions)
+    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
       .subscribe(result => console.log(result));
   }
 
