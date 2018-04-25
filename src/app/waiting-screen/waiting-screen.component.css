@@ -3,7 +3,6 @@
   background-image: url("../images/backgrounds/general-lobby_bg1hell.jpeg");
 
   /* Set a specific height */
-  height: 50%;
 
   /* Position and center the image to scale nicely on all screens */
   background-position: top left;
@@ -15,6 +14,6 @@
   top:0;
   left:0;
   padding:0;
-  margine: 0;
+  margin: 0;
 
 }

@@ -67,15 +67,15 @@ td{
   left: 298px;
   height: 450px;
   overflow-x: auto;
-  white-space: nowrap;
 }
 .roomButton {
+  margin-top: 10px;
+  margin-bottom: 10px;
   border: black;
   color: white;
   background: rgba(0,0,0, 0.75);
   width: 770px;
   height: 45px;
-  margin-bottom: 10px;
 }
 .roomButton:hover {
   border: 1px solid white;
