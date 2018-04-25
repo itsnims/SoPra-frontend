@@ -47,6 +47,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     this.dummylist = ['nimra', 'clara', 'Arina'];
     this.currentPlayer = this.dummylist.indexOf(this.currentPlayer);
 
+
     // for (var position of positions){
       // document.getElementById (position).addEventListener ('click', function(){pos(position, sample_players); } , false); }
 
@@ -102,10 +103,24 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log(this.players);
   }
   addPlayers() {
+<<<<<<< HEAD
 
     this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
     this.players[this.currentPlayer].position =  JSON.parse(localStorage.getItem('selectedHex'));
     this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
+=======
+    temp = 0;
+    for (let i = 0; i < this.players.length; i++) {
+      if (this.players[i].playerId === this.current_player) {
+        this.temp = i;
+      }
+    }
+
+
+    this.hexMapById.get(this.players[temp].position).removePlayer();
+    this.players[0].position =  JSON.parse(localStorage.getItem('selectedHex'));
+    this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[0]);
+>>>>>>> ce5b6051c00426412d9d40818c31c605a4970ee6
     console.log(this.players);
   }
   getPlayerPosition(playerId: string, position: string) {

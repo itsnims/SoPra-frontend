@@ -3,6 +3,7 @@ import {StandardComponent} from '../standard/standard.component';
 import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpParams} from '@angular/common/http';
 
 import {RoomService} from '../shared/services/room.service';
 
@@ -18,18 +19,18 @@ export class InGameScreenComponent implements OnInit {
   boards = [StandardComponent];
   player: PlayerComponent;
   currentselection: string;
-  currentRoom: string;
   current = 'Player1';
-  apiUrl: string;
   room_name: string;
   playerObject: object;
   handCardObject: object;
   marketCardsObject: object;
   random: number;
   public idx: number;
-  apiUrl: string;
+  apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
+  currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
 
-  playerName = 'Your name'; // later replace with this.username or whatever works
+  playerName = JSON.parse(localStorage.getItem('currentUser')).name;
+
 
   // wenn lower market 6 karten hat ist isfree = false
   isFree = false;
@@ -140,7 +141,7 @@ export class InGameScreenComponent implements OnInit {
     }
   }
   updateBuyAvailable(){
-    if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false){
+    if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
       this.buyAvailable = false;
     }
     else {
@@ -214,10 +215,31 @@ export class InGameScreenComponent implements OnInit {
     }
   }
 
+  showSelected() {
+    console.log(this.selected);
+    console.log(this.chosenMarketCard);
+
+  }
+
   // kaufinteraktionen, mit buy button verbunden
   buy() {
     this.firstPurchase = true;
     this.checkIsFree();
+
+    const options = {
+      params: new HttpParams().set('cards', JSON.stringify(this.selected))
+    };
+
+
+    const bodyString = JSON.stringify({cards: this.selected});
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
+
+
+
+    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, options, httpOptions).subscribe(result => console.log(result));
   }
 
   // updatet chosenMarketCard
@@ -238,8 +260,6 @@ export class InGameScreenComponent implements OnInit {
 
 
   constructor(private roomService: RoomService, private http: HttpClient) {
-    this.idx = -1;
-    this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   }
 
   ngOnInit() {
@@ -248,9 +268,7 @@ export class InGameScreenComponent implements OnInit {
         'Content-Type': 'application/json'
       })};
 
-    this.playerName = JSON.parse(localStorage.getItem('currentUser')).name;
     console.log('welcome ' + this.playerName);
-    this.currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
     console.log(this.apiUrl);
     console.log('this.playerName: ' + this.playerName);
     console.log('this.currentRoom: ' + this.currentRoom);
@@ -258,14 +276,10 @@ export class InGameScreenComponent implements OnInit {
     console.log('this is the market url: ' + this.apiUrl + this.currentRoom + '/market');
 
 
-
-
-
-
-
     // this.roomService.getRooms().subscribe(data => console.log((data[0]).players));
-    this.roomService.getRooms().subscribe(data => { // TODO pass this.apiUrl into getRooms()
-      this.playerObject = (data[0]).players; // TODO change this upon getting only information from specific room
+    this.roomService.getRooms(this.currentRoom).subscribe(data => {
+      console.log('this is what we retrieve from getRooms' + data.players);
+      this.playerObject = data.players; // TODO change this upon getting only information from specific room
 
       this.random = this.playerObject.length;
 
@@ -278,7 +292,6 @@ export class InGameScreenComponent implements OnInit {
 
     });
 
-    // TODO implement dynamic link
 
     this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/turn', null, httpOptions).subscribe(result => {
       console.log(result);
@@ -295,13 +308,13 @@ export class InGameScreenComponent implements OnInit {
 
   // TODO implement dynamic link
   getCurrentMarket() {
-
+    this.idx = -1;
     this.http.get(this.apiUrl + this.currentRoom + '/market').subscribe(result => {
       // console.log(result);
 
       for (let key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
         for (let key2 in result[key]) {
-          if (this.idx === 12) {
+          if (this.idx === 11) {
             this.idx = 0;
           }else {
             this.idx += 1;
@@ -321,9 +334,10 @@ export class InGameScreenComponent implements OnInit {
     });
 
 
-    console.log(this.upperCards[0].cardID);
-    console.log(this.upperCards[1].cardID);
-    console.log(this.upperCards[2].cardID); // This logs 'Cartographer for instance'
+
+    // console.log(this.upperCards);
+    // console.log(this.lowerCards);
+
   }
 
 
