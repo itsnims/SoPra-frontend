@@ -11,6 +11,7 @@ export class HexComponent implements OnInit {
   @Input() hexId: string;
   @Input() colourclass: string;
   @Input() strengthId: string;
+  @Input() blockade: string;
   opacity  = 1;
   value = false;
   @Input() player: PlayerComponent = null;

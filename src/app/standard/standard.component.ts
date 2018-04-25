@@ -21,26 +21,31 @@ export class StandardComponent implements OnInit, AfterViewInit {
 /*classe für click events...
 * */
   hex: HexComponent;
+  dummylist: string[];
   players: PlayerComponent[] = [];
   hexMapById = new Map<string, HexComponent>();
+  currentPlayer: any;
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
   ngOnInit() {
 /*Adds players to Playercomponent list
 * -> now players holds all current players*/
+    this.currentPlayer = JSON.parse(localStorage.getItem('currentUser')).name;
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
-    this.players.push(new PlayerComponent())
+    this.players.push(new PlayerComponent());
     this.players[0].playerId = sample_players[0];
     this.players[0].position = 'B1';
-    this.players.push(new PlayerComponent())
+    this.players.push(new PlayerComponent());
     this.players[1].playerId = sample_players[1];
     this.players[1].position = 'B2';
-    this.players.push(new PlayerComponent())
+    this.players.push(new PlayerComponent());
     this.players[2].playerId = sample_players[2];
     this.players[2].position = 'B3';
-    this.players.push(new PlayerComponent())
+    this.players.push(new PlayerComponent());
     this.players[3].playerId = sample_players[3];
     this.players[3].position = 'B4';
+    this.dummylist = ['nimra', 'clara', 'Arina'];
+    this.currentPlayer = this.dummylist.indexOf(this.currentPlayer);
 
 
     // for (var position of positions){
@@ -84,7 +89,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     /*highlights all potentialMoveIds*/
     console.log(this.hexMapById);
     this.setInitialPosition();
-    this.players[0].getPotentialMoveIds()
+    this.players[this.currentPlayer].getPotentialMoveIds()
       .forEach(moveId => {
       this.hexMapById.get(moveId).onhightlight();
       /*this.hex.selectedTile(this.players[0].getPotentialMoveIds());*/
@@ -98,6 +103,12 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log(this.players);
   }
   addPlayers() {
+<<<<<<< HEAD
+
+    this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
+    this.players[this.currentPlayer].position =  JSON.parse(localStorage.getItem('selectedHex'));
+    this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
+=======
     temp = 0;
     for (let i = 0; i < this.players.length; i++) {
       if (this.players[i].playerId === this.current_player) {
@@ -109,15 +120,16 @@ export class StandardComponent implements OnInit, AfterViewInit {
     this.hexMapById.get(this.players[temp].position).removePlayer();
     this.players[0].position =  JSON.parse(localStorage.getItem('selectedHex'));
     this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[0]);
+>>>>>>> ce5b6051c00426412d9d40818c31c605a4970ee6
     console.log(this.players);
   }
-  getPlayerPosition(playerId: string, position: string){
+  getPlayerPosition(playerId: string, position: string) {
 
   }
   /*BACKEND Probabely need notion of current player*/
   updatePlayers(position: string) {
 
-    this.hexMapById.get(position).addplayer(this.players[0])
+    this.hexMapById.get(position).addplayer(this.players[this.currentPlayer]);
   }
 
 

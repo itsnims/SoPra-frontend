@@ -37,7 +37,9 @@
   transform: translateZ(10px);
   transition-duration: 100ms;
 }
+.blockade1:{
 
+}
 .hex .wrapper {
   display: block;
   position: absolute;
@@ -85,6 +87,19 @@
   border-right-color: darkslategrey;
 }  .hex .wrapper .stone:after {
      border-left-color: darkslategrey;
+   }
+
+.blockade1{
+  background-size: contain;
+  background-color: darkslategrey;
+  opacity: 50%;
+}
+.hex .wrapper .blockade1:before {
+  border-right-color: darkslategrey;
+  opacity: 50%;
+}  .hex .wrapper .blockade1:after {
+     border-left-color: darkslategrey;
+    opacity: 50%;
    }
 
 .grey{
