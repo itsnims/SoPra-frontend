@@ -26,6 +26,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   playerObject: object;
   handCardObject: object;
   current_player: string;
+  isItMyTurn = false;
+
 
   marketCardsObject: object;
   random: number;
@@ -283,17 +285,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
 
-  buyThis() {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-      })};
-    const bodyString = JSON.stringify({cards : this.selected});
-    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
-      .subscribe(res => console.log(res));
-  }
-
-
   // updatet chosenMarketCard
   chooseMarketCard(event) { // chosenMarketCard erhält ID vom zuletzt ausgewählten Button
     const target = event.target || event.srcElement || event.currentTarget;
@@ -334,6 +325,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               if (key === 'name') {
                 this.current_player = result[key];
                 console.log('the current_player = ' + this.current_player);
+                console.log('is it my turn?: ' + this.isItMyTurn);
+                if (this.playerName === this.current_player) {
+                  console.log('IT IS YOUR TURN!!');
+                }
               }
             }
           });
