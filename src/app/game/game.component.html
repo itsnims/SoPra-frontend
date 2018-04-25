@@ -15,7 +15,7 @@
 
     <div id ="rooms">
     <span *ngFor="let room of rooms">
-      <button class="roomButton">
+      <button class="roomButton" type="submit" (click)="addPlayerToRoom(room.name)">
         <table class="blackRow">
           <tr>
             <td>{{room.name}}</td>
