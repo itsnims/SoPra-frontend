@@ -1,4 +1,4 @@
-import {Component, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
 import {StandardComponent} from '../standard/standard.component';
 import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
@@ -15,7 +15,7 @@ import {TimerObservable} from "rxjs/observable/TimerObservable";
   styleUrls: ['./in-game-screen.component.css']
 })
 
-export class InGameScreenComponent implements OnInit {
+export class InGameScreenComponent implements OnInit, OnDestroy {
   @ViewChild(StandardComponent) standard: StandardComponent;
   boards = [StandardComponent];
   player: PlayerComponent;
@@ -214,10 +214,7 @@ export class InGameScreenComponent implements OnInit {
       });
     /**/
     }
-
-
-
-  // toggelt die marktbuttons
+    // toggelt die marktbuttons
   showMarketFunc() {
     if (this.showMarket === true) {
       this.showMarket = false;
@@ -318,7 +315,6 @@ export class InGameScreenComponent implements OnInit {
 
 
   ngOnInit() {
-
     /*
     this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
       .subscribe(result => {
@@ -329,16 +325,15 @@ export class InGameScreenComponent implements OnInit {
           }
         }
       }); */
-
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
-        this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
+        this.http.get(this.apiUrl + this.currentRoom + '/currentPlayer')
           .subscribe(result => {
             for (let key in result) {
               if (key === 'name') {
                 this.current_player = result[key];
-                // console.log(this.current_player);
+                console.log('the current_player = ' + this.current_player);
               }
             }
           });
@@ -403,19 +398,12 @@ export class InGameScreenComponent implements OnInit {
         }
       }
 
-
-
       this.marketCardsObject = result;
       // console.log('upperCardsObject: ' + this.marketCardsObject);
     });
-
-
-
-    // console.log(this.upperCards);
-    // console.log(this.lowerCards);
-
   }
-
-
+  ngOnDestroy() {
+    this.alive = false; // switches your TimerObservable off
+  }
 }
 
