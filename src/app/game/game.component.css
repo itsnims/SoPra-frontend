@@ -1,3 +1,85 @@
+.game-image {
+  /* The image used */
+  background-image: url("../images/backgrounds/general-lobby_bg1hell.jpeg");
+
+  /* Set a specific height */
+  height: 100%;
+
+  /* Position and center the image to scale nicely on all screens */
+  background-position: top left;
+  background-repeat: no-repeat;
+  background-size: 1366px 768px;
+  position: fixed;
+  width: 100%;
+  top:0;
+  left:0;
+  padding:0;
+  margin: 0;
+}
+#bgBox {
+  background-color: black;
+  position: fixed;
+  top: 105px;
+  left: 283px;
+  width: 800px;
+  height: 530px;
+  opacity: 0.65;
+}
+h1 {
+  margin-left: 40px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+td{
+  width:220px;
+  text-align: left;
+  padding-left: 10px;
+  color: white;
+}
+
+.blackRow {
+  background-color: transparent;
+  margin-bottom: 10px;
+  color: white;
+  height: 40px;
+  font-size: 17px;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+#titleRow {
+  background: rgba(0,0,0,0.75);
+  position: fixed;
+  top: 120px;
+  left: 298px;
+  margin-bottom: 8px;
+  width: 770px;
+  height: 45px;
+}
+#rooms {
+  position: fixed;
+  top: 180px;
+  left: 298px;
+  height: 450px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.roomButton {
+  border: black;
+  color: white;
+  background: rgba(0,0,0, 0.75);
+  width: 770px;
+  height: 45px;
+  margin-bottom: 10px;
+}
+.roomButton:hover {
+  border: 1px solid white;
+}
 .back{
   display: inline-block;
   font-size: medium;
@@ -27,22 +109,83 @@
 .game-rooms .hover{
   border: white;
 }
-.game-image {
-  /* The image used */
-  background-image: url("../images/backgrounds/general-lobby_bg1.jpeg");
 
-  /* Set a specific height */
-  height: 100%;
-
-  /* Position and center the image to scale nicely on all screens */
-  background-position: top left;
-  background-repeat: no-repeat;
-  background-size: 1366px 768px;
+.manual {
+  width: 125px;
+  display: inline-block;
+  padding: 6px 12px;
+  color: white;
+  background-color: black;
+  font-size: 17px;
+  line-height: 1.42857143;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid white;
+  border-radius: 4px
+}
+#manualLink {
   position: fixed;
-  width: 100%;
-  top:0;
-  left:0;
-  padding:0;
-  margin: 0;
+  top: 35px;
+  left: 1160px;
+}
+#pathLink {
+  position: fixed;
+  top: 90px;
+  left: 1160px;
+}
+
+.bottomButtons {
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 40px;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: black;
+  border: 1px solid transparent;
+
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+.bottomButtons:hover{
+  border: 1px solid white;
+}
+#logout {
+  position: fixed;
+  top: 675px;
+  left: 1100px;
+  width: 120px;
+}
+
+#hostGame {
+  position: fixed;
+  top: 675px;
+  left: 850px;
+  width: 160px;
 
 }
+
