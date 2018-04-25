@@ -223,13 +223,13 @@ export class InGameScreenComponent implements OnInit {
   showSelected() {
     console.log(this.selected[0]);
     console.log(this.chosenMarketCard);
-    this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+   /* return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
       .subscribe(result => {
         for (const el in result) {
           this.possibleTiles.push(result[el].name);
         }
-      });
-    console.log(this.possibleTiles);
+        console.log(this.possibleTiles);
+      });*/
   }
 
   // kaufinteraktionen, mit buy button verbunden
@@ -262,9 +262,17 @@ export class InGameScreenComponent implements OnInit {
   movePlayer() {
     console.log('entered mov');
     console.log(this);
-    console.log(this.standard.addPlayers());
-    this.standard.addPlayers();
+    // TODO addPlayers() doesn't work yet
+    // console.log(this.standard.addPlayers());
+    // this.standard.addPlayers();
     /*console.log(this.boards[0](this.hex.currenthexselection));*/
+    return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+      .subscribe(result => {
+        for (const el in result) {
+          this.possibleTiles.push(result[el].name);
+        }
+        console.log(this.possibleTiles);
+      });
     }
 
 
@@ -302,7 +310,7 @@ export class InGameScreenComponent implements OnInit {
 
     });
 
-
+    // here we get the handcards from heroku
     this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/turn', null, httpOptions).subscribe(result => {
       console.log(result);
       this.handCardObject = result;
