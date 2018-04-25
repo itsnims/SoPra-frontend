@@ -27,6 +27,7 @@ export class InGameScreenComponent implements OnInit {
   random: number;
   public idx: number;
   possibleTiles: string[];
+  opponents: string[];
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
 
@@ -104,10 +105,10 @@ export class InGameScreenComponent implements OnInit {
   opponent2 = 'Opponent 2 name';
   opponent3 = 'Opponent 3 name';
 
-  opponents_list = [this.opponent1, this.opponent2, this.opponent3];
 
   constructor(private roomService: RoomService, private http: HttpClient) {
     this.possibleTiles = new Array<string>();
+    this.opponents = new Array<string>();
   }
 
 
@@ -264,7 +265,7 @@ export class InGameScreenComponent implements OnInit {
     console.log(this);
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    // this.standard.addPlayers();
+    // this.standard.addPlayers();^
     /*console.log(this.boards[0](this.hex.currenthexselection));*/
     return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
       .subscribe(result => {
@@ -279,8 +280,6 @@ export class InGameScreenComponent implements OnInit {
 
 
   ngOnInit() {
-
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -293,43 +292,33 @@ export class InGameScreenComponent implements OnInit {
     console.log(this.apiUrl + this.currentRoom + '/' + this.playerName);
     console.log('this is the market url: ' + this.apiUrl + this.currentRoom + '/market');
 
-
-    // this.roomService.getRooms().subscribe(data => console.log((data[0]).players));
+    // here we get all players of the current room from heroku
     this.roomService.getRooms(this.currentRoom).subscribe(data => {
       console.log('this is what we retrieve from getRooms' + data.players);
-      this.playerObject = data.players; // TODO change this upon getting only information from specific room
+      this.playerObject = data.players;
 
-      this.random = this.playerObject.length;
-
-      for (let i=0; i<this.playerObject.length; i++) {
-        // console.log((this.playerObject[i]).name);
-        this.opponents_list[i] = (this.playerObject[i]).name;
+      // here we push the usernames of all opponents in the room into the list of opponents
+      for (const idx in this.playerObject) {
+        if (this.playerName !== (this.playerObject[idx]).name) {
+          this.opponents.push((this.playerObject[idx]).name);
+        }
       }
-      console.log(this.opponents_list);
-      console.log(localStorage);
-
     });
+
 
     // here we get the handcards from heroku
     this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/turn', null, httpOptions).subscribe(result => {
-      console.log(result);
       this.handCardObject = result;
-      console.log('HandCardsObject: ' + this.handCardObject[0]);
-
-      console.log('handCardsObject' + this.handCardObject);
       for (let i = 0; i < 4; i++) {
-        // console.log((this.playerObject[i]).name);
         this.handCards[i].cardClass = (this.handCardObject[i]).name;
       }
     });
   }
 
-  // TODO implement dynamic link
+  // here we get the current
   getCurrentMarket() {
     this.idx = -1;
     this.http.get(this.apiUrl + this.currentRoom + '/market').subscribe(result => {
-      // console.log(result);
-
       for (let key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
         for (let key2 in result[key]) {
           if (this.idx === 11) {
