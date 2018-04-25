@@ -22,6 +22,8 @@ export class PlayerComponent implements OnInit {
     this.playerId = playerId;
   }
 
-  public getPosition()
+
+  // public getPosition()
+
 
 }

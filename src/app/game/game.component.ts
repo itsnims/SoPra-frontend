@@ -45,15 +45,7 @@ export class GameComponent  implements OnInit, OnDestroy {
     this.current_player = JSON.parse(localStorage.getItem('currentUser')).name;
     console.log('the current player is : ' + this.current_player);
 
-
-    // get users from secure api end point
-    /* this.userService.getUsers()
-      .subscribe(users => {
-        this.users = users;
-      }); */
-
-
-    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+    TimerObservable.create(0, this.interval)  // This updates the current player at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
         this.roomService.getAllRooms()
@@ -64,11 +56,6 @@ export class GameComponent  implements OnInit, OnDestroy {
             }
           });
       });
-
-   /* this.roomService.getRooms()
-      .subscribe(rooms => {
-        this.rooms = rooms;
-      }); */
   }
 
   joinRoom() {
@@ -89,17 +76,6 @@ export class GameComponent  implements OnInit, OnDestroy {
     this.http.put(this.apiUrl, null, httpOptions).subscribe(result => console.log(result));
     this.router.navigate(['/waiting-screen']);
   }
-
-
-
-    /*this.roomService.joinRoomLogin(this.users)
-      .subscribe(result => {
-        if (result) {
-          this.router.navigate(['/waiting-game']);
-        } else {
-          this.router.navigate(['/game']);
-        }
-      }); */
 
   ngOnDestroy() {
     this.alive = false; // switches your TimerObservable off

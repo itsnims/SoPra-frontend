@@ -196,11 +196,23 @@ export class InGameScreenComponent implements OnInit {
       this.selectedCards++;
       this.selected.push(newCard);
       }
+
     this.updateSelectedCardIsActionCard();
     this.updateUseActionCard();
     this.updateUseExpeditionCard();
     this.updateBuyAvailable();
     this.updateDiscard();
+    /**/
+    return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+      .subscribe(result => {
+        for (const el in result) {
+          console.log('this is the result: ' + result);
+          this.possibleTiles.push(result[el].name);
+        }
+        console.log(this.possibleTiles);
+        localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+      });
+    /**/
     }
 
 
@@ -247,6 +259,18 @@ export class InGameScreenComponent implements OnInit {
       });*/
   }
 
+  discardCards() {
+    const bodyString = JSON.stringify({cards: this.selected});
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
+    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard', bodyString, httpOptions)
+      .subscribe(result => console.log(result));
+  }
+
+
+
   // kaufinteraktionen, mit buy button verbunden
   buy() {
     this.firstPurchase = true;
@@ -286,23 +310,16 @@ export class InGameScreenComponent implements OnInit {
     console.log(this);
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    // this.standard.addPlayers();
+    this.standard.addPlayers();
     /*console.log(this.boards[0](this.hex.currenthexselection));*/
-    return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
-      .subscribe(result => {
-        for (const el in result) {
-          console.log('this is the result: ' + result);
-          this.possibleTiles.push(result[el].name);
-        }
-        console.log(this.possibleTiles);
-        localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
-      });
+
     }
 
 
 
   ngOnInit() {
 
+    /*
     this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
       .subscribe(result => {
         for (let key in result) {
@@ -311,7 +328,22 @@ export class InGameScreenComponent implements OnInit {
             console.log('dieser spieler ist an der reihe: ' + this.current_player);
           }
         }
+      }); */
+
+    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
+          .subscribe(result => {
+            for (let key in result) {
+              if (key === 'name') {
+                this.current_player = result[key];
+                // console.log(this.current_player);
+              }
+            }
+          });
       });
+
 
     const httpOptions = {
       headers: new HttpHeaders({

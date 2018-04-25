@@ -11,6 +11,7 @@ import {
   QueryList,
   ElementRef, ViewChildren
 } from '@angular/core';
+import {User} from '../shared/models/user';
 
 @Component({
   selector: 'app-standard',
@@ -116,11 +117,12 @@ export class StandardComponent implements OnInit, AfterViewInit {
       this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
       this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
       this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
-      this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);
+      /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
 
   }
   addPlayers() {
     this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
+    /*localStorage.setItem('currentTile', JSON.stringify());*/
     this.players[this.currentPlayer].position =  JSON.parse(localStorage.getItem('selectedHex'));
     this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
 
