@@ -184,11 +184,23 @@ export class InGameScreenComponent implements OnInit {
       this.selectedCards++;
       this.selected.push(newCard);
       }
+
     this.updateSelectedCardIsActionCard();
     this.updateUseActionCard();
     this.updateUseExpeditionCard();
     this.updateBuyAvailable();
     this.updateDiscard();
+    /**/
+    return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+      .subscribe(result => {
+        for (const el in result) {
+          console.log('this is the result: ' + result);
+          this.possibleTiles.push(result[el].name);
+        }
+        console.log(this.possibleTiles);
+        localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+      });
+    /**/
     }
 
 
@@ -267,21 +279,13 @@ export class InGameScreenComponent implements OnInit {
     console.log(this);
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    // this.standard.addPlayers();
+    this.standard.addPlayers();
     /*console.log(this.boards[0](this.hex.currenthexselection));*/
-    return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
-      .subscribe(result => {
-        for (const el in result) {
-          console.log('this is the result: ' + result);
-          this.possibleTiles.push(result[el].name);
-        }
-        console.log(this.possibleTiles);
-        localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
-      });
+
     }
 
 
-    
+
   ngOnInit() {
     const httpOptions = {
       headers: new HttpHeaders({

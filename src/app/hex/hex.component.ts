@@ -16,11 +16,12 @@ export class HexComponent implements OnInit {
   value = false;
   @Input() player: PlayerComponent = null;
   /*BACKEND current tiles*/
-  clickables = ['B9', 'B7', 'B23']
+  clickables = JSON.parse(localStorage.getItem('possibleTiles'))
 
   constructor() {}
 
   ngOnInit() {
+
   }
   /*Sets truth false value according to what u click*/
   public clickTile(id){
@@ -75,6 +76,7 @@ export class HexComponent implements OnInit {
 
   addplayer(p: PlayerComponent) {
     this.player = p;
+
   }
   removePlayer() {
     this.player = null;
