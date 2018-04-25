@@ -61,11 +61,4 @@ export class WaitingScreenComponent implements OnInit {
       });
   }
 
-
-
-
-
-
-
-
 }
