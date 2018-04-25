@@ -188,15 +188,29 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
     const newCard = card;
     if (this.handCards[i].checked === true) {
+      localStorage.removeItem('possibleTiles');
+      console.log(localStorage.getItem('possibleTiles'));
       this.handCards[i].checked = false;
       const position = this.selected.indexOf(newCard);
       this.selectedCards--;
       this.selected.splice(position, 1);
     }
     else {
+      console.log(localStorage.getItem('possibleTiles'));
+      this.possibleTiles = [];
       this.handCards[i].checked = true;
       this.selectedCards++;
       this.selected.push(newCard);
+      /**/
+      return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+        .subscribe(result => {
+          for (const el in result) {
+            console.log(this.possibleTiles);
+            this.possibleTiles.push(result[el].name);
+          }
+          localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+
+        });
       }
 
     this.updateSelectedCardIsActionCard();
@@ -205,15 +219,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateBuyAvailable();
     this.updateDiscard();
     /**/
-    return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
-      .subscribe(result => {
-        for (const el in result) {
-          console.log('this is the result: ' + result);
-          this.possibleTiles.push(result[el].name);
-        }
-        console.log(this.possibleTiles);
-        localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
-      });
+
     /**/
     }
     // toggelt die marktbuttons
