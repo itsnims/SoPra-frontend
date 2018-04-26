@@ -28,18 +28,18 @@
   opacity: .8;
 }
 
-#player1 {
+#player4 {
+  background-color: blue;
+}
+
+#player3 {
   background-color: red;
 }
 
 #player2 {
+  background-color: green;
+}
+
+#player1 {
   background-color: yellow;
-}
-
-#player3 {
-  background-color: blue;
-}
-
-#player4 {
-  background-color: white;
 }
