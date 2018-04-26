@@ -27,7 +27,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   handCardObject: object;
   current_player: string;
   isItMyTurn: boolean;
-
+  currentHandCardObject: object;
 
   marketCardsObject: object;
   random: number;
@@ -39,12 +39,12 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   display: boolean;
   alive: boolean;
   interval: number;
+  testArray: any[];
 
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
 
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
-
 
   // wenn lower market 6 karten hat ist isfree = false
   isFree = false;
@@ -102,7 +102,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   ];
 
   // hier werden die handcards des spielers eingelesen
-  handCards = [
+ handCards = [
     {cardClass: 'Sailor', checked: false },
     {cardClass: 'Explorer', checked: false},
     {cardClass: 'Traveler', checked: false},
@@ -331,16 +331,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     localStorage.removeItem('possibleTiles');
-    /*
-    this.http.get(this.apiUrl + this.currentRoom + '/currentPlayer')
-      .subscribe(result => {
-        for (let key in result) {
-          if (key === 'name') {
-            this.current_player = result[key];
-            console.log('dieser spieler ist an der reihe: ' + this.current_player);
-          }
-        }});
-*/
+
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -363,7 +354,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
           });
       });
 
-
+    // here we get the current player from heroku in realtime
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
@@ -377,41 +368,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             }});
       });
 
-
-
-
-
-
-
-
-
-
-
-
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
 
 
-
-
-
-
-
-    console.log('welcome ' + this.playerName);
-    console.log(this.apiUrl);
-    console.log('this.playerName: ' + this.playerName);
-    console.log('this.currentRoom: ' + this.currentRoom);
-    console.log(this.apiUrl + this.currentRoom + '/' + this.playerName);
-    console.log('this is the market url: ' + this.apiUrl + this.currentRoom + '/market');
-
     // here we get all players of the current room from heroku
     this.roomService.getRooms(this.currentRoom).subscribe(data => {
       this.playerObject = data.players;
-
-
       for (const idx in this.playerObject) {
         this.playersInRoom.push((this.playerObject[idx]).name);
         // here we push the usernames of all opponents in the room into the list of opponents
@@ -419,10 +384,26 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
           this.opponents.push((this.playerObject[idx]).name);
         }
       }
-      console.log('these are the players in the room: ' + this.playersInRoom);
       localStorage.setItem('playersInRoom', JSON.stringify(this.playersInRoom));
     });
 
+    // here we get the handcards from heroku in realtime
+    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/handcards', httpOptions)
+          .subscribe(result => {
+            this.currentHandCardObject = result;
+            this.handCards = [];
+            this.testArray = [];
+            for (let i = 0; i < result.length - 1; i++) {
+              this.testArray.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
+              this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
+              // this.handCards[i].cardClass = (this.currentHandCardObject[i]).name;
+            }
+            console.log('testArray: ' + this.testArray);
+          });
+      });
 
 
     // here we get the handcards from heroku upon init
@@ -434,19 +415,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     });
 
 
-    // here we get the handcards from heroku in realtime
-    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/handcards', httpOptions)
-          .subscribe(result => {
-            this.handCardObject = result;
-            for (let i = 0; i < result.length; i++) {
-              this.handCards[i].cardClass = (this.handCardObject[i]).name;
-            }
-          });
-      });
+
+
   }
+
+
 
   // here we get the current
   getCurrentMarket() {
