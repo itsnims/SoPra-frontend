@@ -355,6 +355,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 // here we check whether it's actually the player's turn
                 if (this.playerName === this.current_player) {
                   this.isItMyTurn = true;
+                } else {
+                  this.isItMyTurn = false;
                 }
               }
             }
