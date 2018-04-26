@@ -26,7 +26,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   playerObject: object;
   handCardObject: object;
   current_player: string;
-  isItMyTurn = false;
+  isItMyTurn: boolean;
 
 
   marketCardsObject: object;
@@ -124,7 +124,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.playersInRoom = new Array<string>();
     this.display = false;
     this.alive = true;
-    this.interval = 1000;
+    this.interval = 3000;
+    this.isItMyTurn = false;
   }
 
 
@@ -332,8 +333,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     localStorage.removeItem('possibleTiles');
 
 
-
-    /*
     this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
       .subscribe(result => {
         for (let key in result) {
@@ -341,8 +340,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             this.current_player = result[key];
             console.log('dieser spieler ist an der reihe: ' + this.current_player);
           }
-        }
+        }});
 
+    // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
@@ -351,21 +351,28 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             for (let key in result) {
               if (key === 'name') {
                 this.current_player = result[key];
-                console.log('the current_player = ' + this.current_player);
-                console.log('is it my turn?: ' + this.isItMyTurn);
+                // console.log('the current_player = ' + this.current_player);
+                // console.log('is it my turn?: ' + this.isItMyTurn);
+                // here we check whether it's actually the player's turn
                 if (this.playerName === this.current_player) {
-                  console.log('IT IS YOUR TURN!!');
+                  this.isItMyTurn = true;
                 }
               }
             }
           });
-      });*/
+      });
 
 
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
+
+
+
+
+
+
 
     console.log('welcome ' + this.playerName);
     console.log(this.apiUrl);
@@ -399,7 +406,29 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         this.handCards[i].cardClass = (this.handCardObject[i]).name;
       }
     });
+
+
+
+    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/handcards', httpOptions)
+          .subscribe(result => {
+            this.handCardObject = result;
+            for (let i = 0; i < result.length; i++) {
+              this.handCards[i].cardClass = (this.handCardObject[i]).name;
+              // console.log(this.handCards[i].cardClass + i);
+            }
+          });
+      });
+
+
   }
+
+
+
+
+
 
   // here we get the current
   getCurrentMarket() {

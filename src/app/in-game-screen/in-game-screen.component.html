@@ -49,7 +49,8 @@
   <button id="endTurn" class="bottomLeft" type="submit">End turn</button>
   <button  id="expedCard" class="bottomLeft" type="submit" (click)="movePlayer()">Use exped. card</button>
   <button [disabled]="buyAvailable" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
-  <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
+  <button id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
+  <!--   <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button> -->
 </div>
 <button id="leave" type="submit" [routerLink]="['/game']">Quit Game</button>
 
