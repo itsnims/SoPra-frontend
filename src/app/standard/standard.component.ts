@@ -114,8 +114,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
       });*/
   }
   setInitialPosition() {
-    /*for (let i = 0; i < this.numberPlayers; i++) {*/
     localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
+    for (let i = 0; i < this.numberPlayers; i++) {
+      this.hexMapById.get(this.players[i].position).addplayer(this.players[i]);
+    }
+    /*
     this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
       this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
       this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
