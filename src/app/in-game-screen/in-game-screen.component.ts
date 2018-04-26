@@ -113,6 +113,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   selected = [];
   selectedCards = 0; // anzahl ausgewählte handcards
 
+
   opponent1 = 'Opponent 1 name';
   opponent2 = 'Opponent 2 name';
   opponent3 = 'Opponent 3 name';
@@ -283,6 +284,16 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(result => console.log(result));
   }
 
+
+  endturnFunction() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
+    this.isItMyTurn = false;
+    return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/endturn', httpOptions).
+      subscribe(result => console.log(result));
+  }
 
 
   // kaufinteraktionen, mit buy button verbunden
