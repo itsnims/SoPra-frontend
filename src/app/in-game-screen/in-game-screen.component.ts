@@ -113,6 +113,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   selected = [];
   selectedCards = 0; // anzahl ausgewählte handcards
 
+
   opponent1 = 'Opponent 1 name';
   opponent2 = 'Opponent 2 name';
   opponent3 = 'Opponent 3 name';
@@ -284,6 +285,16 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
 
+  endturnFunction() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
+    this.isItMyTurn = false;
+    return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/endturn', httpOptions).
+      subscribe(result => console.log(result));
+  }
+
 
   // kaufinteraktionen, mit buy button verbunden
   buy() {
@@ -404,15 +415,13 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             this.currentHandCardObject = result;
             this.handCards = [];
             this.testArray = [];
-            for (let i = 0; i < result.length; i++) {
+            for (let i = 0; i < Object.keys(result).length; i++) {
               this.testArray.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
               this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
               // this.handCards[i].cardClass = (this.currentHandCardObject[i]).name;
             }
-            console.log('testArray: ' + this.testArray);
           });
       });
-
   }
 
 
