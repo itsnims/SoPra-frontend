@@ -418,7 +418,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       }
     });
 
-
+    /*
     // here we get the handcards from heroku in realtime
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -434,7 +434,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               // this.handCards[i].cardClass = (this.currentHandCardObject[i]).name;
             }
           });
-      });
+      });*/
   }
 
 
