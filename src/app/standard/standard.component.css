@@ -177,3 +177,25 @@ meaning if the child is odd it gets put 1/2size of hexagon down*/
 .hidden {
   display: none;
 }
+
+.hex .wrapper .green #C1{
+  z-index: 2;
+  opacity: 1;
+  background-size: contain;
+  background-color: black;
+}
+.hex .wrapper .green:before {
+  border-right-color: yellow;
+}  .hex .wrapper .green:after {
+     border-left-color: yellow;
+   }
+
+.block1{
+  overflow: visible;
+  background-image: url("\Blockade1.png");
+  position: fixed;
+  top: 10px;
+  left: 10px;
+;
+}
+
