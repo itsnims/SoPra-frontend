@@ -234,6 +234,12 @@
   top: 720px;
   left: 1200px;}
 
+#yourTurn {
+  position: fixed;
+  top: 600px;
+  left: 500px;}
+
+
 .gameboard{
   position: fixed;
 }
