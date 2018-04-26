@@ -35,11 +35,14 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   playersInRoom: string[];
   possibleTiles: string[];
   opponents: string[];
+  myColor: string;
 
   display: boolean;
   alive: boolean;
   interval: number;
   testArray: any[];
+
+  playerColors = ['red', 'white', 'blue', 'yellow'];
 
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
@@ -280,7 +283,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard', bodyString, httpOptions)
+
+    this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard', bodyString, httpOptions)
       .subscribe(result => console.log(result));
   }
 
@@ -343,6 +347,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   ngOnInit() {
     localStorage.removeItem('possibleTiles');
 
+
+
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -390,6 +396,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.playerObject = data.players;
       for (const idx in this.playerObject) {
         this.playersInRoom.push((this.playerObject[idx]).name);
+        if (this.playerName === (this.playerObject[idx]).name) {
+          this.myColor = this.playerColors[idx];
+          console.log('you are the player at position: ' + idx);
+          console.log('you have color: ' + this.myColor);
+        }
         // here we push the usernames of all opponents in the room into the list of opponents
         if (this.playerName !== (this.playerObject[idx]).name) {
           this.opponents.push((this.playerObject[idx]).name);
@@ -398,6 +409,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       localStorage.setItem('playersInRoom', JSON.stringify(this.playersInRoom));
     });
 
+
+
     // here we get the handcards from heroku upon init
     this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/turn', null, httpOptions).subscribe(result => {
       this.handCardObject = result;
@@ -405,6 +418,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         this.handCards[i].cardClass = (this.handCardObject[i]).name;
       }
     });
+
 
     // here we get the handcards from heroku in realtime
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -426,7 +440,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
 
-  // here we get the current
+
+  // here we get the current market upon clicking marketplace buttoon
   getCurrentMarket() {
     this.idx = -1;
     this.http.get(this.apiUrl + this.currentRoom + '/market').subscribe(result => {

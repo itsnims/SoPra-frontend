@@ -200,6 +200,25 @@
   top: 670px;
 }
 
+.yellow {
+  color: yellow;
+}
+
+.red {
+  color: red;
+}
+
+.white {
+  color: white;
+}
+
+.blue {
+  color: blue;
+}
+
+
+
+
 /* Buttons bottom left */
 .bottomLeft {
   position: fixed;
