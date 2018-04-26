@@ -347,8 +347,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   ngOnInit() {
     localStorage.removeItem('possibleTiles');
 
-
-
+    this.standard.ngOnInit();
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)

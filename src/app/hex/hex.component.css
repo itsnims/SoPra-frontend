@@ -90,18 +90,7 @@
      border-left-color: darkslategrey;
    }
 
-.blockade1{
-  background-size: contain;
-  background-color: darkslategrey;
-  opacity: 50%;
-}
-.hex .wrapper .blockade1:before {
-  border-right-color: darkslategrey;
-  opacity: 50%;
-}  .hex .wrapper .blockade1:after {
-     border-left-color: darkslategrey;
-    opacity: 50%;
-   }
+
 
 .grey{
   background-size: contain;
@@ -190,4 +179,20 @@
 
 .hidden {
   display: none;
+}
+
+.blockade{
+  background-size: contain;
+  background-color: red;
+}
+.hex .wrapper .blockade:before {
+  border-right-color: red;
+}  .hex .wrapper .blockade:after {
+     border-left-color: red;
+   }
+#B1 {
+  background-size: contain;
+  background-image: url(stop-sign.png);
+  background-repeat: no-repeat;
+  background-position: center;
 }
