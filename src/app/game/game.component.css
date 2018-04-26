@@ -16,15 +16,6 @@
   padding:0;
   margin: 0;
 }
-#bgBox {
-  background-color: black;
-  position: fixed;
-  top: 105px;
-  left: 283px;
-  width: 800px;
-  height: 530px;
-  opacity: 0.65;
-}
 h1 {
   margin-left: 40px;
   color: white;
@@ -34,6 +25,16 @@ h1 {
   font-variant: small-caps;
   font-style: italic;
 }
+#bgBox {
+  background-color: black;
+  position: fixed;
+  top: 105px;
+  left: 283px;
+  width: 800px;
+  height: 530px;
+  opacity: 0.65;
+}
+
 td{
   width:220px;
   text-align: left;

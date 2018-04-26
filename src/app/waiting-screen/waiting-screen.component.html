@@ -1,33 +1,23 @@
- <div class="waiting-image">
-  <!-- <meta http-equiv="refresh" content="2" > -->
+<div class="waiting-image">
+  <h1>Waiting screen</h1>
+  <div id="blackSquare"></div>
+  <div>
 
 
-  <h1> This is the waiting screen </h1>
+    <button id="roomName" [disabled]="true">{{current_room}}</button>
 
-<p>&nbsp;</p>
-<p>&nbsp;</p>
+    <div id="innerBlackSquare"></div>
 
-
-  <h2> {{current_room}} is about to start </h2>
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
+    <h3 id="playerCount">Players: {{currentPlayers}} / {{maxplayers}}</h3>
   <div *ngFor= "let user of users">
-    <h3>      {{user.username}}
-    </h3>
+    <h3>{{user.username}}</h3>
   </div>
+    <div id="outerSquare">
+      <h3 id="pathName">standard path</h3>
+      <h3 id="pathDiff">easy</h3>
+    </div>
 
-  <h2> there are currently {{currentPlayers}} out of {{maxplayers}} in the room </h2>
-
-
-
-  <p>&nbsp;</p>
-  <p>&nbsp;</p>
-
-
-
-<button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/host-screen']">Cancel</button>
-<button class="btn btn-lg btn-primary btn-block" type="submit" [routerLink]="['/in-game-screen']">Start Game</button>
+  </div>
+  <button id="quit" class="bottomButtons" type="submit" [routerLink]="['/host-screen']">Quit</button>
+  <button id="startGame" class="bottomButtons" type="submit" [routerLink]="['/in-game-screen']">Start Game</button>
 </div>

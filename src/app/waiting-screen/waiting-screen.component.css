@@ -15,5 +15,143 @@
   left:0;
   padding:0;
   margin: 0;
+}
+h1 {
+  margin-left: 40px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+#outerSquare {
+  text-align: center;
+  position: fixed;
+  top: 480px;
+  left: 283px;
+  width: 800px;
+  height: 530px;
+}
+#blackSquare {
+  background-color: black;
+  position: fixed;
+  top: 105px;
+  left: 283px;
+  width: 800px;
+  height: 530px;
+  opacity: 0.65;
+}
 
+#roomName {
+  position: fixed;
+  left: 533px;
+  top: 130px;
+  width: 300px;
+  padding: 10px 16px;
+  font-size: 21px;
+  line-height: 1.3333333;
+  border-radius: 40px;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background: rgba(53, 112, 42, 0.6);
+  border: 1px solid transparent;
+
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+
+#innerBlackSquare {
+  background-color: black;
+  position: fixed;
+  top: 235px;
+  left: 433px;
+  width: 500px;
+  height: 250px;
+  opacity: 0.75;
+}
+
+#playerCount {
+  position: fixed;
+  top: 227px;
+  left: 613px;
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+
+.bottomButtons {
+  width: 125px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.3333333;
+  border-radius: 40px;
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  background-color: black;
+  border: 1px solid transparent;
+
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+.bottomButtons:hover {
+  border: 1px solid white;
+}
+
+#pathName {
+  display: inline-block;
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+
+#pathDiff {
+  margin-top: -10px;
+  top: 500px;
+  text-align: center;
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+
+#quit {
+  position: fixed;
+  top: 675px;
+  left: 325px;
+}
+
+#startGame {
+  position: fixed;
+  top: 675px;
+  left: 916px;
 }
