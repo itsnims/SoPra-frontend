@@ -28,11 +28,11 @@ export class HexComponent implements OnInit {
   ngOnInit() {
   }
   /*Sets truth false value according to what u click*/
-  public clickTile(id){
-    String(id)
-    console.log('click id:', id)
+  public clickTile(id) {
+    String(id);
+    console.log('click id:', id);
     this.clickables = JSON.parse(localStorage.getItem('possibleTiles'));
-    console.log('clickables in tile', this.clickables)
+    console.log('clickables in tile', this.clickables);
     if (this.clickables.indexOf(id) !== -1) {
       return true;
     }
@@ -82,12 +82,14 @@ export class HexComponent implements OnInit {
   }
 
   addplayer(p: PlayerComponent) {
+    console.log('i am here');
     this.player = p;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + localStorage.getItem('currentTile'), httpOptions);
+    return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + localStorage.getItem('currentTile'), httpOptions)
+      .subscribe(result => console.log(result));
 
 
   }
