@@ -25,14 +25,7 @@ h1 {
   font-variant: small-caps;
   font-style: italic;
 }
-#outerSquare {
-  text-align: center;
-  position: fixed;
-  top: 480px;
-  left: 283px;
-  width: 800px;
-  height: 530px;
-}
+
 #blackSquare {
   background-color: black;
   position: fixed;
@@ -93,7 +86,47 @@ h1 {
   font-variant: small-caps;
   font-style: italic;
 }
-
+#players {
+  text-align: center;
+  position: fixed;
+  top: 273px;
+  left: 283px;
+  width: 800px;
+  height: 530px;
+}
+#p1 {
+  text-align: center;
+  display: block;
+  color: red;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+#p2 {
+  display: block;
+  color: yellow;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+#p3 {
+  display: block;
+  color: blue;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+#p4 {
+  display: block;
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
 .bottomButtons {
   width: 125px;
   padding: 10px 16px;
@@ -123,7 +156,14 @@ h1 {
 .bottomButtons:hover {
   border: 1px solid white;
 }
-
+#outerSquare {
+  text-align: center;
+  position: fixed;
+  top: 480px;
+  left: 283px;
+  width: 800px;
+  height: 530px;
+}
 #pathName {
   display: inline-block;
   color: white;

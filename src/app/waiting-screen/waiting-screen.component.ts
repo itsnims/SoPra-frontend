@@ -24,6 +24,11 @@ export class WaitingScreenComponent implements OnInit {
   public currentPlayers: number;
   public maxplayers: number;
 
+  public player1 = 'player 1';
+  public player2 = 'player 2';
+  public player3 = 'player 3';
+  public player4 = 'player 4';
+
   message: string;
   roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
 
@@ -47,6 +52,12 @@ export class WaitingScreenComponent implements OnInit {
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
+        /*start
+        this.roomService.getCurrentRoomInfo(this.roomUrl + this.current_room)
+          .subscribe((data) => {
+            this.player1 = data.players[0].name;
+        });
+        end*/
         this.roomService.getCurrentRoomInfo(this.roomUrl  + this.current_room + '/wait')
           .subscribe((data) => {
             this.currentPlayers = data[0];

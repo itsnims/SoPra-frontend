@@ -9,9 +9,15 @@
     <div id="innerBlackSquare"></div>
 
     <h3 id="playerCount">Players: {{currentPlayers}} / {{maxplayers}}</h3>
-  <div *ngFor= "let user of users">
+    <div id="players">
+      <h3 id="p1">{{player1}}</h3>
+      <h3 id="p2">{{player2}}</h3>
+      <h3 id="p3">{{player3}}</h3>
+      <h3 id="p4">{{player4}}</h3>
+    </div>
+  <!--div *ngFor= "let user of users">
     <h3>{{user.username}}</h3>
-  </div>
+  </div-->
     <div id="outerSquare">
       <h3 id="pathName">standard path</h3>
       <h3 id="pathDiff">easy</h3>
