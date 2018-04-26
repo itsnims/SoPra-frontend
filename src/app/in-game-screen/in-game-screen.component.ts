@@ -124,7 +124,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.playersInRoom = new Array<string>();
     this.display = false;
     this.alive = true;
-    this.interval = 3000;
+    this.interval = 1000;
     this.isItMyTurn = false;
   }
 
@@ -387,6 +387,14 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       localStorage.setItem('playersInRoom', JSON.stringify(this.playersInRoom));
     });
 
+    // here we get the handcards from heroku upon init
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/turn', null, httpOptions).subscribe(result => {
+      this.handCardObject = result;
+      for (let i = 0; i < 4; i++) {
+        this.handCards[i].cardClass = (this.handCardObject[i]).name;
+      }
+    });
+
     // here we get the handcards from heroku in realtime
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -396,7 +404,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             this.currentHandCardObject = result;
             this.handCards = [];
             this.testArray = [];
-            for (let i = 0; i < result.length - 1; i++) {
+            for (let i = 0; i < result.length; i++) {
               this.testArray.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
               this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
               // this.handCards[i].cardClass = (this.currentHandCardObject[i]).name;
@@ -404,18 +412,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             console.log('testArray: ' + this.testArray);
           });
       });
-
-
-    // here we get the handcards from heroku upon init
-    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/turn', null, httpOptions).subscribe(result => {
-      this.handCardObject = result;
-      for (let i = 0; i < 4; i++) {
-        this.handCards[i].cardClass = (this.handCardObject[i]).name;
-      }
-    });
-
-
-
 
   }
 
