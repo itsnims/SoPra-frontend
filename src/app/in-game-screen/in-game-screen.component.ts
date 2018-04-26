@@ -186,27 +186,35 @@ export class InGameScreenComponent implements OnInit {
   toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
     const newCard = card;
     if (this.handCards[i].checked === true) {
+      this.possibleTiles = [];
       localStorage.removeItem('possibleTiles');
-      console.log(localStorage.getItem('possibleTiles'));
+      /*console.log('on if condition', this.possibleTiles)*/
       this.handCards[i].checked = false;
       const position = this.selected.indexOf(newCard);
       this.selectedCards--;
       this.selected.splice(position, 1);
     }
     else {
-      console.log(localStorage.getItem('possibleTiles'));
       this.possibleTiles = [];
+      localStorage.removeItem('possibleTiles');
+      /* WORKS # local storage gets deleted console.log('shouldnotwork', localStorage.getItem('possibleTiles'));*/
       this.handCards[i].checked = true;
       this.selectedCards++;
       this.selected.push(newCard);
       /**/
+      console.log('selected', this.selected);
+      /*problem where is the notion of currenttile???????*/
+      console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
       return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
         .subscribe(result => {
           for (const el in result) {
-            console.log(this.possibleTiles);
+            console.log('log result', result);
             this.possibleTiles.push(result[el].name);
           }
+          console.log('possible tiles in else', this.possibleTiles);
           localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+          console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+
 
         });
       }
@@ -313,19 +321,29 @@ export class InGameScreenComponent implements OnInit {
 
   movePlayer() {
     console.log('entered mov');
-    console.log(this);
+    console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
+    console.log('')
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
     this.standard.addPlayers();
-    /*console.log(this.boards[0](this.hex.currenthexselection));*/
+
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
+
+    /*this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + localStorage.getItem('currentTile'), null, httpOptions);*/
+
+      /*console.log(this.boards[0](this.hex.currenthexselection));*/
 
     }
 
 
 
   ngOnInit() {
+    localStorage.removeItem('possibleTiles');
 
-    /*
+
     this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
       .subscribe(result => {
         for (let key in result) {
@@ -334,9 +352,9 @@ export class InGameScreenComponent implements OnInit {
             console.log('dieser spieler ist an der reihe: ' + this.current_player);
           }
         }
-      }); */
+      });
 
-    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+    /*TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
         this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/Game/currentPlayer')
@@ -348,7 +366,7 @@ export class InGameScreenComponent implements OnInit {
               }
             }
           });
-      });
+      });*/
 
 
     const httpOptions = {

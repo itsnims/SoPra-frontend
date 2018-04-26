@@ -15,7 +15,7 @@ export class PlayerComponent implements OnInit {
   constructor() {}
   /*BACKEND needs all potential moves for player!!*/
   getPotentialMoveIds() {
-    return ['B22', 'C33', 'C9', 'C13'];
+    return JSON.parse(localStorage.getItem('possibleTiles'));
   }
   public setPosition(position: string, playerId: string) {
     this.position = position;

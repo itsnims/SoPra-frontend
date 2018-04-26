@@ -106,15 +106,17 @@ export class StandardComponent implements OnInit, AfterViewInit {
     /*highlights all potentialMoveIds*/
     console.log(this.hexMapById);
     this.setInitialPosition();
-    this.players[this.currentPlayer].getPotentialMoveIds()
+    /*this.players[this.currentPlayer].getPotentialMoveIds()
       .forEach(moveId => {
         this.hexMapById.get(moveId).onhightlight();
-        /*this.hex.selectedTile(this.players[0].getPotentialMoveIds());*/
-      });
+        /*this.hex.selectedTile(this.players[0].getPotentialMoveIds());
+        console.log('standard getPotentialMoveIds', this.players[this.currentPlayer].getPotentialMoveIds());
+      });*/
   }
   setInitialPosition() {
     /*for (let i = 0; i < this.numberPlayers; i++) {*/
-      this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
+    localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
+    this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
       this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
       this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
       /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
@@ -122,10 +124,16 @@ export class StandardComponent implements OnInit, AfterViewInit {
   }
   addPlayers() {
     this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
-    /*localStorage.setItem('currentTile', JSON.stringify());*/
     this.players[this.currentPlayer].position =  JSON.parse(localStorage.getItem('selectedHex'));
-    this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
+    /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
+    /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
+    localStorage.removeItem('currentTile');
+    /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
+    localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
+    /*WORKS: console.log(localStorage.getItem('currentTile'))*/
 
+    this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
+    console.log('should be new position', localStorage.getItem('currentTile'));
       }
   getPlayerPosition(playerId: string, position: string) {
 

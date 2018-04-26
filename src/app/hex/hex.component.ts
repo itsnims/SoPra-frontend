@@ -1,6 +1,7 @@
 import {Component, Input, OnInit, ViewChild} from '@angular/core';
 import {PlayerComponent} from '../player/player.component';
-import {StandardComponent} from '../standard/standard.component';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+
 
 @Component({
   selector: 'app-hex',
@@ -16,16 +17,22 @@ export class HexComponent implements OnInit {
   value = false;
   @Input() player: PlayerComponent = null;
   /*BACKEND current tiles*/
-  clickables = JSON.parse(localStorage.getItem('possibleTiles'))
+  clickables: string[];
 
-  constructor() {}
+  apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
+  currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
+  playerName = JSON.parse(localStorage.getItem('currentUser')).name;
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
-
   }
   /*Sets truth false value according to what u click*/
   public clickTile(id){
     String(id)
+    console.log('click id:', id)
+    this.clickables = JSON.parse(localStorage.getItem('possibleTiles'));
+    console.log('clickables in tile', this.clickables)
     if (this.clickables.indexOf(id) !== -1) {
       return true;
     }
@@ -76,6 +83,12 @@ export class HexComponent implements OnInit {
 
   addplayer(p: PlayerComponent) {
     this.player = p;
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
+    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + localStorage.getItem('currentTile'), httpOptions);
+
 
   }
   removePlayer() {
