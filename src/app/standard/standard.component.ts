@@ -28,6 +28,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
   numberPlayers: number;
   playerNames: string[];
   i: number;
+  blockade1: string;
+  blockade2: string;
+  blockade3: string;
+  blockade4: string;
+  blockade5: string;
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
   ngOnInit() {
