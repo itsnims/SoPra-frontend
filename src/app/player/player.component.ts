@@ -24,5 +24,5 @@ export class PlayerComponent implements OnInit {
 
 
   // public getPosition()
-  
+
 }

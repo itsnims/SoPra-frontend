@@ -282,7 +282,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-
+    this.updateHandcards();
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard', bodyString, httpOptions)
       .subscribe(result => console.log(result));
   }
@@ -309,6 +309,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
+    this.updateHandcards();
     return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
       .subscribe(result => console.log(result));
   }
@@ -333,11 +334,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         this.currentHandCardObject = result;
         this.handCards = [];
-        this.testArray = [];
         for (let i = 0; i < Object.keys(result).length; i++) {
-          this.testArray.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
           this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
-          // this.handCards[i].cardClass = (this.currentHandCardObject[i]).name;
         }
       });
   }
@@ -350,6 +348,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
     this.standard.addPlayers();
+    this.updateHandcards();
 
     const httpOptions = {
       headers: new HttpHeaders({
