@@ -322,6 +322,27 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateBuyAvailable();
   }
 
+
+
+  updateHandcards() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })};
+    this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/handcards', httpOptions)
+      .subscribe(result => {
+        this.currentHandCardObject = result;
+        this.handCards = [];
+        this.testArray = [];
+        for (let i = 0; i < Object.keys(result).length; i++) {
+          this.testArray.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
+          this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
+          // this.handCards[i].cardClass = (this.currentHandCardObject[i]).name;
+        }
+      });
+  }
+
+
   movePlayer() {
     console.log('entered mov');
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
@@ -334,6 +355,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
+
 
     /*this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + localStorage.getItem('currentTile'), null, httpOptions);*/
 
