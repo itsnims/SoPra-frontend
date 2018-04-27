@@ -282,9 +282,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-    this.updateHandcards();
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard', bodyString, httpOptions)
       .subscribe(result => console.log(result));
+    this.updateHandcards();
   }
 
 
@@ -309,9 +309,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-    this.updateHandcards();
-    return this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
+    this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
       .subscribe(result => console.log(result));
+    this.updateHandcards();
   }
 
 
@@ -344,7 +344,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   movePlayer() {
     console.log('entered mov');
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
-    console.log('')
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
     this.standard.addPlayers();
@@ -354,8 +353,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-
-
+    this.selected = [];
     /*this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + localStorage.getItem('currentTile'), null, httpOptions);*/
 
       /*console.log(this.boards[0](this.hex.currenthexselection));*/
