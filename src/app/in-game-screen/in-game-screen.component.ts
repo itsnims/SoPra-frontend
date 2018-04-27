@@ -138,16 +138,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // überprüft wie viele karten im lower market sind
   checkIsFree() {
     if (this.lowerCards.length !== 6) {
-      this.isFree = false; }
-    else {this.isFree = true; }
+      this.isFree = false; } else {this.isFree = true; }
     if (this.firstPurchase === true) {
       this.isFree = true; }
   }
 
   // updated clickable status der buttons unten links
   updateSelectedCardIsActionCard() {
-    for (this.i = 0; this.i < 6; this.i++){
-      if (this.selectedCards[0] === this.actionCards[this.i]){
+    for (this.i = 0; this.i < 6; this.i++) {
+      if (this.selectedCards[0] === this.actionCards[this.i]) {
         this.selectedCardIsActionCard = true;
         return;
       }
@@ -167,7 +166,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.useExpeditionCard = true;
     }
   }
-  updateBuyAvailable(){
+  updateBuyAvailable() {
     if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
       this.buyAvailable = false;
     }
@@ -347,7 +346,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   ngOnInit() {
     localStorage.removeItem('possibleTiles');
 
-    this.standard.ngOnInit();
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -379,7 +377,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             for (let key in result) {
               if (key === 'name') {
                 this.current_player = result[key];
-                console.log('dieser spieler ist an der reihe: ' + this.current_player);
+                // console.log('dieser spieler ist an der reihe: ' + this.current_player);
               }
             }});
       });

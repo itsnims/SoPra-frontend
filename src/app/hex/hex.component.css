@@ -38,9 +38,7 @@
   transform: translateZ(10px);
   transition-duration: 100ms;
 }
-.blockade1:{
 
-}
 .hex .wrapper {
   display: block;
   position: absolute;
@@ -138,13 +136,59 @@
   background-repeat: no-repeat;
   background-position: center;
 }
-
 #coin2{
-  background-size: 26px 25px;
-  background-image: url(coin.png);
-  background-position: top;
+  background-size: 75%;
+  background-repeat: no-repeat;
+  background-image: url(coin.png), url(coin.png);
+  background-position: right bottom, left top;
 }
 
+#coin3{
+  background-size: 65%;
+  background-repeat: no-repeat;
+  background-image: url(coin.png), url(coin.png), url(coin.png);
+  background-position: right bottom, center, left top;
+}
+
+#coin4{
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-image: url(coin.png), url(coin.png), url(coin.png), url(coin.png);
+  background-position: right bottom, left bottom, left top, right top;
+}
+
+#get-card1 {
+  background-size: contain;
+  background-image: url(up-card.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#get-card3 {
+  background-size: contain;
+  background-image: url(up-card.png), url(up-card.png), url(up-card.png);
+  background-repeat: no-repeat;
+  background-position: bottom, center, top;
+}
+  #discard1 {
+    background-size: contain;
+    background-image: url(card-burn.png);
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  #discard3{
+    background-size: contain;
+    background-image: url(card-burn.png), url(card-burn.png), url(card-burn.png);
+    background-repeat: no-repeat;
+    background-position: bottom, center, top;
+  }
+#paddle1{
+  background-size: contain;
+  background-image: url(ice-pop.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
 #paddle2{
   background-size: contain;
   background-image: url(paddles.png);
@@ -193,6 +237,13 @@
 #B1 {
   background-size: contain;
   background-image: url(stop-sign.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#geröll{
+  background-size: 150%;
+  background-image: url(ore.png);
   background-repeat: no-repeat;
   background-position: center;
 }

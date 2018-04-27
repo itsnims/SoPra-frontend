@@ -1,6 +1,7 @@
 import {HexagonBoardComponent} from '../hexagon-board/hexagon-board.component';
 import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {
   OnInit,
   AfterViewInit,
@@ -22,25 +23,39 @@ export class StandardComponent implements OnInit, AfterViewInit {
 /*classe für click events...
 * */
   hex: HexComponent;
+  hello: any;
   players: PlayerComponent[] = [];
   hexMapById = new Map<string, HexComponent>();
   currentPlayer: any;
   numberPlayers: number;
   playerNames: string[];
-  i: number;
-  blockade1: string;
-  blockade2: string;
-  blockade3: string;
-  blockade4: string;
-  blockade5: string;
-  constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
+  selectedHex: string;
+  apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
+  currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
+  playerName = JSON.parse(localStorage.getItem('currentUser')).name;
+  [key: string]: any;
+  blockade: any;
+  Bstrenght: any;
+  /*blockadeColour: string;
+  //blockadeStrength: string;
+  //api + game + spec + blockades
+  */
+  blockadestring: string[]= [];
+  blockadelist: string[]= [];
+  constructor(private componentFactoryResolver: ComponentFactoryResolver, private http: HttpClient) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
   ngOnInit() {
+
+  for ( let i = 0; i <= 4; i++) {
+    this.blockadestring.push('blockade' + String(i));
+  }
+  console.log('this is list:', this.blockadelist);
+
 /*Adds players to Playercomponent list
 * -> now players holds all current players*/
     this.currentPlayer = JSON.parse(localStorage.getItem('currentUser')).name;
     this.playerNames = JSON.parse(localStorage.getItem('playersInRoom'));
-    this.currentPlayer = this.playerNames.indexOf(this.currentPlayer)
+    this.currentPlayer = this.playerNames.indexOf(this.currentPlayer);
     console.log(this.playerNames);
     console.log(this.currentPlayer);
 
@@ -96,6 +111,25 @@ export class StandardComponent implements OnInit, AfterViewInit {
       p4.id = 'player4';
       document.getElementById(divIDToMove).appendChild(p4);
     }*/
+    this.http.get(this.apiUrl + this.currentRoom + '/blockade')
+      .subscribe(result => {
+        console.log(result);
+        const first = this.blockadestring[0];
+        this[first] = 'hello';
+        console.log(this.blockade0);
+        console.log(result[3].name);
+        for (let i = 0; i < 4; i++) {
+          const dummy = this.blockadestring[i];
+          this[dummy] = result[i].name;
+          /*this.Bstrenght[i] = result[i].strenght;*/
+        }
+        this.blockadelist.push(this.blockade0);
+        this.blockadelist.push(this.blockade1);
+        this.blockadelist.push(this.blockade2);
+        this.blockadelist.push(this.blockade3);
+
+        console.log('blockades', this.blockadelist);
+        });
   }
 
   ngAfterViewInit() {
@@ -131,6 +165,22 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
   }
   addPlayers() {
+    if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
+      const httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json'
+        })};
+
+      this.selectedHex = JSON.parse(localStorage.getItem('selectedHex'));
+      const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
+      (<HTMLElement>element).remove();
+      /*
+      Send blockade to backend*/
+      console.log(this.selectedHex);
+      this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selectedHex, httpOptions)
+        .subscribe(result => console.log(result));
+    }
+    else {
     this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
     this.players[this.currentPlayer].position =  JSON.parse(localStorage.getItem('selectedHex'));
     /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
@@ -142,7 +192,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
     this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
     console.log('should be new position', localStorage.getItem('currentTile'));
-      }
+      }}
   getPlayerPosition(playerId: string, position: string) {
 
   }
