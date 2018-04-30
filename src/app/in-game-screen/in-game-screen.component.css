@@ -172,6 +172,10 @@
   background: url('../images/cards/Y4v5-millionaire.png') no-repeat top left;
   background-size: cover;}
 
+.Backside {
+  background: url('../images/cards/backside.jpg') no-repeat top left;
+  background-size: cover;}
+
 /* Expedition Board */
 #drawPile {
   position: fixed;

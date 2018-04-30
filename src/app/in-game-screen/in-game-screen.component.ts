@@ -8,6 +8,7 @@ import {HttpParams} from '@angular/common/http';
 import {RoomService} from '../shared/services/room.service';
 import 'rxjs/add/operator/takeWhile';
 import {TimerObservable} from "rxjs/observable/TimerObservable";
+import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -487,12 +488,19 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             this.idx += 1;
           }
           if (key === 'upperdict') {
-            this.upperCards[this.idx].cardID = key2;
             this.upperCards[this.idx].left = result[key][key2];
+            if (result[key][key2] === 0) {
+              this.upperCards[this.idx].cardID = 'Backside';  // this would display the backside of a card
+            } else {
+              this.upperCards[this.idx].cardID = key2;
+            }
           } else {
-            this.lowerCards[this.idx].cardID = key2;
             this.lowerCards[this.idx].left = result[key][key2];
-
+            if (result[key][key2] === 0) {
+              this.lowerCards[this.idx].cardID = 'Backside';
+            } else {
+              this.lowerCards[this.idx].cardID = key2;
+            }
           }
         }
       }
