@@ -24,7 +24,7 @@
   <div class="lowerMarket">
     <span *ngFor="let lowerCard of lowerCards">
       <button [disabled]="firstPurchase" id="{{lowerCard.cardID}}" class="{{lowerCard.cardID}} marketCard" type="submit" (click)="chooseMarketCard($event)"></button>
-      <span class="cardsLeft">{{lowerCard.left}}</span>
+      <span class="cardsLeft"> {{lowerCard.left}}</span>
     </span>
   </div>
 </div>
