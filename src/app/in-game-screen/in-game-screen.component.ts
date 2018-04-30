@@ -488,16 +488,18 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
           }
           if (key === 'upperdict') {
             this.upperCards[this.idx].cardID = key2;
+            this.upperCards[this.idx].left = result[key][key2];
           } else {
             this.lowerCards[this.idx].cardID = key2;
+            this.lowerCards[this.idx].left = result[key][key2];
+
           }
         }
       }
-
       this.marketCardsObject = result;
-      // console.log('upperCardsObject: ' + this.marketCardsObject);
     });
   }
+
   ngOnDestroy() {
     this.alive = false; // switches your TimerObservable off
   }
