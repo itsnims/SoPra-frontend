@@ -199,6 +199,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       const position = this.selected.indexOf(newCard);
       this.selectedCards--;
       this.selected.splice(position, 1);
+      console.log('selected', this.selected);
     }
     else {
       this.possibleTiles = [];
@@ -265,8 +266,12 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
   showSelected() {
-    console.log(this.selected);
     console.log(this.chosenMarketCard);
+    for (let key in this.lowerCards) {
+        console.log(this.lowerCards[key].cardID);
+        console.log(this.lowerCards[key].cardID === this.chosenMarketCard);
+    }
+  }
    /* return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
       .subscribe(result => {
         for (const el in result) {
@@ -274,7 +279,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         }
         console.log(this.possibleTiles);
       });*/
-  }
+
 
   discardCards() {
     const bodyString = JSON.stringify({cards: this.selected});
@@ -282,9 +287,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
+    console.log(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard');
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard', bodyString, httpOptions)
       .subscribe(result => console.log(result));
     this.updateHandcards();
+    this.selected = [];
   }
 
 
@@ -311,7 +318,18 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       })};
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
       .subscribe(result => console.log(result));
+    console.log('you selected: ' + this.selected);
     this.updateHandcards();
+    this.updateHandcards();
+    this.selected = [];
+    for (let key in this.lowerCards) {
+      // decrease number of cards of specific type left
+      if (this.lowerCards[key].cardID === this.chosenMarketCard) {
+        let temp = Number(this.lowerCards[key].left);
+        temp--;
+        this.lowerCards[key].left = temp.toString();
+      }
+    }
   }
 
 
