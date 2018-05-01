@@ -46,17 +46,17 @@ export class StandardComponent implements OnInit, AfterViewInit {
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
   ngOnInit() {
 
-  for ( let i = 0; i <= 4; i++) {
-    this.blockadestring.push('blockade' + String(i));
-  }
-  console.log('this is list:', this.blockadelist);
+    for (let i = 0; i <= 4; i++) {
+      this.blockadestring.push('blockade' + String(i));
+    }
+    console.log('this is list:', this.blockadelist);
 
-/*Adds players to Playercomponent list
-* -> now players holds all current players*/
+    /*Adds players to Playercomponent list
+    * -> now players holds all current players*/
     this.currentPlayer = JSON.parse(localStorage.getItem('currentUser')).name;
     this.playerNames = JSON.parse(localStorage.getItem('playersInRoom'));
     this.currentPlayer = this.playerNames.indexOf(this.currentPlayer);
-    console.log(this.playerNames);
+    console.log('playerNames:', this.playerNames);
     console.log(this.currentPlayer);
 
     this.numberPlayers = this.playerNames.length;
@@ -68,8 +68,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
         this.players.push(new PlayerComponent());
         this.players[i].playerId = sample_players[i];
         this.players[i].position = 'B' + String(i + 1);
-        console.log(this.players);
       }
+
+      console.log('current players: ', this.players);
+
+
     }
     /*this.players.push(new PlayerComponent());
     this.players[0].playerId = sample_players[0];
@@ -85,9 +88,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
     this.players[3].position = 'B4';*/
 
 
-
     // for (var position of positions){
-      // document.getElementById (position).addEventListener ('click', function(){pos(position, sample_players); } , false); }
+    // document.getElementById (position).addEventListener ('click', function(){pos(position, sample_players); } , false); }
 
     /*this.positionService.fetchPosition().subscribe((data) => this.positions = data);*/
 
@@ -103,14 +105,14 @@ export class StandardComponent implements OnInit, AfterViewInit {
     this.insert.createComponent(componentFactory);*/
 
 
-      /*const innerHTMLContent = '<div class ="' + playerX[0] + '"></div>';
-      const divIDToMove = 'move'.concat(position);
-      console.log(innerHTMLContent, divIDToMove);
-      const p4 = document.createElement('div');
-      p4.className = 'player';
-      p4.id = 'player4';
-      document.getElementById(divIDToMove).appendChild(p4);
-    }*/
+    /*const innerHTMLContent = '<div class ="' + playerX[0] + '"></div>';
+    const divIDToMove = 'move'.concat(position);
+    console.log(innerHTMLContent, divIDToMove);
+    const p4 = document.createElement('div');
+    p4.className = 'player';
+    p4.id = 'player4';
+    document.getElementById(divIDToMove).appendChild(p4);
+  }*/
     this.http.get(this.apiUrl + this.currentRoom + '/blockade')
       .subscribe(result => {
         console.log(result);
@@ -129,8 +131,9 @@ export class StandardComponent implements OnInit, AfterViewInit {
         this.blockadelist.push(this.blockade3);
 
         console.log('blockades', this.blockadelist);
-        });
+      });
   }
+
 
   ngAfterViewInit() {
     // this.divs.forEach(div => console.log(div));
@@ -144,18 +147,23 @@ export class StandardComponent implements OnInit, AfterViewInit {
     /**/
     /*highlights all potentialMoveIds*/
     console.log(this.hexMapById);
-    this.setInitialPosition();
+    /* this.setInitialPosition();
     /*this.players[this.currentPlayer].getPotentialMoveIds()
       .forEach(moveId => {
         this.hexMapById.get(moveId).onhightlight();
         /*this.hex.selectedTile(this.players[0].getPotentialMoveIds());
         console.log('standard getPotentialMoveIds', this.players[this.currentPlayer].getPotentialMoveIds());
       });*/
+    this.setInitialPosition();
+
   }
+
+
   setInitialPosition() {
     localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
     for (let i = 0; i < this.numberPlayers; i++) {
       this.hexMapById.get(this.players[i].position).addplayer(this.players[i]);
+
     }
     /*
     this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
@@ -193,6 +201,14 @@ export class StandardComponent implements OnInit, AfterViewInit {
     this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
     console.log('should be new position', localStorage.getItem('currentTile'));
       }}
+
+  updatePosition(array: any){
+    console.log(array)
+    for (let ele of array) {
+      console.log('element', ele)
+      /*this.hexMapById.get(this.players[ele]).addplayer(this.players[])*/
+    }
+  }
   getPlayerPosition(playerId: string, position: string) {
 
   }

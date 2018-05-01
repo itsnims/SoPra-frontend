@@ -35,6 +35,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   public idx: number;
   playersInRoom: string[];
   possibleTiles: string[];
+  currentPositions: string[];
+  oldPositions: string[];
   opponents: string[];
   myColor: string;
 
@@ -125,6 +127,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   constructor(private roomService: RoomService, private http: HttpClient) {
     this.possibleTiles = new Array<string>();
+    this.currentPositions = new Array<string>();
+    this.oldPositions = new Array<string>();
     this.opponents = new Array<string>();
     this.playersInRoom = new Array<string>();
     this.display = false;
@@ -454,9 +458,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       }
     });
 
-    /*
-    // here we get the handcards from heroku in realtime
-    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+
+    /*TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/handcards', httpOptions)
@@ -471,6 +474,34 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             }
           });
       });*/
+    // update playing piece positions:
+    console.log('try for users', this.http.get(this.apiUrl + this.currentRoom, httpOptions));
+    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
+          .subscribe(result => {
+            console.log(result);
+            this.oldPositions = [];
+            for (let x of this.currentPositions){
+              this.oldPositions.push(x);
+            }
+            console.log('old', this.oldPositions);
+            this.currentPositions = [];
+            for (let key in result) {
+              this.currentPositions.push(result[key].myFigure.currentPosition.name);
+            }
+            });
+          /* WORKS: console.log('current positons:', this.currentPositions);*/
+          for (let i = 0; i <= 3; i++) {
+            if (this.currentPositions[i] !== this.oldPositions[i]) {
+              console.log('entered if');
+              this.standard.updatePosition(this.currentPositions);
+            }
+          }
+        }
+            );
+
   }
 
 
