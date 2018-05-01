@@ -44,17 +44,73 @@ export class InGameScreenComponent implements OnInit {
     {cardClass: 'sailor', checked: false },
     {cardClass: 'explorer', checked: false},
     {cardClass: 'traveler', checked: false},
-    {cardClass: 'traveler', checked: false}
+    {cardClass: 'traveler', checked: false},
+    {cardClass: 'cartographer', checked: false}
   ];
 
   selected = []; // angekreuzte karten
-
   selectedCards = 0;
+  selectedCardIsActionCard = false;
+  i = 0;
+  isItMyTurn = false;
+  useActionCard = true;
+  useExpeditionCard = true;
+  buyAvailable = true;
+  discard = true;
+
+  actionCards = [
+    'cartographer',
+    'compass',
+    'native',
+    'scientist',
+    'transmitter',
+    'travel-log'
+  ];
 
   opponent1 = 'Opponent 1 name';
   opponent2 = 'Opponent 2 name';
   opponent3 = 'Opponent 3 name';
 
+  updateSelectedCardIsActionCard() {
+    for (this.i = 0; this.i < 6; this.i++) {
+      if (this.selected[0] === this.actionCards[this.i]) {
+        this.selectedCardIsActionCard = true;
+        return;
+      }
+    }
+    this.selectedCardIsActionCard = false;
+  }
+
+  updateUseActionCard() {
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
+        this.useActionCard = false;
+        return;
+      } else {
+        this.useActionCard = true;
+        return;
+      }
+    }
+    this.useActionCard = true;
+  }
+  updateUseExpeditionCard() {
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
+        this.useExpeditionCard = false;
+        return;
+      } else {
+        this.useExpeditionCard = true;
+        return;
+      }
+    }
+    this.useExpeditionCard = true;
+  }
+  updateBuyAvailable() {
+
+  }
+  updateDiscard() {
+
+  }
   checkIsFree() {
     if (this.lowerCards.length !== 6) {
       this.isFree = false; }
@@ -63,7 +119,7 @@ export class InGameScreenComponent implements OnInit {
       this.isFree = true; }
   }
 
-  toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
+  toggleHandSelection(card, i) {
     const newCard = card;
     if (this.handCards[i].checked === true) {
       this.handCards[i].checked = false;
@@ -76,6 +132,9 @@ export class InGameScreenComponent implements OnInit {
       this.selectedCards++;
       this.selected.push(newCard);
       }
+    this.updateSelectedCardIsActionCard()
+    this.updateUseExpeditionCard();
+    this.updateUseActionCard()
     }
 
 

@@ -4,11 +4,12 @@
 <div *ngFor="let select of selected">
 <p>{{select}}</p>
 </div>
-<p>{{selectedCards}}</p>
+<p>{{selectedCards}}, {{selectedCardIsActionCard}}</p>
 
-<div class="gameboard" >
+
+<!--div class="gameboard" >
   <app-standard class="board_input" [style.a]></app-standard>
-</div>
+</div-->
 <!-- Market-->
 <button id="marketPlace" type="button" (click)="showMarketFunc()">Marketplace</button>
 <div *ngIf="showMarket">
@@ -46,12 +47,12 @@
 
 <!-- bottom left buttons-->
 <div>
-  <button id="zoomIn" class="bottomLeft" type="button">Zoom In</button>
+  <button [disabled]="useActionCard" id="zoomIn" class="bottomLeft" type="button">action card</button>
   <button id="zoomOut" class="bottomLeft" type="button">Zoom Out</button>
   <button id="endTurn" class="bottomLeft" type="submit">End turn</button>
-  <button id="move" class="bottomLeft" type="submit">Move</button>
-  <button [disabled]="firstPurchase" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
-  <button id="discard" class="bottomLeft" type="submit">Discard</button>
+  <button [disabled]="useExpeditionCard" id="move" class="bottomLeft" type="submit">expedition card</button>
+  <button [disabled]="buyAvailable" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
+  <button [disabled]="discard" id="discard" class="bottomLeft" type="submit">Discard</button>
 </div>
 
 
