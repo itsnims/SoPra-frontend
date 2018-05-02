@@ -57,13 +57,13 @@ export class StandardComponent implements OnInit, AfterViewInit {
     this.playerNames = JSON.parse(localStorage.getItem('playersInRoom'));
     this.currentPlayer = this.playerNames.indexOf(this.currentPlayer);
     console.log('playerNames:', this.playerNames);
-    console.log(this.currentPlayer);
+    console.log('currentPlayer: ', this.currentPlayer);
 
     this.numberPlayers = this.playerNames.length;
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
     /*
     How many playing pieces should be displayed on the board as well as their initial positions*/
-    if (this.numberPlayers > 2) {
+    /*if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
         this.players.push(new PlayerComponent());
         this.players[i].playerId = sample_players[i];
@@ -73,7 +73,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
       console.log('current players: ', this.players);
 
 
-    }
+    }*/
     /*this.players.push(new PlayerComponent());
     this.players[0].playerId = sample_players[0];
 
@@ -154,7 +154,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
         /*this.hex.selectedTile(this.players[0].getPotentialMoveIds());
         console.log('standard getPotentialMoveIds', this.players[this.currentPlayer].getPotentialMoveIds());
       });*/
-    this.setInitialPosition();
+    // this.setInitialPosition();
 
   }
 
@@ -202,12 +202,32 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log('should be new position', localStorage.getItem('currentTile'));
       }}
 
-  updatePosition(array: any){
-    console.log(array)
-    for (let ele of array) {
-      console.log('element', ele)
-      /*this.hexMapById.get(this.players[ele]).addplayer(this.players[])*/
-    }
+  updatePosition(oldarray: any, newarray: any) {
+    console.log('in update')
+    const sample_players = ['player1', 'player2', 'player3', 'player4'];
+
+    if (this.numberPlayers > 2) {
+      for (let i = 0; i < this.numberPlayers; i++) {
+        this.players.push(new PlayerComponent());
+        this.players[i].playerId = sample_players[i];
+        this.players[i].position = newarray[i];
+      }}
+      console.log('this.players now', this.players);
+      console.log('players0:  ', this.players[0]);
+      console.log(oldarray);
+      console.log(newarray);
+      for (let i = 0; i < newarray.length; i++) {
+        console.log(newarray[i]);
+        console.log('this.players[i]', this.players[i]);
+        if (oldarray.length <= 0){
+          this.hexMapById.get(newarray[i]).addplayer(this.players[i]);
+        }
+        else {
+          this.hexMapById.get(oldarray[i]).removePlayer();
+          this.hexMapById.get(newarray[i]).addplayer(this.players[i]);
+        }
+      }
+
   }
   getPlayerPosition(playerId: string, position: string) {
 
@@ -215,7 +235,9 @@ export class StandardComponent implements OnInit, AfterViewInit {
   /*BACKEND Probabely need notion of current player*/
   updatePlayers(position: string) {
 
-    this.hexMapById.get(position).addplayer(this.players[this.currentPlayer]);
+    console.log(this.players[this.currentPlayer]);
+
+    /*this.hexMapById.get(position).addplayer(this.players[this.currentPlayer]);*/
   }
 
 

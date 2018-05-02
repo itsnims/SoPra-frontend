@@ -481,12 +481,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
-            console.log(result);
+            /*console.log(result);*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
               this.oldPositions.push(x);
             }
-            console.log('old', this.oldPositions);
             this.currentPositions = [];
             for (let key in result) {
               this.currentPositions.push(result[key].myFigure.currentPosition.name);
@@ -496,7 +495,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
           for (let i = 0; i <= 3; i++) {
             if (this.currentPositions[i] !== this.oldPositions[i]) {
               console.log('entered if');
-              this.standard.updatePosition(this.currentPositions);
+              this.standard.updatePosition(this.oldPositions, this.currentPositions);
+
             }
           }
         }
