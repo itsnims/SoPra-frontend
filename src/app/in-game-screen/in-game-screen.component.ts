@@ -331,8 +331,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       // decrease number of cards of specific type left
       if (this.lowerCards[key].cardID === this.chosenMarketCard) {
         let temp = Number(this.lowerCards[key].left);
-        temp--;
-        this.lowerCards[key].left = temp.toString();
+        if (temp > 0) {
+          temp--;
+          this.lowerCards[key].left = temp.toString();
+          break;
+        }
       }
     }
   }
@@ -496,14 +499,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             if (this.currentPositions[i] !== this.oldPositions[i]) {
               console.log('entered if');
               this.standard.updatePosition(this.oldPositions, this.currentPositions);
-
             }
           }
-        }
-            );
-
+        });
   }
-
 
 
 
@@ -543,4 +542,3 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.alive = false; // switches your TimerObservable off
   }
 }
-

@@ -163,27 +163,25 @@ export class StandardComponent implements OnInit, AfterViewInit {
     localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
     for (let i = 0; i < this.numberPlayers; i++) {
       this.hexMapById.get(this.players[i].position).addplayer(this.players[i]);
-
     }
     /*
     this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
       this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
       this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
       /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
-
   }
+
+
   addPlayers() {
     if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })};
-
       this.selectedHex = JSON.parse(localStorage.getItem('selectedHex'));
       const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
       (<HTMLElement>element).remove();
-      /*
-      Send blockade to backend*/
+
       console.log(this.selectedHex);
       this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selectedHex, httpOptions)
         .subscribe(result => console.log(result));
@@ -191,16 +189,17 @@ export class StandardComponent implements OnInit, AfterViewInit {
     else {
     this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
     this.players[this.currentPlayer].position =  JSON.parse(localStorage.getItem('selectedHex'));
-    /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
-    /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
+    // WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)
+    // WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.
     localStorage.removeItem('currentTile');
-    /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
+    // WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));
     localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
-    /*WORKS: console.log(localStorage.getItem('currentTile'))*/
+    // WORKS: console.log(localStorage.getItem('currentTile'))
 
     this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
     console.log('should be new position', localStorage.getItem('currentTile'));
       }}
+
 
   updatePosition(oldarray: any, newarray: any) {
     console.log('in update')
@@ -227,8 +226,9 @@ export class StandardComponent implements OnInit, AfterViewInit {
           this.hexMapById.get(newarray[i]).addplayer(this.players[i]);
         }
       }
-
   }
+
+
   getPlayerPosition(playerId: string, position: string) {
 
   }

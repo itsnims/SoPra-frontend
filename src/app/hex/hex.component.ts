@@ -88,15 +88,13 @@ export class HexComponent implements OnInit {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
+    console.log('buggy ' + localStorage.getItem('currentTile') );
     return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + localStorage.getItem('currentTile'), httpOptions)
       .subscribe(result => console.log(result));
-
-
   }
   removePlayer() {
     this.player = null;
   }
   selectedTile(position: string) {
-
   }
 }
