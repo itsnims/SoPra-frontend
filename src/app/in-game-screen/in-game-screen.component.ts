@@ -72,12 +72,12 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   // für useActionCard und useExpeditionCard verwendet
   actionCards = [
-    'cartographer',
-    'compass',
-    'native',
-    'scientist',
-    'transmitter',
-    'travel-log'
+    'Cartographer',
+    'Compass',
+    'Natives',
+    'Scientist',
+    'Transmitter',
+    'TravelDiary'
   ];
   selectedCardIsActionCard = false;
 
@@ -118,12 +118,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // liste der angekreuzten handcards
   selected = [];
   selectedCards = 0; // anzahl ausgewählte handcards
-
-
-  opponent1 = 'Opponent 1 name';
-  opponent2 = 'Opponent 2 name';
-  opponent3 = 'Opponent 3 name';
-
+  
 
   constructor(private roomService: RoomService, private http: HttpClient) {
     this.possibleTiles = new Array<string>();
