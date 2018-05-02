@@ -66,9 +66,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   i = 0;
   useActionCard = true;
   useExpeditionCard = true;
-  // trash = true;
   buyAvailable = true;
   discard = true;
+  // trash = true;
 
   // für useActionCard und useExpeditionCard verwendet
   actionCards = [
@@ -118,7 +118,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // liste der angekreuzten handcards
   selected = [];
   selectedCards = 0; // anzahl ausgewählte handcards
-  
+
 
   constructor(private roomService: RoomService, private http: HttpClient) {
     this.possibleTiles = new Array<string>();
@@ -146,7 +146,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // updated clickable status der buttons unten links
   updateSelectedCardIsActionCard() {
     for (this.i = 0; this.i < 6; this.i++) {
-      if (this.selectedCards[0] === this.actionCards[this.i]) {
+      if (this.selected[0] === this.actionCards[this.i]) {
         this.selectedCardIsActionCard = true;
         return;
       }
@@ -154,33 +154,54 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.selectedCardIsActionCard = false;
   }
   updateUseActionCard() {
-    if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
-      this.useActionCard = false;
-    } else
-      this.useActionCard = true;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
+        this.useActionCard = false;
+        return;
+      } else {
+        this.useActionCard = true;
+        return;
+      }
+    }
+    this.useActionCard = true;
   }
   updateUseExpeditionCard() {
-    if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
-      this.useExpeditionCard = false;
-    } else {
-      this.useExpeditionCard = true;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
+        this.useExpeditionCard = false;
+        return;
+      } else {
+        this.useExpeditionCard = true;
+        return;
+      }
     }
+    this.useExpeditionCard = true;
   }
   updateBuyAvailable() {
-    if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
-      this.buyAvailable = false;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
+        this.buyAvailable = false;
+        return;
+      }
+      else {
+        this.buyAvailable = true;
+        return;
+      }
     }
-    else {
-      this.buyAvailable = true;
-    }
+    this.buyAvailable = true;
   }
   updateDiscard() {
-    if (this.selectedCards >= 1) {
-      this.discard = false;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards >= 1) {
+        this.discard = false;
+        return;
+      }
+      else {
+        this.discard = true;
+        return;
+      }
     }
-    else {
-      this.discard = true;
-    }
+    this.discard = true;
   }
 
   unavailable() { // damit der upper market korrekt ausgewählt wird
