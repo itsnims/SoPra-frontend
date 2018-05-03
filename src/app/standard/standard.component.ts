@@ -23,6 +23,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
 /*classe für click events...
 * */
   hex: HexComponent;
+  empty: string;
   hello: any;
   players: PlayerComponent[] = [];
   hexMapById = new Map<string, HexComponent>();
@@ -50,17 +51,23 @@ export class StandardComponent implements OnInit, AfterViewInit {
       this.blockadestring.push('blockade' + String(i));
     }
     console.log('this is list:', this.blockadelist);
-
+    this.first = true;
     /*Adds players to Playercomponent list
     * -> now players holds all current players*/
-    this.currentPlayer = JSON.parse(localStorage.getItem('currentUser')).name;
     this.playerNames = JSON.parse(localStorage.getItem('playersInRoom'));
-    this.currentPlayer = this.playerNames.indexOf(this.currentPlayer);
     console.log('playerNames:', this.playerNames);
-    console.log('currentPlayer: ', this.currentPlayer);
 
     this.numberPlayers = this.playerNames.length;
+    console.log('numberPlayers', this.numberPlayers)
+    /*give the players their specific name*/
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
+    /*only implement 2 players logic*/
+    if (this.numberPlayers > 2) {
+      for (let i = 0; i < this.numberPlayers; i++) {
+        /*create a new playercomponent*/
+        this.players.push(new PlayerComponent());
+        this.players[i].playerId = sample_players[i];
+      }}
     /*
     How many playing pieces should be displayed on the board as well as their initial positions*/
     /*if (this.numberPlayers > 2) {
@@ -132,6 +139,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
         console.log('blockades', this.blockadelist);
       });
+
+
   }
 
 
@@ -159,20 +168,16 @@ export class StandardComponent implements OnInit, AfterViewInit {
   }
 
 
-  setInitialPosition() {
-    localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
-    for (let i = 0; i < this.numberPlayers; i++) {
-      this.hexMapById.get(this.players[i].position).addplayer(this.players[i]);
-
-    }
     /*
     this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
       this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
       this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
       /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
 
-  }
-  addPlayers() {
+
+  addPlayers(selectedCard: any) {
+    this.currentPlayer = localStorage.getItem('currentPlayer');
+    console.log('currentPlayer: ', this.currentPlayer);
     if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -184,62 +189,60 @@ export class StandardComponent implements OnInit, AfterViewInit {
       (<HTMLElement>element).remove();
       /*
       Send blockade to backend*/
-      console.log(this.selectedHex);
+      console.log('selected addplayer', this.selectedHex);
       this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selectedHex, httpOptions)
-        .subscribe(result => console.log(result));
+        .subscribe(result => console.log('result after addPlayer', result));
     }
     else {
     this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
     this.players[this.currentPlayer].position =  JSON.parse(localStorage.getItem('selectedHex'));
     /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
     /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
-    localStorage.removeItem('currentTile');
+    // localStorage.removeItem('currentTile');
     /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
-    localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
+      console.log('i am in else of addplayer')
+    // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
     /*WORKS: console.log(localStorage.getItem('currentTile'))*/
 
-    this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer]);
+    this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], localStorage.getItem('selectedHex'), selectedCard);
     console.log('should be new position', localStorage.getItem('currentTile'));
       }}
 
   updatePosition(oldarray: any, newarray: any) {
-    console.log('in update')
-    const sample_players = ['player1', 'player2', 'player3', 'player4'];
+    console.log('in update');
 
+    /*currently only for NOT 2players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
-        this.players.push(new PlayerComponent());
-        this.players[i].playerId = sample_players[i];
+        /*assign the the value of newarray*/
         this.players[i].position = newarray[i];
-      }}
-      console.log('this.players now', this.players);
-      console.log('players0:  ', this.players[0]);
-      console.log(oldarray);
-      console.log(newarray);
+      }} else {}
+      console.log('old', oldarray);
+      console.log('new', newarray);
+
       for (let i = 0; i < newarray.length; i++) {
         console.log(newarray[i]);
         console.log('this.players[i]', this.players[i]);
-        if (oldarray.length <= 0){
-          this.hexMapById.get(newarray[i]).addplayer(this.players[i]);
+        /*only removeplayers if they change position*/
+        this.empty = 'false';
+        if (oldarray.length === 0) {
+          this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+
         }
         else {
+          if ( oldarray[i] !== newarray[i]){
+            console.log('in else/if old: ', oldarray[i]),
+              console.log('in else/if new: ', newarray[i])
+          // localStorage.setItem('currentTile', newarray[i]);
+          /*remove player form hex component and then add them to the new positions.*/
           this.hexMapById.get(oldarray[i]).removePlayer();
-          this.hexMapById.get(newarray[i]).addplayer(this.players[i]);
+          console.log('this will be the player added: ', this.players[i])
+          this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);}
+          else {}
         }
       }
 
   }
-  getPlayerPosition(playerId: string, position: string) {
-
-  }
-  /*BACKEND Probabely need notion of current player*/
-  updatePlayers(position: string) {
-
-    console.log(this.players[this.currentPlayer]);
-
-    /*this.hexMapById.get(position).addplayer(this.players[this.currentPlayer]);*/
-  }
-
 
   mouseEnter(div: string) {
     console.log('mouse enter standard : ' + div);

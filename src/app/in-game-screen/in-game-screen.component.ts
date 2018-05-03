@@ -43,6 +43,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   display: boolean;
   alive: boolean;
   interval: number;
+  playerinterval: number;
   testArray: any[];
 
   playerColors = ['red', 'white', 'blue', 'yellow'];
@@ -51,7 +52,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
 
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
-
   // wenn lower market 6 karten hat ist isfree = false
   isFree = false;
   // wenn der user noch keinen kauf gemacht hat ist firstpurchase = false
@@ -134,6 +134,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.display = false;
     this.alive = true;
     this.interval = 1000;
+    this.playerinterval = 6000;
     this.isItMyTurn = false;
   }
 
@@ -369,7 +370,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    this.standard.addPlayers();
+    this.standard.addPlayers(this.selected);
     this.updateHandcards();
 
     const httpOptions = {
@@ -409,7 +410,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             }
           });
       });
-
+    console.log('got current User: ', localStorage.getItem('currentUser'));
     // here we get the current player from heroku in realtime
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -438,6 +439,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         if (this.playerName === (this.playerObject[idx]).name) {
           this.myColor = this.playerColors[idx];
           console.log('you are the player at position: ' + idx);
+          localStorage.setItem('currentPlayer', idx)
           console.log('you have color: ' + this.myColor);
         }
         // here we push the usernames of all opponents in the room into the list of opponents
@@ -476,29 +478,28 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       });*/
     // update playing piece positions:
     console.log('try for users', this.http.get(this.apiUrl + this.currentRoom, httpOptions));
-    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
+    TimerObservable.create(0, this.playerinterval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
-            /*console.log(result);*/
+            console.log('result', result);
+            /*first assign all positions before update to the array old positions*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
               this.oldPositions.push(x);
             }
             this.currentPositions = [];
+            console.log('new', this.currentPositions);
+            /*push the positions from the backend to the array currentPositions*/
             for (let key in result) {
               this.currentPositions.push(result[key].myFigure.currentPosition.name);
             }
+            console.log('new after push', this.currentPositions);
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
-          for (let i = 0; i <= 3; i++) {
-            if (this.currentPositions[i] !== this.oldPositions[i]) {
-              console.log('entered if');
+          /*make an update call only if there has been a change between the old and the new positions*/
               this.standard.updatePosition(this.oldPositions, this.currentPositions);
-
-            }
-          }
         }
             );
 
