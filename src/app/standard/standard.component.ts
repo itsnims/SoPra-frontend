@@ -171,7 +171,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
       /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
   }
 
-  
+
   addPlayers(selected: Array<string>) {
     if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
       const httpOptions = {
