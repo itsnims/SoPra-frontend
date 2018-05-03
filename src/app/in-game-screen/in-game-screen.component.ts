@@ -372,9 +372,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    this.standard.addPlayers();
+    this.standard.addPlayers(this.selected);
     this.updateHandcards();
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -385,7 +384,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       /*console.log(this.boards[0](this.hex.currenthexselection));*/
 
     }
-
 
 
   ngOnInit() {

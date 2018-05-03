@@ -171,8 +171,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
       /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
   }
 
-
-  addPlayers() {
+  
+  addPlayers(selected: Array<string>) {
     if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
       const httpOptions = {
         headers: new HttpHeaders({
@@ -183,7 +183,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
       (<HTMLElement>element).remove();
 
       console.log(this.selectedHex);
-      this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selectedHex, httpOptions)
+      this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selected[0] + '/' + this.selectedHex, httpOptions)
         .subscribe(result => console.log(result));
     }
     else {
