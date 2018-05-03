@@ -530,19 +530,19 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
-            console.log('result', result);
+            // console.log('result', result);
             /*first assign all positions before update to the array old positions*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
               this.oldPositions.push(x);
             }
             this.currentPositions = [];
-            console.log('new', this.currentPositions);
+            // console.log('new', this.currentPositions);
             /*push the positions from the backend to the array currentPositions*/
             for (let key in result) {
               this.currentPositions.push(result[key].myFigure.currentPosition.name);
             }
-            console.log('new after push', this.currentPositions);
+            // console.log('new after push', this.currentPositions);
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
