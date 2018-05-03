@@ -115,7 +115,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     {cardClass: 'Traveler', checked: false}
   ];
 
- 
+
   // liste der angekreuzten handcards
   selected = [];
   selectedCards = 0; // anzahl ausgewählte handcards
