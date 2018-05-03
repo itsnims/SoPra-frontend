@@ -178,12 +178,15 @@ export class StandardComponent implements OnInit, AfterViewInit {
   addPlayers(selectedCard: any) {
     this.currentPlayer = localStorage.getItem('currentPlayer');
     console.log('currentPlayer: ', this.currentPlayer);
+
+
+
+  // addPlayers(selected: Array<string>) {
     if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json'
         })};
-
       this.selectedHex = JSON.parse(localStorage.getItem('selectedHex'));
       const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
       (<HTMLElement>element).remove();
@@ -192,6 +195,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
       console.log('selected addplayer', this.selectedHex);
       this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selectedHex, httpOptions)
         .subscribe(result => console.log('result after addPlayer', result));
+
     }
     else {
     this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
@@ -204,9 +208,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
     // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
     /*WORKS: console.log(localStorage.getItem('currentTile'))*/
 
+
     this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], localStorage.getItem('selectedHex'), selectedCard);
     console.log('should be new position', localStorage.getItem('currentTile'));
       }}
+
 
   updatePosition(oldarray: any, newarray: any) {
     console.log('in update');
@@ -241,8 +247,21 @@ export class StandardComponent implements OnInit, AfterViewInit {
           else {}
         }
       }
+  }
+
+
+
+  getPlayerPosition(playerId: string, position: string) {
 
   }
+  /*BACKEND Probabely need notion of current player*/
+  updatePlayers(position: string) {
+
+    console.log(this.players[this.currentPlayer]);
+
+    /*this.hexMapById.get(position).addplayer(this.players[this.currentPlayer]);*/
+  }
+
 
   mouseEnter(div: string) {
     console.log('mouse enter standard : ' + div);

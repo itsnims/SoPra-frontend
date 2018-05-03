@@ -99,12 +99,10 @@ export class HexComponent implements OnInit {
         .subscribe(result => console.log('result form hex', result));
     }
 
-
   }
   removePlayer() {
     this.player = null;
   }
   selectedTile(position: string) {
-
   }
 }
