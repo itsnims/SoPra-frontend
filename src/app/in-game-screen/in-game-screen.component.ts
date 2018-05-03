@@ -138,6 +138,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   // überprüft wie viele karten im lower market sind
   checkIsFree() {
+    console.log(this.lowerCards);
     if (this.lowerCards.length !== 6) {
       this.isFree = false; } else {this.isFree = true; }
     if (this.firstPurchase === true) {
@@ -302,6 +303,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json'
       })};
     this.isItMyTurn = false;
+    this.firstPurchase = false;
     return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/endturn', httpOptions).
       subscribe(result => console.log(result));
   }
