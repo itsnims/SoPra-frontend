@@ -4,6 +4,7 @@ import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpParams} from '@angular/common/http';
+import {WinScreenComponent} from '../win-screen/win-screen.component';
 
 import {RoomService} from '../shared/services/room.service';
 import 'rxjs/add/operator/takeWhile';

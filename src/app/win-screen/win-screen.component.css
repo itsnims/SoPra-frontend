@@ -1,0 +1,63 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 768px;
+  width: 1366px;
+  background-color: transparent;
+}
+
+.winBox {
+  background: rgba(0,0,0,0.65);
+
+  position: fixed;
+  top: 105px;
+  left: 283px;
+  width: 800px;
+  height: 530px;
+}
+.winText {
+  text-align: center;
+  position: fixed;
+  top: 280px;
+  left: 283px;
+  width: 800px;
+  height: 530px;
+
+}
+.winMessage {
+  text-align: center;
+  display: block;
+    top: 280px;
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+
+.winQuit {
+  width: 125px;
+  display: inline-block;
+  padding: 6px 12px;
+  color: white;
+  background-color: black;
+  font-size: 17px;
+  line-height: 1.42857143;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid white;
+  border-radius: 4px
+}

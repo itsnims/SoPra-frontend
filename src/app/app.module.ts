@@ -20,6 +20,7 @@ import { RoomService} from './shared/services/room.service';
 import { ColumnComponent } from './column/column.component';
 import { PlayerComponent } from './player/player.component';
 import { HexComponent } from './hex/hex.component';
+import { WinScreenComponent } from './win-screen/win-screen.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { HexComponent } from './hex/hex.component';
     ColumnComponent,
     PlayerComponent,
     HexComponent,
+    WinScreenComponent,
   ],
   entryComponents: [PlayerComponent],
   imports: [
