@@ -28,6 +28,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   handCardObject: object;
   current_player: string;
   isItMyTurn: boolean;
+  isItMyTurnCopy: boolean;
+  trashButtonClickable: boolean;
+
+
+
   currentHandCardObject: object;
 
   marketCardsObject: object;
@@ -70,6 +75,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   buyAvailable = true;
   discard = true;
 
+  // selected: string[];
+
   // für useActionCard und useExpeditionCard verwendet
   actionCards = [
     'Cartographer',
@@ -79,6 +86,31 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     'Transmitter',
     'TravelDiary'
   ];
+
+  moveActionCards = [
+    'Natives'
+  ];
+
+
+  drawActionCards = [
+    'Cartographer',
+    'Compass',
+    'Scientist',
+    'TravelDiary'
+  ];
+
+  /*
+  drawActionCardsDict = [
+    {cardID: 'Scientist', maxCardsToBeTrashed : 1},
+    {cardID: 'TravelDiary', maxCardsToBeTrashed: 2},
+    {cardID: 'Compass', maxCardsToBeTrashed: 0},
+    {cardID: 'Cartographer', maxCardsToBeTrashed: 0},
+  ]; */
+
+  marketActionCards = [
+    'Transmitter'
+  ];
+
   selectedCardIsActionCard = false;
 
   // hier werden die upper market cards eingelesen
@@ -115,9 +147,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     {cardClass: 'Traveler', checked: false}
   ];
 
+ httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })};
+
 
   // liste der angekreuzten handcards
   selected = [];
+
   selectedCards = 0; // anzahl ausgewählte handcards
 
 
@@ -131,18 +169,22 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.alive = true;
     this.interval = 1000;
     this.isItMyTurn = false;
+    this.isItMyTurnCopy = false;
+    this.trashButtonClickable = true;
   }
-
 
 
 
   // überprüft wie viele karten im lower market sind
   checkIsFree() {
-    console.log(this.lowerCards);
-    if (this.lowerCards.length !== 6) {
-      this.isFree = false; } else {this.isFree = true; }
-    if (this.firstPurchase === true) {
-      this.isFree = true; }
+    this.http.get(this.apiUrl + this.currentRoom + '/CurrentBottom')
+      .subscribe(result => {
+        console.log(result);
+        if (result !== 6) {
+          this.isFree = false; } else {this.isFree = true; }
+        if (this.firstPurchase === true) {
+          this.isFree = true; }
+      });
   }
 
   // updated clickable status der buttons unten links
@@ -154,6 +196,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       }
     }
     this.selectedCardIsActionCard = false;
+
+
+
+
+
   }
   updateUseActionCard() {
     if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
@@ -304,8 +351,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       })};
     this.isItMyTurn = false;
     this.firstPurchase = false;
-    return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/endturn', httpOptions).
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/endturn', httpOptions).
       subscribe(result => console.log(result));
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
   }
 
 
@@ -534,7 +584,42 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  playActionCard() {
+    if (this.drawActionCards.includes(this.selected[0])) {
+      console.log('yaaaay');
+      this.playDrawActionCard(this.selected[0]);
+    } else if (this.moveActionCards.includes(this.selected[0])) {
+      this.playMoveActionCard();
+    } else if (this.marketActionCards.includes(this.selected[0])) {
+      this.playMarketActionCard();
+    }
+  }
+
+
+  playDrawActionCard(drawActionCard: string) {
+    // draw a new card from draw pile
+    console.log('playActionCard');
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions).subscribe(result => console.log(result));
+    if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
+      this.trashButtonClickable = false;
+    }
+    this.trashButtonClickable = true;
+  }
+
+  playMoveActionCard() {
+
+  }
+
+  playMarketActionCard() {
+
+  }
+
+
+
   ngOnDestroy() {
     this.alive = false; // switches your TimerObservable off
   }
+
+
 }
