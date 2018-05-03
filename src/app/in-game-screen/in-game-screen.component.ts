@@ -48,7 +48,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   display: boolean;
   alive: boolean;
   interval: number;
-  playerinterval: number;
   testArray: any[];
 
   playerColors = ['red', 'white', 'blue', 'yellow'];
@@ -168,7 +167,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.display = false;
     this.alive = true;
     this.interval = 1000;
-    this.playerinterval = 6000;
     this.isItMyTurn = false;
     this.isItMyTurnCopy = false;
     this.trashButtonClickable = true;
@@ -527,7 +525,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       });*/
     // update playing piece positions:
     console.log('try for users', this.http.get(this.apiUrl + this.currentRoom, httpOptions));
-    TimerObservable.create(0, this.playerinterval)  // This executes the http request at the specified interval
+    TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
