@@ -28,6 +28,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   handCardObject: object;
   current_player: string;
   isItMyTurn: boolean;
+  isItMyTurnCopy: boolean;
+  trashButtonClickable: boolean;
+
+
+
   currentHandCardObject: object;
 
   marketCardsObject: object;
@@ -51,7 +56,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
 
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
-
   // wenn lower market 6 karten hat ist isfree = false
   isFree = false;
   // wenn der user noch keinen kauf gemacht hat ist firstpurchase = false
@@ -70,6 +74,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   discard = true;
   // trash = true;
 
+  // selected: string[];
+
   // für useActionCard und useExpeditionCard verwendet
   actionCards = [
     'Cartographer',
@@ -79,6 +85,31 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     'Transmitter',
     'TravelDiary'
   ];
+
+  moveActionCards = [
+    'Natives'
+  ];
+
+
+  drawActionCards = [
+    'Cartographer',
+    'Compass',
+    'Scientist',
+    'TravelDiary'
+  ];
+
+  /*
+  drawActionCardsDict = [
+    {cardID: 'Scientist', maxCardsToBeTrashed : 1},
+    {cardID: 'TravelDiary', maxCardsToBeTrashed: 2},
+    {cardID: 'Compass', maxCardsToBeTrashed: 0},
+    {cardID: 'Cartographer', maxCardsToBeTrashed: 0},
+  ]; */
+
+  marketActionCards = [
+    'Transmitter'
+  ];
+
   selectedCardIsActionCard = false;
 
   // hier werden die upper market cards eingelesen
@@ -115,8 +146,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     {cardClass: 'Traveler', checked: false}
   ];
 
+ httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })};
+
+
   // liste der angekreuzten handcards
   selected = [];
+
   selectedCards = 0; // anzahl ausgewählte handcards
 
 
@@ -130,17 +168,22 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.alive = true;
     this.interval = 1000;
     this.isItMyTurn = false;
+    this.isItMyTurnCopy = false;
+    this.trashButtonClickable = true;
   }
-
 
 
 
   // überprüft wie viele karten im lower market sind
   checkIsFree() {
-    if (this.lowerCards.length !== 6) {
-      this.isFree = false; } else {this.isFree = true; }
-    if (this.firstPurchase === true) {
-      this.isFree = true; }
+    this.http.get(this.apiUrl + this.currentRoom + '/CurrentBottom')
+      .subscribe(result => {
+        console.log(result);
+        if (result !== 6) {
+          this.isFree = false; } else {this.isFree = true; }
+        if (this.firstPurchase === true) {
+          this.isFree = true; }
+      });
   }
 
   // updated clickable status der buttons unten links
@@ -152,6 +195,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       }
     }
     this.selectedCardIsActionCard = false;
+
+
+
+
+
   }
   updateUseActionCard() {
     if (this.isItMyTurn === true) {
@@ -322,8 +370,12 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json'
       })};
     this.isItMyTurn = false;
-    return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/endturn', httpOptions).
+    this.firstPurchase = false;
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/endturn', httpOptions).
       subscribe(result => console.log(result));
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
   }
 
 
@@ -388,9 +440,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    this.standard.addPlayers();
+    this.standard.addPlayers(this.selected);
     this.updateHandcards();
-
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -401,7 +452,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       /*console.log(this.boards[0](this.hex.currenthexselection));*/
 
     }
-
 
 
   ngOnInit() {
@@ -428,7 +478,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             }
           });
       });
-
+    console.log('got current User: ', localStorage.getItem('currentUser'));
     // here we get the current player from heroku in realtime
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -457,6 +507,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         if (this.playerName === (this.playerObject[idx]).name) {
           this.myColor = this.playerColors[idx];
           console.log('you are the player at position: ' + idx);
+          localStorage.setItem('currentPlayer', idx)
           console.log('you have color: ' + this.myColor);
         }
         // here we push the usernames of all opponents in the room into the list of opponents
@@ -500,24 +551,27 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
-            /*console.log(result);*/
+            // console.log('result', result);
+            /*first assign all positions before update to the array old positions*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
               this.oldPositions.push(x);
             }
             this.currentPositions = [];
+            // console.log('new', this.currentPositions);
+            /*push the positions from the backend to the array currentPositions*/
             for (let key in result) {
               this.currentPositions.push(result[key].myFigure.currentPosition.name);
             }
+            // console.log('new after push', this.currentPositions);
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
-          for (let i = 0; i <= 3; i++) {
-            if (this.currentPositions[i] !== this.oldPositions[i]) {
-              console.log('entered if');
+          /*make an update call only if there has been a change between the old and the new positions*/
               this.standard.updatePosition(this.oldPositions, this.currentPositions);
-            }
-          }
-        });
+        }
+            );
+
+
   }
 
 
@@ -554,7 +608,42 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     });
   }
 
+
+  playActionCard() {
+    if (this.drawActionCards.includes(this.selected[0])) {
+      console.log('yaaaay');
+      this.playDrawActionCard(this.selected[0]);
+    } else if (this.moveActionCards.includes(this.selected[0])) {
+      this.playMoveActionCard();
+    } else if (this.marketActionCards.includes(this.selected[0])) {
+      this.playMarketActionCard();
+    }
+  }
+
+
+  playDrawActionCard(drawActionCard: string) {
+    // draw a new card from draw pile
+    console.log('playActionCard');
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions).subscribe(result => console.log(result));
+    if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
+      this.trashButtonClickable = false;
+    }
+    this.trashButtonClickable = true;
+  }
+
+  playMoveActionCard() {
+
+  }
+
+  playMarketActionCard() {
+
+  }
+
+
+
   ngOnDestroy() {
     this.alive = false; // switches your TimerObservable off
   }
+
+
 }

@@ -8,6 +8,8 @@ import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
 import {HexagonBoardComponent} from './hexagon-board/hexagon-board.component';
 import {StandardComponent} from './standard/standard.component';
 import {HexComponent} from './hex/hex.component';
+import {HillsofgoldComponent} from './hillsofgold/hillsofgold.component';
+import {HomestretchComponent} from './homestretch/homestretch.component';
 
 
 const appRoutes: Routes = [
@@ -19,6 +21,9 @@ const appRoutes: Routes = [
     { path: 'in-game-screen', component: InGameScreenComponent},
   {path: 'hexagon-board', component: HexagonBoardComponent},
   {path: 'standard', component: StandardComponent},
+  {path: 'hillsofgold', component: HillsofgoldComponent},
+  {path: 'homestretch', component: HomestretchComponent},
+
 
 
   // otherwise redirect to home

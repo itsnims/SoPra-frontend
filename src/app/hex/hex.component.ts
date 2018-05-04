@@ -43,6 +43,7 @@ export class HexComponent implements OnInit {
     if (this.clickTile(this.hexId)) {
       console.log(this.hexId, 'was clicked');
       this.selectedTile(this.hexId);
+      localStorage.removeItem('selectedHex')
       localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
     }
   }
@@ -81,16 +82,23 @@ export class HexComponent implements OnInit {
     return '';
   }
 
-  addplayer(p: PlayerComponent) {
+  addplayer(p: PlayerComponent, tile: any, card: any) {
     console.log('i am here');
     this.player = p;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-    console.log('buggy ' + localStorage.getItem('currentTile') );
-    return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + localStorage.getItem('currentTile'), httpOptions)
-      .subscribe(result => console.log(result));
+    if (card === 'false'){} else {
+      console.log('tile', tile)
+      console.log('card: ', String(tile))
+      tile = tile.replace(/['"]+/g, '')
+      console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile))
+      // console.log('buggy', localStorage.getItem(('currentTile')))
+      this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
+        .subscribe(result => console.log('result form hex', result));
+    }
+
   }
   removePlayer() {
     this.player = null;
