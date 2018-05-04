@@ -33,6 +33,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
 
+
   currentHandCardObject: object;
 
   marketCardsObject: object;
@@ -196,39 +197,56 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     }
     this.selectedCardIsActionCard = false;
 
-
-
-
-
   }
   updateUseActionCard() {
-    if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
-      this.useActionCard = false;
-    } else
-      this.useActionCard = true;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
+        this.useActionCard = false;
+        return;
+      } else {
+        this.useActionCard = true;
+        return;
+      }
+    }
+    this.useActionCard = true;
   }
   updateUseExpeditionCard() {
-    if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
-      this.useExpeditionCard = false;
-    } else {
-      this.useExpeditionCard = true;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
+        this.useExpeditionCard = false;
+        return;
+      } else {
+        this.useExpeditionCard = true;
+        return;
+      }
     }
+    this.useExpeditionCard = true;
   }
   updateBuyAvailable() {
-    if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
-      this.buyAvailable = false;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
+        this.buyAvailable = false;
+        return;
+      }
+      else {
+        this.buyAvailable = true;
+        return;
+      }
     }
-    else {
-      this.buyAvailable = true;
-    }
+    this.buyAvailable = true;
   }
   updateDiscard() {
-    if (this.selectedCards >= 1) {
-      this.discard = false;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards >= 1) {
+        this.discard = false;
+        return;
+      }
+      else {
+        this.discard = true;
+        return;
+      }
     }
-    else {
-      this.discard = true;
-    }
+    this.discard = true;
   }
 
   unavailable() { // damit der upper market korrekt ausgewählt wird
@@ -248,6 +266,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.selectedCards--;
       this.selected.splice(position, 1);
       console.log('selected', this.selected);
+      this.updateSelectedCardIsActionCard();
+      this.updateUseActionCard();
+      this.updateUseExpeditionCard();
+      this.updateBuyAvailable();
+      this.updateDiscard();
     }
     else {
       this.possibleTiles = [];
@@ -259,6 +282,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       /**/
       console.log('selected', this.selected);
       /*problem where is the notion of currenttile???????*/
+      this.updateSelectedCardIsActionCard();
+      this.updateUseActionCard();
+      this.updateUseExpeditionCard();
+      this.updateBuyAvailable();
+      this.updateDiscard();
       console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
       return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
         .subscribe(result => {
@@ -272,17 +300,13 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
         });
-      }
-
-    this.updateSelectedCardIsActionCard();
-    this.updateUseActionCard();
-    this.updateUseExpeditionCard();
-    this.updateBuyAvailable();
-    this.updateDiscard();
-    /**/
-
-    /**/
     }
+
+
+    /**/
+
+    /**/
+  }
     // toggelt die marktbuttons
   showMarketFunc() {
     if (this.showMarket === true) {
@@ -450,8 +474,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 // here we check whether it's actually the player's turn
                 if (this.playerName === this.current_player) {
                   this.isItMyTurn = true;
+                  this.isItMyTurnCopy = false;
                 } else {
                   this.isItMyTurn = false;
+                  this.isItMyTurnCopy = true;
                 }
               }
             }
