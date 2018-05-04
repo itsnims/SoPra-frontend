@@ -248,6 +248,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.selectedCards--;
       this.selected.splice(position, 1);
       console.log('selected', this.selected);
+      this.updateSelectedCardIsActionCard();
+      this.updateUseActionCard();
+      this.updateUseExpeditionCard();
+      this.updateBuyAvailable();
+      this.updateDiscard();
     }
     else {
       this.possibleTiles = [];
@@ -259,6 +264,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       /**/
       console.log('selected', this.selected);
       /*problem where is the notion of currenttile???????*/
+      this.updateSelectedCardIsActionCard();
+      this.updateUseActionCard();
+      this.updateUseExpeditionCard();
+      this.updateBuyAvailable();
+      this.updateDiscard();
       console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
       return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
         .subscribe(result => {
@@ -272,17 +282,13 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
         });
-      }
-
-    this.updateSelectedCardIsActionCard();
-    this.updateUseActionCard();
-    this.updateUseExpeditionCard();
-    this.updateBuyAvailable();
-    this.updateDiscard();
-    /**/
-
-    /**/
     }
+
+
+    /**/
+
+    /**/
+  }
     // toggelt die marktbuttons
   showMarketFunc() {
     if (this.showMarket === true) {
