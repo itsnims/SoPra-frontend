@@ -47,10 +47,10 @@
 <div>
   <button [disabled]="useActionCard" id="actionCard" class="bottomLeft" type="button" (click)="playActionCard()"> Use action card</button>
   <button [disabled]="trashButtonClickable" id="trash" class="bottomLeft" type="button">Trash</button>
-  <button id="endTurn" class="bottomLeft" type="submit" (click)="endturnFunction()">End turn</button>
+  <button [disabled]="isItMyTurnCopy" id="endTurn" class="bottomLeft" type="submit" (click)="endturnFunction()">End turn</button>
   <button [disabled]="useExpeditionCard" id="expedCard" class="bottomLeft" type="submit" (click)="movePlayer()">Use exped. card</button>
   <button [disabled]="buyAvailable" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
-  <button id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
+  <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
   <!--   <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button> -->
 
   <button id="updatedHancards"  type="submit" (click)="updateHandcards()">update handcards</button>

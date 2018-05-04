@@ -33,6 +33,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
 
+
   currentHandCardObject: object;
 
   marketCardsObject: object;
@@ -196,10 +197,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     }
     this.selectedCardIsActionCard = false;
 
-
-
-
-
   }
   updateUseActionCard() {
     if (this.isItMyTurn === true) {
@@ -226,20 +223,30 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.useExpeditionCard = true;
   }
   updateBuyAvailable() {
-    if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
-      this.buyAvailable = false;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
+        this.buyAvailable = false;
+        return;
+      }
+      else {
+        this.buyAvailable = true;
+        return;
+      }
     }
-    else {
-      this.buyAvailable = true;
-    }
+    this.buyAvailable = true;
   }
   updateDiscard() {
-    if (this.selectedCards >= 1) {
-      this.discard = false;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards >= 1) {
+        this.discard = false;
+        return;
+      }
+      else {
+        this.discard = true;
+        return;
+      }
     }
-    else {
-      this.discard = true;
-    }
+    this.discard = true;
   }
 
   unavailable() { // damit der upper market korrekt ausgewählt wird
@@ -467,8 +474,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 // here we check whether it's actually the player's turn
                 if (this.playerName === this.current_player) {
                   this.isItMyTurn = true;
+                  this.isItMyTurnCopy = false;
                 } else {
                   this.isItMyTurn = false;
+                  this.isItMyTurnCopy = true;
                 }
               }
             }
