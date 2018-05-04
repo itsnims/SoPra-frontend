@@ -191,6 +191,25 @@
   overflow-y: auto;
   white-space: nowrap;
 }
+
+.scrollCards::-webkit-scrollbar{
+  -webkit-appearance: none;
+
+}
+
+.scrollCards::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+.scrollCards::-webkit-scrollbar:horizontal {
+  width: 11px;
+}
+.scrollCards::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0,0,0,0.5);
+}
+
+
 .handCardFormat {
   display: inline-block;
   margin-right: 10px;
