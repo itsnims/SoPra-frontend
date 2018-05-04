@@ -202,17 +202,28 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   }
   updateUseActionCard() {
-    if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
-      this.useActionCard = false;
-    } else
-      this.useActionCard = true;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
+        this.useActionCard = false;
+        return;
+      } else {
+        this.useActionCard = true;
+        return;
+      }
+    }
+    this.useActionCard = true;
   }
   updateUseExpeditionCard() {
-    if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
-      this.useExpeditionCard = false;
-    } else {
-      this.useExpeditionCard = true;
+    if (this.isItMyTurn === true) {
+      if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
+        this.useExpeditionCard = false;
+        return;
+      } else {
+        this.useExpeditionCard = true;
+        return;
+      }
     }
+    this.useExpeditionCard = true;
   }
   updateBuyAvailable() {
     if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
