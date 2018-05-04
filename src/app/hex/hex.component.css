@@ -164,6 +164,14 @@
   background-position: center;
 }
 
+#get-card2{
+
+  background-size: contain;
+  background-image: url(up-card.png), url(up-card.png);
+  background-repeat: no-repeat;
+  background-position: bottom, top;
+}
+
 #get-card3 {
   background-size: contain;
   background-image: url(up-card.png), url(up-card.png), url(up-card.png);
