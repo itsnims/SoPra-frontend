@@ -21,6 +21,7 @@ import { ColumnComponent } from './column/column.component';
 import { PlayerComponent } from './player/player.component';
 import { HexComponent } from './hex/hex.component';
 import { HillsofgoldComponent } from './hillsofgold/hillsofgold.component';
+import { HomestretchComponent } from './homestretch/homestretch.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { HillsofgoldComponent } from './hillsofgold/hillsofgold.component';
     PlayerComponent,
     HexComponent,
     HillsofgoldComponent,
+    HomestretchComponent,
   ],
   entryComponents: [PlayerComponent],
   imports: [
