@@ -86,46 +86,50 @@ h1 {
   font-variant: small-caps;
   font-style: italic;
 }
-#players {
-  text-align: center;
+.playersPosition {
   position: fixed;
   top: 273px;
   left: 283px;
   width: 800px;
   height: 530px;
 }
-#p1 {
+#players {
+
   text-align: center;
-  display: block;
+  margin-top: 10px;
+
+}
+#p0 {
   color: red;
   font-family: serif;
   font-weight: bold;
   font-variant: small-caps;
   font-style: italic;
+  margin-top: 10px;
 }
-#p2 {
-  display: block;
+#p1 {
   color: white;
   font-family: serif;
   font-weight: bold;
   font-variant: small-caps;
   font-style: italic;
+  margin-top: 10px;
 }
-#p3 {
-  display: block;
+#p2 {
   color: blue;
   font-family: serif;
   font-weight: bold;
   font-variant: small-caps;
   font-style: italic;
+  margin-top: 10px;
 }
-#p4 {
-  display: block;
+#p3 {
   color: yellow;
   font-family: serif;
   font-weight: bold;
   font-variant: small-caps;
   font-style: italic;
+  margin-top: 10px;
 }
 .bottomButtons {
   width: 125px;
