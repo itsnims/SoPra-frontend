@@ -434,8 +434,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   movePlayer() {
     console.log('entered mov');
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
-    // TODO addPlayers() doesn't work yet
-    // console.log(this.standard.addPlayers());
     this.standard.addPlayers(this.selected);
     this.updateHandcards();
     this.updateHandcards();
@@ -450,11 +448,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json'
       })};
     this.selected = [];
-    /*this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + localStorage.getItem('currentTile'), null, httpOptions);*/
-
-      /*console.log(this.boards[0](this.hex.currenthexselection));*/
-
-    }
+  }
 
 
   ngOnInit() {
@@ -638,7 +632,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
   playMoveActionCard() {
-
+    this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction', this.httpOptions)
+      .subscribe(result => console.log(result));
   }
 
   playMarketActionCard() {
