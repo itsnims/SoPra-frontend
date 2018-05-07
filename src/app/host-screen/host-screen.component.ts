@@ -39,8 +39,8 @@ export class HostScreenComponent implements OnInit {
     {numbValue: '2', numbSelect: '2'}
     ];
 
-  public shown = false;
-
+  // public shown = false;
+/*
   public pwdInput() {
     if (this.shown === true) {
       this.room.pwdBool = true;
@@ -48,6 +48,7 @@ export class HostScreenComponent implements OnInit {
       this.room.pwdBool = false;
     }
   }
+  */
   playerNumSelect() {
     // this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
     this.room.maxPlayers = (<HTMLInputElement>document.getElementById('maxPlayer')).value;

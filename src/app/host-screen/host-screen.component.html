@@ -14,7 +14,7 @@
   <option *ngFor="let numbOfPlayer of numbOfPlayers" [value]="numbOfPlayer.numbValue">{{numbOfPlayer.numbSelect}}</option>
 </select>
 
-<h3>Password Protection:</h3>
+<!--h3>Password Protection:</h3>
 
 <div class="onoffswitch">
   <form #myForm="ngForm">
@@ -32,7 +32,7 @@
     <h3>Password:</h3>
     <input class="hostInput" type="text" placeholder="My password" [(ngModel)]="room.pwd"><br><br>
   </div>
-</div>
+</div-->
 
 <button class="hostBtn" id="createGame" type="submit" (click)= "playerNumSelect();createRoom()">Create Game</button>
 <button class="hostBtn" id="back2lobby" type="submit" [routerLink]="['/game']">Back to Lobby</button>

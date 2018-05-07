@@ -72,7 +72,7 @@ export class RoomService {
     this.User.username = '';   // here we hardcode a user, so that we can display the room in an appropriate JSON format
     this.User.id = 1;
 
-    const bodyString = JSON.stringify({name: room.name, owner: this.showCurrentHost(), maxplayer: room.maxPlayers, password : room.pwd}); // TODO add path ID
+    const bodyString = JSON.stringify({name: room.name, owner: this.showCurrentHost(), maxplayer: room.maxPlayers /*, password : room.pwd*/}); // TODO add path ID
     // const userID = JSON.stringify({id: user.id})
 
     const httpOptions = {

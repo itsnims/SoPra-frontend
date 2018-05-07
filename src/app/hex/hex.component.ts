@@ -43,7 +43,7 @@ export class HexComponent implements OnInit {
     if (this.clickTile(this.hexId)) {
       console.log(this.hexId, 'was clicked');
       this.selectedTile(this.hexId);
-      localStorage.removeItem('selectedHex')
+      localStorage.removeItem('selectedHex');
       localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
     }
   }
@@ -89,11 +89,11 @@ export class HexComponent implements OnInit {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
-    if (card === 'false'){} else {
-      console.log('tile', tile)
-      console.log('card: ', String(tile))
-      tile = tile.replace(/['"]+/g, '')
-      console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile))
+    if (card === 'false') {} else {
+      console.log('tile', tile);
+      console.log('card: ', String(tile));
+      tile = tile.replace(/['"]+/g, '');
+      console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile));
       // console.log('buggy', localStorage.getItem(('currentTile')))
       this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
         .subscribe(result => console.log('result form hex', result));
