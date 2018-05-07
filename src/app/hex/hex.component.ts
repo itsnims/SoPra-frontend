@@ -84,7 +84,6 @@ export class HexComponent implements OnInit {
 
   addplayer(p: PlayerComponent, tile: any, card: any) {
     console.log('i am here');
-    this.player = p;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -93,10 +92,14 @@ export class HexComponent implements OnInit {
       console.log('tile', tile)
       console.log('card: ', String(tile))
       tile = tile.replace(/['"]+/g, '')
-      console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile))
-      // console.log('buggy', localStorage.getItem(('currentTile')))
-      this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
-        .subscribe(result => console.log('result form hex', result));
+      console.log('clickables in addplayer', this.clickables)
+      if (this.clickables) {
+        this.player = p;
+        console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile))
+        // console.log('buggy', localStorage.getItem(('currentTile')))
+        this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
+          .subscribe(result => console.log('result form hex', result));
+      } else {console.log('in else so works'); }
     }
 
   }
