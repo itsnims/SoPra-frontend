@@ -439,6 +439,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   movePlayer() {
     console.log('entered mov');
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
+    // TODO addPlayers() doesn't work yet
+    // console.log(this.standard.addPlayers());
+    console.log(this.selected)
+
     this.standard.addPlayers(this.selected);
     this.updateHandcards();
     this.updateHandcards();
