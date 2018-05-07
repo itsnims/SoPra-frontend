@@ -43,6 +43,8 @@ td{
 }
 
 .blackRow {
+  table-layout: fixed;
+  width: 256px;
   background-color: transparent;
   margin-bottom: 10px;
   color: white;
@@ -54,12 +56,14 @@ td{
   font-style: italic;
 }
 #titleRow {
+  table-layout: fixed;
+  width: 256px;
   background: rgba(0,0,0,0.75);
   position: fixed;
   top: 120px;
   left: 298px;
   margin-bottom: 8px;
-  width: 770px;
+
   height: 45px;
 }
 #rooms {

@@ -7,7 +7,7 @@ import {HttpParams} from '@angular/common/http';
 
 import {RoomService} from '../shared/services/room.service';
 import 'rxjs/add/operator/takeWhile';
-import {TimerObservable} from "rxjs/observable/TimerObservable";
+import {TimerObservable} from 'rxjs/observable/TimerObservable';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
@@ -30,9 +30,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   isItMyTurn: boolean;
   isItMyTurnCopy: boolean;
   trashButtonClickable: boolean;
-
-
-
+  temp: boolean;
 
   currentHandCardObject: object;
 
@@ -156,9 +154,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // liste der angekreuzten handcards
   selected = [];
 
-  selectedCards = 0; // anzahl ausgewählte handcards
-
-
   constructor(private roomService: RoomService, private http: HttpClient) {
     this.possibleTiles = new Array<string>();
     this.currentPositions = new Array<string>();
@@ -190,8 +185,12 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // updated clickable status der buttons unten links
   updateSelectedCardIsActionCard() {
     for (this.i = 0; this.i < 6; this.i++) {
-      if (this.selectedCards[0] === this.actionCards[this.i]) {
+      if (this.selected[0] === this.actionCards[this.i]) {
         this.selectedCardIsActionCard = true;
+        if (this.selected[0] === 'Transmitter') {
+          this.temp = this.isFree;
+          this.isFree = false;
+        }
         return;
       }
     }
@@ -200,7 +199,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateUseActionCard() {
     if (this.isItMyTurn === true) {
-      if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
+      if (this.selected.length === 1 && this.selectedCardIsActionCard === true) {
         this.useActionCard = false;
         return;
       } else {
@@ -212,7 +211,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateUseExpeditionCard() {
     if (this.isItMyTurn === true) {
-      if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
+      if (this.selected.length === 1 && this.selectedCardIsActionCard === false) {
         this.useExpeditionCard = false;
         return;
       } else {
@@ -224,7 +223,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateBuyAvailable() {
     if (this.isItMyTurn === true) {
-      if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
+      if (this.selected.length >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
         this.buyAvailable = false;
         return;
       }
@@ -237,7 +236,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateDiscard() {
     if (this.isItMyTurn === true) {
-      if (this.selectedCards >= 1) {
+      if (this.selected.length >= 1) {
         this.discard = false;
         return;
       }
@@ -263,7 +262,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       /*console.log('on if condition', this.possibleTiles)*/
       this.handCards[i].checked = false;
       const position = this.selected.indexOf(newCard);
-      this.selectedCards--;
       this.selected.splice(position, 1);
       console.log('selected', this.selected);
       this.updateSelectedCardIsActionCard();
@@ -277,7 +275,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       localStorage.removeItem('possibleTiles');
       /* WORKS # local storage gets deleted console.log('shouldnotwork', localStorage.getItem('possibleTiles'));*/
       this.handCards[i].checked = true;
-      this.selectedCards++;
       this.selected.push(newCard);
       /**/
       console.log('selected', this.selected);
@@ -339,7 +336,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   showSelected() {
     console.log(this.chosenMarketCard);
-    for (let key in this.lowerCards) {
+    for (const key in this.lowerCards) {
         console.log(this.lowerCards[key].cardID);
         console.log(this.lowerCards[key].cardID === this.chosenMarketCard);
     }
@@ -398,7 +395,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateHandcards();
     this.updateHandcards();
     this.selected = [];
-    for (let key in this.lowerCards) {
+    for (const key in this.lowerCards) {
       // decrease number of cards of specific type left
       if (this.lowerCards[key].cardID === this.chosenMarketCard) {
         let temp = Number(this.lowerCards[key].left);
@@ -423,6 +420,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
   updateHandcards() {
+    console.log('handcards should be updated');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -444,18 +442,22 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
     console.log(this.selected)
+
     this.standard.addPlayers(this.selected);
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
     this.updateHandcards();
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })};
     this.selected = [];
-    /*this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + localStorage.getItem('currentTile'), null, httpOptions);*/
-
-      /*console.log(this.boards[0](this.hex.currenthexselection));*/
-
-    }
+  }
 
 
   ngOnInit() {
@@ -467,7 +469,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/currentPlayer')
           .subscribe(result => {
-            for (let key in result) {
+            for (const key in result) {
               if (key === 'name') {
                 this.current_player = result[key];
                 // console.log('the current_player = ' + this.current_player);
@@ -491,7 +493,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/currentPlayer')
           .subscribe(result => {
-            for (let key in result) {
+            for (const key in result) {
               if (key === 'name') {
                 this.current_player = result[key];
                 // console.log('dieser spieler ist an der reihe: ' + this.current_player);
@@ -513,7 +515,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         if (this.playerName === (this.playerObject[idx]).name) {
           this.myColor = this.playerColors[idx];
           console.log('you are the player at position: ' + idx);
-          localStorage.setItem('currentPlayer', idx)
+          localStorage.setItem('currentPlayer', idx);
           console.log('you have color: ' + this.myColor);
         }
         // here we push the usernames of all opponents in the room into the list of opponents
@@ -534,22 +536,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       }
     });
 
-
-    /*TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/handcards', httpOptions)
-          .subscribe(result => {
-            this.currentHandCardObject = result;
-            this.handCards = [];
-            this.testArray = [];
-            for (let i = 0; i < Object.keys(result).length; i++) {
-              this.testArray.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
-              this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
-              // this.handCards[i].cardClass = (this.currentHandCardObject[i]).name;
-            }
-          });
-      });*/
     // update playing piece positions:
     console.log('try for users', this.http.get(this.apiUrl + this.currentRoom, httpOptions));
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -557,19 +543,16 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
-            // console.log('result', result);
             /*first assign all positions before update to the array old positions*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
               this.oldPositions.push(x);
             }
             this.currentPositions = [];
-            // console.log('new', this.currentPositions);
             /*push the positions from the backend to the array currentPositions*/
-            for (let key in result) {
+            for (const key in result) {
               this.currentPositions.push(result[key].myFigure.currentPosition.name);
             }
-            // console.log('new after push', this.currentPositions);
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
@@ -586,8 +569,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   getCurrentMarket() {
     this.idx = -1;
     this.http.get(this.apiUrl + this.currentRoom + '/market').subscribe(result => {
-      for (let key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
-        for (let key2 in result[key]) {
+      for (const key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
+        for (const key2 in result[key]) {
           if (this.idx === 11) {
             this.idx = 0;
           }else {
@@ -630,19 +613,40 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   playDrawActionCard(drawActionCard: string) {
     // draw a new card from draw pile
     console.log('playActionCard');
-    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions).subscribe(result => console.log(result));
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions)
+      .subscribe(result => console.log(result));
     if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
       this.trashButtonClickable = false;
     }
     this.trashButtonClickable = true;
+    this.selected = [];
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
   }
 
   playMoveActionCard() {
+    this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction', this.httpOptions)
+      .subscribe(result => console.log(result)); // list of neighboring tiles
+    this.selected = [];
 
   }
 
   playMarketActionCard() {
-
+    console.log('call to heroku: ' + this.apiUrl + this.currentRoom + '/' + this.playerName + '/Transmitter/' + this.chosenMarketCard + '/marketAction');
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/Transmitter/' + this.chosenMarketCard + '/marketAction', this.httpOptions)
+      .subscribe(result => console.log(result));
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.isFree = this.temp; // reset isFree to the value it had before we played the action card
+    this.selected = [];
   }
 
 

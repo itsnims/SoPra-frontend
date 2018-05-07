@@ -8,6 +8,7 @@ export class Room {
   public pwd: string;
   public path: string;
   public maxPlayers: string;
+  public maxplayer: number;
   public current: number;
   public status: string;
   public players: User[]= [];
