@@ -7,6 +7,7 @@ export class Room {
   public pwdBool: boolean;
   public pwd: string;
   public path: string;
+  public maxPlayers: string;
   public maxplayer: number;
   public current: number;
   public status: string;

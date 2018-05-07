@@ -30,6 +30,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   isItMyTurn: boolean;
   isItMyTurnCopy: boolean;
   trashButtonClickable: boolean;
+  temp: boolean;
 
   currentHandCardObject: object;
 
@@ -186,6 +187,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     for (this.i = 0; this.i < 6; this.i++) {
       if (this.selected[0] === this.actionCards[this.i]) {
         this.selectedCardIsActionCard = true;
+        if (this.selected[0] === 'Transmitter') {
+          this.temp = this.isFree;
+          this.isFree = false;
+        }
         return;
       }
     }
@@ -506,7 +511,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         if (this.playerName === (this.playerObject[idx]).name) {
           this.myColor = this.playerColors[idx];
           console.log('you are the player at position: ' + idx);
-          localStorage.setItem('currentPlayer', idx)
+          localStorage.setItem('currentPlayer', idx);
           console.log('you have color: ' + this.myColor);
         }
         // here we push the usernames of all opponents in the room into the list of opponents
@@ -527,22 +532,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       }
     });
 
-
-    /*TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/handcards', httpOptions)
-          .subscribe(result => {
-            this.currentHandCardObject = result;
-            this.handCards = [];
-            this.testArray = [];
-            for (let i = 0; i < Object.keys(result).length; i++) {
-              this.testArray.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
-              this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
-              // this.handCards[i].cardClass = (this.currentHandCardObject[i]).name;
-            }
-          });
-      });*/
     // update playing piece positions:
     console.log('try for users', this.http.get(this.apiUrl + this.currentRoom, httpOptions));
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -550,19 +539,16 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
-            // console.log('result', result);
             /*first assign all positions before update to the array old positions*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
               this.oldPositions.push(x);
             }
             this.currentPositions = [];
-            // console.log('new', this.currentPositions);
             /*push the positions from the backend to the array currentPositions*/
             for (const key in result) {
               this.currentPositions.push(result[key].myFigure.currentPosition.name);
             }
-            // console.log('new after push', this.currentPositions);
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
@@ -633,11 +619,20 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   playMoveActionCard() {
     this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction', this.httpOptions)
-      .subscribe(result => console.log(result));
+      .subscribe(result => console.log(result)); // list of neighboring tiles
   }
 
   playMarketActionCard() {
-
+    console.log('call to heroku: ' + this.apiUrl + this.currentRoom + '/' + this.playerName + '/Transmitter/' + this.chosenMarketCard + '/marketAction');
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/Transmitter/' + this.chosenMarketCard + '/marketAction', this.httpOptions)
+      .subscribe(result => console.log(result));
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.isFree = this.temp; // reset isFree to the value it had before we played the action card
   }
 
 
