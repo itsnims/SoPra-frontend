@@ -64,7 +64,12 @@ export class GameComponent  implements OnInit, OnDestroy {
     }
   }
 
-
+  roomJoinable(room) {
+    if (room.current === room.maxplayer) {
+      return false;
+    }
+    return true;
+  }
   addPlayerToRoom(room_name: string) {
     const httpOptions = {
       headers: new HttpHeaders({
