@@ -190,7 +190,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // updated clickable status der buttons unten links
   updateSelectedCardIsActionCard() {
     for (this.i = 0; this.i < 6; this.i++) {
-      if (this.selectedCards[0] === this.actionCards[this.i]) {
+      if (this.selected[0] === this.actionCards[this.i]) {
         this.selectedCardIsActionCard = true;
         return;
       }
@@ -200,7 +200,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateUseActionCard() {
     if (this.isItMyTurn === true) {
-      if (this.selectedCards === 1 && this.selectedCardIsActionCard === true) {
+      if (this.selected.length === 1 && this.selectedCardIsActionCard === true) {
         this.useActionCard = false;
         return;
       } else {
@@ -212,7 +212,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateUseExpeditionCard() {
     if (this.isItMyTurn === true) {
-      if (this.selectedCards === 1 && this.selectedCardIsActionCard === false) {
+      if (this.selected.length === 1 && this.selectedCardIsActionCard === false) {
         this.useExpeditionCard = false;
         return;
       } else {
@@ -224,7 +224,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateBuyAvailable() {
     if (this.isItMyTurn === true) {
-      if (this.selectedCards >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
+      if (this.selected.length >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
         this.buyAvailable = false;
         return;
       }
@@ -237,7 +237,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateDiscard() {
     if (this.isItMyTurn === true) {
-      if (this.selectedCards >= 1) {
+      if (this.selected.length >= 1) {
         this.discard = false;
         return;
       }
