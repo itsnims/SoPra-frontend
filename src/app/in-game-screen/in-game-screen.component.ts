@@ -156,7 +156,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // liste der angekreuzten handcards
   selected = [];
 
-  selectedCards = 0; // anzahl ausgewählte handcards
+  // selectedCards = 0;  anzahl ausgewählte handcards
 
 
   constructor(private roomService: RoomService, private http: HttpClient) {
@@ -263,7 +263,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       /*console.log('on if condition', this.possibleTiles)*/
       this.handCards[i].checked = false;
       const position = this.selected.indexOf(newCard);
-      this.selectedCards--;
       this.selected.splice(position, 1);
       console.log('selected', this.selected);
       this.updateSelectedCardIsActionCard();
@@ -277,7 +276,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       localStorage.removeItem('possibleTiles');
       /* WORKS # local storage gets deleted console.log('shouldnotwork', localStorage.getItem('possibleTiles'));*/
       this.handCards[i].checked = true;
-      this.selectedCards++;
       this.selected.push(newCard);
       /**/
       console.log('selected', this.selected);
