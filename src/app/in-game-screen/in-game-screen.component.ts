@@ -7,7 +7,7 @@ import {HttpParams} from '@angular/common/http';
 
 import {RoomService} from '../shared/services/room.service';
 import 'rxjs/add/operator/takeWhile';
-import {TimerObservable} from "rxjs/observable/TimerObservable";
+import {TimerObservable} from 'rxjs/observable/TimerObservable';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 @Component({
@@ -30,9 +30,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   isItMyTurn: boolean;
   isItMyTurnCopy: boolean;
   trashButtonClickable: boolean;
-
-
-
 
   currentHandCardObject: object;
 
@@ -155,9 +152,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   // liste der angekreuzten handcards
   selected = [];
-
-  // selectedCards = 0;  anzahl ausgewählte handcards
-
 
   constructor(private roomService: RoomService, private http: HttpClient) {
     this.possibleTiles = new Array<string>();
@@ -337,7 +331,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   showSelected() {
     console.log(this.chosenMarketCard);
-    for (let key in this.lowerCards) {
+    for (const key in this.lowerCards) {
         console.log(this.lowerCards[key].cardID);
         console.log(this.lowerCards[key].cardID === this.chosenMarketCard);
     }
@@ -396,7 +390,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateHandcards();
     this.updateHandcards();
     this.selected = [];
-    for (let key in this.lowerCards) {
+    for (const key in this.lowerCards) {
       // decrease number of cards of specific type left
       if (this.lowerCards[key].cardID === this.chosenMarketCard) {
         let temp = Number(this.lowerCards[key].left);
@@ -464,7 +458,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/currentPlayer')
           .subscribe(result => {
-            for (let key in result) {
+            for (const key in result) {
               if (key === 'name') {
                 this.current_player = result[key];
                 // console.log('the current_player = ' + this.current_player);
@@ -488,7 +482,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/currentPlayer')
           .subscribe(result => {
-            for (let key in result) {
+            for (const key in result) {
               if (key === 'name') {
                 this.current_player = result[key];
                 // console.log('dieser spieler ist an der reihe: ' + this.current_player);
@@ -563,7 +557,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             this.currentPositions = [];
             // console.log('new', this.currentPositions);
             /*push the positions from the backend to the array currentPositions*/
-            for (let key in result) {
+            for (const key in result) {
               this.currentPositions.push(result[key].myFigure.currentPosition.name);
             }
             // console.log('new after push', this.currentPositions);
@@ -583,8 +577,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   getCurrentMarket() {
     this.idx = -1;
     this.http.get(this.apiUrl + this.currentRoom + '/market').subscribe(result => {
-      for (let key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
-        for (let key2 in result[key]) {
+      for (const key in result) { // This is how we assign the information about cards from heroku to our upperCards and lowerCards
+        for (const key2 in result[key]) {
           if (this.idx === 11) {
             this.idx = 0;
           }else {
@@ -627,7 +621,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   playDrawActionCard(drawActionCard: string) {
     // draw a new card from draw pile
     console.log('playActionCard');
-    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions).subscribe(result => console.log(result));
+    this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions)
+      .subscribe(result => console.log(result));
     if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
       this.trashButtonClickable = false;
     }
