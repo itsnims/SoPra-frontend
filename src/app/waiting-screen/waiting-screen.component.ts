@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Room} from "../shared/models/room";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {User} from "../shared/models/user";
 import {Observable} from "rxjs/Rx";
 import {RoomService} from "../shared/services/room.service";
@@ -31,6 +31,10 @@ export class WaitingScreenComponent implements OnInit {
 
   message: string;
   roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
+  httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json'
+    })};
 
   constructor(private http: HttpClient, private roomService: RoomService, private router: Router) {
   this.interval = 1000;
@@ -49,15 +53,11 @@ export class WaitingScreenComponent implements OnInit {
     });
 
 
+
+
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
-        /*start
-        this.roomService.getCurrentRoomInfo(this.roomUrl + this.current_room)
-          .subscribe((data) => {
-            this.player1 = data.players[0].name;
-        });
-        end*/
         this.roomService.getCurrentRoomInfo(this.roomUrl  + this.current_room + '/wait')
           .subscribe((data) => {
             this.currentPlayers = data[0];
@@ -71,5 +71,11 @@ export class WaitingScreenComponent implements OnInit {
           });
       });
   }
+
+    quitRoom() {
+        this.http.put(this.roomUrl + this.current_player + '/' + this.current_room + '/exit', this.httpOptions)
+          .subscribe(result => console.log(result));
+    }
+
 
 }

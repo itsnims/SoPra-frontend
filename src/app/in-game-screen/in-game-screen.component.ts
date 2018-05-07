@@ -615,11 +615,20 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.trashButtonClickable = false;
     }
     this.trashButtonClickable = true;
+    this.selected = [];
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
   }
 
   playMoveActionCard() {
     this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction', this.httpOptions)
       .subscribe(result => console.log(result)); // list of neighboring tiles
+    this.selected = [];
+
   }
 
   playMarketActionCard() {
@@ -633,6 +642,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateHandcards();
     this.updateHandcards();
     this.isFree = this.temp; // reset isFree to the value it had before we played the action card
+    this.selected = [];
   }
 
 
