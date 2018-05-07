@@ -423,6 +423,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
   updateHandcards() {
+    console.log('handcards should be updated');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -444,6 +445,13 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
     this.standard.addPlayers(this.selected);
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
     this.updateHandcards();
     const httpOptions = {
       headers: new HttpHeaders({
