@@ -175,11 +175,12 @@ export class StandardComponent implements OnInit, AfterViewInit {
       /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
 
 
-  addPlayers(selectedCard: any) {
+  addPlayers(selectedCard: any, possibleTiles: any) {
     this.currentPlayer = localStorage.getItem('currentPlayer');
     console.log('currentPlayer: ', this.currentPlayer);
+    console.log('possibleTiles value', possibleTiles)
 
-
+    if (possibleTiles.length <= 0){} else {
 
   // addPlayers(selected: Array<string>) {
     if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
@@ -197,20 +198,20 @@ export class StandardComponent implements OnInit, AfterViewInit {
       this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/crossBlockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
     }
     else {
-    this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
-    this.players[this.currentPlayer].position =  JSON.parse(localStorage.getItem('selectedHex'));
-    /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
-    /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
-    // localStorage.removeItem('currentTile');
-    /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
+      this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
+      this.players[this.currentPlayer].position = JSON.parse(localStorage.getItem('selectedHex'));
+      /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
+      /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
+      // localStorage.removeItem('currentTile');
+      /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
       console.log('i am in else of addplayer')
-    // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
-    /*WORKS: console.log(localStorage.getItem('currentTile'))*/
+      // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
+      /*WORKS: console.log(localStorage.getItem('currentTile'))*/
 
 
-    this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], localStorage.getItem('selectedHex'), selectedCard);
-    console.log('should be new position', localStorage.getItem('currentTile'));
-
+      this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], localStorage.getItem('selectedHex'), selectedCard);
+      console.log('should be new position', localStorage.getItem('currentTile'));
+    }
 
       }}
 

@@ -443,7 +443,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // console.log(this.standard.addPlayers());
     console.log(this.selected)
 
-    this.standard.addPlayers(this.selected);
+    this.standard.addPlayers(this.selected, this.possibleTiles);
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
@@ -462,6 +462,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     localStorage.removeItem('possibleTiles');
+    localStorage.removeItem('selectedHex')
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
