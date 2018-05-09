@@ -529,7 +529,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               this.opponentBlockadePoints[idx] = Number(JSON.stringify(result));
             });
         }
-        console.log(this.opponentBlockadePoints);
       });
 
 

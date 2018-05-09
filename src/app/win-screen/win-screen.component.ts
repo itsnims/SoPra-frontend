@@ -16,6 +16,7 @@ export class WinScreenComponent implements OnInit {
   alive: boolean;
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
+  winnerObject: object;
 
 
 
@@ -26,6 +27,15 @@ export class WinScreenComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/game/winner')
+      .subscribe(result => {
+        this.winnerObject = result;
+        for (let el in this.winnerObject) {
+          if (el === 'name') {
+            this.winner = this.winnerObject[el];
+          }
+        }
+      });
 
     TimerObservable.create(0, this.interval)
       .takeWhile(() => this.alive)
@@ -34,7 +44,6 @@ export class WinScreenComponent implements OnInit {
           .subscribe(result => {
             if (result) {
               this.gameEnded = true;
-              // TODO: change this.winner to the actual winner
             }
           });
       });
