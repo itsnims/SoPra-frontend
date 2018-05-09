@@ -19,19 +19,18 @@ export class HostScreenComponent implements OnInit {
   current_host: string;
   placeholder: any;
   apiURL = 'https://sopra-fd2af.firebaseio.com/0.json';
-
   constructor(private _service: RoomService, private router: Router) {
 
   }
 
   paths = [
-    {pathID: '1', pathName: 'Classic Path'},
-    /*{pathID: '2', pathName: 'Hills of Gold'},
-    {pathID: '3', pathName: 'Home Stretch'},
-    {pathID: '4', pathName: 'Winding Paths'},
-    {pathID: '5', pathName: 'Serpentine'},
-    {pathID: '6', pathName: 'Swamplands'},
-    {pathID: '7', pathName: 'Witch\'s Cauldron'}*/
+    {pathID: 'Standard Path', pathname: 'StandardPath'},
+    {pathID: 'Hills of Gold', pathname: 'HillOfGold'},
+    {pathID: 'Home Stretch', pathname: 'HomeStretchFields'},
+    {pathID: 'Winding Paths', pathname: 'WindingPath'},
+    {pathID: 'Serpentine', pathname: 'Serpentine'},
+    {pathID: 'Swamplands', pathname: 'Swamplands'},
+    {pathID: 'Witch\'s Cauldron', pathname: 'WitchsCauldron'}
   ];
   numbOfPlayers = [
     {numbValue: '4', numbSelect: '4'},
@@ -48,13 +47,19 @@ export class HostScreenComponent implements OnInit {
       this.room.pwdBool = false;
     }
   }
+  pathSelect() {
+    this.room.pathname = (<HTMLInputElement>document.getElementById('path')).value;
+  }
+
   playerNumSelect() {
     // this.room.path = (<HTMLInputElement>document.getElementById('selectPath')).value;
     this.room.maxPlayers = (<HTMLInputElement>document.getElementById('maxPlayer')).value;
+    this.room.pathname = (<HTMLInputElement>document.getElementById('path')).value;
   }
 
   ngOnInit() {
     this.room = new Room();
+    this.room.pathname = 'StandardPath';
     // this.current_host = JSON.parse(localStorage.getItem('currentUser')).name;
     // console.log('the current host is  : ' + this.current_host);
     // this.current_host = JSON.parse(localStorage.getItem('currentUser')).name;
