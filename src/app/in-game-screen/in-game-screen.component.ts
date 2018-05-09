@@ -10,6 +10,8 @@ import {RoomService} from '../shared/services/room.service';
 import 'rxjs/add/operator/takeWhile';
 import {TimerObservable} from 'rxjs/observable/TimerObservable';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
+import {SerpentineComponent} from '../serpentine/serpentine.component';
+import {HillsofgoldComponent} from '../hillsofgold/hillsofgold.component';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -19,7 +21,8 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 export class InGameScreenComponent implements OnInit, OnDestroy {
   @ViewChild(StandardComponent) standard: StandardComponent;
-  boards = [StandardComponent];
+  @ViewChild(HillsofgoldComponent) hillsofgold: HillsofgoldComponent;
+  boards = [this.standard, this.hillsofgold];
   player: PlayerComponent;
   currentselection: string;
   current = 'Player1';
