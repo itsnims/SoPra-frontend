@@ -4,6 +4,7 @@ import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpParams} from '@angular/common/http';
+import {WinScreenComponent} from '../win-screen/win-screen.component';
 
 import {RoomService} from '../shared/services/room.service';
 import 'rxjs/add/operator/takeWhile';
@@ -390,6 +391,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json'
       })};
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
+      .bufferTime(1000)
       .subscribe(result => console.log(result));
     console.log('you selected: ' + this.selected);
     this.updateHandcards();
