@@ -37,16 +37,20 @@
 }
 .opponents {
   position: fixed;
-  color: white;
+
 }
 
 #opponent1 {
   top: 15px;
-  left: 175px;}
+  left: 175px;
+  color: red;
+}
 
 #opponent2 {
   top: 15px;
-  left: 525px;}
+  left: 525px;
+  color: white;
+}
 
 #opponent3 {
   top: 15px;

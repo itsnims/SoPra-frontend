@@ -1,8 +1,12 @@
 <div class="background-image"> <!--  -->
   <!--p>my turn: {{isItMyTurn}}; isActionCard: {{selectedCardIsActionCard}}; useExpCard: {{useExpeditionCard}}</p-->
 <h3 class="opponents" id="opponent1">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
-  <h3 class="opponents" id="opponent2">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
-  <h3 class="opponents" id="opponent3">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+  <div *ngIf="opponents[1]">
+    <h3 class="opponents" id="opponent2">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+  </div>
+  <div *ngIf="opponents[2]">
+    <h3 class="opponents" id="opponent3">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+  </div>
 
 <app-standard></app-standard>
   <!--p *ngFor="let select of selected">{{select}}</p-->
@@ -61,6 +65,9 @@
       <button id="yourTurn"> IT'S YOUR TURN </button>
   </div>
 
+  <div *ngIf="isItMyTurnCopy">
+    <button id="yourTurn"> PLEASE WAIT FOR YOUR TURN </button>
+  </div>
 
 
 
