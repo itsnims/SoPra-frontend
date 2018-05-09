@@ -192,6 +192,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
       /*
       Send blockade to backend*/
+      console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade')
       this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
       const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
       (<HTMLElement>element).remove();
