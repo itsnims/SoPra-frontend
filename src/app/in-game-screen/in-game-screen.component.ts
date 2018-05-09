@@ -398,9 +398,14 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json'
       })};
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
-      .bufferTime(1000)
       .subscribe(result => console.log(result));
     console.log('you selected: ' + this.selected);
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
     this.selected = [];
