@@ -43,6 +43,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   oldPositions: string[];
   opponents: string[];
   myColor: string;
+  opponentBlockadePoints = [0, 0, 0];
+  myBlockadePoints = 0;
+
+
 
   display: boolean;
   alive: boolean;
@@ -501,6 +505,41 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               }
             }});
       });
+
+
+
+    // get opponent0 blockade points
+    TimerObservable.create(0, this.interval)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        for (let idx = 0; idx < this.opponents.length; idx++) {
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.opponents[idx] + '/blockadePoints')
+            .subscribe(result => {
+              // console.log('this.opponentBlockadePoints[idx]: ' + this.opponentBlockadePoints[idx] + ' Number(JSON.stringify(result))' + Number(JSON.stringify(result)))
+              this.opponentBlockadePoints[idx] = Number(JSON.stringify(result));
+            });
+        }
+        console.log(this.opponentBlockadePoints);
+      });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     const httpOptions = {
       headers: new HttpHeaders({

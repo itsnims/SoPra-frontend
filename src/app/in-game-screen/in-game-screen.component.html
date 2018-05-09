@@ -1,8 +1,9 @@
 <div class="background-image"> <!--  -->
   <!--p>my turn: {{isItMyTurn}}; isActionCard: {{selectedCardIsActionCard}}; useExpCard: {{useExpeditionCard}}</p-->
-<h3 class="opponents" id="opponent1">{{opponents[0]}}</h3>
-<h3 class="opponents" id="opponent2">{{opponents[1]}}</h3>
-<h3 class="opponents" id="opponent3">{{opponents[2]}}</h3>
+<h3 class="opponents" id="opponent1">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+  <h3 class="opponents" id="opponent2">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+  <h3 class="opponents" id="opponent3">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+  
 <app-standard></app-standard>
   <!--p *ngFor="let select of selected">{{select}}</p-->
 <!--div class="gameboard" >
@@ -40,7 +41,7 @@
     </span>
   </div>
 
-  <h4 id="playerName" class="{{myColor}}">{{playerName}}</h4>
+  <h4 id="playerName" class="{{myColor}}">{{playerName}} Blockade Points: {{myBlockadePoints}}</h4>
 </div>
 
 

@@ -37,6 +37,7 @@
 }
 .opponents {
   position: fixed;
+  color: white;
 }
 
 #opponent1 {
