@@ -5,8 +5,8 @@
 <input class="hostInput" type="text" placeholder="My room" [(ngModel)]="room.name">
 
   <h3>Choose Path:</h3>
-<select class="hostInput">
-  <option *ngFor="let path of paths" [value]="path.pathID">{{path.pathName}}</option>
+<select id="path" class="hostInput">
+  <option *ngFor="let path of paths" (click)="pathSelect()" [value]="path.pathname">{{path.pathID}}</option>
 </select>
 
 <h3>Choose # of Players:</h3>
@@ -33,8 +33,8 @@
     <input class="hostInput" type="text" placeholder="My password" [(ngModel)]="room.pwd"><br><br>
   </div>
 </div>
-
-<button class="hostBtn" id="createGame" type="submit" (click)= "playerNumSelect();createRoom()">Create Game</button>
+<h3>{{room.pathname}}</h3>
+<button class="hostBtn" id="createGame" type="submit" (click)= "playerNumSelect();pathSelect();createRoom()">Create Game</button>
 <button class="hostBtn" id="back2lobby" type="submit" [routerLink]="['/game']">Back to Lobby</button>
 
 </div>
