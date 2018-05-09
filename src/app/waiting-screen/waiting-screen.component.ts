@@ -25,13 +25,7 @@ export class WaitingScreenComponent implements OnInit {
   public maxplayers: number;
   playerObject: object;
   playersInRoom: string[];
-
-
-
-  public player1 = 'player 1';
-  public player2 = 'player 2';
-  public player3 = 'player 3';
-  public player4 = 'player 4';
+  pathName = '';
 
   message: string;
   roomUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
@@ -52,7 +46,9 @@ export class WaitingScreenComponent implements OnInit {
 
     this.current_player = JSON.parse(localStorage.getItem('currentUser')).name;
     this.current_room = JSON.parse(localStorage.getItem('currentRoom'));
+    this.pathName = JSON.parse(localStorage.getItem('currentPath'));
     console.log('the current room is : ' + this.current_room);
+
 
 
     this.roomService.getRooms(this.current_room).subscribe(data => {
@@ -75,20 +71,6 @@ export class WaitingScreenComponent implements OnInit {
       // console.log(Object.keys(data).map(key => ({type: key, value: data[key]})));
 
     });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
