@@ -70,7 +70,7 @@ export class GameComponent  implements OnInit, OnDestroy {
     }
     return true;
   }
-  addPlayerToRoom(room_name: string) {
+  addPlayerToRoom(room_name: string, room_path: string) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json;charset=UTF-8', 'Access-Control-Allow-Origin' : '*'
@@ -78,6 +78,7 @@ export class GameComponent  implements OnInit, OnDestroy {
     this.apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
     this.apiUrl +=  this.current_player + '/' + room_name + '/null/join' ; // TODO make sure the actual password is implemented
     localStorage.setItem('currentRoom', JSON.stringify(room_name));
+    localStorage.setItem('currentPath', JSON.stringify(room_path));
     this.http.put(this.apiUrl, null, httpOptions).subscribe(result => console.log(result));
     this.router.navigate(['/waiting-screen']);
   }

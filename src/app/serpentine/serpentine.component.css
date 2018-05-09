@@ -19,7 +19,7 @@ body {
   height: 900px;
   width: 4000px;
   -webkit-transform: rotateX(47deg) rotateY(0deg);
-  transform: rotateX(0deg) rotateY(0deg);
+  transform: rotateX(60deg) rotateY(0deg);
   -webkit-transform-style: preserve-3d;
   transform-style: preserve-3d;
   -webkit-transform-origin: center 65%;

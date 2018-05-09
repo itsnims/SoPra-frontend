@@ -14,7 +14,7 @@
 
     <div id ="rooms">
     <span *ngFor="let room of rooms">
-      <button *ngIf="roomJoinable(room)" class="roomButton" type="submit" (click)="addPlayerToRoom(room.name)">
+      <button *ngIf="roomJoinable(room)" class="roomButton" type="submit" (click)="addPlayerToRoom(room.name, room.pathname)">
         <table class="blackRow">
           <tr>
             <td>{{room.name}}</td>

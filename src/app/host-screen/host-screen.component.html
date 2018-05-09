@@ -33,7 +33,7 @@
     <input class="hostInput" type="text" placeholder="My password" [(ngModel)]="room.pwd"><br><br>
   </div>
 </div>
-<h3>{{room.pathname}}</h3>
+
 <button class="hostBtn" id="createGame" type="submit" (click)= "playerNumSelect();pathSelect();createRoom()">Create Game</button>
 <button class="hostBtn" id="back2lobby" type="submit" [routerLink]="['/game']">Back to Lobby</button>
 

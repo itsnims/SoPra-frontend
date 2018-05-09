@@ -67,6 +67,7 @@ export class HostScreenComponent implements OnInit {
 
   createRoom() {
     localStorage.setItem('currentRoom', JSON.stringify(this.room.name));
+    localStorage.setItem('currentPath', JSON.stringify(this.room.pathname));
     console.log('host_screen local storage: ' + localStorage);
 
     this._service.roomLogin(this.room)

@@ -4,11 +4,14 @@ import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpParams} from '@angular/common/http';
+import {WinScreenComponent} from '../win-screen/win-screen.component';
 
 import {RoomService} from '../shared/services/room.service';
 import 'rxjs/add/operator/takeWhile';
 import {TimerObservable} from 'rxjs/observable/TimerObservable';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
+import {SerpentineComponent} from '../serpentine/serpentine.component';
+import {HillsofgoldComponent} from '../hillsofgold/hillsofgold.component';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -18,7 +21,8 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 
 export class InGameScreenComponent implements OnInit, OnDestroy {
   @ViewChild(StandardComponent) standard: StandardComponent;
-  boards = [StandardComponent];
+  @ViewChild(HillsofgoldComponent) hillsofgold: HillsofgoldComponent;
+  boards = [this.standard, this.hillsofgold];
   player: PlayerComponent;
   currentselection: string;
   current = 'Player1';
@@ -394,6 +398,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json'
       })};
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
+      .bufferTime(1000)
       .subscribe(result => console.log(result));
     console.log('you selected: ' + this.selected);
     this.updateHandcards();

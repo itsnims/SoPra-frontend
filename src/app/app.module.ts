@@ -23,6 +23,7 @@ import { HexComponent } from './hex/hex.component';
 import { HillsofgoldComponent } from './hillsofgold/hillsofgold.component';
 import { HomestretchComponent } from './homestretch/homestretch.component';
 import { SerpentineComponent } from './serpentine/serpentine.component';
+import { WinScreenComponent } from './win-screen/win-screen.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { SerpentineComponent } from './serpentine/serpentine.component';
     HillsofgoldComponent,
     HomestretchComponent,
     SerpentineComponent,
+    WinScreenComponent,
   ],
   entryComponents: [PlayerComponent],
   imports: [
