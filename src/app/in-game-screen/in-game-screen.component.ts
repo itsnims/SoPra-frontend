@@ -243,8 +243,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       if (this.selected.length >= 1 && this.chosenMarketCard !== '' && this.firstPurchase === false) {
         this.buyAvailable = false;
         return;
-      }
-      else {
+      } else {
         this.buyAvailable = true;
         return;
       }
@@ -256,8 +255,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       if (this.selected.length >= 1) {
         this.discard = false;
         return;
-      }
-      else {
+      } else {
         this.discard = true;
         return;
       }
@@ -274,6 +272,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
     const newCard = card;
     if (this.handCards[i].checked === true) {
+      console.log('hereere')
+      if ((localStorage.getItem('currentPath')) === '"StandardPath"') {
+        this.StandardPath.removeTiles(this.possibleTiles);
+      }
       this.possibleTiles = [];
       localStorage.removeItem('possibleTiles');
       /*console.log('on if condition', this.possibleTiles)*/
@@ -286,8 +288,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.updateUseExpeditionCard();
       this.updateBuyAvailable();
       this.updateDiscard();
-    }
-    else {
+} else {
       this.possibleTiles = [];
       localStorage.removeItem('possibleTiles');
       /* WORKS # local storage gets deleted console.log('shouldnotwork', localStorage.getItem('possibleTiles'));*/
@@ -502,8 +503,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.Board = localStorage.getItem('currentPath')
+    const board = localStorage.getItem('currentPath');
 
-    console.log('currentPath: ', localStorage.getItem('currentPath'));
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex')
 
