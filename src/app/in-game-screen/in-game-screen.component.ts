@@ -301,16 +301,22 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.updateUseExpeditionCard();
       this.updateBuyAvailable();
       this.updateDiscard();
+
       console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
-      return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+      this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
         .subscribe(result => {
           for (const el in result) {
             console.log('log result', result);
             this.possibleTiles.push(result[el].name);
           }
+          if ((localStorage.getItem('currentPath')) === '"StandardPath"') {
+            this.StandardPath.showTiles(this.possibleTiles);
+          }
           console.log('possible tiles in else', this.possibleTiles);
           localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
           console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+
+
 
 
         });
@@ -628,7 +634,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
-        console.log(localStorage.getItem('currentPath'))
         // Not sexy way of doing it;
        if ((localStorage.getItem('currentPath')) === '"StandardPath"') {
          this.StandardPath.updatePosition(this.oldPositions, this.currentPositions);

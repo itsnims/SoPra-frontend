@@ -192,10 +192,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
       /*
       Send blockade to backend*/
-      console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade')
+      console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade');
       this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
       const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
-      (<HTMLElement>element).remove();
+      (<HTMLElement>element).remove()
+      this.removeChild(element);
     }
     else {
       this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
@@ -215,7 +216,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
       }}
 
-
+  showTiles(Tiles: any) {
+    for (const tile of Tiles){
+      console.log('tile: ', tile);
+      this.hexMapById.get(tile).onhightlight();
+    }}
   updatePosition(oldarray: any, newarray: any) {
     // console.log('in update');
 
@@ -272,6 +277,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
   mouseLeave(div: string) {
     console.log('mouse leave standard :' + div);
   }
+
+
 
 
 

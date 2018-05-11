@@ -48,6 +48,7 @@ export class HexComponent implements OnInit {
     }
   }
   public onhightlight() {
+    console.log('i am here')
     this.opacity = 0.5;
   }
   public removehightlight() {
