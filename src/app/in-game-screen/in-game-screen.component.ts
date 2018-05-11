@@ -12,6 +12,7 @@ import {TimerObservable} from 'rxjs/observable/TimerObservable';
 import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {SerpentineComponent} from '../serpentine/serpentine.component';
 import {HillsofgoldComponent} from '../hillsofgold/hillsofgold.component';
+import {HomestretchComponent} from '../homestretch/homestretch.component';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -23,12 +24,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   @ViewChild(StandardComponent) StandardPath: StandardComponent;
   @ViewChild(HillsofgoldComponent) HillOfGold: HillsofgoldComponent;
   @ViewChild(SerpentineComponent) Serpentine: SerpentineComponent;
+  @ViewChild (HomestretchComponent) HomeStretchFields: HomestretchComponent;
 
-  Boards = {
-    'StandardPath': StandardComponent,
-    'HillOfGold': HillsofgoldComponent,
-    'Serpentine': SerpentineComponent,
-  }
   current2: any;
   player: PlayerComponent;
   currentselection: string;
@@ -92,8 +89,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // selected: string[];
 
   // to set up all
-  currentBoard = localStorage.getItem('currentPath');
-  boards = [this.StandardPath, this.HillOfGold, this.Serpentine];
 
 
   // für useActionCard und useExpeditionCard verwendet
@@ -480,6 +475,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if ((localStorage.getItem('currentPath')) === '"Serpentine"') {
       this.Serpentine.addPlayers(this.selected, this.possibleTiles);
     }
+    if ((localStorage.getItem('currentPath')) === '"HomeStretchFields"') {
+      this.HomeStretchFields.addPlayers(this.selected, this.possibleTiles);
+    }
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
@@ -502,7 +500,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     console.log('currentPath: ', localStorage.getItem('currentPath'));
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex')
-    console.log('stingified: ', String(this.boards[0]));
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -612,7 +609,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     });
 
     // update playing piece positions:
-    this.current2 = this.Boards[this.Board];
     console.log('try for users', this.http.get(this.apiUrl + this.currentRoom, httpOptions));
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -643,6 +639,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
        if ((localStorage.getItem('currentPath')) === '"Serpentine"') {
          this.Serpentine.updatePosition(this.oldPositions, this.currentPositions);
        }
+          if ((localStorage.getItem('currentPath')) === '"HomeStretchFields"') {
+            this.HomeStretchFields.updatePosition(this.oldPositions, this.currentPositions);
+          }
 
         }
             );
