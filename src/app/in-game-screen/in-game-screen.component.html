@@ -8,6 +8,15 @@
     <h3 class="opponents" id="opponent3">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
   </div>
 
+  <li *ngIf="Board === 'StandardPath'">
+    <app-standard></app-standard>
+  </li>
+  <li *ngIf="Board === 'HillOfGold'">
+    <app-hillsofgold></app-hillsofgold>
+  </li>
+  <li *ngIf="Board === 'Serpentine'">
+  </li>
+
 <app-standard></app-standard>
   <!--p *ngFor="let select of selected">{{select}}</p-->
 <!--div class="gameboard" >

@@ -20,9 +20,16 @@ import {HillsofgoldComponent} from '../hillsofgold/hillsofgold.component';
 })
 
 export class InGameScreenComponent implements OnInit, OnDestroy {
-  @ViewChild(StandardComponent) standard: StandardComponent;
-  @ViewChild(HillsofgoldComponent) hillsofgold: HillsofgoldComponent;
-  boards = [this.standard, this.hillsofgold];
+  @ViewChild(StandardComponent) StandardPath: StandardComponent;
+  @ViewChild(HillsofgoldComponent) HillOfGold: HillsofgoldComponent;
+  @ViewChild(SerpentineComponent) Serpentine: SerpentineComponent;
+
+  Boards = {
+    'StandardPath': StandardComponent,
+    'HillOfGold': HillsofgoldComponent,
+    'Serpentine': SerpentineComponent,
+  }
+  current2: any;
   player: PlayerComponent;
   currentselection: string;
   current = 'Player1';
@@ -49,6 +56,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   myColor: string;
   opponentBlockadePoints = [0, 0, 0];
   myBlockadePoints = 0;
+  Board: string;
 
 
 
@@ -82,6 +90,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   discard = true;
 
   // selected: string[];
+
+  // to set up all
+  currentBoard = localStorage.getItem('currentPath');
+  boards = [this.StandardPath, this.HillOfGold, this.Serpentine];
+
 
   // für useActionCard und useExpeditionCard verwendet
   actionCards = [
@@ -174,6 +187,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.isItMyTurn = false;
     this.isItMyTurnCopy = false;
     this.trashButtonClickable = true;
+
   }
 
 
@@ -455,9 +469,17 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    console.log(this.selected)
-
-    this.standard.addPlayers(this.selected, this.possibleTiles);
+    console.log(this.selected);
+    // NOT sexy way of doing it :S
+    if ((localStorage.getItem('currentPath')) === '"StandardPath"') {
+      this.StandardPath.addPlayers(this.selected, this.possibleTiles);
+    }
+    if ((localStorage.getItem('currentPath')) === '"HillOfGold"') {
+      this.HillOfGold.addPlayers(this.selected, this.possibleTiles);
+    }
+    if ((localStorage.getItem('currentPath')) === '"Serpentine"') {
+      this.Serpentine.addPlayers(this.selected, this.possibleTiles);
+    }
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
@@ -475,8 +497,12 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.Board = localStorage.getItem('currentPath')
+
+    console.log('currentPath: ', localStorage.getItem('currentPath'));
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex')
+    console.log('stingified: ', String(this.boards[0]));
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -586,6 +612,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     });
 
     // update playing piece positions:
+    this.current2 = this.Boards[this.Board];
     console.log('try for users', this.http.get(this.apiUrl + this.currentRoom, httpOptions));
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
@@ -605,7 +632,18 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
-              this.standard.updatePosition(this.oldPositions, this.currentPositions);
+        console.log(localStorage.getItem('currentPath'))
+        // Not sexy way of doing it;
+       if ((localStorage.getItem('currentPath')) === '"StandardPath"') {
+         this.StandardPath.updatePosition(this.oldPositions, this.currentPositions);
+       }
+       if ((localStorage.getItem('currentPath')) === '"HillOfGold"') {
+            this.HillOfGold.updatePosition(this.oldPositions, this.currentPositions);
+          }
+       if ((localStorage.getItem('currentPath')) === '"Serpentine"') {
+         this.Serpentine.updatePosition(this.oldPositions, this.currentPositions);
+       }
+
         }
             );
 
