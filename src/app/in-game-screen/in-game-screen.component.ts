@@ -39,7 +39,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   isItMyTurnCopy: boolean;
   trashButtonClickable: boolean;
   temp: boolean;
-
+  [key: string]: any;
   currentHandCardObject: object;
 
   marketCardsObject: object;
@@ -90,7 +90,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   // to set up all
 
-
+  BoardList = [
+    {'StandardPath': StandardComponent},
+    {'HillOfGold': HillsofgoldComponent}
+  ];
   // für useActionCard und useExpeditionCard verwendet
   actionCards = [
     'Cartographer',
@@ -273,9 +276,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     const newCard = card;
     if (this.handCards[i].checked === true) {
       console.log('hereere')
-      if ((localStorage.getItem('currentPath')) === '"StandardPath"') {
-        this.StandardPath.removeTiles(this.possibleTiles);
-      }
+      console.log(this.BoardList['StandardPath'])
+      // this.BoardList[localStorage.getItem('currentPath')].removeTiles(this.possibleTiles)
+     // if ((localStorage.getItem('currentPath')) === '"StandardPath"') {
+      //  this.StandardPath.removeTiles(this.possibleTiles);
+     // }
       this.possibleTiles = [];
       localStorage.removeItem('possibleTiles');
       /*console.log('on if condition', this.possibleTiles)*/
