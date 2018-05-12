@@ -8,11 +8,20 @@
     <h3 class="opponents" id="opponent3">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
   </div>
 
-  <ng-template appDirective></ng-template>
+  <li *ngIf=" this.Board === 'StandardPath'">
+    <app-standard></app-standard>
+  </li>
+  <li *ngIf="Board === 'HillOfGold'">
+    <app-hillsofgold></app-hillsofgold>
+  </li>
+  <li *ngIf="Board === 'Serpentine'">
+  </li>
+
+  <li *ngIf="Board === 'HomeStretchFields'">
+  </li>
 
 
 
-<app-standard></app-standard>
   <!--p *ngFor="let select of selected">{{select}}</p-->
 <!--div class="gameboard" >
   <app-standard class="board_input" [style.a]></app-standard>
