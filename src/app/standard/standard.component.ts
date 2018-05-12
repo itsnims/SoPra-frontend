@@ -46,6 +46,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private http: HttpClient) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
   ngOnInit() {
+    localStorage.removeItem('mode')
 
     for (let i = 0; i <= 4; i++) {
       this.blockadestring.push('blockade' + String(i));
@@ -61,6 +62,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log('numberPlayers', this.numberPlayers)
     /*give the players their specific name*/
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
+    const twoPlayermode = ['player1', 'player1', 'player2', 'player2']
     /*only implement 2 players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
@@ -68,6 +70,14 @@ export class StandardComponent implements OnInit, AfterViewInit {
         this.players.push(new PlayerComponent());
         this.players[i].playerId = sample_players[i];
       }}
+      else{
+      localStorage.setItem('mode', 'true');
+      for (let i = 0; i <= 4; i++){
+        this.players.push(new PlayerComponent());
+        this.player[i].playerId = twoPlayermode[i];
+
+      }
+    }
     /*
     How many playing pieces should be displayed on the board as well as their initial positions*/
     /*if (this.numberPlayers > 2) {
@@ -176,9 +186,13 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
 
   addPlayers(selectedCard: any, possibleTiles: any) {
-    this.currentPlayer = localStorage.getItem('currentPlayer');
-    console.log('currentPlayer: ', this.currentPlayer);
-    console.log('possibleTiles value', possibleTiles)
+    if (localStorage.getItem('mode') === '"true"'){
+      this.currentPlayer = localStorage.getItem('currentTwoPlayer');
+    } else {
+      this.currentPlayer = localStorage.getItem('currentPlayer');
+      console.log('currentPlayer: ', this.currentPlayer);
+      console.log('possibleTiles value', possibleTiles)
+    }
 
     if (possibleTiles.length <= 0){} else {
 
@@ -199,6 +213,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
       this.removeChild(element);
     }
     else {
+      // TO DO eventually need an if for 2 player mode
       this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
       this.players[this.currentPlayer].position = JSON.parse(localStorage.getItem('selectedHex'));
       /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
@@ -228,6 +243,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     }
     }
   updatePosition(oldarray: any, newarray: any) {
+    // ÄNDERUNG depends on what i get exactely form the backend.
     // console.log('in update');
 
     /*currently only for NOT 2players logic*/

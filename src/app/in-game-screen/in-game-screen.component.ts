@@ -632,6 +632,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
+            console.log(result);
             /*first assign all positions before update to the array old positions*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
@@ -639,8 +640,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             }
             this.currentPositions = [];
             /*push the positions from the backend to the array currentPositions*/
-            for (const key in result) {
-              this.currentPositions.push(result[key].myFigure.currentPosition.name);
+            if (localStorage.getItem('mode') === '"true"') {
+              for (const key in result) {
+                this.currentPositions.push(result[key].myFigure.currentPosition.name[0]);
+                this.currentPositions.push(result[key].myFigure.currentPosition.name[1]);
+              }
+            } else {
+              for (const key in result) {
+                this.currentPositions.push(result[key].myFigure.currentPosition.name);
+              }
             }
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/

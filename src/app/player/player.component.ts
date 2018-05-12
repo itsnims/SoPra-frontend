@@ -8,10 +8,20 @@ import {Component, Input, OnInit} from '@angular/core';
 export class PlayerComponent implements OnInit {
   @Input() playerId: string;
   @Input() position: string;
+  twoplayer: string;
 
 
-  ngOnInit() { }
+  ngOnInit(
+  ) { }
 
+  clickedP() {
+   // TO DO have to see what IDs i need to have.
+    this.twoplayer = localStorage.getItem('mode')
+    if (this.twoplayer === '"true"') {
+      localStorage.removeItem('currentTwoPlayer');
+      localStorage.setItem('currentTwoPlayer', JSON.stringify(this.playerId));
+    }
+  }
   constructor() {}
   /*BACKEND needs all potential moves for player!!*/
   getPotentialMoveIds() {
