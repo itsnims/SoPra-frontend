@@ -24,7 +24,6 @@ import { HillsofgoldComponent } from './hillsofgold/hillsofgold.component';
 import { HomestretchComponent } from './homestretch/homestretch.component';
 import { SerpentineComponent } from './serpentine/serpentine.component';
 import { WinScreenComponent } from './win-screen/win-screen.component';
-import { AppDirectiveComponent } from './app-directive/app-directive.component';
 import { AppDirective } from './app.directive';
 
 
@@ -45,7 +44,6 @@ import { AppDirective } from './app.directive';
     HomestretchComponent,
     SerpentineComponent,
     WinScreenComponent,
-    AppDirectiveComponent,
     AppDirective,
   ],
   entryComponents: [PlayerComponent],

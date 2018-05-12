@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren} from '@angular/core';
+import {Component, OnDestroy, OnInit, QueryList, ViewChild, ViewChildren, Input, ComponentFactoryResolver} from '@angular/core';
 import {StandardComponent} from '../standard/standard.component';
 import {PlayerComponent} from '../player/player.component';
 import {HexComponent} from '../hex/hex.component';
@@ -13,6 +13,7 @@ import {el} from '@angular/platform-browser/testing/src/browser_util';
 import {SerpentineComponent} from '../serpentine/serpentine.component';
 import {HillsofgoldComponent} from '../hillsofgold/hillsofgold.component';
 import {HomestretchComponent} from '../homestretch/homestretch.component';
+import {AppDirective} from '../app.directive';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -25,7 +26,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   @ViewChild(HillsofgoldComponent) HillOfGold: HillsofgoldComponent;
   @ViewChild(SerpentineComponent) Serpentine: SerpentineComponent;
   @ViewChild (HomestretchComponent) HomeStretchFields: HomestretchComponent;
-
+  @ViewChild(AppDirective) appHost: AppDirective;
   current2: any;
   player: PlayerComponent;
   currentselection: string;
@@ -61,6 +62,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   alive: boolean;
   interval: number;
   testArray: any[];
+
+
 
   playerColors = ['red', 'white', 'blue', 'yellow'];
 
@@ -173,7 +176,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // liste der angekreuzten handcards
   selected = [];
 
-  constructor(private roomService: RoomService, private http: HttpClient) {
+  constructor(private roomService: RoomService, private http: HttpClient, private componentFactoryResolver: ComponentFactoryResolver) {
     this.possibleTiles = new Array<string>();
     this.currentPositions = new Array<string>();
     this.oldPositions = new Array<string>();
@@ -181,7 +184,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.playersInRoom = new Array<string>();
     this.display = false;
     this.alive = true;
-    this.interval = 1000;
+    this.iterval = 1000;
     this.isItMyTurn = false;
     this.isItMyTurnCopy = false;
     this.trashButtonClickable = true;
@@ -480,7 +483,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // NOT sexy way of doing it :S
     if ((localStorage.getItem('currentPath')) === '"StandardPath"') {
       this.StandardPath.addPlayers(this.selected, this.possibleTiles);
-    }
+   }
     if ((localStorage.getItem('currentPath')) === '"HillOfGold"') {
       this.HillOfGold.addPlayers(this.selected, this.possibleTiles);
     }
@@ -505,8 +508,20 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.selected = [];
   }
 
+  loadBoard(){
+    let boards = [
+      {'name': 'StandardPath', 'component' : StandardComponent}
+    ]
+    let component = this.boards[localStorage.getItem('currentPath')];
+    let componentFactory = this.componentFactoryResolver.resolveComponentFactory(this.boards[component]);
+    let viewContainerRef = this.appHost.viewContainerRef;
+    viewContainerRef.clear();
+
+    let componentRef = viewContainerRef.createComponent((componentFactory));
+  }
 
   ngOnInit() {
+    this.loadBoard()
     this.Board = localStorage.getItem('currentPath')
     const board = localStorage.getItem('currentPath');
 
