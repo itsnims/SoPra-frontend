@@ -93,7 +93,7 @@ export class WaitingScreenComponent implements OnInit {
   }
 
     quitRoom() {
-        this.http.put(this.roomUrl + this.current_player + '/' + this.currentRoom + '/exit', this.httpOptions)
+        this.http.put(this.roomUrl + this.currentRoom + '/' + this.current_player  + '/exit', this.httpOptions)
           .subscribe(result => console.log(result));
     }
 
