@@ -11,6 +11,7 @@ import {HexComponent} from './hex/hex.component';
 import {HillsofgoldComponent} from './hillsofgold/hillsofgold.component';
 import {HomestretchComponent} from './homestretch/homestretch.component';
 import {SerpentineComponent} from './serpentine/serpentine.component';
+import {SwamplandsComponent} from './swamplands/swamplands.component';
 
 
 const appRoutes: Routes = [
@@ -25,6 +26,7 @@ const appRoutes: Routes = [
   {path: 'hillsofgold', component: HillsofgoldComponent},
   {path: 'homestretch', component: HomestretchComponent},
   {path: 'serpentine', component: SerpentineComponent},
+  {path: 'swamplands', component: SwamplandsComponent},
 
 
 

@@ -25,6 +25,7 @@ import { HomestretchComponent } from './homestretch/homestretch.component';
 import { SerpentineComponent } from './serpentine/serpentine.component';
 import { WinScreenComponent } from './win-screen/win-screen.component';
 import { AppDirective } from './app.directive';
+import { SwamplandsComponent } from './swamplands/swamplands.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { AppDirective } from './app.directive';
     SerpentineComponent,
     WinScreenComponent,
     AppDirective,
+    SwamplandsComponent,
   ],
   entryComponents: [PlayerComponent],
   imports: [

@@ -1,0 +1,508 @@
+[33mcommit ce4d78a173f08923458b40b1655d16320d38facb[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Sat May 12 16:52:01 2018 +0200
+
+    #9 mockup of 2playermode
+
+[33mcommit 4787edb4c7a01910bb3f3ba8e85fa363df5003fe[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Sat May 12 15:37:02 2018 +0200
+
+    #159 not very beautiful but works
+
+[33mcommit 662ee5a8888f5fb776191ebf97e35db2544dc5cd[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Sat May 12 13:13:14 2018 +0200
+
+    #159 dynamic loading works but players are not anymore displayed;
+
+[33mcommit 9d80e02fdc5c94ac5273635802e3b99adb7d8933[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Sat May 12 12:36:10 2018 +0200
+
+    #159 intermediate result
+
+[33mcommit 6d7992953531c69e1178d449fd23053d7c2c0348[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Fri May 11 15:44:13 2018 +0200
+
+    #109 remove hightlight on diselection of card
+
+[33mcommit f6fbe75a104a1273bd3f0ce3ce7c4565b9823110[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Fri May 11 15:21:50 2018 +0200
+
+    #109 first shown clickable tiles (still to do; remove them again)
+
+[33mcommit 2036a610f6293b6c456a66dec8678c3f083d099c[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Fri May 11 13:18:08 2018 +0200
+
+    #159 added homestretch dynamic, adjusted TS of homestretch, serpentine and hills of gold, changed in-game-screen-ts to work with homestretch (not very beautiful jet but functional)
+
+[33mcommit d9ba83e63b235463554418df6ffa113f2a06022a[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Fri May 11 12:14:32 2018 +0200
+
+    #159 added serpentine, hills and standard dynamically (only standard works so far others get stuck in waiting screen
+
+[33mcommit b6f23196350d6f1bbfdd8eb0b12b957dcbe1fd0e[m
+Author: acharl <amadeo@fermat.org>
+Date:   Wed May 9 17:20:19 2018 +0200
+
+    closes #132 win screen
+
+[33mcommit 12e106dac5b532691da615ad8793a4d54450322f[m
+Author: acharl <amadeo@fermat.org>
+Date:   Wed May 9 16:39:48 2018 +0200
+
+    added player instruction to wait for turn
+
+[33mcommit 5a4f559f53da4e61de4d0ba30ffe940457d27ac4[m
+Author: acharl <amadeo@fermat.org>
+Date:   Wed May 9 16:27:39 2018 +0200
+
+    refactored buy function
+
+[33mcommit 3f542c0659f99170d506ae841917d298aed48ba0[m
+Merge: 472ce6f b844802
+Author: acharl <amadeo@fermat.org>
+Date:   Wed May 9 16:08:27 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit 472ce6f23db67cbb8e9579ac07c7e27c0363d7c9[m
+Merge: e908e05 b098641
+Author: acharl <amadeo@fermat.org>
+Date:   Wed May 9 16:08:16 2018 +0200
+
+    #130 blockade points are displayed
+
+[33mcommit b8448022603b61fa7c9f0047bb34f8e8b72928a2[m
+Merge: 8cd9580 b098641
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Wed May 9 16:03:53 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit 8cd95806be2e9852d7efa5b75bbe7589036041f6[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Wed May 9 16:03:42 2018 +0200
+
+    #99 blockade works css missing
+
+[33mcommit b0986413c84e79cf462db478277776a8cd05f88b[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Wed May 9 16:01:21 2018 +0200
+
+    display selected path in the waiting screen
+
+[33mcommit e908e05f8c2c75e0bfcaa9689a1810a54cdce961[m
+Author: acharl <amadeo@fermat.org>
+Date:   Wed May 9 15:59:03 2018 +0200
+
+    #130 blockade points are displayed
+
+[33mcommit ca9d9f5e99fc4cf54f45fc499dcf915e370875f5[m
+Merge: baafa6a 1ec9142
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Wed May 9 15:32:25 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit baafa6aecfacd2802c4a59ee7f9827de72ccea35[m
+Merge: 849b4fc 198ecad
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Wed May 9 15:31:55 2018 +0200
+
+    #132 win screen can be shown now
+
+[33mcommit 1ec91425a8c7127da8218dce20a8cc7b86bffc1d[m
+Merge: bb456d3 849b4fc
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Wed May 9 15:24:56 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit bb456d319b37c2e527225e2d69ecb752bfab74d8[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Wed May 9 15:24:41 2018 +0200
+
+    #45 serpentine created
+
+[33mcommit 849b4fcca3959b9d0549cd3517be49fd77797c9e[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Wed May 9 14:48:08 2018 +0200
+
+    #116 chosen path is shown
+
+[33mcommit 61aacc04923b1ee38792a9b1fd70b039a4ad832e[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Tue May 8 18:14:12 2018 +0200
+
+    #157 fixed by checking if there are actually clickable tiles. //closed
+
+[33mcommit c32ddcad331c4ad272be165235c19e96c4ef1525[m
+Merge: 214dd84 459a935
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Mon May 7 16:34:35 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit 214dd841e71d0d33ab604c33e4f9187ac672ae09[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Mon May 7 16:34:08 2018 +0200
+
+    #122 adjusted formatting
+
+[33mcommit 459a93578c8fc68591c4386ca7bdfd3fb4b3338d[m
+Merge: 189687b 25f3289
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 16:30:15 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit 189687b051c6c6fbb0b2b07d55e05f684c780abd[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 16:29:56 2018 +0200
+
+    fixes renaming issue
+
+[33mcommit 25f3289a6e53893ca50f566b402c921318cd98f5[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Mon May 7 16:21:42 2018 +0200
+
+    #150 wrong if else construct check if in clickable tiles fix
+
+[33mcommit 2f60a318d5cc3ae52f9b7812655bc5edb5e53632[m
+Merge: b20b8e8 04510d5
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Mon May 7 15:39:52 2018 +0200
+
+    #156 added the link (not jet tested)
+
+[33mcommit b20b8e8ef0dcdd2bcb57afa0c998c2832da3d20e[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Mon May 7 15:36:12 2018 +0200
+
+    #156 added the link (not jet tested)
+
+[33mcommit 04510d5b2c0f22d0239ad006fac8a8fa0d17932e[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 15:03:15 2018 +0200
+
+    #122 users of current game are displayed in waiting screen
+
+[33mcommit e64d1b8777a5fd6250b55cd52e10176828898f3a[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 14:41:57 2018 +0200
+
+    #144, #145 delete cards from selected upon using them
+
+[33mcommit 58f9333091e9f3d1eec7bbef55d36bf0c3eb17f9[m
+Merge: bd93f19 88577bf
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 13:50:36 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit bd93f1950a51e1cd1afce8d18e4325931fd640f4[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 13:50:26 2018 +0200
+
+    closes #144 marketActionCards
+
+[33mcommit 88577bf68c9bec69f99adad2cce2cc08d9f5798d[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Mon May 7 13:49:07 2018 +0200
+
+    #116 full rooms are no longer displayd
+
+[33mcommit cfab9b23eb64ef627cc2c90c4097159d082332f1[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 12:30:08 2018 +0200
+
+    #116 display maxplayer in game lobby screen
+
+[33mcommit 0d8335c353a266a09b14551b5a41f30a76a714f0[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 12:08:57 2018 +0200
+
+    closes #154
+
+[33mcommit bfdfae57b24c56cca6cdcaeae88baa3236ce8bdb[m
+Merge: 9c9b24d 349f867
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Mon May 7 11:37:23 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit 9c9b24daa0acd3d93e8810199d4cccc18e9df3c7[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Mon May 7 11:37:13 2018 +0200
+
+    refactoring
+
+[33mcommit 349f86752f24a622947bd048383813c009028806[m
+Merge: cdabc52 8e767f1
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 11:28:39 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit cdabc52b630c5a133bdc9a8e4c25ef8cfc9623a6[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon May 7 11:28:26 2018 +0200
+
+    closes #153 - update handcards
+
+[33mcommit 8e767f1fb26df2f8e46480c84cc8f86882aabe97[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Mon May 7 11:02:54 2018 +0200
+
+    removed dead code
+
+[33mcommit 8fb0c89501916df3660be064a1d771cb68694b0a[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Mon May 7 10:55:00 2018 +0200
+
+    #116, #146 removed unnecessary information in general lobby, reformatted
+
+[33mcommit ef591eacddd9c50367ed2d71703e34d2a3247e1e[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Mon May 7 10:37:55 2018 +0200
+
+    #148 adjusted clickability of move buttons, issue closed
+
+[33mcommit 9e610c783a0ca8411521be20a741b3b4bac2ba6b[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Mon May 7 09:52:45 2018 +0200
+
+    #45 another component basic
+
+[33mcommit 303e2b38ec68d17f27d3d3c9db19586c1a6b4a0a[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Sat May 5 02:17:27 2018 +0200
+
+    #45 hills of gold; with right ID and right colouring
+
+[33mcommit 96585e52dd68d2be15db632c5448e4bca77378bf[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Sat May 5 02:15:53 2018 +0200
+
+    #45 hills of gold; with right ID and right colouring
+
+[33mcommit 904b132d2276a30db10003c20dad3cebe2673031[m
+Merge: cea5ac3 a9572ce
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Sat May 5 00:32:23 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit cea5ac35a9a8c7bafe9401b32c9943df42d8a6fe[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Sat May 5 00:32:04 2018 +0200
+
+    #45 homestretch; right colours and ids
+
+[33mcommit a9572ceb2d40707579f1f95e80efb99f052f5bad[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri May 4 16:26:30 2018 +0200
+
+    #112 end turn and discard are not available when it's not your turn
+
+[33mcommit 535e131889eb3cd9a47af2e2127f31083ce9f2d3[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri May 4 16:16:49 2018 +0200
+
+    closes #112
+
+[33mcommit 3377d1eb32e99f46df5e605de41582d6836bf46c[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri May 4 16:09:35 2018 +0200
+
+    #126 buttons clickable only with specific cards
+
+[33mcommit 198ecad7d557583b5157dd7f8a571f222991c24b[m[33m ([m[1;31morigin/FrWinScreen[m[33m)[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri May 4 14:58:39 2018 +0200
+
+    #132 prototype of functionality upon recieving winner from backend
+
+[33mcommit 9eef073ae7be40faa263cfc3fcf00d65cdb24381[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri May 4 14:25:32 2018 +0200
+
+    closes #143
+
+[33mcommit 072b7a5e4fc14854ab97f8605c3d43cbee8cfcd2[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri May 4 14:23:37 2018 +0200
+
+    closes #143
+
+[33mcommit d8e49671c7e80e9b28fc2652dd0bdaa06aabd943[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Fri May 4 02:48:03 2018 +0200
+
+    #45 homestretch; missing right ID and right look (get tomorrow from backend
+
+[33mcommit aadd0b8a79f23dd74720a9a78117ab82cc6c98ea[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Fri May 4 01:31:38 2018 +0200
+
+    #45 hills of gold; missing right ID and right look (get tomorrow from backend
+
+[33mcommit d181af8cc2b96ba3284f4dc8a7c80b194fef13d9[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Thu May 3 22:44:55 2018 +0200
+
+    #132 Win screen is created, rest calls are missing
+
+[33mcommit ae6ff028a0555e8bcf761bf713fda30fa670a0aa[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Thu May 3 20:41:19 2018 +0200
+
+    #135 speed up processing time
+
+[33mcommit ca76f26e87a220441365c193597f9d17318807cf[m
+Merge: e6fbfac a80c3f3
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Thu May 3 20:08:47 2018 +0200
+
+    #135 FINALLY AFTER 2DAYS  DEBUGGING FIXED it works and players are always only on positions from the backend
+
+[33mcommit e6fbfac85b5f2d89544ae75963ce2b06cee9b97e[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Thu May 3 20:00:21 2018 +0200
+
+    #135 FINALLY AFTER 2DAYS  DEBUGGING FIXED it works and players are always only on positions from the backend
+
+[33mcommit a80c3f359c01effee58e8e75a2afd7d14e73f47e[m
+Author: acharl <amadeo@fermat.org>
+Date:   Thu May 3 18:07:28 2018 +0200
+
+    #142 implemented playDrawActionCard
+
+[33mcommit 4486decdb4263b97873a2ab7bec2ee1ec0d95b1d[m
+Author: acharl <amadeo@fermat.org>
+Date:   Thu May 3 14:19:44 2018 +0200
+
+    #closes 63
+
+[33mcommit abe8eadf2609dfc693c90f2b98d536961e3951e4[m
+Author: acharl <amadeo@fermat.org>
+Date:   Thu May 3 12:06:10 2018 +0200
+
+    #139 added selected card to put call of addPlayers
+
+[33mcommit 7bf4969d809321931e2b275ddf9e4b0a2da89af8[m
+Author: acharl <amadeo@fermat.org>
+Date:   Thu May 3 12:03:41 2018 +0200
+
+    #139 added selected card to put call of addPlayers
+
+[33mcommit 012ed1835be4c407265e849215cb895a2ba2f2fb[m
+Merge: 72e5802 84deb64
+Author: acharl <amadeo@fermat.org>
+Date:   Thu May 3 11:54:30 2018 +0200
+
+    Merge branch 'dev' of https://github.com/sealuzh/sopra-fs18-group13-client into dev
+
+[33mcommit 72e5802c257562dc4b43370042fdaf7b901441fc[m
+Author: acharl <amadeo@fermat.org>
+Date:   Thu May 3 11:54:12 2018 +0200
+
+    #139 added selected card to put call of addPlayers
+
+[33mcommit 84deb64623f2620854c97094618083382af94297[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Wed May 2 21:53:40 2018 +0200
+
+    added a break to fix a displaying error
+
+[33mcommit 10abc99547aa9d45bd3b49243663652b564c4182[m
+Author: Franck2509 <franck97@bluewin.ch>
+Date:   Wed May 2 21:12:40 2018 +0200
+
+    removed dead code, refactored names of cards
+
+[33mcommit ccf0f7892e53762b177b3a3e51d906f6475e92d1[m
+Author: acharl <amadeo@fermat.org>
+Date:   Wed May 2 16:43:15 2018 +0200
+
+    fixes #136
+
+[33mcommit 01561ae09bb2c9a292649d43a072dc5a9ceebbf5[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Wed May 2 03:11:55 2018 +0200
+
+    #110 #104 1st: solved with timerobservable and adding class update player instaed of initialPosition 2nd: solves problem of only showing playing pieces on refresh aswell since the initial position is determined by timerobservable and backend input
+
+[33mcommit 9dafa97156f952edad9b0bb5e6cdf536ff7f3ada[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Tue May 1 18:02:37 2018 +0200
+
+    #110 get all actual positions within a given timeobservable only call update if positions have changed; still to implement update funcitonality.
+
+[33mcommit 60072aa87caa385c56a95e69c67f3d0b20e7b009[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon Apr 30 17:17:04 2018 +0200
+
+    #134 display backside of card for empty spot
+
+[33mcommit aac74caa92c633476e3d673355b1a551b5869f7c[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon Apr 30 17:00:49 2018 +0200
+
+    closes #93
+
+[33mcommit d555ab154ae0c1c223f2a4f8b96d5c6a41d975ba[m
+Merge: 5b32490 3a8d62b
+Author: acharl <amadeo@fermat.org>
+Date:   Mon Apr 30 16:43:05 2018 +0200
+
+    Merge pull request #3 from sealuzh/master
+    
+    pull changes from master into dev
+
+[33mcommit 3a8d62bd10f4e926b50730effcf305a4b05569df[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: acharl <amadeo@fermat.org>
+Date:   Mon Apr 30 16:40:25 2018 +0200
+
+    closes #123 and #125
+
+[33mcommit f9db7915d3d1a6cf9f36aad2113a448bff6a7893[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri Apr 27 13:30:16 2018 +0200
+
+    fixes #114
+
+[33mcommit 5b32490a8e61e5d66ad82b3ed999fd4e91515f18[m[33m ([m[1;33mtag: m3[m[33m)[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri Apr 27 11:47:59 2018 +0200
+
+    #111 update handcards upon clicking buttons
+
+[33mcommit d6ce82eb689e7034161657cfeaaab22914755fa8[m
+Author: acharl <amadeo@fermat.org>
+Date:   Fri Apr 27 11:23:01 2018 +0200
+
+    #107 update handcards
+
+[33mcommit 698e041651b2507a05bc5772cc2b4d9cfd0ed43d[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Fri Apr 27 11:13:00 2018 +0200
+
+    #xx right player colour
+
+[33mcommit 459a3c1bdc21759f4efbce66cddab81af2220c6c[m
+Author: mariab19 <clara.barth@hotmail.de>
+Date:   Fri Apr 27 04:07:01 2018 +0200
+
+    #99 they are there but not useful since problem of getting them from backend, some stiles to distinguish between tiles
+
+[33mcommit cdaf41a27caa2e1bc64e1d6ab56f52796a55e1b1[m
+Author: acharl <amadeo@fermat.org>
+Date:   Thu Apr 26 18:03:26 2018 +0200
+
