@@ -770,13 +770,20 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // draw a new card from draw pile
     console.log('playActionCard');
     this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions)
-      .subscribe(result => console.log(result));
-    if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
-      this.trashButtonClickable = false;
-    } else {
-      this.trashButtonClickable = true;
-    }
-    console.log('trashButtonClickable: ' + this.trashButtonClickable);
+      .subscribe(result => {
+        console.log(result);
+          if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
+            this.trashButtonClickable = false;
+          } else {
+            this.trashButtonClickable = true;
+          }
+          console.log('trashButtonClickable: ' + this.trashButtonClickable);
+        },
+        (error) => {
+        alert('you don\'t have enough cards on your draw pile');
+        console.log(error);
+        });
+
     this.selected = [];
     this.updateHandcards();
     this.updateHandcards();
