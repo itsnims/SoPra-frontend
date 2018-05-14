@@ -771,7 +771,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     console.log('possible tiles in else', this.possibleTiles);
     localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
     console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
-    
+
   }); // list of neighboring tiles
   }
 
