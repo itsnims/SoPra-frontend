@@ -37,6 +37,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
   [key: string]: any;
   blockade: any;
   Bstrenght: any;
+  numberX: number;
   /*blockadeColour: string;
   //blockadeStrength: string;
   //api + game + spec + blockades
@@ -79,6 +80,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
       }
       console.log('players: ', this.players);
+      console.log('hello world')
     }
     /*
     How many playing pieces should be displayed on the board as well as their initial positions*/
@@ -186,8 +188,9 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
   addPlayers(selectedCard: any, possibleTiles: any) {
     console.log('standard component selected card: ' + selectedCard);
-    if (localStorage.getItem('mode') === '"true"'){
+    if (localStorage.getItem('mode') === 'true'){
       this.currentPlayer = localStorage.getItem('currentTwoPlayer');
+      console.log('i am current: ', this.currentPlayer)
     } else {
       this.currentPlayer = localStorage.getItem('currentPlayer');
       console.log('currentPlayer: ', this.currentPlayer);
@@ -214,19 +217,36 @@ export class StandardComponent implements OnInit, AfterViewInit {
     }
     else {
       // TO DO eventually need an if for 2 player mode
-      this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
-      this.players[this.currentPlayer].position = JSON.parse(localStorage.getItem('selectedHex'));
-      /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
-      /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
-      // localStorage.removeItem('currentTile');
-      /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
-      console.log('i am in else of addplayer')
-      // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
-      /*WORKS: console.log(localStorage.getItem('currentTile'))*/
+      if (localStorage.getItem('mode') === 'true') {
+        for (let i = 0; i < 4; i ++) {
+          if (this.players[i].playerId === this.currentPlayer){
+            this.numberX = i;}
+            console.log(this.numberX)
+        }
+        console.log('playernumber', this.players[this.numberX])
+        this.hexMapById.get(this.players[this.numberX].position).removePlayer();
+        this.players[this.numberX].position = JSON.parse(localStorage.getItem('selectedHex'));
+        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.numberX], localStorage.getItem('selectedHex'), selectedCard);
 
 
-      this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], localStorage.getItem('selectedHex'), selectedCard);
-      console.log('should be new position', localStorage.getItem('currentTile'));
+      } else {
+
+        console.log('BUG?', this.players[this.currentPlayer])
+        console.log('position to remove: ', this.players[this.currentPlayer].position)
+        this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
+        this.players[this.currentPlayer].position = JSON.parse(localStorage.getItem('selectedHex'));
+        /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
+        /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
+        // localStorage.removeItem('currentTile');
+        /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
+        console.log('i am in else of addplayer')
+        // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
+        /*WORKS: console.log(localStorage.getItem('currentTile'))*/
+
+
+        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], localStorage.getItem('selectedHex'), selectedCard);
+        console.log('should be new position', localStorage.getItem('currentTile'));
+      }
     }
 
       }}
@@ -243,9 +263,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     }
     }
   updatePosition(oldarray: any, newarray: any) {
-    console.log('new', newarray)// ÄNDERUNG depends on what i get exactely form the backend.
     // console.log('in update');
-    console.log('players', this.players);
     /*currently only for NOT 2players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {

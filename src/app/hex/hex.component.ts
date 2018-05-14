@@ -41,30 +41,34 @@ export class HexComponent implements OnInit {
     }
 /*Uses clickTile to determine if a tile is clickable.*/
   clicked() {
-    if (this.clickTile(this.hexId)) {
-      console.log(this.hexId, 'was clicked');
-      this.selectedTile(this.hexId);
-      localStorage.removeItem('selectedHex');
-      localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
-
-    }
-    if (localStorage.getItem('mode') === 'true' && localStorage.getItem('2playerpos').includes(this.hexId)){
+    console.log(localStorage.getItem('2playerpos').indexOf(this.hexId))
+    if (localStorage.getItem('mode') === 'true' && localStorage.getItem('2playerpos').includes(this.hexId)) {
       localStorage.removeItem('currentTwoPlayer')
-      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 0){
+      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 0) {
         localStorage.setItem('currentTwoPlayer', 'player10');
       }
-      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 3){
+      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 3) {
         localStorage.setItem('currentTwoPlayer', 'player11');
+        console.log('i am here 11');
       }
-      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 6){
+      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 6) {
         localStorage.setItem('currentTwoPlayer', 'player20');
       }
-      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 9){
+      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 9) {
         localStorage.setItem('currentTwoPlayer', 'player21');
+      }
+    } else{
+        if (this.clickTile(this.hexId)) {
+          console.log(this.hexId, 'was clicked');
+          this.selectedTile(this.hexId);
+          localStorage.removeItem('selectedHex');
+          localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
+
+        }
       }
 
       console.log()
-    }
+
   }
   public onhightlight() {
     console.log('i am here')
@@ -112,8 +116,14 @@ export class HexComponent implements OnInit {
     };
     if (card === 'false') {
     } else {
+
       if (localStorage.getItem('mode') === 'true') {
-        if (this.playerName.name === 'player10' || this.playerName.name === 'player20') {
+        console.log(this.playerName.name, 'or', this.player.playerId)
+        console.log(this.player.playerId === 'player10')
+
+        if (this.player.playerId === 'player10' || this.player.playerId === 'player20') {
+          console.log('for players /one', ' + ', tile)
+
           this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile + '/one', httpOptions)
             .subscribe(result => console.log('result form hex', result));
         } else {

@@ -42,6 +42,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   playedDrawCard: string;
   playingPieceOnCamp = false;
   cardsToBeTrashed: number;
+  numbX: string;
 
 
   marketCardsObject: object;
@@ -323,9 +324,13 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.updateBuyAvailable();
       this.updateDiscard();
       if (this.selected[0] !== 'Natives') {
-        console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
+        console.log('get call', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move');
         if (localStorage.getItem('mode') === 'true'){
-          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move' + '/one')
+          if (localStorage.getItem('currentTwoPlayer') === 'player10' || localStorage.getItem('currentTwoPlayer') === 'player20'){
+            this.numbX = '/one';
+          }
+          else{ this.numbX = '/two';}
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move' + this.numbX)
             .subscribe(result => {
               for (const xl in result) {
                 console.log('log result', result);
