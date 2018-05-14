@@ -486,7 +486,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       });
     if (localStorage.getItem('tileColor') === 'Camp') {
       // TODO http.get to know how many should be trashed
-
       this.playingPieceOnCamp = true;
       this.trashButtonClickable = false;
     }
