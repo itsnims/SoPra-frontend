@@ -261,7 +261,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
           console.log('i am here')
           console.log(newarray)
           this.players[i].position = newarray[i];
-      } else {}
+      }}
+      else {}
       // console.log('old', oldarray);
       // console.log('new', newarray);
 
