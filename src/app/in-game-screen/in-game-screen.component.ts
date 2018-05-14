@@ -487,6 +487,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
     if (this.Board === 'StandardPath') {
       this.StandardPath.addPlayers(this.selected, this.possibleTiles);
+      this.StandardPath.removeTiles(this.possibleTiles);
+
     }
     if (this.Board === 'HillOfGold') {
       this.HillOfGold.addPlayers(this.selected, this.possibleTiles);
