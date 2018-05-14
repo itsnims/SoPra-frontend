@@ -319,25 +319,47 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.updateDiscard();
       if (this.selected[0] !== 'Natives') {
         console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
-          .subscribe(result => {
-            for (const el in result) {
-              console.log('log result', result);
-              this.possibleTiles.push(result[el].name);
-            }
-            if (this.Board === 'StandardPath') {
-              console.log('in show');
-              this.StandardPath.showTiles(this.possibleTiles);
-            }
-            if (this.Board === 'HillOfGold') {
-              this.HillOfGold.showTiles(this.possibleTiles);
-            }
-            console.log('possible tiles in else', this.possibleTiles);
-            localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
-            console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+        if (localStorage.getItem('mode') === 'true'){
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move' + '/one')
+            .subscribe(result => {
+              for (const xl in result) {
+                console.log('log result', result);
+                this.possibleTiles.push(result[xl].name);
+              }
+              if (this.Board === 'StandardPath') {
+                console.log('in show');
+                this.StandardPath.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'HillOfGold') {
+                this.HillOfGold.showTiles(this.possibleTiles);
+              }
+              console.log('possible tiles in else', this.possibleTiles);
+              localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+              console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
 
 
-          });
+            });
+        } else {
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+            .subscribe(result => {
+              for (const il in result) {
+                console.log('log result', result);
+                this.possibleTiles.push(result[il].name);
+              }
+              if (this.Board === 'StandardPath') {
+                console.log('in show');
+                this.StandardPath.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'HillOfGold') {
+                this.HillOfGold.showTiles(this.possibleTiles);
+              }
+              console.log('possible tiles in else', this.possibleTiles);
+              localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+              console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+
+
+            });
+        }
       }
       if (this.selected[0] === 'Natives') {
         this.playMoveActionCard();
@@ -490,7 +512,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    console.log(this.selected);
+    console.log('selected in move: ', this.selected);
     // NOT sexy way of doing it :S
     console.log('in move:', this.possibleTiles, localStorage.getItem(('selectedHex')).replace(/['"]+/g, '')
     , 'in shit: ', this.possibleTiles.indexOf(localStorage.getItem('selectedHex').replace(/['"]+/g, '')))

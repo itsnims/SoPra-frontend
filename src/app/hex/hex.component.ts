@@ -47,6 +47,22 @@ export class HexComponent implements OnInit {
       localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
 
     }
+    if (localStorage.getItem('mode') === 'true' && localStorage.getItem('2playerpos').includes(this.hexId)){
+      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 0){
+        localStorage.setItem('currentTwoPlayer', 'player10');
+      }
+      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 3){
+        localStorage.setItem('currentTwoPlayer', 'player11');
+      }
+      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 6){
+        localStorage.setItem('currentTwoPlayer', 'player20');
+      }
+      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 9){
+        localStorage.setItem('currentTwoPlayer', 'player21');
+      }
+
+      console.log()
+    }
   }
   public onhightlight() {
     console.log('i am here')
@@ -92,16 +108,29 @@ export class HexComponent implements OnInit {
         'Content-Type': 'application/json'
       })};
     if (card === 'false'){} else {
-      console.log('tile', tile)
-      console.log('card: ', String(tile))
-      tile = tile.replace(/['"]+/g, '')
-      console.log('tile', tile)
-      console.log('clickables in addplayer', this.clickables)
+      if (localStorage.getItem('mode' ) === 'true' ) {
+        if (this.playerName.name === 'player10' || this.playerName.name === 'player20') {
+          this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile + '/one', httpOptions)
+            .subscribe(result => console.log('result form hex', result));
+        } else {
+
+          this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile + '/two', httpOptions)
+            .subscribe(result => console.log('result form hex', result));
+        }
+      }
+      else {
+        console.log('tile', tile)
+        console.log('card: ', String(tile))
+        tile = tile.replace(/['"]+/g, '')
+        console.log('tile', tile)
+        console.log('clickables in addplayer', this.clickables)
         console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile))
         // console.log('buggy', localStorage.getItem(('currentTile')))
 
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
           .subscribe(result => console.log('result form hex', result));
+
+      }
 
     }
 

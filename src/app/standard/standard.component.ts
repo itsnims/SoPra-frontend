@@ -258,10 +258,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
       else {
         for (let i = 0; i < 4; i++) {
           /*assign the the value of newarray*/
-          console.log('i am here')
-          console.log(newarray)
           this.players[i].position = newarray[i];
-      }}
+      }
+      localStorage.setItem('2playerpos', newarray);
+        console.log('newarray', localStorage.getItem('2playerpos'));
+    }
 
       // console.log('old', oldarray);
       // console.log('new', newarray) ;
