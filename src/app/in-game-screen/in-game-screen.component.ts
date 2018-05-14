@@ -276,15 +276,18 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if (this.handCards[i].checked === true) {
       console.log('hereere');
       // this.BoardList[localStorage.getItem('currentPath')].removeTiles(this.possibleTiles)
-     if (this.Board === 'StandardPath') {
-       this.StandardPath.removeTiles(this.possibleTiles);
-     }
-      if (this.Board === 'HillOfGold') {
-        this.HillOfGold.removeTiles(this.possibleTiles);
+      if (this.selected[0] !== 'Natives') {
+        if (this.Board === 'StandardPath') {
+          this.StandardPath.removeTiles(this.possibleTiles);
+        }
+        if (this.Board === 'HillOfGold') {
+          this.HillOfGold.removeTiles(this.possibleTiles);
+        }
+        // }
+        this.possibleTiles = [];
+        localStorage.removeItem('possibleTiles');
       }
-     // }
-      this.possibleTiles = [];
-      localStorage.removeItem('possibleTiles');
+
       /*console.log('on if condition', this.possibleTiles)*/
       this.handCards[i].checked = false;
       const position = this.selected.indexOf(newCard);
@@ -309,29 +312,31 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.updateUseExpeditionCard();
       this.updateBuyAvailable();
       this.updateDiscard();
-
-      console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
-      this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
-        .subscribe(result => {
-          for (const el in result) {
-            console.log('log result', result);
-            this.possibleTiles.push(result[el].name);
-          }
-          if (this.Board === 'StandardPath') {
-            console.log('in show');
-            this.StandardPath.showTiles(this.possibleTiles);
-          }
-          if (this.Board === 'HillOfGold') {
-            this.HillOfGold.showTiles(this.possibleTiles);
-          }
-          console.log('possible tiles in else', this.possibleTiles);
-          localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
-          console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
-
-
+      if (this.selected[0] !== 'Natives') {
+        console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
+        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+          .subscribe(result => {
+            for (const el in result) {
+              console.log('log result', result);
+              this.possibleTiles.push(result[el].name);
+            }
+            if (this.Board === 'StandardPath') {
+              console.log('in show');
+              this.StandardPath.showTiles(this.possibleTiles);
+            }
+            if (this.Board === 'HillOfGold') {
+              this.HillOfGold.showTiles(this.possibleTiles);
+            }
+            console.log('possible tiles in else', this.possibleTiles);
+            localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+            console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
 
 
-        });
+          });
+      }
+      if (this.selected[0] === 'Natives') {
+        this.playMoveActionCard();
+      }
     }
 
 
