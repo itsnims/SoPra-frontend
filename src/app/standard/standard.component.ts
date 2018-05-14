@@ -255,14 +255,14 @@ export class StandardComponent implements OnInit, AfterViewInit {
         /*assign the the value of newarray*/
         this.players[i].position = newarray[i];
       }}
-      if (this.numberPlayers === 2){
+      else {
         for (let i = 0; i < 4; i++) {
           /*assign the the value of newarray*/
           console.log('i am here')
           console.log(newarray)
           this.players[i].position = newarray[i];
       }}
-      else {}
+
       // console.log('old', oldarray);
       // console.log('new', newarray);
 
