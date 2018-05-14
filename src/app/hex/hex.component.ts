@@ -45,6 +45,7 @@ export class HexComponent implements OnInit {
       this.selectedTile(this.hexId);
       localStorage.removeItem('selectedHex');
       localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
+
     }
   }
   public onhightlight() {
