@@ -1,11 +1,43 @@
 <div class="background-image"> <!--  -->
   <!--p>my turn: {{isItMyTurn}}; isActionCard: {{selectedCardIsActionCard}}; useExpCard: {{useExpeditionCard}}</p-->
-<h3 class="opponents" id="opponent1">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+<div *ngIf="playerIsRed">
+  <h3 class="opponents" id="opponent1" style="color: white">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
   <div *ngIf="opponents[1]">
-    <h3 class="opponents" id="opponent2">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+    <h3 class="opponents" id="opponent2" style="color: blue">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
   </div>
   <div *ngIf="opponents[2]">
-    <h3 class="opponents" id="opponent3">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+    <h3 class="opponents" id="opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+  </div>
+</div>
+
+  <div *ngIf="playerIsWhite">
+    <h3 class="opponents" id="opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <div *ngIf="opponents[1]">
+      <h3 class="opponents" id="opponent2" style="color: blue">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+    </div>
+    <div *ngIf="opponents[2]">
+      <h3 class="opponents" id="opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+    </div>
+  </div>
+
+  <div *ngIf="playerIsBlue">
+    <h3 class="opponents" id="opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <div *ngIf="opponents[1]">
+      <h3 class="opponents" id="opponent2" style="color: white">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+    </div>
+    <div *ngIf="opponents[2]">
+      <h3 class="opponents" id="opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+    </div>
+  </div>
+
+  <div *ngIf="playerIsYellow">
+    <h3 class="opponents" id="opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <div *ngIf="opponents[1]">
+      <h3 class="opponents" id="opponent2" style="color: white">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+    </div>
+    <div *ngIf="opponents[2]">
+      <h3 class="opponents" id="opponent3" style="color: blue">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+    </div>
   </div>
 
   <li *ngIf=" this.Board === 'StandardPath'">
