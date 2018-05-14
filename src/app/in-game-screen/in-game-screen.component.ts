@@ -376,13 +376,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         console.log(this.lowerCards[key].cardID === this.chosenMarketCard);
     }
   }
-   /* return this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
-      .subscribe(result => {
-        for (const el in result) {
-          this.possibleTiles.push(result[el].name);
-        }
-        console.log(this.possibleTiles);
-      });*/
 
 
   discardCards() {
@@ -394,6 +387,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     console.log(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard');
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard', bodyString, httpOptions)
       .subscribe(result => console.log(result));
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
     this.updateHandcards();
     this.selected = [];
   }
@@ -461,6 +457,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
   updateHandcards() {
+    this.selected = [];
     console.log('handcards should be updated');
     const httpOptions = {
       headers: new HttpHeaders({
@@ -515,10 +512,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
 
-
   ngOnInit() {
+
     localStorage.removeItem('possibleTiles');
-    localStorage.removeItem('selectedHex')
+    localStorage.removeItem('selectedHex');
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -543,6 +540,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             }
           });
       });
+
     console.log('got current User: ', localStorage.getItem('currentUser'));
     // here we get the current player from heroku in realtime
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -573,7 +571,16 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         }
       });
 
-
+    // get opponent0 blockade points
+    TimerObservable.create(0, this.interval)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/blockadePoints')
+            .subscribe(result => {
+              // console.log('this.opponentBlockadePoints[idx]: ' + this.opponentBlockadePoints[idx] + ' Number(JSON.stringify(result))' + Number(JSON.stringify(result)))
+              this.myBlockadePoints = Number(JSON.stringify(result));
+            });
+      });
 
 
 
@@ -634,7 +641,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
-            console.log(result);
             /*first assign all positions before update to the array old positions*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
@@ -765,7 +771,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   }); // list of neighboring tiles
     this.selected = [];
-
   }
 
   playMarketActionCard() {
