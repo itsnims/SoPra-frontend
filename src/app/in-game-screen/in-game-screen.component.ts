@@ -59,7 +59,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   mustTrash = false;
   trashNumber = 0;
-  mustDiscard = true;
+  mustDiscard = false;
   discardNumber = 0;
 
   display: boolean;
