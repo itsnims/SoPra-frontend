@@ -40,6 +40,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   temp: boolean;
   currentHandCardObject: object;
   playedDrawCard: string;
+  playingPieceOnCamp = false;
+  cardsToBeTrashed: number;
 
 
   marketCardsObject: object;
@@ -196,6 +198,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
 
+
   // überprüft wie viele karten im lower market sind
   checkIsFree() {
     this.http.get(this.apiUrl + this.currentRoom + '/CurrentBottom')
@@ -321,25 +324,47 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.updateDiscard();
       if (this.selected[0] !== 'Natives') {
         console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
-          .subscribe(result => {
-            for (const el in result) {
-              console.log('log result', result);
-              this.possibleTiles.push(result[el].name);
-            }
-            if (this.Board === 'StandardPath') {
-              console.log('in show');
-              this.StandardPath.showTiles(this.possibleTiles);
-            }
-            if (this.Board === 'HillOfGold') {
-              this.HillOfGold.showTiles(this.possibleTiles);
-            }
-            console.log('possible tiles in else', this.possibleTiles);
-            localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
-            console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+        if (localStorage.getItem('mode') === 'true'){
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move' + '/one')
+            .subscribe(result => {
+              for (const xl in result) {
+                console.log('log result', result);
+                this.possibleTiles.push(result[xl].name);
+              }
+              if (this.Board === 'StandardPath') {
+                console.log('in show');
+                this.StandardPath.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'HillOfGold') {
+                this.HillOfGold.showTiles(this.possibleTiles);
+              }
+              console.log('possible tiles in else', this.possibleTiles);
+              localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+              console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
 
 
-          });
+            });
+        } else {
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
+            .subscribe(result => {
+              for (const il in result) {
+                console.log('log result', result);
+                this.possibleTiles.push(result[il].name);
+              }
+              if (this.Board === 'StandardPath') {
+                console.log('in show');
+                this.StandardPath.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'HillOfGold') {
+                this.HillOfGold.showTiles(this.possibleTiles);
+              }
+              console.log('possible tiles in else', this.possibleTiles);
+              localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+              console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+
+
+            });
+        }
       }
       if (this.selected[0] === 'Natives') {
         this.playMoveActionCard();
@@ -419,6 +444,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
+    this.trashButtonClickable = true;
   }
 
 
@@ -433,7 +459,14 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json'
       })};
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
-      .subscribe(result => console.log(result));
+      .subscribe(result => {
+        if (result) {
+          alert('you bought ' + this.chosenMarketCard);
+        } else {
+          alert('you dont have enough money to buy ' + this.chosenMarketCard);
+          this.firstPurchase = false;
+        }
+      });
     console.log('you selected: ' + this.selected);
     this.updateHandcards();
     this.updateHandcards();
@@ -470,7 +503,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   updateHandcards() {
     this.selected = [];
-    console.log('handcards should be updated');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -483,16 +515,20 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
           this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
         }
       });
+    if (localStorage.getItem('tileColor') === 'Camp') {
+      // TODO http.get to know how many should be trashed
+      this.playingPieceOnCamp = true;
+      this.trashButtonClickable = false;
+    }
   }
 
 
   movePlayer() {
-    alert('you made a move');
     console.log('entered mov');
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
-    console.log(this.selected);
+    console.log('selected in move: ', this.selected);
     // NOT sexy way of doing it :S
     console.log('in move:', this.possibleTiles, localStorage.getItem(('selectedHex')).replace(/['"]+/g, '')
     , 'in shit: ', this.possibleTiles.indexOf(localStorage.getItem('selectedHex').replace(/['"]+/g, '')))
@@ -587,31 +623,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             });
         }
       });
-
-    // get opponent0 blockade points
-    TimerObservable.create(0, this.interval)
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/blockadePoints')
-            .subscribe(result => {
-              // console.log('this.opponentBlockadePoints[idx]: ' + this.opponentBlockadePoints[idx] + ' Number(JSON.stringify(result))' + Number(JSON.stringify(result)))
-              this.myBlockadePoints = Number(JSON.stringify(result));
-            });
-      });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -783,13 +794,20 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // draw a new card from draw pile
     console.log('playActionCard');
     this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions)
-      .subscribe(result => console.log(result));
-    if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
-      this.trashButtonClickable = false;
-    } else {
-      this.trashButtonClickable = true;
-    }
-    console.log('trashButtonClickable: ' + this.trashButtonClickable);
+      .subscribe(result => {
+        console.log(result);
+          if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
+            this.trashButtonClickable = false;
+          } else {
+            this.trashButtonClickable = true;
+          }
+          console.log('trashButtonClickable: ' + this.trashButtonClickable);
+        },
+        (error) => {
+        alert('you don\'t have enough cards on your draw pile');
+        console.log(error);
+        });
+
     this.selected = [];
     this.updateHandcards();
     this.updateHandcards();
@@ -842,6 +860,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     } else if (this.playedDrawCard === 'TravelDiary' && this.selected.length === 2) {
       this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
         .subscribe(result => console.log(result));
+    } else if (this.playingPieceOnCamp) {
+
     }
     // TODO show notification to user that he selected wrong number of cards to trash
     this.updateHandcards();

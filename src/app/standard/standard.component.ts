@@ -62,7 +62,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log('numberPlayers', this.numberPlayers)
     /*give the players their specific name*/
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
-    const twoPlayermode = ['player1.0', 'player1.1', 'player2.0', 'player2.1']
+    const twoPlayermode = ['player10', 'player11', 'player20', 'player21']
     /*only implement 2 players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
@@ -134,11 +134,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
   }*/
     this.http.get(this.apiUrl + this.currentRoom + '/blockade')
       .subscribe(result => {
-        console.log('get result: ', result);
         const first = this.blockadestring[0];
         this[first] = 'hello';
-        console.log(this.blockade0);
-        console.log(result[3].name);
         for (let i = 0; i < 4; i++) {
           const dummy = this.blockadestring[i];
           this[dummy] = result[i].name;
@@ -258,13 +255,14 @@ export class StandardComponent implements OnInit, AfterViewInit {
       else {
         for (let i = 0; i < 4; i++) {
           /*assign the the value of newarray*/
-          console.log('i am here')
-          console.log(newarray)
           this.players[i].position = newarray[i];
-      }}
+      }
+      localStorage.setItem('2playerpos', newarray);
+        console.log('newarray', localStorage.getItem('2playerpos'));
+    }
 
       // console.log('old', oldarray);
-      // console.log('new', newarray);
+      // console.log('new', newarray) ;
 
       for (let i = 0; i < newarray.length; i++) {
         // console.log(newarray[i]);
