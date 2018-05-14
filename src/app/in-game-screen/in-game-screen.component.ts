@@ -312,10 +312,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.updateUseExpeditionCard();
       this.updateBuyAvailable();
       this.updateDiscard();
-      console.log('this.selected: ' + this.selected);
-
       if (this.selected[0] !== 'Natives') {
-        console.log('this.selected[0] : ' + this.selected[0]);
         console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
         this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
           .subscribe(result => {
@@ -744,8 +741,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(result => console.log(result));
     if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
       this.trashButtonClickable = false;
+    } else {
+      this.trashButtonClickable = true;
     }
-    this.trashButtonClickable = true;
+    console.log('trashButtonClickable: ' + this.trashButtonClickable);
     this.selected = [];
     this.updateHandcards();
     this.updateHandcards();
@@ -789,7 +788,17 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.selected = [];
   }
 
-
+  trashCard() {
+    const bodyString = JSON.stringify({cards: this.selected});
+    this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
+      .subscribe(result => console.log(result));
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.selected = [];
+  }
 
   ngOnDestroy() {
     this.alive = false; // switches your TimerObservable off
