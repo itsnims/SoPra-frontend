@@ -39,6 +39,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   trashButtonClickable: boolean;
   temp: boolean;
   currentHandCardObject: object;
+  playedDrawCard: string;
 
 
   marketCardsObject: object;
@@ -480,6 +481,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
   movePlayer() {
+    alert('you made a move');
     console.log('entered mov');
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
     // TODO addPlayers() doesn't work yet
@@ -726,13 +728,27 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
 
+  contains(a, obj) {
+    var i = a.length;
+    while (i--) {
+      if (a[i] === obj) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+
+
   playActionCard() {
-    if (this.drawActionCards.includes(this.selected[0])) {
-      console.log('yaaaay');
+    console.log('this.selected: '+ this.selected[0]);
+    this.playedDrawCard = this.selected[0];
+    console.log('playedDrawCard before: ' + this.playedDrawCard);
+    if (this.contains(this.drawActionCards, this.selected[0])) {
       this.playDrawActionCard(this.selected[0]);
-    } else if (this.moveActionCards.includes(this.selected[0])) {
+    } else if (this.contains(this.moveActionCards, this.selected[0])) {
       this.playMoveActionCard();
-    } else if (this.marketActionCards.includes(this.selected[0])) {
+    } else if (this.contains(this.marketActionCards, this.selected[0])) {
       this.playMarketActionCard();
     }
   }
@@ -793,15 +809,24 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
   trashCard() {
+    console.log('playedDrawCard : ' + this.playedDrawCard);
     const bodyString = JSON.stringify({cards: this.selected});
-    this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
-      .subscribe(result => console.log(result));
+    if (this.playedDrawCard === 'Scientist' && this.selected.length === 1) {
+      this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
+        .subscribe(result => console.log(result));
+    } else if (this.playedDrawCard === 'TravelDiary' && this.selected.length === 2) {
+      this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
+        .subscribe(result => console.log(result));
+    }
+    // TODO show notification to user that he selected wrong number of cards to trash
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
     this.selected = [];
+    this.playedDrawCard = '';
+    this.trashButtonClickable = true;
   }
 
   ngOnDestroy() {
