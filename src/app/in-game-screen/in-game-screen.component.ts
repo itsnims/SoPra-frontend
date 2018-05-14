@@ -653,39 +653,47 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
             /*first assign all positions before update to the array old positions*/
+            console.log('2player result: ', result)
             this.oldPositions = [];
             for (let x of this.currentPositions){
               this.oldPositions.push(x);
             }
             this.currentPositions = [];
             /*push the positions from the backend to the array currentPositions*/
-            if (localStorage.getItem('mode') === '"true"') {
+            console.log(localStorage.getItem('mode'))
+            if (localStorage.getItem('mode') === 'true') {
               for (const key in result) {
-                this.currentPositions.push(result[key].myFigure.currentPosition.name[0]);
-                this.currentPositions.push(result[key].myFigure.currentPosition.name[1]);
+                this.currentPositions.push(result[key].myFigures[0].currentPosition.name);
+                this.currentPositions.push(result[key].myFigures[1].currentPosition.name);
               }
+              console.log('currentposition 2player: ', this.currentPositions);
+
             } else {
               for (const key in result) {
                 this.currentPositions.push(result[key].myFigure.currentPosition.name);
               }
             }
+
+            if (this.Board === 'StandardPath') {
+              this.StandardPath.updatePosition(this.oldPositions, this.currentPositions);
+            }
+
+            if (this.Board === 'HillOfGold') {
+              this.HillOfGold.updatePosition(this.oldPositions, this.currentPositions);
+            }
+            if (this.Board === 'Serpentine') {
+              this.Serpentine.updatePosition(this.oldPositions, this.currentPositions);
+            }
+            if ((localStorage.getItem('currentPath')) === '"HomeStretchFields"') {
+              this.HomeStretchFields.updatePosition(this.oldPositions, this.currentPositions);
+            }
             });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
         // Not sexy way of doing it;
+        console.log('i execute');
+        console.log(this.currentPositions)
 
-       if (this.Board === 'StandardPath') {
-         this.StandardPath.updatePosition(this.oldPositions, this.currentPositions);
-       }
-       if (this.Board === 'HillOfGold') {
-            this.HillOfGold.updatePosition(this.oldPositions, this.currentPositions);
-          }
-       if (this.Board === 'Serpentine') {
-         this.Serpentine.updatePosition(this.oldPositions, this.currentPositions);
-       }
-          if ((localStorage.getItem('currentPath')) === '"HomeStretchFields"') {
-            this.HomeStretchFields.updatePosition(this.oldPositions, this.currentPositions);
-          }
 
         }
             );

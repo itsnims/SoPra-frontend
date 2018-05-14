@@ -62,7 +62,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log('numberPlayers', this.numberPlayers)
     /*give the players their specific name*/
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
-    const twoPlayermode = ['player1', 'player1', 'player2', 'player2']
+    const twoPlayermode = ['player1', 'player2', 'player1', 'player2']
     /*only implement 2 players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
@@ -71,12 +71,14 @@ export class StandardComponent implements OnInit, AfterViewInit {
         this.players[i].playerId = sample_players[i];
       }}
       else{
+      console.log('in else of players')
       localStorage.setItem('mode', 'true');
-      for (let i = 0; i <= 4; i++){
+      for (let i = 0; i < 4; i++){
         this.players.push(new PlayerComponent());
-        this.player[i].playerId = twoPlayermode[i];
+        this.players[i].playerId = twoPlayermode[i];
 
       }
+      console.log('players: ', this.players);
     }
     /*
     How many playing pieces should be displayed on the board as well as their initial positions*/
@@ -244,15 +246,22 @@ export class StandardComponent implements OnInit, AfterViewInit {
     }
     }
   updatePosition(oldarray: any, newarray: any) {
-    // ÄNDERUNG depends on what i get exactely form the backend.
+    console.log('new', newarray)// ÄNDERUNG depends on what i get exactely form the backend.
     // console.log('in update');
-
+    console.log('players', this.players);
     /*currently only for NOT 2players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
         /*assign the the value of newarray*/
         this.players[i].position = newarray[i];
-      }} else {}
+      }}
+      if (this.numberPlayers > 1){
+        for (let i = 0; i < 4; i++) {
+          /*assign the the value of newarray*/
+          console.log('i am here')
+          console.log(newarray)
+          this.players[i].position = newarray[i];
+      } else {}
       // console.log('old', oldarray);
       // console.log('new', newarray);
 
