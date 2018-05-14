@@ -742,8 +742,28 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
   playMoveActionCard() {
+    localStorage.removeItem('possibleTiles');
     this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction', this.httpOptions)
-      .subscribe(result => console.log(result)); // list of neighboring tiles
+      .subscribe(result => {
+        for(const et in result) {
+      console.log('log result', result);
+      this.possibleTiles.push(result[et].name);
+    }
+    if (this.Board === 'StandardPath') {
+      console.log('in show');
+      this.StandardPath.showTiles(this.possibleTiles);
+    }
+    if (this.Board === 'HillOfGold') {
+      this.HillOfGold.showTiles(this.possibleTiles);
+    }
+    console.log('possible tiles in else', this.possibleTiles);
+    localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+    console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+
+
+
+
+  }); // list of neighboring tiles
     this.selected = [];
 
   }
