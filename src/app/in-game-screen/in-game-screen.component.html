@@ -117,3 +117,27 @@
 
 
 <app-win-screen></app-win-screen>
+
+<!-- Trash overlay-->
+<div *ngIf="mustTrash">
+  <div class="overlay1">
+    <div class="overlayBox">
+      <h2 class="overlayMessage">You must trash {{trashNumber}} cards</h2>
+    </div>
+  </div>
+  <div id="overlay2trash"></div>
+  <div id="overlay3trash"></div>
+  <div class="overlay4"></div>
+
+</div>
+
+<!-- Discard overlay-->
+<div *ngIf="mustDiscard">
+  <div class="overlay1">
+    <div class="overlayBox">
+      <h2 class="overlayMessage">You must discard {{discardNumber}} cards</h2>
+    </div>
+  </div>
+  <div id="overlay2discard"></div>
+  <div class="overlay4"></div>
+</div>

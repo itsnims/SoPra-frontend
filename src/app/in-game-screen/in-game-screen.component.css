@@ -313,3 +313,65 @@
   top: -1180px;
   left: 10px;
 }
+
+
+/* Overlays */
+.overlay1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 627px;
+  width: 1366px;
+  background-color: transparent;
+}
+.overlay4 {
+  position: fixed;
+  top: 718px;
+  left: 0px;
+  height: 50px;
+  width: 180px;
+  background-color: transparent;
+}
+#overlay2trash {
+  position: fixed;
+  top: 619px;
+  left: 0px;
+  height: 55px;
+  width: 180px;
+  background-color: transparent;
+}
+#overlay3trash {
+  position: fixed;
+  top: 619px;
+  left: 180px;
+  height: 150px;
+  width: 180px;
+  background-color: transparent;
+}
+#overlay2discard {
+  position: fixed;
+  top: 619px;
+  left: 0px;
+  height: 99px;
+  width: 360px;
+  background-color: transparent;
+}
+.overlayBox {
+  background: rgba(0,0,0,0.65);
+
+  position: fixed;
+  top: 105px;
+  left: 283px;
+  width: 800px;
+  height: 450px;
+}
+.overlayMessage {
+  text-align: center;
+  display: block;
+  margin-top: 180px;
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
