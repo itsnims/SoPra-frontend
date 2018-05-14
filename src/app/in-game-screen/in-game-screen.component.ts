@@ -66,6 +66,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
   playerColors = ['red', 'white', 'blue', 'yellow'];
+  playerIsRed = false;
+  playerIsWhite = false;
+  playerIsBlue = false;
+  playerIsYellow = false;
 
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
@@ -623,6 +627,17 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         this.playersInRoom.push((this.playerObject[idx]).name);
         if (this.playerName === (this.playerObject[idx]).name) {
           this.myColor = this.playerColors[idx];
+
+          if (this.myColor === 'red')
+            this.playerIsRed = true;
+          else if (this.myColor === 'white')
+            this.playerIsWhite = true;
+          else if (this.myColor === 'blue')
+            this.playerIsBlue = true;
+          else
+            this.playerIsYellow = true;
+
+
           console.log('you are the player at position: ' + idx);
           localStorage.setItem('currentPlayer', idx);
           console.log('you have color: ' + this.myColor);

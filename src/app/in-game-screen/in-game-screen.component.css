@@ -43,13 +43,13 @@
 #opponent1 {
   top: 15px;
   left: 175px;
-  color: red;
+  /* color: red; */
 }
 
 #opponent2 {
   top: 15px;
   left: 525px;
-  color: white;
+  /* color: white; */
 }
 
 #opponent3 {
