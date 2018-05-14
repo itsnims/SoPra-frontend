@@ -62,7 +62,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log('numberPlayers', this.numberPlayers)
     /*give the players their specific name*/
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
-    const twoPlayermode = ['player1.0', 'player1.1', 'player2.0', 'player2.1']
+    const twoPlayermode = ['player10', 'player11', 'player20', 'player21']
     /*only implement 2 players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
@@ -264,7 +264,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
       }}
 
       // console.log('old', oldarray);
-      // console.log('new', newarray);
+      // console.log('new', newarray) ;
 
       for (let i = 0; i < newarray.length; i++) {
         // console.log(newarray[i]);

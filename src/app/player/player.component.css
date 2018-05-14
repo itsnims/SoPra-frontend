@@ -36,10 +36,10 @@
   background-color: blue;
 }
 
-#player2 {
+#player2, #player20, #player21{
   background-color: white;
 }
 
-#player1 {
+#player1, #player10, #player11{
   background-color: red;
 }
