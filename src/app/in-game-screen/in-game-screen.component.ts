@@ -55,8 +55,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   myBlockadePoints = 0;
   Board = localStorage.getItem('currentPath').replace(/['"]+/g, '');
 
-
-
+  mustTrash = false;
+  trashNumber = 0;
+  mustDiscard = true;
+  discardNumber = 0;
 
   display: boolean;
   alive: boolean;
