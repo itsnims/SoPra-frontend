@@ -15,6 +15,7 @@ export class HexComponent implements OnInit {
   @Input() blockade: string;
   opacity  = 1;
   value = false;
+  tileColor: string;
   @Input() player: PlayerComponent = null;
   /*BACKEND current tiles*/
   clickables: string[];
@@ -96,18 +97,32 @@ export class HexComponent implements OnInit {
       console.log('card: ', String(tile))
       tile = tile.replace(/['"]+/g, '')
       console.log('tile', tile)
-      console.log('clickables in addplayer', this.clickables)
-        console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile))
-        // console.log('buggy', localStorage.getItem(('currentTile')))
-
-        this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
-          .subscribe(result => console.log('result form hex', result));
-
+      console.log('clickables in addplayer', this.clickables);
+      console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile));
+      // console.log('buggy', localStorage.getItem(('currentTile')))
+      this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
+        .subscribe(result => {
+          console.log('result form hex', result);
+          for (const key in result) {
+            if (key === 'Color') {
+              localStorage.setItem('tileColor', String(result[key]));
+            }
+          }
+          for (const key in result) {
+            if (key === 'strenght' && localStorage.getItem('tileColor') === 'Camp') {
+              localStorage.setItem('tileStrength', String(result[key]));
+              alert('you have to trash ' + result[key] + ' card(s)'); // TODO show how many
+            }
+          }
+        });
     }
-
   }
+
+
   removePlayer() {
     this.player = null;
+    localStorage.removeItem('tileColor');
+    localStorage.removeItem('tileStrength');
   }
   selectedTile(position: string) {
   }

@@ -132,11 +132,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
   }*/
     this.http.get(this.apiUrl + this.currentRoom + '/blockade')
       .subscribe(result => {
-        console.log('get result: ', result);
         const first = this.blockadestring[0];
         this[first] = 'hello';
-        console.log(this.blockade0);
-        console.log(result[3].name);
         for (let i = 0; i < 4; i++) {
           const dummy = this.blockadestring[i];
           this[dummy] = result[i].name;
