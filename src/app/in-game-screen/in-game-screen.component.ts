@@ -40,6 +40,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   temp: boolean;
   currentHandCardObject: object;
   playedDrawCard: string;
+  playingPieceOnCamp = false;
+  cardsToBeTrashed: number;
 
 
   marketCardsObject: object;
@@ -192,6 +194,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.trashButtonClickable = true;
 
   }
+
 
 
   // überprüft wie viele karten im lower market sind
@@ -439,6 +442,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
+    this.trashButtonClickable = true;
   }
 
 
@@ -453,7 +457,14 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         'Content-Type': 'application/json'
       })};
     this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.chosenMarketCard, bodyString, httpOptions)
-      .subscribe(result => console.log(result));
+      .subscribe(result => {
+        if (result) {
+          alert('you bought ' + this.chosenMarketCard);
+        } else {
+          alert('you dont have enough money to buy ' + this.chosenMarketCard);
+          this.firstPurchase = false;
+        }
+      });
     console.log('you selected: ' + this.selected);
     this.updateHandcards();
     this.updateHandcards();
@@ -490,7 +501,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   updateHandcards() {
     this.selected = [];
-    console.log('handcards should be updated');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
@@ -503,11 +513,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
           this.handCards.push({cardClass: (this.currentHandCardObject[i]).name, checked: false });
         }
       });
+    if (localStorage.getItem('tileColor') === 'Camp') {
+      // TODO http.get to know how many should be trashed
+      this.playingPieceOnCamp = true;
+      this.trashButtonClickable = false;
+    }
   }
 
 
   movePlayer() {
-    alert('you made a move');
     console.log('entered mov');
     console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
     // TODO addPlayers() doesn't work yet
@@ -607,31 +621,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             });
         }
       });
-
-    // get opponent0 blockade points
-    TimerObservable.create(0, this.interval)
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/blockadePoints')
-            .subscribe(result => {
-              // console.log('this.opponentBlockadePoints[idx]: ' + this.opponentBlockadePoints[idx] + ' Number(JSON.stringify(result))' + Number(JSON.stringify(result)))
-              this.myBlockadePoints = Number(JSON.stringify(result));
-            });
-      });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -862,6 +851,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     } else if (this.playedDrawCard === 'TravelDiary' && this.selected.length === 2) {
       this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
         .subscribe(result => console.log(result));
+    } else if (this.playingPieceOnCamp) {
+
     }
     // TODO show notification to user that he selected wrong number of cards to trash
     this.updateHandcards();

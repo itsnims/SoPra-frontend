@@ -15,6 +15,7 @@ export class HexComponent implements OnInit {
   @Input() blockade: string;
   opacity  = 1;
   value = false;
+  tileColor: string;
   @Input() player: PlayerComponent = null;
   /*BACKEND current tiles*/
   clickables: string[];
@@ -106,9 +107,11 @@ export class HexComponent implements OnInit {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      })};
-    if (card === 'false'){} else {
-      if (localStorage.getItem('mode' ) === 'true' ) {
+      })
+    };
+    if (card === 'false') {
+    } else {
+      if (localStorage.getItem('mode') === 'true') {
         if (this.playerName.name === 'player10' || this.playerName.name === 'player20') {
           this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile + '/one', httpOptions)
             .subscribe(result => console.log('result form hex', result));
@@ -128,15 +131,31 @@ export class HexComponent implements OnInit {
         // console.log('buggy', localStorage.getItem(('currentTile')))
 
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
-          .subscribe(result => console.log('result form hex', result));
-
+          .subscribe(result => {
+            for (const key in result) {
+              if (key === 'Color') {
+                localStorage.setItem('tileColor', String(result[key]));
+              }
+            }
+            for (const key in result) {
+              if (key === 'strenght' && localStorage.getItem('tileColor') === 'Camp') {
+                localStorage.setItem('tileStrength', String(result[key]));
+                alert('you have to trash ' + result[key] + ' card(s)'); // TODO show how many
+              }
+              if (key === 'strenght' && localStorage.getItem('tileColor') === 'White') {
+                localStorage.setItem('tileStrength', String(result[key]));
+                alert('you have to discard ' + result[key] + ' card(s)'); // TODO show how many
+              }
+            }
+          })
       }
-
     }
-
   }
+
   removePlayer() {
     this.player = null;
+    localStorage.removeItem('tileColor');
+    localStorage.removeItem('tileStrength');
   }
   selectedTile(position: string) {
   }
