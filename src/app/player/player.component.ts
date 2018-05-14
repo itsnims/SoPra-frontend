@@ -17,7 +17,8 @@ export class PlayerComponent implements OnInit {
   clickedP() {
    // TO DO have to see what IDs i need to have.
     this.twoplayer = localStorage.getItem('mode')
-    if (this.twoplayer === '"true"') {
+    if (this.twoplayer === 'true') {
+      console.log('have been clicked', this.playerId)
       localStorage.removeItem('currentTwoPlayer');
       localStorage.setItem('currentTwoPlayer', JSON.stringify(this.playerId));
     }
