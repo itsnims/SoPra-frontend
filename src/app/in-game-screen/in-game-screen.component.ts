@@ -230,7 +230,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
   updateUseExpeditionCard() {
     if (this.isItMyTurn === true) {
-      if (this.selected.length === 1 && this.selectedCardIsActionCard === false) {
+      if (this.selected.length === 1 && this.selectedCardIsActionCard === false || this.selected.length === 1 && this.selected[0] === 'Natives') {
         this.useExpeditionCard = false;
         return;
       } else {
@@ -274,7 +274,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
     const newCard = card;
     if (this.handCards[i].checked === true) {
-      console.log('hereere');
       // this.BoardList[localStorage.getItem('currentPath')].removeTiles(this.possibleTiles)
       if (this.selected[0] !== 'Natives') {
         if (this.Board === 'StandardPath') {
@@ -292,13 +291,14 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.handCards[i].checked = false;
       const position = this.selected.indexOf(newCard);
       this.selected.splice(position, 1);
-      console.log('selected', this.selected);
       this.updateSelectedCardIsActionCard();
       this.updateUseActionCard();
       this.updateUseExpeditionCard();
       this.updateBuyAvailable();
       this.updateDiscard();
-} else {
+      console.log('this.selected: ' + this.selected);
+
+    } else {
       this.possibleTiles = [];
       localStorage.removeItem('possibleTiles');
       /* WORKS # local storage gets deleted console.log('shouldnotwork', localStorage.getItem('possibleTiles'));*/
@@ -312,7 +312,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.updateUseExpeditionCard();
       this.updateBuyAvailable();
       this.updateDiscard();
+      console.log('this.selected: ' + this.selected);
+
       if (this.selected[0] !== 'Natives') {
+        console.log('this.selected[0] : ' + this.selected[0]);
         console.log('get call', this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move'));
         this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move')
           .subscribe(result => {
@@ -761,11 +764,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction', this.httpOptions)
       .subscribe(result => {
         for(const et in result) {
-      console.log('log result', result);
       this.possibleTiles.push(result[et].name);
     }
     if (this.Board === 'StandardPath') {
-      console.log('in show');
       this.StandardPath.showTiles(this.possibleTiles);
     }
     if (this.Board === 'HillOfGold') {
@@ -775,11 +776,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
     console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
 
-
-
-
   }); // list of neighboring tiles
-    this.selected = [];
   }
 
   playMarketActionCard() {

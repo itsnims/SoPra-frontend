@@ -85,7 +85,7 @@ export class HexComponent implements OnInit {
   }
 
   addplayer(p: PlayerComponent, tile: any, card: any) {
-    console.log('i am here');
+    console.log('hex component card: ' + card);
     this.player = p;
     const httpOptions = {
       headers: new HttpHeaders({

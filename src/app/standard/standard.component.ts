@@ -186,6 +186,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
 
   addPlayers(selectedCard: any, possibleTiles: any) {
+    console.log('standard component selected card: ' + selectedCard);
     if (localStorage.getItem('mode') === '"true"'){
       this.currentPlayer = localStorage.getItem('currentTwoPlayer');
     } else {
