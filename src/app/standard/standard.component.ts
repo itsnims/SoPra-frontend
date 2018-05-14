@@ -191,7 +191,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     } else {
       this.currentPlayer = localStorage.getItem('currentPlayer');
       console.log('currentPlayer: ', this.currentPlayer);
-      console.log('possibleTiles value', possibleTiles)
+      console.log('possibleTiles value', possibleTiles);
     }
 
     if (possibleTiles.length <= 0){} else {
@@ -257,6 +257,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
           /*assign the the value of newarray*/
           this.players[i].position = newarray[i];
       }
+      localStorage.removeItem('2playerpos');
       localStorage.setItem('2playerpos', newarray);
         console.log('newarray', localStorage.getItem('2playerpos'));
     }

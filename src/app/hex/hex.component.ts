@@ -49,6 +49,7 @@ export class HexComponent implements OnInit {
 
     }
     if (localStorage.getItem('mode') === 'true' && localStorage.getItem('2playerpos').includes(this.hexId)){
+      localStorage.removeItem('currentTwoPlayer')
       if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 0){
         localStorage.setItem('currentTwoPlayer', 'player10');
       }
