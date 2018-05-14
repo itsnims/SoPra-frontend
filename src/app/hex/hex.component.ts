@@ -95,11 +95,14 @@ export class HexComponent implements OnInit {
       console.log('tile', tile)
       console.log('card: ', String(tile))
       tile = tile.replace(/['"]+/g, '')
+      console.log('tile', tile)
       console.log('clickables in addplayer', this.clickables)
         console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile))
         // console.log('buggy', localStorage.getItem(('currentTile')))
+
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
           .subscribe(result => console.log('result form hex', result));
+
     }
 
   }
