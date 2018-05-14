@@ -62,7 +62,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     console.log('numberPlayers', this.numberPlayers)
     /*give the players their specific name*/
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
-    const twoPlayermode = ['player1', 'player2', 'player1', 'player2']
+    const twoPlayermode = ['player1', 'player1', 'player2', 'player2']
     /*only implement 2 players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
