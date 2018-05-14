@@ -486,6 +486,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // console.log(this.standard.addPlayers());
     console.log(this.selected);
     // NOT sexy way of doing it :S
+    console.log('in move:', this.possibleTiles, localStorage.getItem(('selectedHex')).replace(/['"]+/g, '')
+    , 'in shit: ', this.possibleTiles.indexOf(localStorage.getItem('selectedHex').replace(/['"]+/g, '')))
+    if (this.possibleTiles.indexOf(localStorage.getItem('selectedHex').replace(/['"]+/g, '')) > -1) {
 
     if (this.Board === 'StandardPath') {
       this.StandardPath.addPlayers(this.selected, this.possibleTiles);
@@ -501,6 +504,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if (this.Board === 'HomeStretchFields') {
       this.HomeStretchFields.addPlayers(this.selected, this.possibleTiles);
     }
+  }
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
