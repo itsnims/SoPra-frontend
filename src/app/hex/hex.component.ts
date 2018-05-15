@@ -41,8 +41,8 @@ export class HexComponent implements OnInit {
     }
 /*Uses clickTile to determine if a tile is clickable.*/
   clicked() {
-    console.log(localStorage.getItem('2playerpos').indexOf(this.hexId))
     if (localStorage.getItem('mode') === 'true' && localStorage.getItem('2playerpos').includes(this.hexId)) {
+      console.log('shit in 2')
       localStorage.removeItem('currentTwoPlayer')
       if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 0) {
         localStorage.setItem('currentTwoPlayer', 'player10');

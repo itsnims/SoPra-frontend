@@ -284,6 +284,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   // aktionen die ausgeführt werden wenn eine handcard aus- / abgewählt wird
   toggleHandSelection(card, i) { // = toggleSelection(user) ist noch fehlerhaft
     const newCard = card;
+    console.log('new', newCard)
     if (this.handCards[i].checked === true) {
       // this.BoardList[localStorage.getItem('currentPath')].removeTiles(this.possibleTiles)
       if (this.selected[0] !== 'Natives') {
@@ -540,6 +541,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if (this.possibleTiles.indexOf(localStorage.getItem('selectedHex').replace(/['"]+/g, '')) > -1) {
 
     if (this.Board === 'StandardPath') {
+
       this.StandardPath.addPlayers(this.selected, this.possibleTiles);
       this.StandardPath.removeTiles(this.possibleTiles);
 
@@ -574,6 +576,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex');
+    localStorage.removeItem('mode')
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -706,6 +709,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 this.currentPositions.push(result[key].myFigure.currentPosition.name);
               }
             }
+            console.log('currently: ', this.currentPositions)
 
             if (this.Board === 'StandardPath') {
               this.StandardPath.updatePosition(this.oldPositions, this.currentPositions);
