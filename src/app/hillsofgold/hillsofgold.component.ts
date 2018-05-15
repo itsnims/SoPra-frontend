@@ -37,6 +37,7 @@ export class HillsofgoldComponent implements OnInit {
   [key: string]: any;
   blockade: any;
   Bstrenght: any;
+  numberX: number;
   /*blockadeColour: string;
   //blockadeStrength: string;
   //api + game + spec + blockades
@@ -46,6 +47,7 @@ export class HillsofgoldComponent implements OnInit {
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private http: HttpClient) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
   ngOnInit() {
+    localStorage.removeItem('mode')
 
     for (let i = 0; i <= 4; i++) {
       this.blockadestring.push('blockade' + String(i));
@@ -61,13 +63,26 @@ export class HillsofgoldComponent implements OnInit {
     console.log('numberPlayers', this.numberPlayers)
     /*give the players their specific name*/
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
+    const twoPlayermode = ['player10', 'player11', 'player20', 'player21']
     /*only implement 2 players logic*/
+    console.log('number:', this.numberPlayers)
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
         /*create a new playercomponent*/
         this.players.push(new PlayerComponent());
         this.players[i].playerId = sample_players[i];
       }}
+    else{
+      console.log('in else of players')
+      localStorage.setItem('mode', 'true');
+      for (let i = 0; i < 4; i++){
+        this.players.push(new PlayerComponent());
+        this.players[i].playerId = twoPlayermode[i];
+
+      }
+      console.log('players: ', this.players);
+      console.log('hello world')
+    }
     /*
     How many playing pieces should be displayed on the board as well as their initial positions*/
     /*if (this.numberPlayers > 2) {
@@ -122,11 +137,8 @@ export class HillsofgoldComponent implements OnInit {
   }*/
     this.http.get(this.apiUrl + this.currentRoom + '/blockade')
       .subscribe(result => {
-        console.log('get result: ', result);
         const first = this.blockadestring[0];
         this[first] = 'hello';
-        console.log(this.blockade0);
-        console.log(result[3].name);
         for (let i = 0; i < 4; i++) {
           const dummy = this.blockadestring[i];
           this[dummy] = result[i].name;
@@ -176,9 +188,15 @@ export class HillsofgoldComponent implements OnInit {
 
 
   addPlayers(selectedCard: any, possibleTiles: any) {
-    this.currentPlayer = localStorage.getItem('currentPlayer');
-    console.log('currentPlayer: ', this.currentPlayer);
-    console.log('possibleTiles value', possibleTiles)
+    console.log('standard component selected card: ' + selectedCard);
+    if (localStorage.getItem('mode') === 'true'){
+      this.currentPlayer = localStorage.getItem('currentTwoPlayer');
+      console.log('i am current: ', this.currentPlayer)
+    } else {
+      this.currentPlayer = localStorage.getItem('currentPlayer');
+      console.log('currentPlayer: ', this.currentPlayer);
+      console.log('possibleTiles value', possibleTiles);
+    }
 
     if (possibleTiles.length <= 0){} else {
 
@@ -192,41 +210,82 @@ export class HillsofgoldComponent implements OnInit {
 
         /*
         Send blockade to backend*/
-        console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade')
+        console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade');
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
         const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
-        (<HTMLElement>element).remove();
+        (<HTMLElement>element).remove()
+        this.removeChild(element);
       }
       else {
-        this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
-        this.players[this.currentPlayer].position = JSON.parse(localStorage.getItem('selectedHex'));
-        /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
-        /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
-        // localStorage.removeItem('currentTile');
-        /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
-        console.log('i am in else of addplayer')
-        // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
-        /*WORKS: console.log(localStorage.getItem('currentTile'))*/
+        this.tile = JSON.parse(localStorage.getItem('selectedHex'))
+        this.tile2 = this.tile.replace(/['"]+/g, '');
+        console.log(this.tile2)
+        // TO DO eventually need an if for 2 player mode
+        console.log('currentPlayer: ', this.currentPlayer)
+        if (localStorage.getItem('mode') === 'true') {
+          for (let i = 0; i < 4; i ++) {
+            if (this.players[i].playerId === this.currentPlayer){
+              this.numberX = i;}
+            console.log('position of player: ', this.numberX)
+          }
+          console.log('playernumber', this.players[this.numberX])
+          this.hexMapById.get(this.players[this.numberX].position).removePlayer();
+          this.players[this.numberX].position = JSON.parse(localStorage.getItem('selectedHex'));
+
+          console.log(localStorage.getItem('selectedHex'))
+          this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.numberX], this.tile2, selectedCard);
 
 
-        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], localStorage.getItem('selectedHex'), selectedCard);
-        console.log('should be new position', localStorage.getItem('currentTile'));
+        } else {
+
+
+          console.log('BUG?', this.players[this.currentPlayer])
+          console.log('position to remove: ', this.players[this.currentPlayer].position)
+          this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
+          this.players[this.currentPlayer].position = JSON.parse(localStorage.getItem('selectedHex'));
+          /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
+          /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
+          // localStorage.removeItem('currentTile');
+          /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
+          console.log('i am in else of addplayer')
+          // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
+          /*WORKS: console.log(localStorage.getItem('currentTile'))*/
+
+          console.log('JSON', JSON.parse(localStorage.getItem('selectedHex')))
+          this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], this.tile2, selectedCard);
+          console.log('should be new position', localStorage.getItem('currentTile'));
+        }
       }
 
     }}
 
+  showTiles(Tiles: any) {
+    for (const tile of Tiles){
+      console.log('tile: ', tile);
+      this.hexMapById.get(tile).onhightlight();
+    }}
+  removeTiles(Tiles: any){
+    for (const tile of Tiles) {
+      console.log('in remove tiles with tiles:', Tiles)
+      this.hexMapById.get(tile).removehightlight();
 
+    }}
   updatePosition(oldarray: any, newarray: any) {
     // console.log('in update');
-
     /*currently only for NOT 2players logic*/
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
         /*assign the the value of newarray*/
         this.players[i].position = newarray[i];
-      }} else {}
+      }}
+    else {
+      for (let i = 0; i < 4; i++) {
+        /*assign the the value of newarray*/
+        this.players[i].position = newarray[i];
+      }
+    }
     // console.log('old', oldarray);
-    // console.log('new', newarray);
+    // console.log('new', newarray) ;
 
     for (let i = 0; i < newarray.length; i++) {
       // console.log(newarray[i]);
@@ -234,11 +293,16 @@ export class HillsofgoldComponent implements OnInit {
       /*only removeplayers if they change position*/
       this.empty = 'false';
       if (oldarray.length === 0) {
-        this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
-
-      }
+        this.currentkey = String(i) + 'st'
+        localStorage.removeItem(this.currentkey + 'st');                                                            this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+        localStorage.setItem(this.currentkey, newarray[i]);
+        console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))           }
       else {
         if ( oldarray[i] !== newarray[i]){
+          this.currentkey = String(i) + 'st'
+          localStorage.removeItem(this.currentkey + 'st');
+          localStorage.setItem(this.currentkey, newarray[i]);
+          console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))
           console.log('in else/if old: ', oldarray[i]),
             console.log('in else/if new: ', newarray[i])
           // localStorage.setItem('currentTile', newarray[i]);
@@ -272,5 +336,10 @@ export class HillsofgoldComponent implements OnInit {
   mouseLeave(div: string) {
     console.log('mouse leave standard :' + div);
   }
+
+
+
+
+
 
 }

@@ -43,13 +43,14 @@
   <li *ngIf=" this.Board === 'StandardPath'">
     <app-standard></app-standard>
   </li>
-  <li *ngIf="Board === 'HillOfGold'">
+  <li *ngIf="this.Board === 'HillsOfGold'">
+    <div>works</div>
     <app-hillsofgold></app-hillsofgold>
   </li>
-  <li *ngIf="Board === 'Serpentine'">
+  <li *ngIf="this.Board === 'Serpentine'">
   </li>
 
-  <li *ngIf="Board === 'HomeStretchFields'">
+  <li *ngIf="this.Board === 'HomeStretchFields'">
   </li>
 
 

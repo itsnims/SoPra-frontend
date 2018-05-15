@@ -23,7 +23,7 @@ import {AppDirective} from '../app.directive';
 
 export class InGameScreenComponent implements OnInit, OnDestroy {
   @ViewChild(StandardComponent) StandardPath: StandardComponent;
-  @ViewChild(HillsofgoldComponent) HillOfGold: HillsofgoldComponent;
+  @ViewChild(HillsofgoldComponent) HillsOfGold: HillsofgoldComponent;
   @ViewChild(SerpentineComponent) Serpentine: SerpentineComponent;
   @ViewChild (HomestretchComponent) HomeStretchFields: HomestretchComponent;
   player: PlayerComponent;
@@ -291,8 +291,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         if (this.Board === 'StandardPath') {
           this.StandardPath.removeTiles(this.possibleTiles);
         }
-        if (this.Board === 'HillOfGold') {
-          this.HillOfGold.removeTiles(this.possibleTiles);
+        if (this.Board === 'HillsOfGold') {
+          this.HillsOfGold.removeTiles(this.possibleTiles);
         }
         // }
         this.possibleTiles = [];
@@ -343,8 +343,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 console.log('in show');
                 this.StandardPath.showTiles(this.possibleTiles);
               }
-              if (this.Board === 'HillOfGold') {
-                this.HillOfGold.showTiles(this.possibleTiles);
+              if (this.Board === 'HillsOfGold') {
+                this.HillsOfGold.showTiles(this.possibleTiles);
               }
               console.log('possible tiles in else', this.possibleTiles);
               localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
@@ -363,8 +363,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 console.log('in show');
                 this.StandardPath.showTiles(this.possibleTiles);
               }
-              if (this.Board === 'HillOfGold') {
-                this.HillOfGold.showTiles(this.possibleTiles);
+              if (this.Board === 'HillsOfGold') {
+                this.HillsOfGold.showTiles(this.possibleTiles);
               }
               console.log('possible tiles in else', this.possibleTiles);
               localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
@@ -545,8 +545,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.StandardPath.addPlayers(this.selected, this.possibleTiles);
 
     }
-    if (this.Board === 'HillOfGold') {
-      this.HillOfGold.addPlayers(this.selected, this.possibleTiles);
+    if (this.Board === 'HillsOfGold') {
+      this.HillsOfGold.addPlayers(this.selected, this.possibleTiles);
     }
     if (this.Board === 'Serpentine') {
       this.Serpentine.addPlayers(this.selected, this.possibleTiles);
@@ -573,7 +573,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
-
+    console.log('BOARD', this.Board)
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex');
 
@@ -681,7 +681,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     });
 
     // update playing piece positions:
-    console.log('try for users', this.http.get(this.apiUrl + this.currentRoom, httpOptions));
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
       .takeWhile(() => this.alive)
       .subscribe(() => {
@@ -699,8 +698,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 this.currentPositions.push(result[key].myFigures[0].currentPosition.name);
                 this.currentPositions.push(result[key].myFigures[1].currentPosition.name);
               }
-              console.log('old', this.oldPositions);
-              console.log('currentPositions', this.currentPositions);
 
             } else {
               for (const key in result) {
@@ -713,8 +710,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               this.StandardPath.updatePosition(this.oldPositions, this.currentPositions);
             }
 
-            if (this.Board === 'HillOfGold') {
-              this.HillOfGold.updatePosition(this.oldPositions, this.currentPositions);
+            if (this.Board === 'HillsOfGold') {
+              this.HillsOfGold.updatePosition(this.oldPositions, this.currentPositions);
             }
             if (this.Board === 'Serpentine') {
               this.Serpentine.updatePosition(this.oldPositions, this.currentPositions);
@@ -832,8 +829,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if (this.Board === 'StandardPath') {
       this.StandardPath.showTiles(this.possibleTiles);
     }
-    if (this.Board === 'HillOfGold') {
-      this.HillOfGold.showTiles(this.possibleTiles);
+    if (this.Board === 'HillsOfGold') {
+      this.HillsOfGold.showTiles(this.possibleTiles);
     }
     console.log('possible tiles in else', this.possibleTiles);
     localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
