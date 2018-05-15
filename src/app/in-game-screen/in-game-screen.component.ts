@@ -541,8 +541,8 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     // NOT sexy way of doing it :S
       console.log(this.selected)
     if (this.Board === 'StandardPath') {
-      this.StandardPath.addPlayers(this.selected, this.possibleTiles);
       this.StandardPath.removeTiles(this.possibleTiles);
+      this.StandardPath.addPlayers(this.selected, this.possibleTiles);
 
     }
     if (this.Board === 'HillOfGold') {

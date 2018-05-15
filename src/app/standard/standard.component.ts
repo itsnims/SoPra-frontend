@@ -264,11 +264,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
       console.log('tile: ', tile);
       this.hexMapById.get(tile).onhightlight();
     }}
-    removeTiles(Tiles: any){if (this.Board === 'HillOfGold') {
+    removeTiles(Tiles: any){
       for (const tile of Tiles) {
         console.log('in remove tiles with tiles:', Tiles)
         this.hexMapById.get(tile).removehightlight();
-      }
+
     }}
   updatePosition(oldarray: any, newarray: any) {
     // console.log('in update');
