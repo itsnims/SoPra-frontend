@@ -65,6 +65,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
     const sample_players = ['player1', 'player2', 'player3', 'player4'];
     const twoPlayermode = ['player10', 'player11', 'player20', 'player21']
     /*only implement 2 players logic*/
+    console.log('number:', this.numberPlayers)
     if (this.numberPlayers > 2) {
       for (let i = 0; i < this.numberPlayers; i++) {
         /*create a new playercomponent*/
@@ -216,6 +217,9 @@ export class StandardComponent implements OnInit, AfterViewInit {
       this.removeChild(element);
     }
     else {
+      this.tile = JSON.parse(localStorage.getItem('selectedHex'))
+      this.tile2 = this.tile.replace(/['"]+/g, '');
+      console.log(this.tile2)
       // TO DO eventually need an if for 2 player mode
       if (localStorage.getItem('mode') === 'true') {
         for (let i = 0; i < 4; i ++) {
@@ -226,10 +230,13 @@ export class StandardComponent implements OnInit, AfterViewInit {
         console.log('playernumber', this.players[this.numberX])
         this.hexMapById.get(this.players[this.numberX].position).removePlayer();
         this.players[this.numberX].position = JSON.parse(localStorage.getItem('selectedHex'));
-        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.numberX], localStorage.getItem('selectedHex'), selectedCard);
+
+        console.log(localStorage.getItem('selectedHex'))
+        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.numberX], this.tile2, selectedCard);
 
 
       } else {
+
 
         console.log('BUG?', this.players[this.currentPlayer])
         console.log('position to remove: ', this.players[this.currentPlayer].position)
@@ -243,8 +250,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
         // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
         /*WORKS: console.log(localStorage.getItem('currentTile'))*/
 
-
-        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], localStorage.getItem('selectedHex'), selectedCard);
+        console.log('JSON', JSON.parse(localStorage.getItem('selectedHex')))
+        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], this.tile2, selectedCard);
         console.log('should be new position', localStorage.getItem('currentTile'));
       }
     }
@@ -256,12 +263,12 @@ export class StandardComponent implements OnInit, AfterViewInit {
       console.log('tile: ', tile);
       this.hexMapById.get(tile).onhightlight();
     }}
-    removeTiles(Tiles: any){
-    for (const tile of Tiles){
-      console.log('in remove tiles with tiles:', Tiles)
-      this.hexMapById.get(tile).removehightlight();
-    }
-    }
+    removeTiles(Tiles: any){if (this.Board === 'HillOfGold') {
+      for (const tile of Tiles) {
+        console.log('in remove tiles with tiles:', Tiles)
+        this.hexMapById.get(tile).removehightlight();
+      }
+    }}
   updatePosition(oldarray: any, newarray: any) {
     // console.log('in update');
     /*currently only for NOT 2players logic*/
