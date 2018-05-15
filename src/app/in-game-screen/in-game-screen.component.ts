@@ -14,6 +14,7 @@ import {SerpentineComponent} from '../serpentine/serpentine.component';
 import {HillsofgoldComponent} from '../hillsofgold/hillsofgold.component';
 import {HomestretchComponent} from '../homestretch/homestretch.component';
 import {AppDirective} from '../app.directive';
+import {SwamplandsComponent} from '../swamplands/swamplands.component';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -26,6 +27,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   @ViewChild(HillsofgoldComponent) HillsOfGold: HillsofgoldComponent;
   @ViewChild(SerpentineComponent) Serpentine: SerpentineComponent;
   @ViewChild (HomestretchComponent) HomeStretchFields: HomestretchComponent;
+  @ViewChild(SwamplandsComponent) Swamplands: SwamplandsComponent;
   player: PlayerComponent;
   currentselection: string;
   current = 'Player1';
@@ -294,6 +296,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         if (this.Board === 'HillsOfGold') {
           this.HillsOfGold.removeTiles(this.possibleTiles);
         }
+        if (this.Board === 'HomeStretchFields') {
+          this.HomeStretchFields.removeTiles(this.possibleTiles);
+        }
+        if (this.Board === 'Serpentine') {
+          this.Serpentine.removeTiles(this.possibleTiles);
+        }
+        if (this.Board === 'Swamplands') {
+          this.Swamplands.removeTiles(this.possibleTiles);
+        }
         // }
         this.possibleTiles = [];
         localStorage.removeItem('possibleTiles');
@@ -345,6 +356,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               }
               if (this.Board === 'HillsOfGold') {
                 this.HillsOfGold.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'HomeStretchFields') {
+                this.HomeStretchFields.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'Serpentine') {
+                this.Serpentine.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'Swamplands') {
+                this.Swamplands.showTiles(this.possibleTiles);
               }
               console.log('possible tiles in else', this.possibleTiles);
               localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
