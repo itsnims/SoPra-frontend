@@ -435,6 +435,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateHandcards();
     this.updateHandcards();
     this.selected = [];
+    console.log('bull')
   }
 
 
@@ -531,17 +532,13 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   movePlayer() {
     console.log('entered mov');
-    console.log('possible tiles in movePlayer', JSON.parse(localStorage.getItem('currentTiles')));
+    console.log('possible tiles in movePlayer', this.possibleTiles);
     // TODO addPlayers() doesn't work yet
     // console.log(this.standard.addPlayers());
     console.log('selected in move: ', this.selected);
     // NOT sexy way of doing it :S
-    console.log('in move:', this.possibleTiles, localStorage.getItem(('selectedHex')).replace(/['"]+/g, '')
-    , 'in shit: ', this.possibleTiles.indexOf(localStorage.getItem('selectedHex').replace(/['"]+/g, '')))
-    if (this.possibleTiles.indexOf(localStorage.getItem('selectedHex').replace(/['"]+/g, '')) > -1) {
-
+      console.log(this.selected)
     if (this.Board === 'StandardPath') {
-
       this.StandardPath.addPlayers(this.selected, this.possibleTiles);
       this.StandardPath.removeTiles(this.possibleTiles);
 
@@ -555,7 +552,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if (this.Board === 'HomeStretchFields') {
       this.HomeStretchFields.addPlayers(this.selected, this.possibleTiles);
     }
-  }
+
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
@@ -574,9 +571,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
 
+
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex');
-    localStorage.removeItem('mode')
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval

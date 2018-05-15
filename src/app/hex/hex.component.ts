@@ -23,6 +23,7 @@ export class HexComponent implements OnInit {
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
+  tile2: string;
 
   constructor(private http: HttpClient) {}
 
@@ -123,10 +124,10 @@ export class HexComponent implements OnInit {
 
         if (this.player.playerId === 'player10' || this.player.playerId === 'player20') {
           console.log('for players /one', ' + ', tile)
-
           this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile + '/one', httpOptions)
             .subscribe(result => console.log('result form hex', result));
         } else {
+          console.log('tile', tile)
 
           this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile + '/two', httpOptions)
             .subscribe(result => console.log('result form hex', result));
@@ -135,10 +136,10 @@ export class HexComponent implements OnInit {
       else {
         console.log('tile', tile)
         console.log('card: ', String(tile))
-        tile = tile.replace(/['"]+/g, '')
-        console.log('tile', tile)
+        this.tile2 = tile.replace(/['"]+/g, '');
+        console.log('tile', this.tile2)
         console.log('clickables in addplayer', this.clickables)
-        console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + String(tile))
+        console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile)
         // console.log('buggy', localStorage.getItem(('currentTile')))
 
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
