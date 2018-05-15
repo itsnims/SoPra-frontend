@@ -386,6 +386,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               if (this.Board === 'HillsOfGold') {
                 this.HillsOfGold.showTiles(this.possibleTiles);
               }
+              if (this.Board === 'HomeStretchFields') {
+                this.HomeStretchFields.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'Serpentine') {
+                this.Serpentine.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'Swamplands') {
+                this.Swamplands.showTiles(this.possibleTiles);
+              }
               console.log('possible tiles in else', this.possibleTiles);
               localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
               console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
@@ -566,13 +575,21 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
     }
     if (this.Board === 'HillsOfGold') {
+      this.HillsOfGold.removeTiles(this.possibleTiles);
       this.HillsOfGold.addPlayers(this.selected, this.possibleTiles);
     }
     if (this.Board === 'Serpentine') {
+      this.Serpentine.removeTiles(this.possibleTiles);
       this.Serpentine.addPlayers(this.selected, this.possibleTiles);
     }
     if (this.Board === 'HomeStretchFields') {
+      this.HomeStretchFields.removeTiles(this.possibleTiles);
       this.HomeStretchFields.addPlayers(this.selected, this.possibleTiles);
+    }
+    if (this.Board === 'Swamplands') {
+      this.Swamplands.removeTiles(this.possibleTiles);
+
+      this.Swamplands.addPlayers(this.selected, this.possibleTiles);
     }
 
     this.updateHandcards();
