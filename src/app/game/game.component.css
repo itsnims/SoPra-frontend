@@ -44,6 +44,7 @@ td{
 
 .blackRow {
   table-layout: fixed;
+  overflow: hidden;
   width: 770px;
   background-color: transparent;
   margin-bottom: 10px;
@@ -57,12 +58,12 @@ td{
 }
 #titleRow {
   table-layout: fixed;
-  width: 760px;
+  width: 770px;
   background: rgba(0,0,0,0.75);
   position: fixed;
   top: 120px;
   left: 298px;
-  margin-bottom: 8px;
+
 
   height: 45px;
 }
@@ -71,10 +72,10 @@ td{
   top: 180px;
   left: 298px;
   height: 450px;
-  overflow-x: auto;
+  overflow-x: hidden;
 }
 .roomButton {
-  margin-top: 10px;
+  /*margin-top: 10px;*/
   margin-bottom: 10px;
   border: black;
   color: white;

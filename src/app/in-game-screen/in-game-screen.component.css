@@ -40,19 +40,18 @@
 
 }
 
-#opponent1 {
+.opponent1 {
   top: 15px;
   left: 175px;
   /* color: red; */
 }
-
-#opponent2 {
+.opponent2 {
   top: 15px;
   left: 525px;
   /* color: white; */
 }
 
-#opponent3 {
+.opponent3 {
   top: 15px;
   left: 875px;}
 
@@ -296,9 +295,10 @@
 #leave {
   position: fixed;
   top: 720px;
-  left: 1200px;}
+  left: 1200px;
+}
 
-#yourTurn {
+.yourTurn {
   position: fixed;
   top: 600px;
   left: 500px;}

@@ -1,0 +1,34 @@
+<button class="openTut" type="button" (click)="showTutorialFunc()">Tutorial</button>
+<div *ngIf="showTutorial" class="tutorial text">
+  <h2 >Tutorial</h2>
+  <div id="expedCards">
+    <h3>Expedition Cards</h3>
+    <p>1) Choose the expedition card you want to play</p>
+    <p>1.5) In 2 player mode select the playing piece you want to move</p>
+    <p>2) Choose the tile you want to move to</p>
+    <p>3) Press "Move"</p> <br>
+    <h3>Buy from Market</h3>
+    <p>1) Choose hand cards with sufficient value</p>
+    <p>2) Choose a buyable market card</p>
+    <p>3) Press "Buy"</p>
+
+  </div>
+  <div id="actionCards">
+    <h3>Action Cards</h3>
+  <h4>- Transmitter</h4>
+    <p>1) Choose the Transmitter Card</p>
+    <p>2) Choose the Card you want from the Market</p>
+    <p>3) Press "Use action card"</p><br>
+  <h4>- Native</h4>
+  <p>1) Choose the native</p>
+  <p>2) Choose the tile you want to move to</p>
+  <p>3) Press "Move"</p><br>
+  <h4>- Others</h4>
+  <p>1) Choose the action card you want to play</p>
+  <p>2) Press "Use action card"</p>
+  <p>3) Trash a card if possible and desired</p>
+  </div>
+  <a id="manualLink" target="_blank" class="manual" href="https://www.ravensburger.com/spielanleitungen/ecm/Spielanleitungen/26754%20anl%201741342.pdf?ossl=pds_text_Spielanleitung">Manual</a>
+  <button id="closeTut" type="button" (click)="showTutorialFunc()">Close Tutorial</button>
+
+</div>

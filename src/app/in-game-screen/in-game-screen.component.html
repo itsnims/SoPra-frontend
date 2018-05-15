@@ -1,42 +1,42 @@
 <div class="background-image"> <!--  -->
   <!--p>my turn: {{isItMyTurn}}; isActionCard: {{selectedCardIsActionCard}}; useExpCard: {{useExpeditionCard}}</p-->
 <div *ngIf="playerIsRed">
-  <h3 class="opponents" id="opponent1" style="color: white">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+  <h3 class="opponents opponent1" style="color: white">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
   <div *ngIf="opponents[1]">
-    <h3 class="opponents" id="opponent2" style="color: blue">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+    <h3 class="opponents opponent2" style="color: blue">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
   </div>
   <div *ngIf="opponents[2]">
-    <h3 class="opponents" id="opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+    <h3 class="opponents opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
   </div>
 </div>
 
   <div *ngIf="playerIsWhite">
-    <h3 class="opponents" id="opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <h3 class="opponents opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
     <div *ngIf="opponents[1]">
-      <h3 class="opponents" id="opponent2" style="color: blue">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+      <h3 class="opponents opponent2" style="color: blue">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
     </div>
     <div *ngIf="opponents[2]">
-      <h3 class="opponents" id="opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+      <h3 class="opponents opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
     </div>
   </div>
 
   <div *ngIf="playerIsBlue">
-    <h3 class="opponents" id="opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <h3 class="opponents opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
     <div *ngIf="opponents[1]">
-      <h3 class="opponents" id="opponent2" style="color: white">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+      <h3 class="opponents opponent2" style="color: white">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
     </div>
     <div *ngIf="opponents[2]">
-      <h3 class="opponents" id="opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+      <h3 class="opponents opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
     </div>
   </div>
 
   <div *ngIf="playerIsYellow">
-    <h3 class="opponents" id="opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <h3 class="opponents opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
     <div *ngIf="opponents[1]">
-      <h3 class="opponents" id="opponent2" style="color: white">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+      <h3 class="opponents opponent2" style="color: white">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
     </div>
     <div *ngIf="opponents[2]">
-      <h3 class="opponents" id="opponent3" style="color: blue">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+      <h3 class="opponents opponent3" style="color: blue">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
     </div>
   </div>
 
@@ -103,15 +103,15 @@
   <button [disabled]="buyAvailable" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
   <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
   <!--   <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button> -->
-
+</div>
   <button id="updatedHancards"  type="submit" (click)="updateHandcards()">update handcards</button>
 
   <div *ngIf="isItMyTurn">
-      <button id="yourTurn"> IT'S YOUR TURN </button>
+      <button class="yourTurn"> IT'S YOUR TURN </button>
   </div>
 
   <div *ngIf="isItMyTurnCopy">
-    <button id="yourTurn"> PLEASE WAIT FOR YOUR TURN </button>
+    <button class="yourTurn"> PLEASE WAIT FOR YOUR TURN </button>
   </div>
 
 
@@ -140,4 +140,6 @@
   </div>
   <div id="overlay2discard"></div>
   <div class="overlay4"></div>
+</div>
+  <app-tutorial></app-tutorial>
 </div>
