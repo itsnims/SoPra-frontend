@@ -24,6 +24,8 @@ export class HexComponent implements OnInit {
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
   tile2: string;
+  execute: number;
+  twoplayer: boolean;
 
   constructor(private http: HttpClient) {}
 
@@ -42,34 +44,51 @@ export class HexComponent implements OnInit {
     }
 /*Uses clickTile to determine if a tile is clickable.*/
   clicked() {
-    if (localStorage.getItem('mode') === 'true' && localStorage.getItem('2playerpos').includes(this.hexId)) {
-      console.log('shit in 2')
-      localStorage.removeItem('currentTwoPlayer')
-      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 0) {
-        localStorage.setItem('currentTwoPlayer', 'player10');
-      }
-      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 3) {
-        localStorage.setItem('currentTwoPlayer', 'player11');
-        console.log('i am here 11');
-      }
-      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 6) {
-        localStorage.setItem('currentTwoPlayer', 'player20');
-      }
-      if (localStorage.getItem('2playerpos').indexOf(this.hexId) === 9) {
-        localStorage.setItem('currentTwoPlayer', 'player21');
-      }
-    } else{
-        if (this.clickTile(this.hexId)) {
-          console.log(this.hexId, 'was clicked');
-          this.selectedTile(this.hexId);
-          localStorage.removeItem('selectedHex');
-          localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
-
+    this.twoplayer = false;
+    if (localStorage.getItem('mode') === 'true' ) {
+      for (let i = 0; i < 4; i++) {
+        let check = String(i) + 'st';
+        console.log('clicked hex', this.hexId)
+        console.log('to check', check)
+        console.log('localget', localStorage.getItem(check));
+        if (localStorage.getItem(check) === this.hexId) {
+          localStorage.removeItem('currentTwoPlayer');
+          this.execute = i;
+          this.twoplayer = true;
         }
       }
+    }
+      if (this.twoplayer) {
+        if (this.execute === 0) {
+          console.log('in 10')
+          localStorage.setItem('currentTwoPlayer', 'player10');
+        }
+        if (this.execute === 1) {
+          console.log('in 11');
+          localStorage.setItem('currentTwoPlayer', 'player11');
+        }
+
+        if (this.execute === 2) {
+          console.log('in 20')
+          localStorage.setItem('currentTwoPlayer', 'player20');
+        }
+        if (this.execute === 3) {
+          console.log('in 21')
+          localStorage.setItem('currentTwoPlayer', 'player21');
+        }
+      } else {
+      if (this.clickTile(this.hexId)) {
+        console.log(this.hexId, 'was clicked');
+        this.selectedTile(this.hexId);
+        localStorage.removeItem('selectedHex');
+        localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
+
+      }
+
 
       console.log()
 
+    }
   }
   public onhightlight() {
     console.log('i am here')
@@ -119,8 +138,7 @@ export class HexComponent implements OnInit {
     } else {
 
       if (localStorage.getItem('mode') === 'true') {
-        console.log(this.playerName.name, 'or', this.player.playerId)
-        console.log(this.player.playerId === 'player10')
+        console.log('currentID', this.player.playerId)
 
         if (this.player.playerId === 'player10' || this.player.playerId === 'player20') {
           console.log('for players /one', ' + ', tile)

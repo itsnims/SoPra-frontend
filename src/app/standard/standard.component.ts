@@ -221,11 +221,12 @@ export class StandardComponent implements OnInit, AfterViewInit {
       this.tile2 = this.tile.replace(/['"]+/g, '');
       console.log(this.tile2)
       // TO DO eventually need an if for 2 player mode
+      console.log('currentPlayer: ', this.currentPlayer)
       if (localStorage.getItem('mode') === 'true') {
         for (let i = 0; i < 4; i ++) {
           if (this.players[i].playerId === this.currentPlayer){
             this.numberX = i;}
-            console.log(this.numberX)
+            console.log('position of player: ', this.numberX)
         }
         console.log('playernumber', this.players[this.numberX])
         this.hexMapById.get(this.players[this.numberX].position).removePlayer();
@@ -282,11 +283,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
           /*assign the the value of newarray*/
           this.players[i].position = newarray[i];
       }
-      localStorage.removeItem('2playerpos');
-      localStorage.setItem('2playerpos', newarray);
-        console.log('newarray', localStorage.getItem('2playerpos'));
     }
-
       // console.log('old', oldarray);
       // console.log('new', newarray) ;
 
@@ -296,11 +293,16 @@ export class StandardComponent implements OnInit, AfterViewInit {
         /*only removeplayers if they change position*/
         this.empty = 'false';
         if (oldarray.length === 0) {
-          this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
-
-        }
+           this.currentkey = String(i) + 'st'
+           localStorage.removeItem(this.currentkey + 'st');                                                            this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+           localStorage.setItem(this.currentkey, newarray[i]);
+           console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))           }
         else {
           if ( oldarray[i] !== newarray[i]){
+           this.currentkey = String(i) + 'st'
+           localStorage.removeItem(this.currentkey + 'st');
+           localStorage.setItem(this.currentkey, newarray[i]);
+           console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))
             console.log('in else/if old: ', oldarray[i]),
               console.log('in else/if new: ', newarray[i])
           // localStorage.setItem('currentTile', newarray[i]);
