@@ -296,7 +296,8 @@ export class StandardComponent implements OnInit, AfterViewInit {
         this.empty = 'false';
         if (oldarray.length === 0) {
            this.currentkey = String(i) + 'st'
-           localStorage.removeItem(this.currentkey + 'st');                                                            this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+           localStorage.removeItem(this.currentkey + 'st');
+           this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
            localStorage.setItem(this.currentkey, newarray[i]);
            console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))           }
         else {

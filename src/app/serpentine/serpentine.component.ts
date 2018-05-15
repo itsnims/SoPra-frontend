@@ -20,8 +20,6 @@ import {User} from '../shared/models/user';
   styleUrls: ['./serpentine.component.css']
 })
 export class SerpentineComponent implements OnInit, AfterViewInit {
-  /*classe für click events...
-  * */
   hex: HexComponent;
   empty: string;
   hello: any;
@@ -189,9 +187,9 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
 
   addPlayers(selectedCard: any, possibleTiles: any) {
     console.log('standard component selected card: ' + selectedCard);
-    if (localStorage.getItem('mode') === 'true'){
+    if (localStorage.getItem('mode') === 'true') {
       this.currentPlayer = localStorage.getItem('currentTwoPlayer');
-      console.log('i am current: ', this.currentPlayer)
+      console.log('i am current: ', this.currentPlayer);
     } else {
       this.currentPlayer = localStorage.getItem('currentPlayer');
       console.log('currentPlayer: ', this.currentPlayer);
@@ -294,7 +292,8 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
       this.empty = 'false';
       if (oldarray.length === 0) {
         this.currentkey = String(i) + 'st'
-        localStorage.removeItem(this.currentkey + 'st');                                                            this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+        localStorage.removeItem(this.currentkey + 'st');
+        this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
         localStorage.setItem(this.currentkey, newarray[i]);
         console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))           }
       else {
