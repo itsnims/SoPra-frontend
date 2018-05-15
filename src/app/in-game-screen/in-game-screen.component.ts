@@ -756,7 +756,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             if ((localStorage.getItem('currentPath')) === '"HomeStretchFields"') {
               this.HomeStretchFields.updatePosition(this.oldPositions, this.currentPositions);
             }
-            });
+            if (this.Board === 'Swamplands') {
+              this.Swamplands.updatePosition(this.oldPositions, this.currentPositions);
+            }
+
+          });
           /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
         // Not sexy way of doing it;
@@ -869,6 +873,15 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if (this.Board === 'HillsOfGold') {
       this.HillsOfGold.showTiles(this.possibleTiles);
     }
+        if (this.Board === 'HomeStretchFields') {
+          this.HomeStretchFields.showTiles(this.possibleTiles);
+        }
+        if (this.Board === 'Serpentine') {
+          this.Serpentine.showTiles(this.possibleTiles);
+        }
+        if (this.Board === 'Swamplands') {
+          this.Swamplands.showTiles(this.possibleTiles);
+        }
     console.log('possible tiles in else', this.possibleTiles);
     localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
     console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
