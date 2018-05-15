@@ -25,7 +25,7 @@ export class HostScreenComponent implements OnInit {
 
   paths = [
     {pathID: 'Standard Path', pathname: 'StandardPath'},
-    {pathID: 'Hills of Gold', pathname: 'HillOfGold'},
+    {pathID: 'Hills of Gold', pathname: 'HillsOfGold'},
     {pathID: 'Home Stretch', pathname: 'HomeStretchFields'},
     {pathID: 'Winding Paths', pathname: 'WindingPath'},
     {pathID: 'Serpentine', pathname: 'Serpentine'},
