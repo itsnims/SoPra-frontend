@@ -327,10 +327,12 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       if (this.selected[0] !== 'Natives') {
         console.log('get call', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move');
         if (localStorage.getItem('mode') === 'true'){
+          console.log(localStorage.getItem('currentTwoPlayer'))
           if (localStorage.getItem('currentTwoPlayer') === 'player10' || localStorage.getItem('currentTwoPlayer') === 'player20'){
             this.numbX = '/one';
           }
           else{ this.numbX = '/two';}
+          console.log('numbX', this.numbX)
           this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + this.selected + '/move' + this.numbX)
             .subscribe(result => {
               for (const xl in result) {
@@ -686,29 +688,28 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
             /*first assign all positions before update to the array old positions*/
-            console.log('2player result: ', result)
             this.oldPositions = [];
             for (let x of this.currentPositions){
               this.oldPositions.push(x);
             }
             this.currentPositions = [];
             /*push the positions from the backend to the array currentPositions*/
-            console.log(localStorage.getItem('mode'))
             if (localStorage.getItem('mode') === 'true') {
               for (const key in result) {
                 this.currentPositions.push(result[key].myFigures[0].currentPosition.name);
                 this.currentPositions.push(result[key].myFigures[1].currentPosition.name);
               }
-              console.log('currentposition 2player: ', this.currentPositions);
+              console.log('old', this.oldPositions);
+              console.log('currentPositions', this.currentPositions);
 
             } else {
               for (const key in result) {
                 this.currentPositions.push(result[key].myFigure.currentPosition.name);
               }
             }
-            console.log('currently: ', this.currentPositions)
 
             if (this.Board === 'StandardPath') {
+              console.log('update standard')
               this.StandardPath.updatePosition(this.oldPositions, this.currentPositions);
             }
 
@@ -725,8 +726,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
           /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
         // Not sexy way of doing it;
-        console.log('i execute');
-        console.log(this.currentPositions)
 
 
         }
