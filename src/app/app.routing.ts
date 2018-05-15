@@ -12,6 +12,7 @@ import {HillsofgoldComponent} from './hillsofgold/hillsofgold.component';
 import {HomestretchComponent} from './homestretch/homestretch.component';
 import {SerpentineComponent} from './serpentine/serpentine.component';
 import {SwamplandsComponent} from './swamplands/swamplands.component';
+import {WitchscauldronComponent} from './witchscauldron/witchscauldron.component';
 
 
 const appRoutes: Routes = [
@@ -27,6 +28,7 @@ const appRoutes: Routes = [
   {path: 'homestretch', component: HomestretchComponent},
   {path: 'serpentine', component: SerpentineComponent},
   {path: 'swamplands', component: SwamplandsComponent},
+  {path: 'witch', component: WitchscauldronComponent},
 
 
 

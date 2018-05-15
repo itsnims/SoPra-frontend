@@ -27,6 +27,7 @@ import { WinScreenComponent } from './win-screen/win-screen.component';
 import { AppDirective } from './app.directive';
 import { SwamplandsComponent } from './swamplands/swamplands.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
+import { WitchscauldronComponent } from './witchscauldron/witchscauldron.component';
 
 
 @NgModule({
@@ -49,6 +50,7 @@ import { TutorialComponent } from './tutorial/tutorial.component';
     AppDirective,
     SwamplandsComponent,
     TutorialComponent,
+    WitchscauldronComponent,
   ],
   entryComponents: [PlayerComponent],
   imports: [
