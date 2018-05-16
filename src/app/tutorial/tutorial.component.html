@@ -1,6 +1,7 @@
 <button class="openTut" type="button" (click)="showTutorialFunc()">Tutorial</button>
 <div *ngIf="showTutorial" class="tutorial text">
-  <h2 >Tutorial</h2>
+  <h2>Tutorial</h2>
+  <h3 style="text-align: center">>>If playing pieces didn't load refresh the page<<</h3>
   <div id="expedCards">
     <h3>Expedition Cards</h3>
     <p>0) In 2 player mode select the playing piece you want to move</p>
@@ -10,7 +11,11 @@
     <h3>Buy from Market</h3>
     <p>1) Choose hand cards with sufficient value</p>
     <p>2) Choose a buyable market card</p>
-    <p>3) Press "Buy"</p>
+    <p>3) Press "Buy"</p><br>
+    <h3>Remove Blockade</h3>
+    <p>1) Select a strong enough card</p>
+    <p>2) Press the "Stop" tile next to the blockade</p>
+    <p>3) Press "Move"</p>
 
   </div>
   <div id="actionCards">
