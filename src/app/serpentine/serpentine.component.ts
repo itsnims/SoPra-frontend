@@ -149,7 +149,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
         let list = [];
 
         for (const object in result) {
-          list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght};
+          list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght});
           // list.push(list['strength'] = result[object].strenght);
           /*this.Bstrenght[i] = result[i].strenght;*/
         }
