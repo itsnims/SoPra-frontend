@@ -193,13 +193,25 @@
   }
 #paddle1{
   background-size: contain;
-  background-image: url(ice-pop.png);
+  background-image: url(ice-popcopy.png);
   background-repeat: no-repeat;
   background-position: center;
 }
 #paddle2{
   background-size: contain;
-  background-image: url(paddles.png);
+  background-image: url(2paddlescopy.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#paddle3{
+  background-size: contain;
+  background-image: url(3paddlescopy.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#paddle4{
+  background-size: contain;
+  background-image: url(4paddlescopy.png);
   background-repeat: no-repeat;
   background-position: center;
 }
