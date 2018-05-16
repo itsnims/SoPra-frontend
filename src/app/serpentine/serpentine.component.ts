@@ -23,8 +23,14 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   /*classe für click events...
   * */
   hex: HexComponent;
-  bk1: string;
-  BK1: boolean;
+
+  BK1 = false;
+  BK2 = false;
+  BK3 = false;
+  BK4: boolean;
+  BK5: boolean;
+  BK6: boolean;
+
   empty: string;
   hello: any;
   players: PlayerComponent[] = [];
@@ -39,10 +45,22 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   [key: string]: any;
   blockade: any;
   bk1Strength: string;
+  bk2Strength: string;
+  bk3Strength: string;
+  bk4Strength: string;
+  bk5Strength: string;
+  bk6Strength: string;
+
   bk1Colour: string;
+  bk2Colour: string;
+  bk3Colour: string;
+  bk4Colour: string;
+  bk5Colour: string;
+  bk6Colour: string;
+
   Bstrenght: any;
   numberX: number;
-  list: []
+  list: any;
   blockadeColour: string;
   /*blockadeColour: string;
   //blockadeStrength: string;
@@ -54,7 +72,10 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
 
   ngOnInit() {
-    this.BK1 = false;
+    this.BK4 = false;
+    this.BK5 = false;
+    this.BK6 = false;
+
     localStorage.removeItem('mode')
 
     for (let i = 0; i <= 4; i++) {
@@ -149,15 +170,19 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
         let list = [];
 
         for (const object in result) {
-          list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght};
+          list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght});
           // list.push(list['strength'] = result[object].strenght);
           /*this.Bstrenght[i] = result[i].strenght;*/
+          this["colorBK" + String(object)] = 'hexagon ' + list[0].color.toLowerCase();
+
         }
-         this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
+         console.log()
+           // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
       //          this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
 
           this.bk1Strength = 'strength' + list[0].strength;
-          //           this.bk2Strength = 'strength' + list[1].strength;
+          this.bk2Strength = 'strength' + list[1].strength;
+          this.bk3Strength = 'strength' + list[2].strength;
         console.log('blockade', this.bk1Strength)
 
       });
@@ -213,7 +238,10 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
       // addPlayers(selected: Array<string>) {
       if (blockades.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
         console.log('in function')
-        this.BK1 = true;
+        if (localStorage.getItem('selectedHex') === 'BK1'){this.BK1 = true;}
+        if (localStorage.getItem('selectedHex') === 'BK2'){this.BK2 = true;}
+        if (localStorage.getItem('selectedHex') === 'BK3'){this.BK3 = true;}
+
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json'
