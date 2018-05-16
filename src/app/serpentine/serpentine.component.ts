@@ -23,6 +23,8 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   /*classe für click events...
   * */
   hex: HexComponent;
+  bk1: string;
+  BK1: boolean;
   empty: string;
   hello: any;
   players: PlayerComponent[] = [];
@@ -36,8 +38,12 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
   [key: string]: any;
   blockade: any;
+  bk1Strength: string;
+  bk1Colour: string;
   Bstrenght: any;
   numberX: number;
+  list: []
+  blockadeColour: string;
   /*blockadeColour: string;
   //blockadeStrength: string;
   //api + game + spec + blockades
@@ -48,6 +54,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
 
   ngOnInit() {
+    this.BK1 = false;
     localStorage.removeItem('mode')
 
     for (let i = 0; i <= 4; i++) {
@@ -138,19 +145,20 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   }*/
     this.http.get(this.apiUrl + this.currentRoom + '/blockade')
       .subscribe(result => {
-        const first = this.blockadestring[0];
-        this[first] = 'hello';
-        for (let i = 0; i < 4; i++) {
-          const dummy = this.blockadestring[i];
-          this[dummy] = result[i].name;
+        console.log('blockade', result)
+        let list = [];
+
+        for (const object in result) {
+          list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght};
+          // list.push(list['strength'] = result[object].strenght);
           /*this.Bstrenght[i] = result[i].strenght;*/
         }
-        this.blockadelist.push(this.blockade0);
-        this.blockadelist.push(this.blockade1);
-        this.blockadelist.push(this.blockade2);
-        this.blockadelist.push(this.blockade3);
+        this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
+        if (list[0].color === 'Green') {
+          this.bk1Strength = 'strength' + list[0].strength;
+        }
+        console.log('blockade', this.bk1Strength)
 
-        console.log('blockades', this.blockadelist);
       });
 
 
@@ -200,9 +208,11 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
     }
 
     if (possibleTiles.length <= 0){} else {
-
+      let blockades = ['BK1', 'BK2', 'BK3', 'BK4', 'BK5', 'BK6', 'BK7']
       // addPlayers(selected: Array<string>) {
-      if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
+      if (blockades.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
+        console.log('in function')
+        this.BK1 = true;
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json'
@@ -271,6 +281,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
       this.hexMapById.get(tile).removehightlight();
 
     }}
+
   updatePosition(oldarray: any, newarray: any) {
     // console.log('in update');
     /*currently only for NOT 2players logic*/
