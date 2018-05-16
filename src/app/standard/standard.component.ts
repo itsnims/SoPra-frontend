@@ -22,9 +22,14 @@ import {User} from '../shared/models/user';
   styleUrls: ['./standard.component.css']
 })
 export class StandardComponent implements OnInit, AfterViewInit {
-/*classe für click events...
-* */
   hex: HexComponent;
+
+  BK1: boolean;
+  BK2: boolean;
+  BK3: boolean;
+  BK4: boolean;
+
+
   empty: string;
   hello: any;
   players: PlayerComponent[] = [];
@@ -38,8 +43,17 @@ export class StandardComponent implements OnInit, AfterViewInit {
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
   [key: string]: any;
   blockade: any;
+  bk1Strength: string;
+  bk2Strength: string;
+  bk3Strength: string;
+  bk4Strength: string;
+
+
+
   Bstrenght: any;
   numberX: number;
+  list: any;
+  blockadeColour: string;
   /*blockadeColour: string;
   //blockadeStrength: string;
   //api + game + spec + blockades
@@ -48,6 +62,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
   blockadelist: string[]= [];
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private http: HttpClient) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
+
   ngOnInit() {
     localStorage.removeItem('mode')
 
@@ -74,7 +89,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
         this.players.push(new PlayerComponent());
         this.players[i].playerId = sample_players[i];
       }}
-      else{
+    else{
       console.log('in else of players')
       localStorage.setItem('mode', 'true');
       for (let i = 0; i < 4; i++){
@@ -139,19 +154,33 @@ export class StandardComponent implements OnInit, AfterViewInit {
   }*/
     this.http.get(this.apiUrl + this.currentRoom + '/blockade')
       .subscribe(result => {
-        const first = this.blockadestring[0];
-        this[first] = 'hello';
-        for (let i = 0; i < 4; i++) {
-          const dummy = this.blockadestring[i];
-          this[dummy] = result[i].name;
-          /*this.Bstrenght[i] = result[i].strenght;*/
-        }
-        this.blockadelist.push(this.blockade0);
-        this.blockadelist.push(this.blockade1);
-        this.blockadelist.push(this.blockade2);
-        this.blockadelist.push(this.blockade3);
+        console.log('blockade', result)
+        let list = [];
 
-        console.log('blockades', this.blockadelist);
+        for (const object in result) {
+          list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght});
+          // list.push(list['strength'] = result[object].strenght);
+          /*this.Bstrenght[i] = result[i].strenght;*/
+          if (list[object].color.toLowerCase() === 'white'){
+            this["colorBK" + String(object)] = 'hexagon grey'
+          }else {
+            this["colorBK" + String(object)] = 'hexagon ' + list[object].color.toLowerCase();
+          }
+        }
+        console.log('color', this.colorBK1)
+        console.log('color', this.colorBK2)
+        console.log('color', this.colorBK3)
+        // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
+        //          this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
+
+        this.bk1Strength = 'strength' + list[0].strength;
+        this.bk2Strength = 'strength' + list[1].strength;
+        this.bk3Strength = 'strength' + list[2].strength;
+        this.bk4Strength = 'strength' + list[3].strength;
+
+
+        console.log('blockade', this.bk1Strength)
+
       });
 
 
@@ -159,7 +188,6 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit() {
-    // this.divs.forEach(div => console.log(div));
     const hex = this.divs.forEach(item => {
       this.hexMapById.set(item.hexId, item);
       if (['B9', 'B11'].includes(item.hexId)) {
@@ -182,11 +210,11 @@ export class StandardComponent implements OnInit, AfterViewInit {
   }
 
 
-    /*
-    this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
-      this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
-      this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
-      /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
+  /*
+  this.hexMapById.get(this.players[0].position).addplayer(this.players[0]);
+    this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
+    this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
+    /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
 
 
   addPlayers(selectedCard: any, possibleTiles: any) {
@@ -201,77 +229,86 @@ export class StandardComponent implements OnInit, AfterViewInit {
     }
 
     if (possibleTiles.length <= 0){} else {
-
-  // addPlayers(selected: Array<string>) {
-    if (this.blockadelist.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
-      const httpOptions = {
-        headers: new HttpHeaders({
-          'Content-Type': 'application/json'
-        })};
-      this.selectedHex = JSON.parse(localStorage.getItem('selectedHex'));
-
-      /*
-      Send blockade to backend*/
-      console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade');
-      this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
-      const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
-      (<HTMLElement>element).remove()
-      this.removeChild(element);
-    }
-    else {
-      this.tile = JSON.parse(localStorage.getItem('selectedHex'))
-      this.tile2 = this.tile.replace(/['"]+/g, '');
-      console.log(this.tile2)
-      // TO DO eventually need an if for 2 player mode
-      console.log('currentPlayer: ', this.currentPlayer)
-      if (localStorage.getItem('mode') === 'true') {
-        for (let i = 0; i < 4; i ++) {
-          if (this.players[i].playerId === this.currentPlayer){
-            this.numberX = i;}
-            console.log('position of player: ', this.numberX)
-        }
-        console.log('playernumber', this.players[this.numberX])
-        this.hexMapById.get(this.players[this.numberX].position).removePlayer();
-        this.players[this.numberX].position = JSON.parse(localStorage.getItem('selectedHex'));
-
-        console.log(localStorage.getItem('selectedHex'))
-        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.numberX], this.tile2, selectedCard);
+      const blockades = ['BK1', 'BK2', 'BK3', 'BK4', 'BK5', 'BK6', 'BK7']
+      // addPlayers(selected: Array<string>) {
+      if (blockades.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
+        console.log('in function')
+        console.log('BKSSS', localStorage.getItem('selectedHex'))
+        if (localStorage.getItem('selectedHex') === '"BK1"'){this.BK1 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK2"'){this.BK2 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK3"'){this.BK3 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK4"'){this.BK4 = true;}
 
 
-      } else {
+        const httpOptions = {
+          headers: new HttpHeaders({
+            'Content-Type': 'application/json'
+          })};
+        this.selectedHex = JSON.parse(localStorage.getItem('selectedHex'));
 
+        /*
+        Send blockade to backend*/
+        console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade');
+        this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
+        const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
+        (<HTMLElement>element).remove();
 
-        console.log('BUG?', this.players[this.currentPlayer])
-        console.log('position to remove: ', this.players[this.currentPlayer].position)
-        this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
-        this.players[this.currentPlayer].position = JSON.parse(localStorage.getItem('selectedHex'));
-        /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
-        /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
-        // localStorage.removeItem('currentTile');
-        /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
-        console.log('i am in else of addplayer')
-        // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
-        /*WORKS: console.log(localStorage.getItem('currentTile'))*/
-
-        console.log('JSON', JSON.parse(localStorage.getItem('selectedHex')))
-        this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], this.tile2, selectedCard);
-        console.log('should be new position', localStorage.getItem('currentTile'));
       }
-    }
+      else {
+        this.tile = JSON.parse(localStorage.getItem('selectedHex'))
+        this.tile2 = this.tile.replace(/['"]+/g, '');
+        console.log(this.tile2)
+        // TO DO eventually need an if for 2 player mode
+        console.log('currentPlayer: ', this.currentPlayer)
+        if (localStorage.getItem('mode') === 'true') {
+          for (let i = 0; i < 4; i ++) {
+            if (this.players[i].playerId === this.currentPlayer){
+              this.numberX = i;}
+            console.log('position of player: ', this.numberX)
+          }
+          console.log('playernumber', this.players[this.numberX])
+          this.hexMapById.get(this.players[this.numberX].position).removePlayer();
+          this.players[this.numberX].position = JSON.parse(localStorage.getItem('selectedHex'));
 
-      }}
+          console.log(localStorage.getItem('selectedHex'))
+          this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.numberX], this.tile2, selectedCard);
+
+
+        } else {
+
+
+          console.log('BUG?', this.players[this.currentPlayer])
+          console.log('position to remove: ', this.players[this.currentPlayer].position)
+          this.hexMapById.get(this.players[this.currentPlayer].position).removePlayer();
+          this.players[this.currentPlayer].position = JSON.parse(localStorage.getItem('selectedHex'));
+          /*WORKS: console.log('in addPlayers', this.players[this.currentPlayer].position)*/
+          /*WORKS: console.log('should work', localStorage.getItem('currentTile')); first time gives initial position back.*/
+          // localStorage.removeItem('currentTile');
+          /*WORKS: console.log('shouldnt work', localStorage.getItem('currentTile'));*/
+          console.log('i am in else of addplayer')
+          // localStorage.setItem('currentTile', this.players[this.currentPlayer].position);
+          /*WORKS: console.log(localStorage.getItem('currentTile'))*/
+
+          console.log('JSON', JSON.parse(localStorage.getItem('selectedHex')))
+          this.hexMapById.get(JSON.parse(localStorage.getItem('selectedHex'))).addplayer(this.players[this.currentPlayer], this.tile2, selectedCard);
+          console.log('should be new position', localStorage.getItem('currentTile'));
+        }
+      }
+
+    }}
 
   showTiles(Tiles: any) {
     for (const tile of Tiles){
       console.log('tile: ', tile);
       this.hexMapById.get(tile).onhightlight();
     }}
-    removeTiles(Tiles: any){
-      for (const tile of Tiles) {
-        console.log('in remove tiles with tiles:', Tiles)
-        this.hexMapById.get(tile).removehightlight();
+  removeTiles(Tiles: any){
+    for (const tile of Tiles) {
+      console.log('in remove tiles with tiles:', Tiles)
+      this.hexMapById.get(tile).removehightlight();
 
     }}
+
   updatePosition(oldarray: any, newarray: any) {
     // console.log('in update');
     /*currently only for NOT 2players logic*/
@@ -280,42 +317,44 @@ export class StandardComponent implements OnInit, AfterViewInit {
         /*assign the the value of newarray*/
         this.players[i].position = newarray[i];
       }}
-      else {
-        for (let i = 0; i < 4; i++) {
-          /*assign the the value of newarray*/
-          this.players[i].position = newarray[i];
+    else {
+      for (let i = 0; i < 4; i++) {
+        /*assign the the value of newarray*/
+        this.players[i].position = newarray[i];
       }
     }
-      // console.log('old', oldarray);
-      // console.log('new', newarray) ;
+    // console.log('old', oldarray);
+    // console.log('new', newarray) ;
 
-      for (let i = 0; i < newarray.length; i++) {
-        // console.log(newarray[i]);
-        // console.log('this.players[i]', this.players[i]);
-        /*only removeplayers if they change position*/
-        this.empty = 'false';
-        if (oldarray.length === 0) {
-           this.currentkey = String(i) + 'st'
-           localStorage.removeItem(this.currentkey + 'st');
-           this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
-           localStorage.setItem(this.currentkey, newarray[i]);
-           console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))           }
-        else {
-          if ( oldarray[i] !== newarray[i]){
-           this.currentkey = String(i) + 'st'
-           localStorage.removeItem(this.currentkey + 'st');
-           localStorage.setItem(this.currentkey, newarray[i]);
-           console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))
-            console.log('in else/if old: ', oldarray[i]),
-              console.log('in else/if new: ', newarray[i])
+    for (let i = 0; i < newarray.length; i++) {
+      // console.log(newarray[i]);
+      // console.log('this.players[i]', this.players[i]);
+      /*only removeplayers if they change position*/
+      this.empty = 'false';
+      if (oldarray.length === 0) {
+        this.currentkey = String(i) + 'st'
+        localStorage.removeItem(this.currentkey + 'st');
+        localStorage.setItem(this.currentkey, newarray[i]);
+        console.log(newarray[i])
+        console.log(this.hexMapById.get('B1'))
+        this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+        console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey)) }
+      else {
+        if ( oldarray[i] !== newarray[i]) {
+          this.currentkey = String(i) + 'st'
+          localStorage.removeItem(this.currentkey + 'st');
+          localStorage.setItem(this.currentkey, newarray[i]);
+          console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))
+          console.log('in else/if old: ', oldarray[i]),
+            console.log('in else/if new: ', newarray[i])
           // localStorage.setItem('currentTile', newarray[i]);
           /*remove player form hex component and then add them to the new positions.*/
           this.hexMapById.get(oldarray[i]).removePlayer();
           console.log('this will be the player added: ', this.players[i])
           this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);}
-          else {}
-        }
+        else {}
       }
+    }
   }
 
 
@@ -346,3 +385,4 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
 
 }
+

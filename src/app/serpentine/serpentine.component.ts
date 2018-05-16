@@ -51,12 +51,6 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   bk5Strength: string;
   bk6Strength: string;
 
-  bk1Colour: string;
-  bk2Colour: string;
-  bk3Colour: string;
-  bk4Colour: string;
-  bk5Colour: string;
-  bk6Colour: string;
 
   Bstrenght: any;
   numberX: number;
@@ -72,15 +66,6 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
 
   ngOnInit() {
-    this.BK3 = false
-    this.BK4 = false;
-    this.BK5 = false;
-    this.BK6 = false;
-
-    console.log('bk', this.BK1)
-    console.log(this.BK2)
-    console.log(this.BK3)
-
     localStorage.removeItem('mode')
 
     for (let i = 0; i <= 4; i++) {
@@ -188,6 +173,11 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
           this.bk1Strength = 'strength' + list[0].strength;
           this.bk2Strength = 'strength' + list[1].strength;
           this.bk3Strength = 'strength' + list[2].strength;
+        this.bk4Strength = 'strength' + list[3].strength;
+        this.bk5Strength = 'strength' + list[4].strength;
+        this.bk5Strength = 'strength' + list[5].strength;
+
+
         console.log('blockade', this.bk1Strength)
 
       });
@@ -244,11 +234,13 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
       if (blockades.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
         console.log('in function')
         console.log('BKSSS', localStorage.getItem('selectedHex'))
-        if (localStorage.getItem('selectedHex') === '"BK1"'){
-          console.log('setting true');
-          this.BK1 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK1"'){this.BK1 = true;}
         if (localStorage.getItem('selectedHex') === '"BK2"'){this.BK2 = true;}
         if (localStorage.getItem('selectedHex') === '"BK3"'){this.BK3 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK4"'){this.BK4 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK5"'){this.BK5 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK6"'){this.BK6 = true;}
+
 
         const httpOptions = {
           headers: new HttpHeaders({
