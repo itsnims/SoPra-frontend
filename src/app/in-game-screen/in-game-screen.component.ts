@@ -627,7 +627,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
-
+    localStorage.removeItem('mode');
     console.log('BOARD', this.Board)
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex');
