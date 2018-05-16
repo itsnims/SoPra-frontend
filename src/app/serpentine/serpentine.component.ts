@@ -20,6 +20,8 @@ import {User} from '../shared/models/user';
   styleUrls: ['./serpentine.component.css']
 })
 export class SerpentineComponent implements OnInit, AfterViewInit {
+  /*classe für click events...
+  * */
   hex: HexComponent;
   empty: string;
   hello: any;
@@ -44,6 +46,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   blockadelist: string[]= [];
   constructor(private componentFactoryResolver: ComponentFactoryResolver, private http: HttpClient) { }
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
+
   ngOnInit() {
     localStorage.removeItem('mode')
 
@@ -155,7 +158,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit() {
-    // this.divs.forEach(div => console.log(div));
+    this.divs.forEach(div => console.log('div:', div.hexId));
     const hex = this.divs.forEach(item => {
       this.hexMapById.set(item.hexId, item);
       if (['B9', 'B11'].includes(item.hexId)) {
@@ -187,9 +190,9 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
 
   addPlayers(selectedCard: any, possibleTiles: any) {
     console.log('standard component selected card: ' + selectedCard);
-    if (localStorage.getItem('mode') === 'true') {
+    if (localStorage.getItem('mode') === 'true'){
       this.currentPlayer = localStorage.getItem('currentTwoPlayer');
-      console.log('i am current: ', this.currentPlayer);
+      console.log('i am current: ', this.currentPlayer)
     } else {
       this.currentPlayer = localStorage.getItem('currentPlayer');
       console.log('currentPlayer: ', this.currentPlayer);
@@ -293,11 +296,13 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
       if (oldarray.length === 0) {
         this.currentkey = String(i) + 'st'
         localStorage.removeItem(this.currentkey + 'st');
-        this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
         localStorage.setItem(this.currentkey, newarray[i]);
-        console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey))           }
+        console.log(newarray[i])
+        console.log(this.hexMapById.get('B1'))
+        this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+        console.log('currentkey', this.currentkey, 'currentVal', localStorage.getItem(this.currentkey)) }
       else {
-        if ( oldarray[i] !== newarray[i]){
+        if ( oldarray[i] !== newarray[i]) {
           this.currentkey = String(i) + 'st'
           localStorage.removeItem(this.currentkey + 'st');
           localStorage.setItem(this.currentkey, newarray[i]);
@@ -342,3 +347,4 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
 
 
 }
+

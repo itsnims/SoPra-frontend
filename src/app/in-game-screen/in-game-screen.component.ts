@@ -594,7 +594,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.HillsOfGold.removeTiles(this.possibleTiles);
       this.HillsOfGold.addPlayers(this.selected, this.possibleTiles);
     }
+    console.log('i am before add serpent')
     if (this.Board === 'Serpentine') {
+      console.log('i am after add serpent')
+
       this.Serpentine.removeTiles(this.possibleTiles);
       this.Serpentine.addPlayers(this.selected, this.possibleTiles);
     }
@@ -757,6 +760,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 this.currentPositions.push(result[key].myFigures[0].currentPosition.name);
                 this.currentPositions.push(result[key].myFigures[1].currentPosition.name);
               }
+              console.log(this.currentPositions)
 
             } else {
               for (const key in result) {
@@ -772,10 +776,12 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             if (this.Board === 'HillsOfGold') {
               this.HillsOfGold.updatePosition(this.oldPositions, this.currentPositions);
             }
+            console.log('i am before serpent')
             if (this.Board === 'Serpentine') {
+              console.log('i am after serpent')
               this.Serpentine.updatePosition(this.oldPositions, this.currentPositions);
             }
-            if ((localStorage.getItem('currentPath')) === '"HomeStretchFields"') {
+            if (this.Board === 'HomeStretchFields') {
               this.HomeStretchFields.updatePosition(this.oldPositions, this.currentPositions);
             }
             if (this.Board === 'Swamplands') {
