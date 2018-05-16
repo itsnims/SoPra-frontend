@@ -153,10 +153,11 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
           // list.push(list['strength'] = result[object].strenght);
           /*this.Bstrenght[i] = result[i].strenght;*/
         }
-        this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
-        if (list[0].color === 'Green') {
+         this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
+      //          this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
+
           this.bk1Strength = 'strength' + list[0].strength;
-        }
+          //           this.bk2Strength = 'strength' + list[1].strength;
         console.log('blockade', this.bk1Strength)
 
       });
