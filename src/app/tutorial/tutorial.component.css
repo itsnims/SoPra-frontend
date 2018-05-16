@@ -10,6 +10,11 @@
   position: fixed;
   top: 720px;
   left: 1200px;
+  color: black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
 }
 #closeTut {
   position: fixed;

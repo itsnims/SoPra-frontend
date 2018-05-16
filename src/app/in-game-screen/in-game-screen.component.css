@@ -64,6 +64,11 @@
   -moz-transform: rotate(-90.0deg);
   -o-transform: rotate(-90.0deg);
   -webkit-transform: rotate(-90.0deg);
+  color: black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
 }
 
 .marketCard {
@@ -266,7 +271,13 @@
 /* Buttons bottom left */
 .bottomLeft {
   position: fixed;
-  width: 88px;}
+  width: 88px;
+  color: black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
 
 #actionCard {
   top: 619px;
@@ -300,9 +311,16 @@
 
 .yourTurn {
   position: fixed;
+  background: black;
   top: 600px;
-  left: 500px;}
-
+  left: 500px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
 
 .gameboard{
   position: fixed;

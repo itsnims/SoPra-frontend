@@ -86,6 +86,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
   // wenn lower market 6 karten hat ist isfree = false
   isFree = false;
+  antiIsFree = true;
   // wenn der user noch keinen kauf gemacht hat ist firstpurchase = false
   firstPurchase = false;
 
@@ -210,7 +211,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         console.log(result);
         if (result !== 6) {
-          this.isFree = false; } else {this.isFree = true; }
+          this.isFree = false; this.antiIsFree = true;} else {this.isFree = true; this.antiIsFree = false;}
         if (this.firstPurchase === true) {
           this.isFree = true; }
       });
@@ -224,6 +225,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         if (this.selected[0] === 'Transmitter') {
           this.temp = this.isFree;
           this.isFree = false;
+          this.antiIsFree = true;
         }
         return;
       }
@@ -283,6 +285,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   unavailable() { // damit der upper market korrekt ausgewählt wird
     if (this.firstPurchase === false) {
       this.isFree = true;
+      this.antiIsFree = false;
     }
   }
   // aktionen die ausgeführt werden wenn eine handcard aus- / abgewählt wird
@@ -943,7 +946,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     } else if (this.playedDrawCard === 'TravelDiary' && this.selected.length <= 2) {
       this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
         .subscribe(result => console.log(result));
-    } 
+    }
     // TODO show notification to user that he selected wrong number of cards to trash
     this.updateHandcards();
     this.updateHandcards();
