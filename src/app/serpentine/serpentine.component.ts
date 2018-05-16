@@ -24,9 +24,9 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   * */
   hex: HexComponent;
 
-  BK1 = false;
-  BK2 = false;
-  BK3 = false;
+  BK1: boolean;
+  BK2: boolean;
+  BK3: boolean;
   BK4: boolean;
   BK5: boolean;
   BK6: boolean;
@@ -72,9 +72,14 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   @ViewChildren(HexComponent) divs: QueryList<HexComponent>;
 
   ngOnInit() {
+    this.BK3 = false
     this.BK4 = false;
     this.BK5 = false;
     this.BK6 = false;
+
+    console.log('bk', this.BK1)
+    console.log(this.BK2)
+    console.log(this.BK3)
 
     localStorage.removeItem('mode')
 
@@ -234,13 +239,16 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
     }
 
     if (possibleTiles.length <= 0){} else {
-      let blockades = ['BK1', 'BK2', 'BK3', 'BK4', 'BK5', 'BK6', 'BK7']
+      const blockades = ['BK1', 'BK2', 'BK3', 'BK4', 'BK5', 'BK6', 'BK7']
       // addPlayers(selected: Array<string>) {
       if (blockades.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
         console.log('in function')
-        if (localStorage.getItem('selectedHex') === 'BK1'){this.BK1 = true;}
-        if (localStorage.getItem('selectedHex') === 'BK2'){this.BK2 = true;}
-        if (localStorage.getItem('selectedHex') === 'BK3'){this.BK3 = true;}
+        console.log('BKSSS', localStorage.getItem('selectedHex'))
+        if (localStorage.getItem('selectedHex') === '"BK1"'){
+          console.log('setting true');
+          this.BK1 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK2"'){this.BK2 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK3"'){this.BK3 = true;}
 
         const httpOptions = {
           headers: new HttpHeaders({
@@ -253,8 +261,8 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
         console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade');
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
         const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
-        (<HTMLElement>element).remove()
-        this.removeChild(element);
+        (<HTMLElement>element).remove();
+
       }
       else {
         this.tile = JSON.parse(localStorage.getItem('selectedHex'))
