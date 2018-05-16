@@ -30,7 +30,7 @@ export class HostScreenComponent implements OnInit {
     {pathID: 'Winding Paths', pathname: 'WindingPath'},
     {pathID: 'Serpentine', pathname: 'Serpentine'},
     {pathID: 'Swamplands', pathname: 'Swamplands'},
-    {pathID: 'Witch\'s Cauldron', pathname: 'WitchsCauldron'}
+    {pathID: 'Witch\'s Cauldron', pathname: 'WitchsCauldron'},
   ];
   numbOfPlayers = [
     {numbValue: '4', numbSelect: '4'},
