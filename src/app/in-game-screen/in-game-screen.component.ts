@@ -868,9 +868,14 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + drawActionCard + '/drawAction', this.httpOptions)
       .subscribe(result => {
         console.log(result);
-          if (drawActionCard === 'Scientist' || drawActionCard === 'TravelDiary') {
+          if (drawActionCard === 'Scientist') {
+            alert('you may now trash 1 card');
             this.trashButtonClickable = false;
-          } else {
+          } else if (drawActionCard === 'TravelDiary') {
+            alert('you may now trash up to 2 cards');
+            this.trashButtonClickable = false;
+          }
+          else {
             this.trashButtonClickable = true;
           }
           console.log('trashButtonClickable: ' + this.trashButtonClickable);
@@ -941,12 +946,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if (this.playedDrawCard === 'Scientist' && this.selected.length === 1) {
       this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
         .subscribe(result => console.log(result));
-    } else if (this.playedDrawCard === 'TravelDiary' && this.selected.length === 2) {
+    } else if (this.playedDrawCard === 'TravelDiary' && this.selected.length <= 2) {
       this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
         .subscribe(result => console.log(result));
-    } else if (this.playingPieceOnCamp) {
-
-    }
+    } 
     // TODO show notification to user that he selected wrong number of cards to trash
     this.updateHandcards();
     this.updateHandcards();
