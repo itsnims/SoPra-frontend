@@ -156,20 +156,25 @@ export class StandardComponent implements OnInit, AfterViewInit {
       .subscribe(result => {
         console.log('blockade', result)
         let list = [];
-
+        let iterable = 1;
         for (const object in result) {
           list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght});
           // list.push(list['strength'] = result[object].strenght);
           /*this.Bstrenght[i] = result[i].strenght;*/
+
+          console.log(String(iterable));
           if (list[object].color.toLowerCase() === 'white'){
-            this["colorBK" + String(object)] = 'hexagon grey'
+            this["colorBK" + String(iterable)] = 'hexagon grey'
           }else {
-            this["colorBK" + String(object)] = 'hexagon ' + list[object].color.toLowerCase();
+            this["colorBK" + String(iterable)] = 'hexagon ' + list[object].color.toLowerCase();
+
           }
+          iterable ++;
         }
         console.log('color', this.colorBK1)
         console.log('color', this.colorBK2)
         console.log('color', this.colorBK3)
+        console.log('color')
         // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
         //          this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
 
