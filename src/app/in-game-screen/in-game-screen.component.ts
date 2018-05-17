@@ -48,6 +48,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   playedDrawCard: string;
   playingPieceOnCamp = false;
   cardsToBeTrashed: number;
+  cardsToBeDiscarded: number;
   numbX: string;
 
 
@@ -65,6 +66,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   Board = localStorage.getItem('currentPath').replace(/['"]+/g, '');
 
   mustTrash = false;
+  mustDiscard = false;
   trashNumber = 0;
   mustDiscard = false;
   discardNumber = 0;
@@ -495,7 +497,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateHandcards();
     this.updateHandcards();
     this.selected = [];
-    console.log('bull')
+    this.mustDiscard = false;
   }
 
 
@@ -721,6 +723,18 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         })
       });
 
+    TimerObservable.create(0, this.interval)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard')
+          .subscribe(result => {
+            console.log(result);
+            if (Number(JSON.stringify(result)) > 0) {
+              this.mustDiscard = true;
+              this.cardsToBeDiscarded = Number(JSON.stringify(result));
+            }
+          })
+      });
 
 
     const httpOptions = {

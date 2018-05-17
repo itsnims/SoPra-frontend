@@ -27,15 +27,24 @@ export class WinScreenComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/game/winner')
-      .subscribe(result => {
-        this.winnerObject = result;
-        for (let el in this.winnerObject) {
-          if (el === 'name') {
-            this.winner = this.winnerObject[el];
-          }
-        }
+
+
+
+    TimerObservable.create(0, this.interval)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get('https://sopra-fs18-group13-server.herokuapp.com/Games/' + this.currentRoom + '/winner')
+          .subscribe(result => {
+            this.winnerObject = result;
+            for (let el in this.winnerObject) {
+              if (el === 'name') {
+                this.winner = this.winnerObject[el];
+                this.gameEnded = true;
+              }
+            }
       });
+
+        
 
     TimerObservable.create(0, this.interval)
       .takeWhile(() => this.alive)
@@ -43,7 +52,7 @@ export class WinScreenComponent implements OnInit {
         this.http.get(this.apiUrl + this.currentRoom + '/checkWinner')
           .subscribe(result => {
             if (result) {
-              this.gameEnded = true;
+              // this.gameEnded = true;
             }
           });
       });
