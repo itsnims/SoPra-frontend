@@ -721,34 +721,34 @@ reload()  {
             });
         }
       });
-
-    TimerObservable.create(0, this.interval)
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash')
-          .subscribe(result => {
-          console.log(result);
-          if (Number(JSON.stringify(result)) > 0) {
-            this.trashButtonClickable = false;
-            this.mustTrash = true;
-            this.cardsToBeTrashed = Number(JSON.stringify(result));
-          }
-        })
-      });
-
-    TimerObservable.create(0, this.interval)
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard')
-          .subscribe(result => {
+    /*
+      TimerObservable.create(0, this.interval)
+        .takeWhile(() => this.alive)
+        .subscribe(() => {
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash')
+            .subscribe(result => {
             console.log(result);
             if (Number(JSON.stringify(result)) > 0) {
-              this.mustDiscard = true;
-              this.cardsToBeDiscarded = Number(JSON.stringify(result));
+              this.trashButtonClickable = false;
+              this.mustTrash = true;
+              this.cardsToBeTrashed = Number(JSON.stringify(result));
             }
           })
-      });
+        });
 
+      TimerObservable.create(0, this.interval)
+        .takeWhile(() => this.alive)
+        .subscribe(() => {
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard')
+            .subscribe(result => {
+              console.log(result);
+              if (Number(JSON.stringify(result)) > 0) {
+                this.mustDiscard = true;
+                this.cardsToBeDiscarded = Number(JSON.stringify(result));
+              }
+            })
+        });
+        */
 
     const httpOptions = {
       headers: new HttpHeaders({
