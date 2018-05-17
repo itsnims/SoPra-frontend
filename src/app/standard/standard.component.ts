@@ -24,11 +24,16 @@ import {User} from '../shared/models/user';
 export class StandardComponent implements OnInit, AfterViewInit {
   hex: HexComponent;
 
+
+  old = 0;
+  new1 = 0;
+  remove: boolean;
+  count = 1;
+
   BK1: boolean;
   BK2: boolean;
   BK3: boolean;
   BK4: boolean;
-
 
   empty: string;
   hello: any;
@@ -98,7 +103,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
       }
       console.log('players: ', this.players);
-      console.log('hello world')
+      console.log('hello world');
     }
     /*
     How many playing pieces should be displayed on the board as well as their initial positions*/
@@ -172,11 +177,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
           this["strengthBK" + iterable] = 'blockade' + list[object].strength
           iterable ++;
         }
-        console.log('block', this.strengthBK1)
-        console.log('block', this.colorBK1)
-        console.log('color', this.colorBK2)
-        console.log('color', this.colorBK3)
-        console.log('color')
+
         // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
         //
         //       this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
@@ -223,9 +224,40 @@ export class StandardComponent implements OnInit, AfterViewInit {
     this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
     this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
     /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
+  getCurrentBlockades() {
+    this.http.get(this.apiUrl + this.currentRoom + '/Currentblockade')
+      .subscribe(result => {
+        console.log('current', result)
+        let iter = 0
+        for (const object in result) {
+          console.log('current', object);
+          iter ++;
+        };
+        this.new1 = iter;
+        console.log('new', this.new1)
+        console.log('newold', this.old)
+
+        if (this.old === 0){this.old = iter}else {
+          if (this.old !== this.new1) {
+            this.remove = true;
+          } else {
+            this.remove = false;
+          }
+          console.log('newcount', this.count)
+          this.old = iter;
+
+          if (this.remove) {
+            this["BK" + this.count] = true;
+
+            console.log('BK1', this.BK1)
+            this.count++;
+          }
+        }
+      })
+  }
 
 
-  addPlayers(selectedCard: any, possibleTiles: any) {
+    addPlayers(selectedCard: any, possibleTiles: any) {
     console.log('standard component selected card: ' + selectedCard);
     if (localStorage.getItem('mode') === 'true'){
       this.currentPlayer = localStorage.getItem('currentTwoPlayer');
@@ -254,19 +286,12 @@ export class StandardComponent implements OnInit, AfterViewInit {
             'Content-Type': 'application/json'
           })};
         this.selectedHex = JSON.parse(localStorage.getItem('selectedHex'));
-        this.http.get(this.apiUrl + this.currentRoom + '/currentBlockade')
-          .subscribe(result => {
-            console.log('NEWOLDblockade', result);})
-        /*
-        Send blockade to backend*/
+
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
         const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
         (<HTMLElement>element).remove();
         console.log()
 
-        this.http.get(this.apiUrl + this.currentRoom + '/blockade')
-          .subscribe(result => {
-            console.log('NEWblockade', result);}
 
       }
       else {
@@ -364,9 +389,12 @@ export class StandardComponent implements OnInit, AfterViewInit {
             console.log('in else/if new: ', newarray[i])
           // localStorage.setItem('currentTile', newarray[i]);
           /*remove player form hex component and then add them to the new positions.*/
+          this.getCurrentBlockades();
           this.hexMapById.get(oldarray[i]).removePlayer();
           console.log('this will be the player added: ', this.players[i])
-          this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);}
+          this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+          console.log('current after log');
+        }
         else {}
       }
     }

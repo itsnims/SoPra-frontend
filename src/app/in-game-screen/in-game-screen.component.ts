@@ -5,7 +5,6 @@ import {HexComponent} from '../hex/hex.component';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {HttpParams} from '@angular/common/http';
 import {WinScreenComponent} from '../win-screen/win-screen.component';
-
 import {RoomService} from '../shared/services/room.service';
 import 'rxjs/add/operator/takeWhile';
 import {TimerObservable} from 'rxjs/observable/TimerObservable';
@@ -190,7 +189,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
  // component: StandardComponent;
 
 
-  constructor(private roomService: RoomService, private http: HttpClient, private componentFactoryResolver: ComponentFactoryResolver) {
+  constructor(private roomService: RoomService, private http: HttpClient) {
     this.possibleTiles = new Array<string>();
     this.currentPositions = new Array<string>();
     this.oldPositions = new Array<string>();
@@ -775,7 +774,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       .subscribe(() => {
         this.http.get(this.apiUrl + this.currentRoom + '/users', httpOptions)
           .subscribe(result => {
-            console.log('result: ',result)
+            console.log('result: ', result)
             /*first assign all positions before update to the array old positions*/
             this.oldPositions = [];
             for (let x of this.currentPositions){
@@ -823,13 +822,14 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             }
 
           });
-          /* WORKS: console.log('current positons:', this.currentPositions);*/
+        /* WORKS: console.log('current positons:', this.currentPositions);*/
           /*make an update call only if there has been a change between the old and the new positions*/
         // Not sexy way of doing it;
 
 
         }
             );
+
 
 
   }
