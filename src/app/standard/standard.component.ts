@@ -164,25 +164,27 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
           console.log(String(iterable));
           if (list[object].color.toLowerCase() === 'white'){
-            this["colorBK" + String(iterable)] = 'hexagon grey'
+            console.log(list[object].name)
+            this["colorBK" + iterable] = 'hexagon grey'
           }else {
-            this["colorBK" + String(iterable)] = 'hexagon ' + list[object].color.toLowerCase();
-
+            this["colorBK" + iterable] = 'hexagon ' + list[object].color.toLowerCase();
           }
+          this["strengthBK" + iterable] = 'blockade' + list[object].strength
           iterable ++;
         }
-        console.log('color', this.colorBK1)
+        console.log('block', this.strengthBK1)
+        console.log('block', this.colorBK1)
         console.log('color', this.colorBK2)
         console.log('color', this.colorBK3)
         console.log('color')
         // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
         //
         //       this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
-        this.bk1Strength = 'blockade' + list[0].strength;
+        /*this.bk1Strength = 'blockade' + list[0].strength;
         this.bk2Strength = 'blockade' + list[1].strength;
         this.bk3Strength = 'blockade' + list[2].strength;
         this.bk4Strength = 'blockade' + list[3].strength;
-
+*/
 
         console.log('blockade', this.bk1Strength);
         console.log(this.bk3Strength)
@@ -238,7 +240,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
       const blockades = ['BK1', 'BK2', 'BK3', 'BK4', 'BK5', 'BK6', 'BK7']
       // addPlayers(selected: Array<string>) {
       if (blockades.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
-        console.log('in function')
+        console.log('in function');
         console.log('BKSSS', localStorage.getItem('selectedHex'))
         if (localStorage.getItem('selectedHex') === '"BK1"'){this.BK1 = true;}
         if (localStorage.getItem('selectedHex') === '"BK2"'){this.BK2 = true;}
@@ -246,18 +248,25 @@ export class StandardComponent implements OnInit, AfterViewInit {
         if (localStorage.getItem('selectedHex') === '"BK4"'){this.BK4 = true;}
 
 
+
         const httpOptions = {
           headers: new HttpHeaders({
             'Content-Type': 'application/json'
           })};
         this.selectedHex = JSON.parse(localStorage.getItem('selectedHex'));
-
+        this.http.get(this.apiUrl + this.currentRoom + '/currentBlockade')
+          .subscribe(result => {
+            console.log('NEWOLDblockade', result);})
         /*
         Send blockade to backend*/
-        console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade');
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
         const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
         (<HTMLElement>element).remove();
+        console.log()
+
+        this.http.get(this.apiUrl + this.currentRoom + '/blockade')
+          .subscribe(result => {
+            console.log('NEWblockade', result);}
 
       }
       else {
