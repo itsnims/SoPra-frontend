@@ -28,6 +28,7 @@ import { AppDirective } from './app.directive';
 import { SwamplandsComponent } from './swamplands/swamplands.component';
 import { TutorialComponent } from './tutorial/tutorial.component';
 import { WitchscauldronComponent } from './witchscauldron/witchscauldron.component';
+import { WindingpathsComponent } from './windingpaths/windingpaths.component';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { WitchscauldronComponent } from './witchscauldron/witchscauldron.compone
     SwamplandsComponent,
     TutorialComponent,
     WitchscauldronComponent,
+    WindingpathsComponent,
   ],
   entryComponents: [PlayerComponent],
   imports: [

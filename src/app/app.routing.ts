@@ -13,6 +13,7 @@ import {HomestretchComponent} from './homestretch/homestretch.component';
 import {SerpentineComponent} from './serpentine/serpentine.component';
 import {SwamplandsComponent} from './swamplands/swamplands.component';
 import {WitchscauldronComponent} from './witchscauldron/witchscauldron.component';
+import {WindingpathsComponent} from './windingpaths/windingpaths.component';
 
 
 const appRoutes: Routes = [
@@ -29,6 +30,8 @@ const appRoutes: Routes = [
   {path: 'serpentine', component: SerpentineComponent},
   {path: 'swamplands', component: SwamplandsComponent},
   {path: 'witch', component: WitchscauldronComponent},
+  {path: 'wind', component: WindingpathsComponent},
+
 
 
 
