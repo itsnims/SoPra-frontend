@@ -647,12 +647,27 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.selected = [];
   }
 
+reload()  {
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem( 'firstLoad' ) )
+      {
+        localStorage[ 'firstLoad' ] = true;
+        window.location.reload();
+      }
+
+      else
+        localStorage.removeItem( 'firstLoad' );
+    }
+  }
 
   ngOnInit() {
     localStorage.removeItem('mode');
     console.log('BOARD', this.Board)
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex');
+
+    // this.reload();
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
