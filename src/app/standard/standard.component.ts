@@ -197,6 +197,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit() {
+
     const hex = this.divs.forEach(item => {
       this.hexMapById.set(item.hexId, item);
       if (['B9', 'B11'].includes(item.hexId)) {
@@ -204,6 +205,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
       }
       return false;
     });
+
     /**/
     /*highlights all potentialMoveIds*/
     console.log(this.hexMapById);
@@ -239,7 +241,9 @@ export class StandardComponent implements OnInit, AfterViewInit {
 
         if (this.old === 0){this.old = iter}else {
           if (this.old !== this.new1) {
+
             this.remove = true;
+
           } else {
             this.remove = false;
           }
@@ -250,7 +254,7 @@ export class StandardComponent implements OnInit, AfterViewInit {
             this["BK" + this.count] = true;
 
             console.log('BK1', this.BK1)
-            this.count++;
+            this.count ++;
           }
         }
       })

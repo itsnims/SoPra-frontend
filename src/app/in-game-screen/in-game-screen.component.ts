@@ -728,7 +728,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
           .subscribe(result => {
             console.log(result);
             if (Number(JSON.stringify(result)) > 0) {
-              this.mustDiscard = true;
+              this.mustDiscard = false;
               this.cardsToBeDiscarded = Number(JSON.stringify(result));
             }
           })
@@ -809,16 +809,13 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             }
 
             if (this.Board === 'StandardPath') {
-              console.log('update standard')
               this.StandardPath.updatePosition(this.oldPositions, this.currentPositions);
             }
 
             if (this.Board === 'HillsOfGold') {
               this.HillsOfGold.updatePosition(this.oldPositions, this.currentPositions);
             }
-            console.log('i am before serpent')
             if (this.Board === 'Serpentine') {
-              console.log('i am after serpent')
               this.Serpentine.updatePosition(this.oldPositions, this.currentPositions);
             }
             if (this.Board === 'HomeStretchFields') {
