@@ -176,15 +176,16 @@ export class StandardComponent implements OnInit, AfterViewInit {
         console.log('color', this.colorBK3)
         console.log('color')
         // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
-        //          this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
+        //
+        //       this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
+        this.bk1Strength = 'blockade' + list[0].strength;
+        this.bk2Strength = 'blockade' + list[1].strength;
+        this.bk3Strength = 'blockade' + list[2].strength;
+        this.bk4Strength = 'blockade' + list[3].strength;
 
-        this.bk1Strength = 'strength' + list[0].strength;
-        this.bk2Strength = 'strength' + list[1].strength;
-        this.bk3Strength = 'strength' + list[2].strength;
-        this.bk4Strength = 'strength' + list[3].strength;
 
-
-        console.log('blockade', this.bk1Strength)
+        console.log('blockade', this.bk1Strength);
+        console.log(this.bk3Strength)
 
       });
 

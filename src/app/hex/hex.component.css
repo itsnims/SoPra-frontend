@@ -216,6 +216,20 @@
   background-position: center;
 }
 
+#blockade1{
+  background-size: contain;
+  background-image: url(1.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#blockade2{
+  background-size: contain;
+  background-image: url(2.png);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 
 /*Creation of hexagon shape and colouring*/
 .hexagon {
