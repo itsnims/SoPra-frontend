@@ -20,7 +20,6 @@ import {User} from '../shared/models/user';
   styleUrls: ['./windingpaths.component.css']
 })
 export class WindingpathsComponent implements OnInit {
-
   hex: HexComponent;
 
   BK1: boolean;
@@ -28,7 +27,8 @@ export class WindingpathsComponent implements OnInit {
   BK3: boolean;
   BK4: boolean;
   BK5: boolean;
-  BK6: boolean;
+
+
 
   empty: string;
   hello: any;
@@ -48,7 +48,8 @@ export class WindingpathsComponent implements OnInit {
   bk3Strength: string;
   bk4Strength: string;
   bk5Strength: string;
-  bk6Strength: string;
+
+
 
 
   Bstrenght: any;
@@ -157,15 +158,25 @@ export class WindingpathsComponent implements OnInit {
       .subscribe(result => {
         console.log('blockade', result)
         let list = [];
-
+        let iterable = 1;
         for (const object in result) {
           list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght});
           // list.push(list['strength'] = result[object].strenght);
           /*this.Bstrenght[i] = result[i].strenght;*/
-          this["colorBK" + String(object)] = 'hexagon ' + list[0].color.toLowerCase();
 
+          console.log(String(iterable));
+          if (list[object].color.toLowerCase() === 'white'){
+            this["colorBK" + String(iterable)] = 'hexagon grey'
+          }else {
+            this["colorBK" + String(iterable)] = 'hexagon ' + list[object].color.toLowerCase();
+
+          }
+          iterable ++;
         }
-        console.log()
+        console.log('color', this.colorBK1)
+        console.log('color', this.colorBK2)
+        console.log('color', this.colorBK3)
+        console.log('color')
         // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
         //          this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
 
@@ -174,7 +185,7 @@ export class WindingpathsComponent implements OnInit {
         this.bk3Strength = 'strength' + list[2].strength;
         this.bk4Strength = 'strength' + list[3].strength;
         this.bk5Strength = 'strength' + list[4].strength;
-        this.bk5Strength = 'strength' + list[5].strength;
+
 
 
         console.log('blockade', this.bk1Strength)
@@ -186,7 +197,6 @@ export class WindingpathsComponent implements OnInit {
 
 
   ngAfterViewInit() {
-    this.divs.forEach(div => console.log('div:', div.hexId));
     const hex = this.divs.forEach(item => {
       this.hexMapById.set(item.hexId, item);
       if (['B9', 'B11'].includes(item.hexId)) {
@@ -237,8 +247,6 @@ export class WindingpathsComponent implements OnInit {
         if (localStorage.getItem('selectedHex') === '"BK2"'){this.BK2 = true;}
         if (localStorage.getItem('selectedHex') === '"BK3"'){this.BK3 = true;}
         if (localStorage.getItem('selectedHex') === '"BK4"'){this.BK4 = true;}
-        if (localStorage.getItem('selectedHex') === '"BK5"'){this.BK5 = true;}
-        if (localStorage.getItem('selectedHex') === '"BK6"'){this.BK6 = true;}
 
 
         const httpOptions = {
