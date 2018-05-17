@@ -647,12 +647,27 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.selected = [];
   }
 
+reload()  {
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem( 'firstLoad' ) )
+      {
+        localStorage[ 'firstLoad' ] = true;
+        window.location.reload();
+      }
+
+      else
+        localStorage.removeItem( 'firstLoad' );
+    }
+  }
 
   ngOnInit() {
     localStorage.removeItem('mode');
     console.log('BOARD', this.Board)
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex');
+
+    // this.reload();
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -707,34 +722,36 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
             });
         }
       });
-
-    TimerObservable.create(0, this.interval)
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash')
-          .subscribe(result => {
-          console.log(result);
-          if (Number(JSON.stringify(result)) > 0) {
-            this.trashButtonClickable = false;
-            this.mustTrash = true;
-            this.cardsToBeTrashed = Number(JSON.stringify(result));
-          }
-        })
-      });
-
-    TimerObservable.create(0, this.interval)
-      .takeWhile(() => this.alive)
-      .subscribe(() => {
-        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard')
-          .subscribe(result => {
+    /*
+      TimerObservable.create(0, this.interval)
+        .takeWhile(() => this.alive)
+        .subscribe(() => {
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash')
+            .subscribe(result => {
             console.log(result);
             if (Number(JSON.stringify(result)) > 0) {
               this.mustDiscard = false;
               this.cardsToBeDiscarded = Number(JSON.stringify(result));
+              this.trashButtonClickable = false;
+              this.mustTrash = true;
+              this.cardsToBeTrashed = Number(JSON.stringify(result));
             }
           })
-      });
+        });
 
+      TimerObservable.create(0, this.interval)
+        .takeWhile(() => this.alive)
+        .subscribe(() => {
+          this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/discard')
+            .subscribe(result => {
+              console.log(result);
+              if (Number(JSON.stringify(result)) > 0) {
+                this.mustDiscard = true;
+                this.cardsToBeDiscarded = Number(JSON.stringify(result));
+              }
+            })
+        });
+        */
 
     const httpOptions = {
       headers: new HttpHeaders({

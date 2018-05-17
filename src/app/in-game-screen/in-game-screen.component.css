@@ -92,7 +92,8 @@
 
 .cardsLeft {
   margin-right: 20px;
-  font-size: 250%
+  font-size: 250%;
+  color: white;
 }
 
 /* maybe have to change names*/
