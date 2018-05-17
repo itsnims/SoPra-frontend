@@ -170,11 +170,11 @@ export class HexComponent implements OnInit {
             for (const key in result) {
               if (key === 'strenght' && localStorage.getItem('tileColor') === 'Camp') {
                 localStorage.setItem('tileStrength', String(result[key]));
-                alert('you have to trash ' + result[key] + ' card(s)'); // TODO show how many
+                // alert('you have to trash ' + result[key] + ' card(s)'); // TODO show how many
               }
               if (key === 'strenght' && localStorage.getItem('tileColor') === 'White') {
                 localStorage.setItem('tileStrength', String(result[key]));
-                alert('you have to discard ' + result[key] + ' card(s)'); // TODO show how many
+                // alert('you have to discard ' + result[key] + ' card(s)'); // TODO show how many
               }
             }
           })

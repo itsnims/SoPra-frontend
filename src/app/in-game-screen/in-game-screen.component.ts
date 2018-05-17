@@ -707,6 +707,19 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         }
       });
 
+    TimerObservable.create(0, this.interval)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash')
+          .subscribe(result => {
+          console.log(result);
+          if (Number(JSON.stringify(result)) > 0) {
+            this.trashButtonClickable = false;
+            this.mustTrash = true;
+            this.cardsToBeTrashed = Number(JSON.stringify(result));
+          }
+        })
+      });
 
 
 
@@ -972,6 +985,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     } else if (this.playedDrawCard === 'TravelDiary' && this.selected.length <= 2) {
       this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
         .subscribe(result => console.log(result));
+    } else if (this.cardsToBeTrashed === this.selected.length) {
+      this.http.post(this.apiUrl + this.currentRoom + '/' + this.playerName + '/trash', bodyString, this.httpOptions)
+        .subscribe(result => console.log(result));
     }
     // TODO show notification to user that he selected wrong number of cards to trash
     this.updateHandcards();
@@ -979,9 +995,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     this.updateHandcards();
     this.updateHandcards();
     this.updateHandcards();
+    this.cardsToBeTrashed = 0;
     this.selected = [];
     this.playedDrawCard = '';
     this.trashButtonClickable = true;
+    this.mustTrash = false;
   }
 
   ngOnDestroy() {
