@@ -49,6 +49,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   cardsToBeTrashed: number;
   cardsToBeDiscarded: number;
   numbX: string;
+  numbY: string;
 
 
   marketCardsObject: object;
@@ -939,37 +940,78 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
 
   playMoveActionCard() {
     localStorage.removeItem('possibleTiles');
-    this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction', this.httpOptions)
-      .subscribe(result => {
-        for(const et in result) {
-      this.possibleTiles.push(result[et].name);
-    }
-    if (this.Board === 'StandardPath') {
-      this.StandardPath.showTiles(this.possibleTiles);
-    }
-    if (this.Board === 'HillsOfGold') {
-      this.HillsOfGold.showTiles(this.possibleTiles);
-    }
-        if (this.Board === 'HomeStretchFields') {
-          this.HomeStretchFields.showTiles(this.possibleTiles);
-        }
-        if (this.Board === 'Serpentine') {
-          this.Serpentine.showTiles(this.possibleTiles);
-        }
-        if (this.Board === 'Swamplands') {
-          this.Swamplands.showTiles(this.possibleTiles);
-        }
-        if (this.Board === 'WitchsCauldron') {
-          this.WitchsCauldron.showTiles(this.possibleTiles);
-        }
-        if (this.Board === 'WindingPath') {
-          this.WindingPath.showTiles(this.possibleTiles);
-        }
-    console.log('possible tiles in else', this.possibleTiles);
-    localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
-    console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+    if (localStorage.getItem('mode') === 'true'){
+      if (localStorage.getItem('currentTwoPlayer') === 'player10' || localStorage.getItem('currentTwoPlayer') === 'player20'){
+        this.numbY = '/one';
+      }
+      else{ this.numbY = '/two';}
+      console.log('numbY', this.numbY)
 
-  }); // list of neighboring tiles
+      this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction' + this.numbY, this.httpOptions)
+        .subscribe(result => {
+          for (const et in result) {
+            this.possibleTiles.push(result[et].name);
+          }
+          if (this.Board === 'StandardPath') {
+            this.StandardPath.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'HillsOfGold') {
+            this.HillsOfGold.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'HomeStretchFields') {
+            this.HomeStretchFields.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'Serpentine') {
+            this.Serpentine.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'Swamplands') {
+            this.Swamplands.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'WitchsCauldron') {
+            this.WitchsCauldron.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'WindingPath') {
+            this.WindingPath.showTiles(this.possibleTiles);
+          }
+          console.log('possible tiles in else', this.possibleTiles);
+          localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+          console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+
+        })
+    } else {
+
+      this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/moveAction', this.httpOptions)
+        .subscribe(result => {
+          for (const et in result) {
+            this.possibleTiles.push(result[et].name);
+          }
+          if (this.Board === 'StandardPath') {
+            this.StandardPath.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'HillsOfGold') {
+            this.HillsOfGold.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'HomeStretchFields') {
+            this.HomeStretchFields.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'Serpentine') {
+            this.Serpentine.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'Swamplands') {
+            this.Swamplands.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'WitchsCauldron') {
+            this.WitchsCauldron.showTiles(this.possibleTiles);
+          }
+          if (this.Board === 'WindingPath') {
+            this.WindingPath.showTiles(this.possibleTiles);
+          }
+          console.log('possible tiles in else', this.possibleTiles);
+          localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
+          console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
+
+        }); // list of neighboring tiles
+    }
   }
 
   playMarketActionCard() {
