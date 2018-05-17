@@ -28,8 +28,6 @@ export class WinScreenComponent implements OnInit {
 
   ngOnInit() {
 
-
-
     TimerObservable.create(0, this.interval)
       .takeWhile(() => this.alive)
       .subscribe(() => {
@@ -42,9 +40,9 @@ export class WinScreenComponent implements OnInit {
                 this.gameEnded = true;
               }
             }
+          });
       });
 
-        
 
     TimerObservable.create(0, this.interval)
       .takeWhile(() => this.alive)
@@ -56,11 +54,8 @@ export class WinScreenComponent implements OnInit {
             }
           });
       });
-    }
+  }
 }
-
-
-
 
 
 
