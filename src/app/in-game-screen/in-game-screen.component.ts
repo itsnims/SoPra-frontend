@@ -16,6 +16,7 @@ import {HomestretchComponent} from '../homestretch/homestretch.component';
 import {AppDirective} from '../app.directive';
 import {SwamplandsComponent} from '../swamplands/swamplands.component';
 import {WitchscauldronComponent} from '../witchscauldron/witchscauldron.component';
+import {WindingpathsComponent} from '../windingpaths/windingpaths.component';
 
 @Component({
   selector: 'app-in-game-screen',
@@ -30,6 +31,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   @ViewChild (HomestretchComponent) HomeStretchFields: HomestretchComponent;
   @ViewChild(SwamplandsComponent) Swamplands: SwamplandsComponent;
   @ViewChild(WitchscauldronComponent) WitchsCauldron: WitchscauldronComponent;
+  @ViewChild(WindingpathsComponent)   WindingPath: WindingpathsComponent;
   player: PlayerComponent;
   currentselection: string;
   current = 'Player1';
@@ -313,6 +315,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         if (this.Board === 'WitchsCauldron') {
           this.WitchsCauldron.removeTiles(this.possibleTiles);
         }
+        if (this.Board === 'WindingPath') {
+          this.WindingPath.removeTiles(this.possibleTiles);
+        }
         // }
         this.possibleTiles = [];
         localStorage.removeItem('possibleTiles');
@@ -378,6 +383,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
                 console.log('in show');
                 this.WitchsCauldron.showTiles(this.possibleTiles);
               }
+              if (this.Board === 'WindingPath') {
+                console.log('in show');
+                this.WindingPath.showTiles(this.possibleTiles);
+              }
               console.log('possible tiles in else', this.possibleTiles);
               localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
               console.log('current local storage with JSON', JSON.parse(localStorage.getItem('possibleTiles')));
@@ -410,6 +419,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               if (this.Board === 'WitchsCauldron') {
                 console.log('in show');
                 this.WitchsCauldron.showTiles(this.possibleTiles);
+              }
+              if (this.Board === 'WindingPath') {
+                console.log('in show');
+                this.WindingPath.showTiles(this.possibleTiles);
               }
               console.log('possible tiles in else', this.possibleTiles);
               localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
@@ -594,10 +607,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
       this.HillsOfGold.removeTiles(this.possibleTiles);
       this.HillsOfGold.addPlayers(this.selected, this.possibleTiles);
     }
-    console.log('i am before add serpent')
     if (this.Board === 'Serpentine') {
-      console.log('i am after add serpent')
-
       this.Serpentine.removeTiles(this.possibleTiles);
       this.Serpentine.addPlayers(this.selected, this.possibleTiles);
     }
@@ -613,6 +623,11 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
     if (this.Board === 'WitchsCauldron') {
       this.WitchsCauldron.removeTiles(this.possibleTiles);
       this.WitchsCauldron.addPlayers(this.selected, this.possibleTiles);
+
+    }
+    if (this.Board === 'WindingPath') {
+      this.WindingPath.removeTiles(this.possibleTiles);
+      this.WindingPath.addPlayers(this.selected, this.possibleTiles);
 
     }
 
@@ -788,8 +803,10 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
               this.Swamplands.updatePosition(this.oldPositions, this.currentPositions);
             }
             if (this.Board === 'WitchsCauldron') {
-              console.log('update WitchsCauldron')
               this.WitchsCauldron.updatePosition(this.oldPositions, this.currentPositions);
+            }
+            if (this.Board === 'WindingPath') {
+              this.WindingPath.updatePosition(this.oldPositions, this.currentPositions);
             }
 
           });
@@ -921,6 +938,9 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
         }
         if (this.Board === 'WitchsCauldron') {
           this.WitchsCauldron.showTiles(this.possibleTiles);
+        }
+        if (this.Board === 'WindingPath') {
+          this.WindingPath.showTiles(this.possibleTiles);
         }
     console.log('possible tiles in else', this.possibleTiles);
     localStorage.setItem('possibleTiles', JSON.stringify(this.possibleTiles));
