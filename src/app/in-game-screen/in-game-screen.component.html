@@ -115,7 +115,7 @@
   <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
   <!--   <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button> -->
 </div>
-  <button id="updatedHancards"  type="submit" (click)="updateHandcards()">update handcards</button>
+  <button id="updatedHancards"  type="submit" (click)="updateHandcards()">Fast Forward</button>
 
   <div *ngIf="isItMyTurn">
       <p class="yourTurn"> IT'S YOUR TURN </p>
@@ -146,7 +146,7 @@
 <div *ngIf="mustDiscard">
   <div class="overlay1">
     <div class="overlayBox">
-      <h2 class="overlayMessage">You must discard {{discardNumber}} cards</h2>
+      <h2 class="overlayMessage">You must discard {{cardsToBeDiscarded}} cards</h2>
     </div>
   </div>
   <div id="overlay2discard"></div>
