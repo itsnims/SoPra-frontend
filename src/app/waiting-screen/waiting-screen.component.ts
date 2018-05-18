@@ -52,18 +52,6 @@ export class WaitingScreenComponent implements OnInit {
 
 
 
-    this.roomService.getRooms(this.currentRoom).subscribe(data => {
-      console.log('we are calling getRooms');
-      this.playerObject = data.players;
-      for (const idx in this.playerObject) {
-        this.playersInRoom.push((this.playerObject[idx]).name);
-        // here we push the usernames of all opponents in the room into the list of opponents
-      }
-      console.log('these are the players: ' + this.playersInRoom);
-
-      localStorage.setItem('playersInRoom', JSON.stringify(this.playersInRoom));
-    });
-
 
 
     this.http.get(this.roomUrl  + this.currentRoom).subscribe((data) => {
@@ -90,6 +78,21 @@ export class WaitingScreenComponent implements OnInit {
             }
           });
       });
+
+    this.roomService.getRooms(this.currentRoom).subscribe(data => {
+      console.log('we are calling getRooms');
+      this.playerObject = data.players;
+      for (const idx in this.playerObject) {
+        this.playersInRoom.push((this.playerObject[idx]).name);
+        // here we push the usernames of all opponents in the room into the list of opponents
+      }
+      console.log('these are the players: ' + this.playersInRoom);
+
+      localStorage.setItem('playersInRoom', JSON.stringify(this.playersInRoom));
+    });
+
+
+
   }
 
     quitRoom() {
