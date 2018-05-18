@@ -666,8 +666,8 @@ reload()  {
     console.log('BOARD', this.Board)
     localStorage.removeItem('possibleTiles');
     localStorage.removeItem('selectedHex');
-
-    // this.reload();
+    setTimeout(function(){}, 2000);
+    this.reload();
 
     // Here we determine whether it's the player's turn
     TimerObservable.create(0, this.interval)  // This executes the http request at the specified interval
@@ -722,7 +722,7 @@ reload()  {
             });
         }
       });
-    /*
+
       TimerObservable.create(0, this.interval)
         .takeWhile(() => this.alive)
         .subscribe(() => {
@@ -751,7 +751,7 @@ reload()  {
               }
             })
         });
-        */
+
 
     const httpOptions = {
       headers: new HttpHeaders({
