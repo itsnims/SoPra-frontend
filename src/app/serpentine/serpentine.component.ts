@@ -20,16 +20,18 @@ import {User} from '../shared/models/user';
   styleUrls: ['./serpentine.component.css']
 })
 export class SerpentineComponent implements OnInit, AfterViewInit {
-  /*classe für click events...
-  * */
-  hex: HexComponent;
+   hex: HexComponent;
+
+
+  old = 0;
+  new1 = 0;
+  remove: boolean;
+  count = 1;
 
   BK1: boolean;
   BK2: boolean;
   BK3: boolean;
   BK4: boolean;
-  BK5: boolean;
-  BK6: boolean;
 
   empty: string;
   hello: any;
@@ -48,8 +50,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
   bk2Strength: string;
   bk3Strength: string;
   bk4Strength: string;
-  bk5Strength: string;
-  bk6Strength: string;
+
 
 
   Bstrenght: any;
@@ -100,7 +101,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
 
       }
       console.log('players: ', this.players);
-      console.log('hello world')
+      console.log('hello world');
     }
     /*
     How many playing pieces should be displayed on the board as well as their initial positions*/
@@ -158,27 +159,34 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
       .subscribe(result => {
         console.log('blockade', result)
         let list = [];
-
+        let iterable = 1;
         for (const object in result) {
           list.push({name: result[object].name, color: result[object].Color, strength: result[object].strenght});
           // list.push(list['strength'] = result[object].strenght);
           /*this.Bstrenght[i] = result[i].strenght;*/
-          this["colorBK" + String(object)] = 'hexagon ' + list[0].color.toLowerCase();
 
+          console.log(String(iterable));
+          if (list[object].color.toLowerCase() === 'white'){
+            console.log(list[object].name)
+            this["colorBK" + iterable] = 'hexagon grey'
+          }else {
+            this["colorBK" + iterable] = 'hexagon ' + list[object].color.toLowerCase();
+          }
+          this["strengthBK" + iterable] = 'blockade' + list[object].strength
+          iterable ++;
         }
-         console.log()
-           // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
-      //          this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
 
-          this.bk1Strength = 'strength' + list[0].strength;
-          this.bk2Strength = 'strength' + list[1].strength;
-          this.bk3Strength = 'strength' + list[2].strength;
-        this.bk4Strength = 'strength' + list[3].strength;
-        this.bk5Strength = 'strength' + list[4].strength;
-        this.bk5Strength = 'strength' + list[5].strength;
+        // this.bk1Colour = 'hexagon ' + list[0].color.toLowerCase();
+        //
+        //       this.bk2Colour = 'hexagon ' + list[1].color.toLowerCase();
+        /*this.bk1Strength = 'blockade' + list[0].strength;
+        this.bk2Strength = 'blockade' + list[1].strength;
+        this.bk3Strength = 'blockade' + list[2].strength;
+        this.bk4Strength = 'blockade' + list[3].strength;
+*/
 
-
-        console.log('blockade', this.bk1Strength)
+        console.log('blockade', this.bk1Strength);
+        console.log(this.bk3Strength)
 
       });
 
@@ -187,7 +195,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
 
 
   ngAfterViewInit() {
-    this.divs.forEach(div => console.log('div:', div.hexId));
+
     const hex = this.divs.forEach(item => {
       this.hexMapById.set(item.hexId, item);
       if (['B9', 'B11'].includes(item.hexId)) {
@@ -195,6 +203,7 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
       }
       return false;
     });
+
     /**/
     /*highlights all potentialMoveIds*/
     console.log(this.hexMapById);
@@ -215,6 +224,39 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
     this.hexMapById.get(this.players[1].position).addplayer(this.players[1]);
     this.hexMapById.get(this.players[2].position).addplayer(this.players[2]);
     /*this.hexMapById.get(this.players[3].position).addplayer(this.players[3]);*/
+  getCurrentBlockades() {
+    this.http.get(this.apiUrl + this.currentRoom + '/Currentblockade')
+      .subscribe(result => {
+        console.log('current', result)
+        let iter = 0
+        for (const object in result) {
+          console.log('current', object);
+          iter ++;
+        };
+        this.new1 = iter;
+        console.log('new', this.new1)
+        console.log('newold', this.old)
+
+        if (this.old === 0){this.old = iter}else {
+          if (this.old !== this.new1) {
+
+            this.remove = true;
+
+          } else {
+            this.remove = false;
+          }
+          console.log('newcount', this.count)
+          this.old = iter;
+
+          if (this.remove) {
+            this["BK" + this.count] = true;
+
+            console.log('BK1', this.BK1)
+            this.count ++;
+          }
+        }
+      })
+  }
 
 
   addPlayers(selectedCard: any, possibleTiles: any) {
@@ -232,14 +274,13 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
       const blockades = ['BK1', 'BK2', 'BK3', 'BK4', 'BK5', 'BK6', 'BK7']
       // addPlayers(selected: Array<string>) {
       if (blockades.indexOf(JSON.parse(localStorage.getItem('selectedHex'))) > -1) {
-        console.log('in function')
+        console.log('in function');
         console.log('BKSSS', localStorage.getItem('selectedHex'))
         if (localStorage.getItem('selectedHex') === '"BK1"'){this.BK1 = true;}
         if (localStorage.getItem('selectedHex') === '"BK2"'){this.BK2 = true;}
         if (localStorage.getItem('selectedHex') === '"BK3"'){this.BK3 = true;}
         if (localStorage.getItem('selectedHex') === '"BK4"'){this.BK4 = true;}
-        if (localStorage.getItem('selectedHex') === '"BK5"'){this.BK5 = true;}
-        if (localStorage.getItem('selectedHex') === '"BK6"'){this.BK6 = true;}
+
 
 
         const httpOptions = {
@@ -248,12 +289,11 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
           })};
         this.selectedHex = JSON.parse(localStorage.getItem('selectedHex'));
 
-        /*
-        Send blockade to backend*/
-        console.log('send to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade');
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
         const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
         (<HTMLElement>element).remove();
+        console.log()
+
 
       }
       else {
@@ -351,9 +391,12 @@ export class SerpentineComponent implements OnInit, AfterViewInit {
             console.log('in else/if new: ', newarray[i])
           // localStorage.setItem('currentTile', newarray[i]);
           /*remove player form hex component and then add them to the new positions.*/
+          this.getCurrentBlockades();
           this.hexMapById.get(oldarray[i]).removePlayer();
           console.log('this will be the player added: ', this.players[i])
-          this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);}
+          this.hexMapById.get(newarray[i]).addplayer(this.players[i], newarray[i], this.empty);
+          console.log('current after log');
+        }
         else {}
       }
     }
