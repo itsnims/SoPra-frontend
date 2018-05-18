@@ -32,6 +32,9 @@ export class SwamplandsComponent implements OnInit , AfterViewInit{
   BK2: boolean;
   BK3: boolean;
   BK4: boolean;
+  BK5: boolean;
+  BK6: boolean;
+
 
   empty: string;
   hello: any;
@@ -46,10 +49,7 @@ export class SwamplandsComponent implements OnInit , AfterViewInit{
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
   [key: string]: any;
   blockade: any;
-  bk1Strength: string;
-  bk2Strength: string;
-  bk3Strength: string;
-  bk4Strength: string;
+
 
 
 
@@ -280,6 +280,9 @@ export class SwamplandsComponent implements OnInit , AfterViewInit{
         if (localStorage.getItem('selectedHex') === '"BK2"'){this.BK2 = true;}
         if (localStorage.getItem('selectedHex') === '"BK3"'){this.BK3 = true;}
         if (localStorage.getItem('selectedHex') === '"BK4"'){this.BK4 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK5"'){this.BK5 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK6"'){this.BK6 = true;}
+
 
 
 
