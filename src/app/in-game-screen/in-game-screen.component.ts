@@ -591,16 +591,6 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
 
-  fastForward() {
-    this.http.put(this.apiUrl + this.currentRoom + '/Fast', this.httpOptions)
-      .subscribe(result => console.log(result));
-    this.updateHandcards();
-    this.updateHandcards();
-    this.updateHandcards();
-    this.updateHandcards();
-    this.updateHandcards();
-  }
-
 
   movePlayer() {
     console.log('entered mov');
