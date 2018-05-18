@@ -294,9 +294,6 @@ export class StandardComponent implements OnInit, AfterViewInit {
         this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + selectedCard + '/blockade', httpOptions).subscribe((result => console.log('result api crossblockade', result)));
         const element = document.getElementById(JSON.parse(localStorage.getItem('selectedHex')));
         (<HTMLElement>element).remove();
-        console.log()
-
-
       }
       else {
         this.tile = JSON.parse(localStorage.getItem('selectedHex'))
