@@ -722,6 +722,17 @@ reload()  {
             });
         }
       });
+
+    // get own blockade points
+    TimerObservable.create(0, this.interval)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/blockadePoints')
+          .subscribe(result => {
+            this.myBlockadePoints = Number(JSON.stringify(result));
+          });
+      });
+    
     /*
       TimerObservable.create(0, this.interval)
         .takeWhile(() => this.alive)
