@@ -591,6 +591,7 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
 
+
   movePlayer() {
     console.log('entered mov');
     console.log('possible tiles in movePlayer', this.possibleTiles);
@@ -722,6 +723,17 @@ reload()  {
             });
         }
       });
+
+    // get own blockade points
+    TimerObservable.create(0, this.interval)
+      .takeWhile(() => this.alive)
+      .subscribe(() => {
+        this.http.get(this.apiUrl + this.currentRoom + '/' + this.playerName + '/blockadePoints')
+          .subscribe(result => {
+            this.myBlockadePoints = Number(JSON.stringify(result));
+          });
+      });
+
     /*
       TimerObservable.create(0, this.interval)
         .takeWhile(() => this.alive)
