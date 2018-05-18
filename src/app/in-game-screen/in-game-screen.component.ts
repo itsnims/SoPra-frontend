@@ -591,6 +591,17 @@ export class InGameScreenComponent implements OnInit, OnDestroy {
   }
 
 
+  fastForward() {
+    this.http.put(this.apiUrl + this.currentRoom + '/Fast', this.httpOptions)
+      .subscribe(result => console.log(result));
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+    this.updateHandcards();
+  }
+
+
   movePlayer() {
     console.log('entered mov');
     console.log('possible tiles in movePlayer', this.possibleTiles);
@@ -732,7 +743,7 @@ reload()  {
             this.myBlockadePoints = Number(JSON.stringify(result));
           });
       });
-    
+
     /*
       TimerObservable.create(0, this.interval)
         .takeWhile(() => this.alive)
