@@ -1,0 +1,84 @@
+.tutorial {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 768px;
+  width: 1366px;
+  background-color: rgba(0,0,0,0.7);
+}
+.openTut {
+  position: fixed;
+  top: 720px;
+  left: 1200px;
+  color: black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+#closeTut {
+  position: fixed;
+  top: 600px;
+  left: 623px;
+  color: black;
+  width: 120px;
+
+}
+.text {
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
+#actionCards {
+  position: fixed;
+  top: 100px;
+  left: 683px;
+  height: 668px;
+  width: 683px;
+  margin-left: 125px;
+}
+#expedCards {
+  position: fixed;
+  top: 100px;
+  left: 0;
+  height: 668px;
+  width: 683px;
+  margin-left: 125px;
+}
+p {
+  margin-left: 20px;
+}
+h2 {
+  text-align: center;
+}
+.manual {
+  position: fixed;
+  top: 35px;
+  left: 1160px;
+  width: 125px;
+  display: inline-block;
+  padding: 6px 12px;
+  color: white;
+  background-color: black;
+  font-size: 17px;
+  line-height: 1.42857143;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  border: 1px solid white;
+  border-radius: 4px
+}

@@ -8,6 +8,12 @@ import {InGameScreenComponent} from './in-game-screen/in-game-screen.component';
 import {HexagonBoardComponent} from './hexagon-board/hexagon-board.component';
 import {StandardComponent} from './standard/standard.component';
 import {HexComponent} from './hex/hex.component';
+import {HillsofgoldComponent} from './hillsofgold/hillsofgold.component';
+import {HomestretchComponent} from './homestretch/homestretch.component';
+import {SerpentineComponent} from './serpentine/serpentine.component';
+import {SwamplandsComponent} from './swamplands/swamplands.component';
+import {WitchscauldronComponent} from './witchscauldron/witchscauldron.component';
+import {WindingpathsComponent} from './windingpaths/windingpaths.component';
 
 
 const appRoutes: Routes = [
@@ -19,6 +25,15 @@ const appRoutes: Routes = [
     { path: 'in-game-screen', component: InGameScreenComponent},
   {path: 'hexagon-board', component: HexagonBoardComponent},
   {path: 'standard', component: StandardComponent},
+  {path: 'hillsofgold', component: HillsofgoldComponent},
+  {path: 'homestretch', component: HomestretchComponent},
+  {path: 'serpentine', component: SerpentineComponent},
+  {path: 'swamplands', component: SwamplandsComponent},
+  {path: 'witch', component: WitchscauldronComponent},
+  {path: 'wind', component: WindingpathsComponent},
+
+
+
 
 
   // otherwise redirect to home

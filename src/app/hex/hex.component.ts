@@ -15,6 +15,7 @@ export class HexComponent implements OnInit {
   @Input() blockade: string;
   opacity  = 1;
   value = false;
+  tileColor: string;
   @Input() player: PlayerComponent = null;
   /*BACKEND current tiles*/
   clickables: string[];
@@ -22,6 +23,9 @@ export class HexComponent implements OnInit {
   apiUrl = 'https://sopra-fs18-group13-server.herokuapp.com/Games/';
   currentRoom = JSON.parse(localStorage.getItem('currentRoom'));
   playerName = JSON.parse(localStorage.getItem('currentUser')).name;
+  tile2: string;
+  execute: number;
+  twoplayer: boolean;
 
   constructor(private http: HttpClient) {}
 
@@ -40,13 +44,54 @@ export class HexComponent implements OnInit {
     }
 /*Uses clickTile to determine if a tile is clickable.*/
   clicked() {
-    if (this.clickTile(this.hexId)) {
-      console.log(this.hexId, 'was clicked');
-      this.selectedTile(this.hexId);
-      localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
+    this.twoplayer = false;
+    if (localStorage.getItem('mode') === 'true' ) {
+      for (let i = 0; i < 4; i++) {
+        let check = String(i) + 'st';
+        console.log('clicked hex', this.hexId)
+        console.log('to check', check)
+        console.log('localget', localStorage.getItem(check));
+        if (localStorage.getItem(check) === this.hexId) {
+          localStorage.removeItem('currentTwoPlayer');
+          this.execute = i;
+          this.twoplayer = true;
+        }
+      }
+    }
+      if (this.twoplayer) {
+        if (this.execute === 0) {
+          console.log('in 10')
+          localStorage.setItem('currentTwoPlayer', 'player10');
+        }
+        if (this.execute === 1) {
+          console.log('in 11');
+          localStorage.setItem('currentTwoPlayer', 'player11');
+        }
+
+        if (this.execute === 2) {
+          console.log('in 20')
+          localStorage.setItem('currentTwoPlayer', 'player20');
+        }
+        if (this.execute === 3) {
+          console.log('in 21')
+          localStorage.setItem('currentTwoPlayer', 'player21');
+        }
+      } else {
+      if (this.clickTile(this.hexId)) {
+        console.log(this.hexId, 'was clicked');
+        this.selectedTile(this.hexId);
+        localStorage.removeItem('selectedHex');
+        localStorage.setItem('selectedHex', JSON.stringify(this.hexId));
+
+      }
+
+
+      console.log()
+
     }
   }
   public onhightlight() {
+    console.log('i am here')
     this.opacity = 0.5;
   }
   public removehightlight() {
@@ -81,22 +126,67 @@ export class HexComponent implements OnInit {
     return '';
   }
 
-  addplayer(p: PlayerComponent) {
-    console.log('i am here');
+  addplayer(p: PlayerComponent, tile: any, card: any) {
+    console.log('hex component card: ' + card);
     this.player = p;
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
-      })};
-    return this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + localStorage.getItem('currentTile'), httpOptions)
-      .subscribe(result => console.log(result));
+      })
+    };
+    if (card === 'false') {
+    } else {
 
+      if (localStorage.getItem('mode') === 'true') {
+        console.log('currentID', this.player.playerId)
 
+        if (this.player.playerId === 'player10' || this.player.playerId === 'player20') {
+          console.log('for players /one', ' + ', tile)
+          this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile + '/one', httpOptions)
+            .subscribe(result => console.log('result form hex', result));
+        } else {
+          console.log('tile', tile)
+
+          this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile + '/two', httpOptions)
+            .subscribe(result => console.log('result form hex', result));
+        }
+      }
+      else {
+        console.log('tile', tile)
+        console.log('card: ', String(tile))
+        this.tile2 = tile.replace(/['"]+/g, '');
+        console.log('tile', this.tile2)
+        console.log('clickables in addplayer', this.clickables)
+        console.log('put to backend: ', this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile)
+        // console.log('buggy', localStorage.getItem(('currentTile')))
+
+        this.http.put(this.apiUrl + this.currentRoom + '/' + this.playerName + '/' + card + '/' + tile, httpOptions)
+          .subscribe(result => {
+            for (const key in result) {
+              if (key === 'Color') {
+                localStorage.setItem('tileColor', String(result[key]));
+              }
+            }
+            for (const key in result) {
+              if (key === 'strenght' && localStorage.getItem('tileColor') === 'Camp') {
+                localStorage.setItem('tileStrength', String(result[key]));
+                // alert('you have to trash ' + result[key] + ' card(s)'); // TODO show how many
+              }
+              if (key === 'strenght' && localStorage.getItem('tileColor') === 'White') {
+                localStorage.setItem('tileStrength', String(result[key]));
+                // alert('you have to discard ' + result[key] + ' card(s)'); // TODO show how many
+              }
+            }
+          })
+      }
+    }
   }
+
   removePlayer() {
     this.player = null;
+    localStorage.removeItem('tileColor');
+    localStorage.removeItem('tileStrength');
   }
   selectedTile(position: string) {
-
   }
 }

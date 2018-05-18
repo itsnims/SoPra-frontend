@@ -43,7 +43,11 @@ export class LoginComponent implements OnInit {
           this.error = 'Username exists';
           this.loading = false;
         }
-      });
+      },
+        (error) => {
+        alert('name is already taken, please choose a different username');
+        }
+        );
     }
 
 

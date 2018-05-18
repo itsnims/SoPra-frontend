@@ -37,17 +37,21 @@
 }
 .opponents {
   position: fixed;
+
 }
 
-#opponent1 {
+.opponent1 {
   top: 15px;
-  left: 175px;}
-
-#opponent2 {
+  left: 175px;
+  /* color: red; */
+}
+.opponent2 {
   top: 15px;
-  left: 525px;}
+  left: 525px;
+  /* color: white; */
+}
 
-#opponent3 {
+.opponent3 {
   top: 15px;
   left: 875px;}
 
@@ -60,6 +64,11 @@
   -moz-transform: rotate(-90.0deg);
   -o-transform: rotate(-90.0deg);
   -webkit-transform: rotate(-90.0deg);
+  color: black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
 }
 
 .marketCard {
@@ -83,7 +92,8 @@
 
 .cardsLeft {
   margin-right: 20px;
-  font-size: 250%
+  font-size: 250%;
+  color: white;
 }
 
 /* maybe have to change names*/
@@ -172,6 +182,10 @@
   background: url('../images/cards/Y4v5-millionaire.png') no-repeat top left;
   background-size: cover;}
 
+.Backside {
+  background: url('../images/cards/backside.jpg') no-repeat top left;
+  background-size: cover;}
+
 /* Expedition Board */
 #drawPile {
   position: fixed;
@@ -186,7 +200,43 @@
   width: 400px;
   overflow-y: auto;
   white-space: nowrap;
+
 }
+
+.scrollCards::-webkit-scrollbar{
+  -webkit-appearance: none;
+
+}
+
+.scrollCards::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+.scrollCards::-webkit-scrollbar:horizontal {
+  width: 11px;
+}
+.scrollCards::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0,0,0,0.5);
+}
+
+.scrollCards::-webkit-scrollbar{
+  -webkit-appearance: none;
+
+}
+
+.scrollCards::-webkit-scrollbar:vertical {
+  width: 11px;
+}
+.scrollCards::-webkit-scrollbar:horizontal {
+  width: 11px;
+}
+.scrollCards::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  border: 2px solid white;
+  background-color: rgba(0,0,0,0.5);
+}
+
 .handCardFormat {
   display: inline-block;
   margin-right: 10px;
@@ -222,7 +272,13 @@
 /* Buttons bottom left */
 .bottomLeft {
   position: fixed;
-  width: 88px;}
+  width: 88px;
+  color: black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
 
 #actionCard {
   top: 619px;
@@ -251,13 +307,21 @@
 #leave {
   position: fixed;
   top: 720px;
-  left: 1200px;}
+  left: 1200px;
+}
 
-#yourTurn {
+.yourTurn {
   position: fixed;
+  background: black;
   top: 600px;
-  left: 500px;}
-
+  left: 500px;
+  color: white;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
+}
 
 .gameboard{
   position: fixed;
@@ -267,4 +331,66 @@
   position: fixed;
   top: -1180px;
   left: 10px;
+}
+
+
+/* Overlays */
+.overlay1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 627px;
+  width: 1366px;
+  background-color: transparent;
+}
+.overlay4 {
+  position: fixed;
+  top: 718px;
+  left: 0px;
+  height: 50px;
+  width: 180px;
+  background-color: transparent;
+}
+#overlay2trash {
+  position: fixed;
+  top: 619px;
+  left: 0px;
+  height: 55px;
+  width: 180px;
+  background-color: transparent;
+}
+#overlay3trash {
+  position: fixed;
+  top: 619px;
+  left: 180px;
+  height: 150px;
+  width: 180px;
+  background-color: transparent;
+}
+#overlay2discard {
+  position: fixed;
+  top: 619px;
+  left: 0px;
+  height: 99px;
+  width: 360px;
+  background-color: transparent;
+}
+.overlayBox {
+  background: rgba(0,0,0,0.65);
+
+  position: fixed;
+  top: 105px;
+  left: 283px;
+  width: 800px;
+  height: 450px;
+}
+.overlayMessage {
+  text-align: center;
+  display: block;
+  margin-top: 180px;
+  color: white;
+  font-family: serif;
+  font-weight: bold;
+  font-variant: small-caps;
+  font-style: italic;
 }

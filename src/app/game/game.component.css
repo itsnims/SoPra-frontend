@@ -33,6 +33,7 @@ h1 {
   width: 800px;
   height: 530px;
   opacity: 0.65;
+  margin-bottom: 10px;
 }
 
 td{
@@ -43,8 +44,11 @@ td{
 }
 
 .blackRow {
+  table-layout: fixed;
+  overflow: hidden;
+  width: 770px;
   background-color: transparent;
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
   color: white;
   height: 40px;
   font-size: 17px;
@@ -54,12 +58,14 @@ td{
   font-style: italic;
 }
 #titleRow {
+  table-layout: fixed;
+  width: 770px;
   background: rgba(0,0,0,0.75);
   position: fixed;
   top: 120px;
   left: 298px;
-  margin-bottom: 8px;
-  width: 770px;
+
+
   height: 45px;
 }
 #rooms {
@@ -67,10 +73,11 @@ td{
   top: 180px;
   left: 298px;
   height: 450px;
-  overflow-x: auto;
+  width: 800px;
+  overflow-x: hidden;
 }
 .roomButton {
-  margin-top: 10px;
+  /*margin-top: 10px;*/
   margin-bottom: 10px;
   border: black;
   color: white;

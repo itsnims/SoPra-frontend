@@ -7,60 +7,24 @@
     <table id="titleRow" class="blackRow">
       <tr>
         <td>Game Name</td>
-        <td>Pwd Protected</td>
         <td>Players</td>
-        <td>Path & Difficulty</td>
-        <td>Time</td>
+        <td>Path</td>
       </tr>
     </table>
 
     <div id ="rooms">
     <span *ngFor="let room of rooms">
-      <button class="roomButton" type="submit" (click)="addPlayerToRoom(room.name)">
+      <button *ngIf="roomJoinable(room)" class="roomButton" type="submit" (click)="addPlayerToRoom(room.name, room.pathname)">
         <table class="blackRow">
           <tr>
             <td>{{room.name}}</td>
-            <td>{{room.pwdBool}}</td>
-            <td>{{room.current}} / {{room.maxPlayers}}</td>
-            <td>{{room.path}}</td>
-            <td>-</td>
+            <td>{{room.current}} / {{room.maxplayer}}</td>
+            <td>{{room.pathname}}</td>
           </tr>
         </table>
       </button>
     </span>
     </div>
-
-    <!--ul class="list-group">
-     < <li class="list-group-item" *ngFor="let user of users">
-        {{user.username}}</li> -->
-
-      <!--div *ngFor= "let room of rooms">
-        <button class="game-rooms" type="submit">
-          {{room.name}}
-          <div> {{room.current}} players in the room
-          </div>
-
-          <!-- {{room.status}} -->
-          <!--div *ngIf="joinable">
-            <button class="btn btn-sm btn-primary btn-block" type="submit" (click)="addPlayerToRoom(room.name)">Join Room</button>
-          </div>
-        </button>
-      </div>
-    </ul-->
-
-    <!-- <li class="list-group-item" *ngFor="let user of users">
-      {{user.username}} {{user.id}} </li>
-
-    <li class="list-group-item" *ngFor="let room of rooms">
-      {{room.name}}, {{room.PlayersInRoom}} </li>
-
-    <div *ngFor= "let room of rooms">
-      <button class="game-rooms" type="submit" >{{room.id}}
-        {{room.name}}
-        {{room.pwdBool}}
-        {{room.status}}</button>
-    </div> -->
-
 
     <form>
       <a id="manualLink" target="_blank" class="manual" href="https://www.ravensburger.com/spielanleitungen/ecm/Spielanleitungen/26754%20anl%201741342.pdf?ossl=pds_text_Spielanleitung">Manual</a>

@@ -4,26 +4,21 @@
   <div>
 
 
-    <button id="roomName" [disabled]="true">{{current_room}}</button>
+    <button id="roomName" [disabled]="true">{{currentRoom}}</button>
 
     <div id="innerBlackSquare"></div>
 
     <h3 id="playerCount">Players: {{currentPlayers}} / {{maxplayers}}</h3>
-    <div id="players">
-      <h3 id="p1">{{player1}}</h3>
-      <h3 id="p2">{{player2}}</h3>
-      <h3 id="p3">{{player3}}</h3>
-      <h3 id="p4">{{player4}}</h3>
-    </div>
-  <!--div *ngFor= "let user of users">
-    <h3>{{user.username}}</h3>
-  </div-->
-    <div id="outerSquare">
-      <h3 id="pathName">standard path</h3>
-      <h3 id="pathDiff">easy</h3>
+    <div class="playersPosition">
+      <div id="players" *ngFor= "let user of playersInRoom; let i = index;">
+          <h3 id="p{{i}}">{{user}}</h3>
+      </div>
+
+      <div id="outerSquare">
+        <h3 id="pathName">{{pathName}}</h3>
+      </div>
     </div>
 
   </div>
-  <button id="quit" class="bottomButtons" type="submit" [routerLink]="['/host-screen']">Quit</button>
-  <button id="startGame" class="bottomButtons" type="submit" [routerLink]="['/in-game-screen']">Start Game</button>
+  <button id="quit" class="bottomButtons" type="submit" [routerLink]="['/game']" (click)="quitRoom()">Quit</button>
 </div>

@@ -149,8 +149,15 @@
 
     <!--tile C-->
     <app-hex [hexId]="'C22'" [colourclass]="'hexagon grey'" [strengthId]="'get-card1'"></app-hex>
-    <app-hex [hexId]="'C15'" [colourclass]="'hexagon grey'" [strengthId]="'get-card1'"></app-hex>      <app-hex [hexId]="'C9'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-    <app-hex [hexId]="'C4'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+    <app-hex [hexId]="'C15'" [colourclass]="'hexagon grey'" [strengthId]="'get-card1'"></app-hex>
+    <app-hex [hexId]="'C9'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+    <div *ngIf="this.BK1">
+      <app-hex [hexId]="'C4'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+    </div>
+    <div *ngIf="!this.BK1">
+      <app-hex [hexId]="'C4'" [colourclass]= "this.colorBK1" [strengthId]= ""></app-hex>
+    </div>
+
     <app-hex [hexId]="'B22'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
     <app-hex [hexId]="'B21'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
     <app-hex [hexId]="'B20'" [colourclass]="'hexagon yellow'" [strengthId]="'coin1'"></app-hex>
@@ -191,7 +198,12 @@
   <app-hex [hexId]="'C21'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
     <app-hex [hexId]="'C14'" [colourclass]="'hexagon grey'" [strengthId]="'get-card1'"></app-hex>
   <app-hex [hexId]="'C8'" [colourclass]="'hexagon yellow'" [strengthId]="'coin1'"></app-hex>
-  <app-hex [hexId]="'C3'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+    <div *ngIf="this.BK1">
+      <app-hex [hexId]="'C3'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+    </div>
+    <div *ngIf="!this.BK1">
+      <app-hex [hexId]="'C3'" [colourclass]= "this.colorBK1" [strengthId]= ""></app-hex>
+    </div>
 
   <!--B Tile-->
   <app-hex [hexId]="'B28'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
@@ -234,7 +246,15 @@
   <app-hex [hexId]="'C20'" [colourclass]="'hexagon yellow'" [strengthId]="'coin1'"></app-hex>
   <app-hex [hexId]="'C13'" [colourclass]="'hexagon yellow'" [strengthId]="'coin1'"></app-hex>
   <app-hex [hexId]="'C7'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
-  <app-hex [hexId]="'C2'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
+
+  <div *ngIf="this.BK1">
+    <app-hex [hexId]="'C2'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
+  </div>
+
+  <div *ngIf="!this.BK1">
+    <app-hex [hexId]="'C2'" [colourclass]= "this.colorBK1" [strengthId]= ""></app-hex>
+  </div>
+
 
 
   <!--tile B-->
@@ -277,7 +297,14 @@
   <app-hex [hexId]="'C19'" [colourclass]="'hexagon stone'" [strengthId]="'geröll'"></app-hex>
   <app-hex [hexId]="'C12'" [colourclass]="'hexagon grey'" [strengthId]="'get-card1'"></app-hex>
   <app-hex [hexId]="'C6'" [colourclass]="'hexagon yellow'" [strengthId]="'coin1'"></app-hex>
-  <app-hex [hexId]="'C1'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
+
+  <div *ngIf="this.BK1">
+    <app-hex [hexId]="'C1'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK1">
+    <app-hex [hexId]="'C1'" [colourclass]= "this.colorBK1" [strengthId]= ""></app-hex>
+  </div>
+
   <!--  <app-hex [hexId]="'C1'" [colourclass]="blockade ? 'hexagon blue' : blockadeColour" [strengthId]="blockade ?'strength1': blockadeStrength" class="blockade1"></app-hex>-->
 
 
@@ -323,7 +350,7 @@
   <app-hex [hexId]="'C18'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
   <app-hex [hexId]="'C11'" [colourclass]="'hexagon grey'" [strengthId]="'get-card1'"></app-hex>
   <app-hex [hexId]="'C5'" [colourclass]="'hexagon yellow'" [strengthId]="'coin1'"></app-hex>
-  <app-hex [hexId]="'BK1'" [colourclass]="'hexagon blockade'" [strengthId]="'B1'"></app-hex>
+  <app-hex [hexId]="'BK1'" [colourclass]="'hexagon blockade'" [strengthId]="this.strengthBK1"></app-hex>
 </div>
 
 <div class="hexes-9 column">
@@ -422,12 +449,36 @@
   <a class="emptyhex"></a>
 
   <!--C tile-->
+  <div *ngIf="this.BK2">
+    <app-hex [hexId]="'N4'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK2">
+    <app-hex [hexId]="'N4'" [colourclass]= "this.colorBK2" [strengthId]= ""></app-hex>
+  </div>
 
-  <app-hex [hexId]="'N4'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'N3'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'N2'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'N1'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'BK2'" [colourclass]="'hexagon blockade'" [strengthId]="'B1'"></app-hex>
+  <div *ngIf="this.BK2">
+    <app-hex [hexId]="'N3'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK2">
+    <app-hex [hexId]="'N3'" [colourclass]= "this.colorBK2" [strengthId]= ""></app-hex>
+  </div>
+
+  <div *ngIf="this.BK2">
+    <app-hex [hexId]="'N2'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK2">
+    <app-hex [hexId]="'N2'" [colourclass]= "this.colorBK2" [strengthId]= ""></app-hex>
+  </div>
+
+  <div *ngIf="this.BK2">
+    <app-hex [hexId]="'N1'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK2">
+    <app-hex [hexId]="'N1'" [colourclass]= "this.colorBK2" [strengthId]= ""></app-hex>
+  </div>
+
+
+  <app-hex [hexId]="'BK2'" [colourclass]="'hexagon blockade'" [strengthId]="this.strengthBK2"></app-hex>
 
 </div>
 <div class="hexes-12 column">
@@ -662,11 +713,37 @@
 
 
   <!--I tile-->
-  <app-hex [hexId]="'I4'" [colourclass]="'hexagon blue'" [strengthId]="'paddle2'"></app-hex>
-  <app-hex [hexId]="'I3'" [colourclass]="'hexagon blue'" [strengthId]="'paddle2'"></app-hex>
-  <app-hex [hexId]="'I2'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
-  <app-hex [hexId]="'I1'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'BK3'" [colourclass]="'hexagon blockade'" [strengthId]="'B1'"></app-hex>
+  <div *ngIf="this.BK3">
+    <app-hex [hexId]="'I4'" [colourclass]="'hexagon blue'" [strengthId]="'paddle2'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK3">
+  <app-hex [hexId]="'I4'" [colourclass]= "this.colorBK3" [strengthId]= ""></app-hex>
+</div>
+
+  <div *ngIf="this.BK3">
+    <app-hex [hexId]="'I3'" [colourclass]="'hexagon blue'" [strengthId]="'paddle2'"></app-hex>
+  </div>
+    <div *ngIf="!this.BK3">
+    <app-hex [hexId]="'I3'" [colourclass]= "this.colorBK3" [strengthId]= ""></app-hex>
+  </div>
+
+  <div *ngIf="this.BK3">
+    <app-hex [hexId]="'I2'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK3">
+    <app-hex [hexId]="'I2'" [colourclass]= "this.colorBK3" [strengthId]= ""></app-hex>
+  </div>
+
+
+  <div *ngIf="this.BK3">
+    <app-hex [hexId]="'I1'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK3">
+    <app-hex [hexId]="'I1'" [colourclass]= "this.colorBK3" [strengthId]= ""></app-hex>
+  </div>
+
+
+  <app-hex [hexId]="'BK3'" [colourclass]="'hexagon blockade'" [strengthId]="this.strengthBK3"></app-hex>
 
 </div>
 
@@ -765,7 +842,13 @@
   <!--K tile-->
   <app-hex [hexId]="'K22'" [colourclass]="'hexagon card'" [strengthId]="'discard1'"></app-hex>      <app-hex [hexId]="'K15'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
   <app-hex [hexId]="'K9'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'K4'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
+
+  <div *ngIf="this.BK4">
+    <app-hex [hexId]="'K4'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK4">
+    <app-hex [hexId]="'K4'" [colourclass]= "this.colorBK4" [strengthId]= ""></app-hex>
+  </div>
 
   <!--I tile-->
 
@@ -805,7 +888,13 @@
   <app-hex [hexId]="'K21'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
   <app-hex [hexId]="'K14'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
   <app-hex [hexId]="'K8'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'K3'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
+
+  <div *ngIf="this.BK4">
+    <app-hex [hexId]="'K3'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK4">
+    <app-hex [hexId]="'K3'" [colourclass]= "this.colorBK4" [strengthId]= ""></app-hex>
+  </div>
 
 
   <!--I tile-->
@@ -838,17 +927,23 @@
 
 
   <!--Last tiles/El Dorado-->
-  <app-hex [hexId]="'el-g'" [colourclass]="'hexagon yellow'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'el-b'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
+  <app-hex [hexId]="'el-g'" [colourclass]="'hexagon yellow'" [strengthId]="''"></app-hex>
+  <app-hex [hexId]="'EDBlue3'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
 
   <!--K tile-->
   <app-hex [hexId]="'K33'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
-  <app-hex [hexId]="'K27'" [colourclass]="'hexagon blue'" [strengthId]="'strength1'"></app-hex>
+  <app-hex [hexId]="'K27'" [colourclass]="'hexagon blue'" [strengthId]="'paddle3'"></app-hex>
   <app-hex [hexId]="'K20'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
   <app-hex [hexId]="'K13'" [colourclass]="'hexagon green'" [strengthId]="'strength3'"></app-hex>
   <app-hex [hexId]="'K7'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'K2'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
 
+
+  <div *ngIf="this.BK4">
+    <app-hex [hexId]="'K2'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK4">
+    <app-hex [hexId]="'K2'" [colourclass]= "this.colorBK4" [strengthId]= ""></app-hex>
+  </div>
 
   <!--I tile-->
 
@@ -878,8 +973,8 @@
   <a class="emptyhex"></a>
   <a class="emptyhex"></a>
 
-  <app-hex [hexId]="'el-g'" [colourclass]="'hexagon yellow'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'el-b'" [colourclass]="'hexagon blue'" [strengthId]="'strength1'"></app-hex>
+  <app-hex [hexId]="'el-g'" [colourclass]="'hexagon yellow'" [strengthId]="''"></app-hex>
+  <app-hex [hexId]="'EDBlue2'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
 
   <!--K tile-->
   <app-hex [hexId]="'K37'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
@@ -888,8 +983,13 @@
   <app-hex [hexId]="'K19'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
   <app-hex [hexId]="'K12'" [colourclass]="'hexagon green'" [strengthId]="'strength3'"></app-hex>
   <app-hex [hexId]="'K6'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'K1'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
 
+  <div *ngIf="this.BK4">
+    <app-hex [hexId]="'K1'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
+  </div>
+  <div *ngIf="!this.BK4">
+    <app-hex [hexId]="'K1'" [colourclass]= "this.colorBK4" [strengthId]= ""></app-hex>
+  </div>
   <!--I tile-->
 
 
@@ -917,8 +1017,8 @@
 
 
   <!--el dorado-->
-  <app-hex [hexId]="'el-g'" [colourclass]="'hexagon yellow'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'el-b'" [colourclass]="'hexagon blue'" [strengthId]="'strength1'"></app-hex>
+  <app-hex [hexId]="'el-g'" [colourclass]="'hexagon yellow'" [strengthId]="''"></app-hex>
+  <app-hex [hexId]="'EDBlue1'" [colourclass]="'hexagon blue'" [strengthId]="'paddle1'"></app-hex>
   <!--K tile-->
   <app-hex [hexId]="'K36'" [colourclass]="'hexagon green'" [strengthId]="'strength2'"></app-hex>
   <app-hex [hexId]="'K31'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
@@ -926,7 +1026,7 @@
   <app-hex [hexId]="'K18'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
   <app-hex [hexId]="'K11'" [colourclass]="'hexagon yellow'" [strengthId]="'coin4'"></app-hex>
   <app-hex [hexId]="'K5'" [colourclass]="'hexagon green'" [strengthId]="'strength1'"></app-hex>
-  <app-hex [hexId]="'BK5'" [colourclass]="'hexagon blockade'" [strengthId]="'B1'"></app-hex>
+  <app-hex [hexId]="'BK4'" [colourclass]="'hexagon blockade'" [strengthId]="this.strengthBK4"></app-hex>
 
 
 </div>
@@ -989,7 +1089,6 @@
 
 </div>
 
-  </div
-
-  ></div>
+  </div>
+</div>
 </body>

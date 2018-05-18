@@ -1,13 +1,75 @@
-<div class="background-image">
-<h3 class="opponents" id="opponent1">{{opponents[0]}}</h3>
-<h3 class="opponents" id="opponent2">{{opponents[1]}}</h3>
-<h3 class="opponents" id="opponent3">{{opponents[2]}}</h3>
-<app-standard></app-standard>
+<div class="background-image"> <!--  -->
+  <!--p>my turn: {{isItMyTurn}}; isActionCard: {{selectedCardIsActionCard}}; useExpCard: {{useExpeditionCard}}</p-->
+<div *ngIf="playerIsRed">
+  <h3 class="opponents opponent1" style="color: white">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+  <div *ngIf="opponents[1]">
+    <h3 class="opponents opponent2" style="color: blue">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+  </div>
+  <div *ngIf="opponents[2]">
+    <h3 class="opponents opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+  </div>
+</div>
+
+  <div *ngIf="playerIsWhite">
+    <h3 class="opponents opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <div *ngIf="opponents[1]">
+      <h3 class="opponents opponent2" style="color: blue">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+    </div>
+    <div *ngIf="opponents[2]">
+      <h3 class="opponents opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+    </div>
+  </div>
+
+  <div *ngIf="playerIsBlue">
+    <h3 class="opponents opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <div *ngIf="opponents[1]">
+      <h3 class="opponents opponent2" style="color: white">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+    </div>
+    <div *ngIf="opponents[2]">
+      <h3 class="opponents opponent3" style="color: yellow">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+    </div>
+  </div>
+
+  <div *ngIf="playerIsYellow">
+    <h3 class="opponents opponent1" style="color: red">{{opponents[0]}} Blockade Points: {{opponentBlockadePoints[0]}}</h3>
+    <div *ngIf="opponents[1]">
+      <h3 class="opponents opponent2" style="color: white">{{opponents[1]}} Blockade Points: {{opponentBlockadePoints[1]}}</h3>
+    </div>
+    <div *ngIf="opponents[2]">
+      <h3 class="opponents opponent3" style="color: blue">{{opponents[2]}} Blockade Points: {{opponentBlockadePoints[2]}}</h3>
+    </div>
+  </div>
+
+  <li *ngIf=" this.Board === 'StandardPath'">
+    <app-standard></app-standard>
+  </li>
+  <li *ngIf="this.Board === 'HillsOfGold'">
+    <div>works</div>
+    <app-hillsofgold></app-hillsofgold>
+  </li>
+  <li *ngIf="this.Board === 'Serpentine'">
+    <app-serpentine></app-serpentine>
+  </li>
+
+  <li *ngIf="this.Board === 'HomeStretchFields'">
+    <app-homestretch></app-homestretch>
+  </li>
+  <li *ngIf="this.Board === 'Swamplands'">
+    <app-swamplands></app-swamplands>
+  </li>
+
+  <li *ngIf="this.Board === 'WitchsCauldron'">
+<app-witchscauldron></app-witchscauldron>
+  </li>
+  <li *ngIf="this.Board === 'WindingPath'">
+    <app-windingpaths></app-windingpaths>
+  </li>
+
+
   <!--p *ngFor="let select of selected">{{select}}</p-->
 <!--div class="gameboard" >
   <app-standard class="board_input" [style.a]></app-standard>
 </div-->
-  <button id="m" type="button" (click)="showSelected()">ShowSelected</button>
 <!-- Market-->
 <button id="marketPlace" type="button" (click)="showMarketFunc(); getCurrentMarket()">Marketplace</button>
 <div *ngIf="showMarket">
@@ -39,29 +101,56 @@
     </span>
   </div>
 
-  <h4 id="playerName" class="{{myColor}}">{{playerName}}</h4>
+  <h2 id="playerName" class="{{myColor}}">{{playerName}} Blockade Points: {{myBlockadePoints}}</h2>
 </div>
+
 
 <!-- bottom left buttons-->
 <div>
-  <button [disabled]="useActionCard" id="actionCard" class="bottomLeft" type="button">Use action card</button>
-  <button id="trash" class="bottomLeft" type="button">Trash</button>
-  <button id="endTurn" class="bottomLeft" type="submit" (click)="endturnFunction()">End turn</button>
-  <button  id="expedCard" class="bottomLeft" type="submit" (click)="movePlayer()">Use exped. card</button>
+  <button [disabled]="useActionCard" id="actionCard" class="bottomLeft" type="button" (click)="playActionCard()"> Use action card</button>
+  <button [disabled]="trashButtonClickable" id="trash" class="bottomLeft" type="button" (click)="trashCard()">Trash</button>
+  <button [disabled]="isItMyTurnCopy" id="endTurn" class="bottomLeft" type="submit" (click)="endturnFunction()">End turn</button>
+  <button [disabled]="useExpeditionCard" id="expedCard" class="bottomLeft" type="submit" (click)="movePlayer()">Move</button>
   <button [disabled]="buyAvailable" id="buy" class="bottomLeft" type="submit" (click)="buy()">Buy</button>
-  <button id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
+  <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button>
   <!--   <button [disabled]="discard" id="discard" class="bottomLeft" type="submit" (click)="discardCards()">Discard</button> -->
-
-  <button id="updatedHancards"  type="submit" (click)="updateHandcards()">update handcards</button>
+</div>
+  <button id="updatedHancards"  type="submit" (click)="updateHandcards()">Fast Forward</button>
 
   <div *ngIf="isItMyTurn">
-      <button id="yourTurn"> IT'S YOUR TURN </button>
+      <p class="yourTurn"> IT'S YOUR TURN </p>
+  </div>
+
+  <div *ngIf="isItMyTurnCopy">
+    <p class="yourTurn"> PLEASE WAIT FOR YOUR TURN </p>
   </div>
 
 
 
+<app-win-screen></app-win-screen>
+
+<!-- Trash overlay-->
+<div *ngIf="mustTrash">
+  <div class="overlay1">
+    <div class="overlayBox">
+      <h2 class="overlayMessage">You must trash {{cardsToBeTrashed}} card(s)</h2>
+    </div>
+  </div>
+  <div id="overlay2trash"></div>
+  <div id="overlay3trash"></div>
+  <div class="overlay4"></div>
 
 </div>
-<button id="leave" type="submit" [routerLink]="['/game']">Quit Game</button>
 
+<!-- Discard overlay-->
+<div *ngIf="mustDiscard">
+  <div class="overlay1">
+    <div class="overlayBox">
+      <h2 class="overlayMessage">You must discard {{cardsToBeDiscarded}} card(s)</h2>
+    </div>
+  </div>
+  <div id="overlay2discard"></div>
+  <div class="overlay4"></div>
+</div>
+  <app-tutorial></app-tutorial>
 </div>
