@@ -32,6 +32,8 @@ export class WindingpathsComponent implements OnInit {
   BK2: boolean;
   BK3: boolean;
   BK4: boolean;
+  BK5: boolean;
+
 
   empty: string;
   hello: any;
@@ -50,6 +52,8 @@ export class WindingpathsComponent implements OnInit {
   bk2Strength: string;
   bk3Strength: string;
   bk4Strength: string;
+  bk5Strength: string;
+
 
 
 
@@ -280,6 +284,8 @@ export class WindingpathsComponent implements OnInit {
         if (localStorage.getItem('selectedHex') === '"BK2"'){this.BK2 = true;}
         if (localStorage.getItem('selectedHex') === '"BK3"'){this.BK3 = true;}
         if (localStorage.getItem('selectedHex') === '"BK4"'){this.BK4 = true;}
+        if (localStorage.getItem('selectedHex') === '"BK5"'){this.BK5 = true;}
+
 
 
 
