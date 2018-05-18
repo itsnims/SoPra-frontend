@@ -764,7 +764,7 @@ reload()  {
               }
             })
         });
-
+  */
 
     const httpOptions = {
       headers: new HttpHeaders({
